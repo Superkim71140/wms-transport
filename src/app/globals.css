@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0B1F3A;
+  --color-navy-dark: #061224;
+  --color-navy-light: #1A365D;
+  --color-navy-muted: #2C4A75;
+  --color-red: #2563EB;
+  --color-red-light: #3B82F6;
+  --color-red-dark: #1D4ED8;
+  --color-red-glow: rgba(37, 99, 235, 0.4);
+  --color-gray-bg: #F4F6F8;
+  --color-gray-card: #F9FAFB;
+  --color-gray-dark: #1E293B;
+  
+  --font-sans: var(--font-noto-sans-thai), var(--font-inter), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  
+  --shadow-premium: 0 10px 30px -10px rgba(11, 31, 58, 0.08), 0 1px 3px rgba(11, 31, 58, 0.03);
+  --shadow-premium-hover: 0 20px 40px -15px rgba(37, 99, 235, 0.15), 0 1px 10px rgba(37, 99, 235, 0.05);
+  --shadow-red-glow: 0 0 25px 2px rgba(37, 99, 235, 0.35);
+  
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-road: road 15s linear infinite;
+  --animate-truck-bounce: truckBounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes road {
+  0% { background-position: 0 0; }
+  100% { background-position: -200px 0; }
+}
+
+@keyframes truckBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+/* PERMANENT DARK THEME VARIABLES */
+:root {
+  --background: #040b15;
+  --foreground: #F4F6F8;
+  --card-bg: rgba(11, 31, 58, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-muted: #94A3B8;
+}
+
+body {
+  /* Removed hardcoded background and color to allow layout.tsx Tailwind classes to function! */
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+}
+
+.glass-glow {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Interactive custom components */
+.glowing-red-btn, .glowing-blue-btn {
+  position: relative;
+  background-color: #2563EB;
+  color: white;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glowing-red-btn:hover, .glowing-blue-btn:hover {
+  background-color: #3B82F6;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+  transform: translateY(-2px);
+}
+
+.glowing-red-btn::after, .glowing-blue-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(30deg);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0;
+}
+
+.glowing-red-btn:hover::after, .glowing-blue-btn:hover::after {
+  left: 150%;
+  opacity: 1;
+}
+
+/* Custom Scrollbar - Dark Mode Matched */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #040b15;
+}
+::-webkit-scrollbar-thumb {
+  background: #2563EB;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3B82F6;
+}
+
+/* Mask for custom map highlight */
+.map-route-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawRoute 3s ease-in-out forwards infinite;
+}
+
+@keyframes drawRoute {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Redesigned LINE Button with Pulse Animation and Glowing Shadow */
+.line-btn-pulse {
+  background-color: #06C755;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px rgba(6, 199, 85, 0.4);
+  animation: line-pulse 2s infinite;
+}
+
+.line-btn-pulse:hover {
+  background-color: #05B34F;
+  box-shadow: 0 0 25px rgba(6, 199, 85, 0.7);
+}
+
+@keyframes line-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(6, 199, 85, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(6, 199, 85, 0);
+  }
+}
+
+/* Premium Image Shine Effect */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: single;
+}
+
+.shine-effect:hover::after {
+  animation: shine 0.85s;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
