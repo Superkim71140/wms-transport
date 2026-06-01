@@ -25,43 +25,43 @@ export default function FloatingLine() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 right-4 sm:left-auto sm:right-8 sm:bottom-8 z-50 flex items-center justify-between sm:justify-start gap-4 p-2 pl-5 sm:pl-6 bg-slate-950/75 backdrop-blur-xl border border-white/10 sm:border-blue-500/20 rounded-full shadow-[0_10px_40px_rgba(2,8,23,0.5)] blue-glow-pulse font-sans sm:w-auto"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-6 px-6 sm:px-8 py-3.5 sm:py-4 bg-[#040b15]/90 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.8)] font-sans w-[92%] sm:w-auto justify-between sm:justify-start select-none"
         >
           
           {/* Left Section: Status & Text */}
-          <div className="flex items-center gap-3 pr-4 sm:pr-5 border-r border-white/10">
+          <div className="flex items-center gap-2.5 sm:gap-3 pr-3 sm:pr-5 border-r border-white/10 py-0.5">
             {/* Minimalist Live Ping */}
             <div className="relative flex h-2.5 w-2.5 items-center justify-center shrink-0">
-              <span className="status-pulse-custom absolute inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </div>
             {/* Solid, Crisp Text */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2">
-              <span className="text-[12px] sm:text-sm font-black text-slate-100 tracking-wide whitespace-nowrap flex items-center gap-1.5">
-                <Headphones className="w-3.5 h-3.5 text-blue-400" />
+            <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
+              <span className="text-sm sm:text-base lg:text-lg font-black text-slate-100 tracking-wide whitespace-nowrap" style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}>
                 ติดต่อแอดมิน
               </span>
-              <span className="text-[10px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap self-start sm:self-auto">
+              <span className="text-[9px] sm:text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 whitespace-nowrap self-start sm:self-auto">
                 ONLINE 24 ชม.
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 pl-2 sm:pl-3">
+          <div className="flex items-center gap-2 sm:gap-3 pl-1 sm:pl-2 shrink-0">
             {/* LINE Button - Custom Motion Link */}
             <motion.a
-              href="https://line.me/ti/p/~@wmstransport"
+              href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="ติดต่อเราผ่าน LINE @wmstransport"
+              aria-label="Contact WMS Transport via LINE"
               whileHover={{ scale: 1.08, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full line-btn-pulse border border-[#06C755]/30 cursor-pointer shadow-[0_4px_15px_rgba(6,199,85,0.3)] p-2.5 sm:p-3"
+              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full line-btn-pulse border border-[#06C755]/30 cursor-pointer shadow-[0_4px_15px_rgba(6,199,85,0.3)] p-2 sm:p-2.5"
             >
               <Image 
                 src="/images/LINE_Brand_icon.png" 
                 alt="LINE Logo" 
-                width={28} 
-                height={28} 
+                width={24} 
+                height={24} 
                 className="w-full h-full object-contain shrink-0" 
               />
             </motion.a>
@@ -74,13 +74,13 @@ export default function FloatingLine() {
               aria-label="ติดต่อเราผ่าน Facebook"
               whileHover={{ scale: 1.08, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-[#1877F2] hover:bg-[#166FE5] cursor-pointer transition-colors duration-300 shadow-[0_4px_15px_rgba(24,119,242,0.3)] p-2 sm:p-2.5"
+              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-[#1877F2] hover:bg-[#166FE5] cursor-pointer transition-colors duration-300 shadow-[0_4px_15px_rgba(24,119,242,0.3)] p-2 sm:p-2.5"
             >
               <Image 
                 src="/images/Facebook_Logo_.png" 
                 alt="Facebook Logo" 
-                width={24} 
-                height={24} 
+                width={20} 
+                height={20} 
                 className="w-full h-full object-contain shrink-0" 
               />
             </motion.a>
@@ -91,9 +91,9 @@ export default function FloatingLine() {
               aria-label="โทรติดต่อ WMS Transport ที่เบอร์ 061-240-2436"
               whileHover={{ scale: 1.08, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 cursor-pointer transition-colors duration-300 shadow-[0_4px_15px_rgba(37,99,235,0.3)]"
+              className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-500 cursor-pointer transition-colors duration-300 shadow-[0_4px_15px_rgba(37,99,235,0.3)]"
             >
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="currentColor" />
+              <Phone className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-white" fill="currentColor" />
             </motion.a>
           </div>
 

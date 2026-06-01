@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, ShieldCheck } from "lucide-react";
+import { Star, ShieldCheck, Quote } from "lucide-react";
 
 type Testimonial = {
   name: string;
@@ -43,15 +43,14 @@ export default function CustomerReviews() {
   return (
     <section 
       id="reviews" 
-      className="py-32 px-4 sm:px-6 lg:px-8 relative w-full font-sans z-10"
+      className="py-24 px-4 sm:px-6 lg:px-8 relative w-full font-sans overflow-hidden"
     >
-      {/* Background radial glow behind the section */}
-      <div 
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-blue-600/5 blur-[150px] -z-10 pointer-events-none" 
-      />
+      {/* Dynamic ambient glow effects */}
+      <div className="absolute top-12 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow" />
+      <div className="absolute bottom-12 right-1/4 w-96 h-96 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
       {/* Header */}
-      <div className="max-w-[1600px] mx-auto text-center mb-24 relative z-10">
+      <div className="max-w-7xl mx-auto text-center mb-16 relative z-10">
         <motion.span 
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,74 +76,78 @@ export default function CustomerReviews() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-slate-400 text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-medium"
+          className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-medium"
         >
-          การันตีความประทับใจ ความตรงเวลา และงานบริการที่ยอดเยี่ยมจากลูกค้าจริง ระดับมืออาชีพ
+          การันตีความประทับใจ ความตรงเวลา และงานบริการที่ยอดเยี่ยมจากผู้ใช้บริการจริงของเรา
         </motion.p>
-
-        <div className="relative w-48 h-[2px] mx-auto mt-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
       </div>
 
-      {/* Reviews Grid */}
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
-        {testimonials.map((test, i) => (
-          <motion.div 
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
-            whileHover={{ y: -8 }}
-            className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-10 relative overflow-hidden flex flex-col justify-between gap-8 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] hover:border-blue-500/30 transition-all duration-500 min-h-[350px] group"
-          >
-            {/* Giant Quote Watermark */}
-            <span className="absolute -top-6 right-4 text-9xl text-white/[0.03] font-serif select-none pointer-events-none leading-none group-hover:text-blue-500/[0.05] transition-colors duration-500">
-              &ldquo;
-            </span>
+      {/* Reviews Infinite Marquee */}
+      <div className="relative w-full overflow-hidden py-4 z-10 [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee-custom {
+            animation: marquee 30s linear infinite;
+          }
+        `}} />
+        <div className="flex gap-6 animate-marquee-custom hover:[animation-play-state:paused] w-max">
+          {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((test, i) => (
+            <div 
+              key={i}
+              className="w-[350px] md:w-[450px] shrink-0 bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col justify-between gap-6 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-blue-500/30 hover:from-white/[0.05] hover:to-blue-950/20 transition-all duration-300 min-h-[320px] group relative overflow-hidden"
+            >
+              {/* Ambient inner card glow */}
+              <div className="absolute -inset-px bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-            {/* Content Group (Stars + Text) */}
-            <div className="flex flex-col gap-6 z-10 relative">
-              {/* Rating stars */}
-              <div className="flex gap-1.5 text-blue-400">
-                {Array.from({ length: test.stars }).map((_, idx) => (
-                  <Star 
-                    key={idx} 
-                    className="h-5 w-5 fill-current drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" 
-                  />
-                ))}
+              {/* Top Row: Stars & Quote Watermark */}
+              <div className="flex items-center justify-between z-10">
+                <div className="flex gap-1 text-amber-400">
+                  {Array.from({ length: test.stars }).map((_, idx) => (
+                    <Star 
+                      key={idx} 
+                      className="h-4.5 w-4.5 fill-current filter drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]" 
+                    />
+                  ))}
+                </div>
+                <Quote className="h-10 w-10 text-blue-500/10 group-hover:text-blue-500/20 group-hover:scale-110 transition-all duration-300" />
               </div>
 
-              {/* Quote Text */}
-              <p className="text-slate-300 font-medium leading-[1.8] text-[16px] tracking-wide border-l-4 border-blue-500/40 pl-5">
-                {test.comment}
-              </p>
-            </div>
-
-            {/* Customer Profile Row */}
-            <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10 relative z-10">
-              <div className="flex items-center gap-4">
-                {/* Initial Avatar */}
-                <div className="w-12 h-12 bg-gradient-to-br from-[#04152D] to-blue-900 border border-white/10 rounded-full flex items-center justify-center text-white font-black text-lg flex-shrink-0 shadow-lg group-hover:border-blue-400/50 transition-colors">
-                  {test.initial}
-                </div>
-                <div>
-                  <h4 className="text-base sm:text-lg font-black text-white leading-tight group-hover:text-blue-300 transition-colors">
-                    {test.name}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-400 font-semibold mt-1.5 leading-none">
-                    {test.role}
-                  </p>
-                </div>
+              {/* Comment Body */}
+              <div className="z-10 flex-1 py-2">
+                <p className="text-slate-100 font-medium leading-relaxed text-[15px] sm:text-base">
+                  &quot;{test.comment}&quot;
+                </p>
               </div>
-              
-              {/* Verified Trust Badge */}
-              <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>{test.badge === "Verified Booking" ? "ยืนยันการจอง" : test.badge === "Verified Customer" ? "ลูกค้าจริง" : "พาร์ทเนอร์"}</span>
-              </span>
+
+              {/* Reviewer Row */}
+              <div className="flex items-center justify-between mt-4 pt-5 border-t border-white/10 z-10">
+                <div className="flex items-center gap-3">
+                  {/* Initial Avatar with Gradient */}
+                  <div className="w-10 h-10 bg-gradient-to-tr from-blue-600 to-sky-400 rounded-full flex items-center justify-center text-white font-extrabold text-base shadow-[0_4px_12px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform">
+                    {test.initial}
+                  </div>
+                  <div>
+                    <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-blue-300 transition-colors">
+                      {test.name}
+                    </h4>
+                    <p className="text-xs text-slate-400 font-medium mt-0.5">
+                      {test.role}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Verified Trust Badge */}
+                <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.05)] select-none">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span>{test.badge === "Verified Booking" ? "ยืนยันการจอง" : test.badge === "Verified Customer" ? "ลูกค้าจริง" : "พาร์ทเนอร์"}</span>
+                </span>
+              </div>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

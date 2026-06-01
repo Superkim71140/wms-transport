@@ -65,16 +65,17 @@ export default function CustomerReviews() {
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] relative overflow-hidden">
       {/* Decorative Glow */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-500/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 font-sans">
         <div className="text-center mb-16">
-          <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)] mb-4 inline-block">
-            Testimonials
+          <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+            รีวิวจากลูกค้า
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight mt-4 mb-6">
-            ความประทับใจจากลูกค้า
+            ความประทับใจ <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">จากลูกค้า</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
             เสียงตอบรับจากผู้ใช้บริการจริง การันตีด้วยคุณภาพและความพึงพอใจสูงสุดที่เรามอบให้
           </p>
         </div>
@@ -86,35 +87,43 @@ export default function CustomerReviews() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="bg-white/[0.02] p-8 rounded-3xl border border-white/10 hover:border-blue-500/30 relative group hover:-translate-y-2 transition-all duration-300 flex flex-col shadow-[0_15px_40px_rgba(0,0,0,0.3)]"
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              whileHover={{ y: -6, scale: 1.01 }}
+              className="bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl p-8 rounded-3xl border border-white/10 hover:border-blue-500/30 hover:from-white/[0.05] hover:to-blue-950/20 transition-all duration-300 relative group flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[300px]"
             >
-              <Quote className="absolute top-6 right-6 h-12 w-12 text-white/5 group-hover:text-blue-500/10 transition-colors" />
+              {/* Ambient inner card glow */}
+              <div className="absolute -inset-px bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(review.rating)].map((_, idx) => (
-                  <Star key={idx} className="h-5 w-5 fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" />
-                ))}
+              {/* Top Row: Stars & Quote Watermark */}
+              <div className="flex items-center justify-between z-10 mb-4">
+                <div className="flex gap-1 text-amber-400">
+                  {[...Array(review.rating)].map((_, idx) => (
+                    <Star key={idx} className="h-4.5 w-4.5 fill-amber-400 text-amber-400 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]" />
+                  ))}
+                </div>
+                <Quote className="h-10 w-10 text-blue-500/10 group-hover:text-blue-500/20 group-hover:scale-110 transition-all duration-300" />
               </div>
 
-              <p className="text-slate-700 dark:text-slate-300 font-medium leading-relaxed mb-8 relative z-10 flex-1">
+              {/* Comment text */}
+              <p className="text-slate-100 font-medium leading-relaxed mb-6 relative z-10 flex-1 text-[15px] sm:text-base">
                 &quot;{review.text}&quot;
               </p>
 
-              <div className="flex items-center gap-4 border-t border-slate-100 dark:border-white/5 pt-6 mt-auto">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden shrink-0 bg-gradient-to-br from-navy to-navy-light flex items-center justify-center shadow-sm">
-                   <span className="text-white font-bold text-lg">{review.initial}</span>
+              {/* Reviewer Row */}
+              <div className="flex items-center gap-4 border-t border-white/10 pt-5 mt-auto relative z-10">
+                <div className="relative h-11 w-11 rounded-full overflow-hidden shrink-0 bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-[0_4px_12px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform">
+                  <span className="text-white font-extrabold text-base">{review.initial}</span>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <h4 className="font-bold text-navy dark:text-white text-sm">{review.name}</h4>
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-                      <BadgeCheck className="h-3 w-3" />
-                      <span className="text-[10px] font-bold">ลูกค้าจริง</span>
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <h4 className="font-bold text-white text-sm sm:text-base truncate">{review.name}</h4>
+                    <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 select-none">
+                      <BadgeCheck className="h-3.5 w-3.5 shrink-0" />
+                      <span className="text-[10px] font-bold whitespace-nowrap">ลูกค้าจริง</span>
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500">{review.role} • {review.type}</p>
+                  <p className="text-xs text-slate-400 truncate">{review.role} • {review.type}</p>
                 </div>
               </div>
             </motion.div>

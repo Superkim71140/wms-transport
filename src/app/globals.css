@@ -50,6 +50,10 @@
   --text-muted: #94A3B8;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   /* Removed hardcoded background and color to allow layout.tsx Tailwind classes to function! */
   font-family: var(--font-sans);
@@ -115,6 +119,15 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3B82F6;
+}
+
+/* Hide scrollbar for horizontal swipe sections */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Mask for custom map highlight */
@@ -225,5 +238,34 @@ body {
     transform: scale(2.2);
     opacity: 0;
   }
+}
+
+/* Shimmer Button Sweep Animation */
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shimmer-effect-sweep 4s infinite linear;
+}
+
+@keyframes shimmer-effect-sweep {
+  0% { left: -150%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
 }
 

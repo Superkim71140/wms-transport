@@ -1,13 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, MapPin } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+const phuketLinks = [
+  { name: "ย้ายบ้าน/คอนโด ภูเก็ต", href: "/service/phuket/moving" },
+  { name: "ขนส่งมอเตอร์ไซค์ ภูเก็ต", href: "/service/phuket/motorcycle" },
+  { name: "ขนส่งสินค้า ภูเก็ต", href: "/service/phuket/freight" },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPhuketDropdownOpen, setIsPhuketDropdownOpen] = useState(false);
+  const [isMobilePhuketOpen, setIsMobilePhuketOpen] = useState(false);
+  const pathname = usePathname();
+  const [activeHash, setActiveHash] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,113 +29,239 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    const interval = setInterval(handleHashChange, 500);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsPhuketDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const navLinks = [
     { name: "บริการของเรา", href: "/#services" },
-    { name: "ทำไมต้องเรา", href: "/#why-choose-us" },
     { name: "ขั้นตอนการขนย้าย", href: "/#process" },
+    { name: "ราคาขนส่ง", href: "/#pricing" },
     { name: "พื้นที่บริการ", href: "/#areas" },
     { name: "ผลงาน", href: "/portfolio" },
     { name: "รีวิวลูกค้า", href: "/#reviews" },
   ];
 
+  const isActiveLink = (href: string) => {
+    if (href === "/portfolio") {
+      return pathname === "/portfolio";
+    }
+    if (pathname === "/") {
+      const hash = href.split("#")[1];
+      return activeHash === `#${hash}` || (activeHash === "" && hash === "services");
+    }
+    return false;
+  };
+
+  const isPhuketActive = pathname.startsWith("/service/phuket");
+
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ease-out ${
-        isScrolled
-          ? "bg-[#040b15]/90 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.6)] py-3"
-          : "bg-gradient-to-b from-[#040b15]/85 via-[#040b15]/40 to-transparent py-6 drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]" 
+      className={`fixed left-1/2 -translate-x-1/2 w-[95%] max-w-7xl bg-[#040b15]/60 backdrop-blur-2xl border border-white/10 rounded-full px-6 flex items-center justify-between shadow-[0_15px_40px_rgba(225,29,72,0.1)] z-[100] transition-all duration-500 ease-out ${
+        isScrolled ? "top-2 py-2.5 scale-[0.99]" : "top-4 py-3.5 scale-100"
       }`}
     >
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-600/0 via-red-500 to-red-600/0 shadow-[0_0_10px_rgba(239,68,68,0.5)] z-[-1]"></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-1">
-        <div className="flex justify-between items-center gap-4">
-          
-          {/* Premium Logo Lockup */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="relative group flex items-center gap-3">
-              <div className="relative bg-[#040b15] p-1 rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
-                <Image
-                  src="/logoWMS.png"
-                  alt="WMS Transport Logo"
-                  width={120}
-                  height={120}
-                  className="w-auto h-10 sm:h-12 object-contain rounded-full"
-                  priority
-                />
-              </div>
-              <div className="hidden sm:flex flex-col justify-center">
-                <span className="text-white font-black text-lg leading-none tracking-wide drop-shadow-lg whitespace-nowrap">WMS</span>
-                <span className="text-blue-400 font-bold text-[10px] tracking-widest uppercase drop-shadow-lg whitespace-nowrap">Transport</span>
-              </div>
+      {/* Premium Logo Lockup */}
+      <div className="flex-shrink-0 flex items-center">
+        <Link href="/" className="relative group flex items-center gap-3">
+          <div className="relative group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
+            <Image
+              src="/logoWMS.png"
+              alt="WMS Transport Logo"
+              width={120}
+              height={120}
+              className="w-auto h-10 sm:h-12 object-contain mix-blend-screen"
+              priority
+            />
+          </div>
+          <div className="hidden sm:flex flex-col justify-center">
+            <span className="text-white font-black text-lg leading-none tracking-wide drop-shadow-lg whitespace-nowrap">WMS</span>
+            <span className="text-blue-400 font-bold text-[10px] tracking-widest uppercase drop-shadow-lg whitespace-nowrap">Transport</span>
+          </div>
+        </Link>
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="hidden xl:flex items-center gap-1.5">
+        {navLinks.map((link) => {
+          const active = isActiveLink(link.href);
+          return (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`whitespace-nowrap text-[13px] xl:text-sm font-bold transition-all duration-300 relative group drop-shadow-lg px-4 py-2 hover:text-red-400 ${
+                active
+                  ? "text-red-400 border-b-2 border-red-500 rounded-none"
+                  : "text-slate-300 rounded-full"
+              }`}
+            >
+              {link.name}
             </Link>
-          </div>
+          );
+        })}
 
-          {/* Desktop Menu */}
-          <div className="hidden xl:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="whitespace-nowrap text-[13px] xl:text-sm font-bold text-white/90 hover:text-white transition-all duration-300 relative group drop-shadow-lg"
-              >
-                {link.name}
-                <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-red-500 transition-all duration-300 group-hover:w-full drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-                <span className="absolute inset-0 bg-red-500/10 rounded-md scale-90 opacity-0 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 -z-10"></span>
-              </Link>
-            ))}
-          </div>
+        {/* Phuket Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setIsPhuketDropdownOpen((v) => !v)}
+            className={`whitespace-nowrap text-[13px] xl:text-sm font-bold transition-all duration-300 px-4 py-2 rounded-full flex items-center gap-1.5 ${
+              isPhuketActive
+                ? "text-blue-400"
+                : "text-slate-300 hover:text-blue-400"
+            }`}
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            บริการในภูเก็ต
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                isPhuketDropdownOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-          {/* Desktop CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <a
-              href="tel:0612402436"
-              className="whitespace-nowrap flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-[13px] hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
-            >
-              <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
-              <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
-            </a>
-            <a
-              href="https://line.me/ti/p/~@wmstransport"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="whitespace-nowrap flex items-center gap-2 px-5 xl:px-6 py-2.5 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:from-[#05B34F] hover:to-[#04A045] text-white font-black text-[13px] transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:shadow-[0_0_30px_rgba(6,199,85,0.6)] hover:-translate-y-0.5 border border-[#06C755]/30 group"
-            >
-              <Image 
-                src="/images/LINE_Brand_icon.png" 
-                alt="LINE Logo" 
-                width={18} 
-                height={18} 
-                className="w-4.5 h-4.5 object-contain shrink-0 filter brightness-100" 
-              />
-              <span className="drop-shadow-lg">ติดต่อขนส่งผ่าน LINE</span>
-            </a>
-          </div>
-
-          {/* Mobile Menu Toggle Button */}
-          <div className="flex xl:hidden items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white drop-shadow-lg p-2 focus:outline-none hover:text-red-400 transition-colors"
-            >
-              {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-            </button>
-          </div>
+          {/* Dropdown Panel */}
+          {isPhuketDropdownOpen && (
+            <div className="absolute top-[calc(100%+0.75rem)] right-0 w-56 bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-50">
+              <div className="p-1.5 flex flex-col gap-0.5">
+                {phuketLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsPhuketDropdownOpen(false)}
+                    className={`text-sm font-semibold px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-2 ${
+                      pathname === link.href
+                        ? "bg-blue-500/15 text-blue-400 border border-blue-500/20"
+                        : "text-slate-300 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span className="text-blue-500 text-xs">→</span>
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+      </div>
+
+      {/* Desktop CTA Buttons */}
+      <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <a
+          href="tel:0612402436"
+          className="whitespace-nowrap flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-[13px] hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
+        >
+          <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
+          <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
+        </a>
+        <a
+          href="https://line.me/ti/p/DtICkMaDet"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact WMS Transport via LINE"
+          className="whitespace-nowrap flex items-center gap-2 px-5 xl:px-6 py-2.5 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-[13px] transition-all duration-300 shadow-[0_0_15px_rgba(6,199,85,0.3)] border border-[#06C755]/30 group"
+        >
+          <Image
+            src="/images/LINE_Brand_icon.png"
+            alt="LINE Logo"
+            width={18}
+            height={18}
+            className="w-4.5 h-4.5 object-contain shrink-0"
+          />
+          <span className="drop-shadow-lg">ติดต่อขนส่งผ่าน LINE</span>
+        </a>
+      </div>
+
+      {/* Mobile Menu Toggle Button */}
+      <div className="flex xl:hidden items-center">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="text-white drop-shadow-lg p-2 focus:outline-none hover:text-red-400 transition-colors"
+        >
+          {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+        </button>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 w-full bg-[#040b15]/98 backdrop-blur-3xl border-b border-white/10 py-6 px-4 flex flex-col gap-2 shadow-2xl z-50">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-base font-bold text-slate-200 hover:text-white hover:bg-white/5 block py-3.5 px-5 rounded-xl transition-colors border border-transparent hover:border-white/5"
+        <div className="xl:hidden absolute top-[calc(100%+0.75rem)] left-0 w-full bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 py-6 px-4 flex flex-col gap-2 rounded-3xl shadow-2xl z-50">
+          {navLinks.map((link) => {
+            const active = isActiveLink(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-base font-bold block py-3.5 px-5 rounded-xl transition-colors border ${
+                  active
+                    ? "text-red-400 bg-red-500/10 border-red-500/30"
+                    : "text-slate-200 hover:text-red-400 hover:bg-white/5 border-transparent"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+
+          {/* Mobile Phuket Submenu */}
+          <div className="border border-white/5 rounded-xl overflow-hidden">
+            <button
+              onClick={() => setIsMobilePhuketOpen((v) => !v)}
+              className={`w-full flex items-center justify-between text-base font-bold py-3.5 px-5 transition-colors ${
+                isPhuketActive
+                  ? "text-blue-400 bg-blue-500/10"
+                  : "text-slate-200 hover:text-blue-400 hover:bg-white/5"
+              }`}
             >
-              {link.name}
-            </Link>
-          ))}
+              <span className="flex items-center gap-2">
+                <MapPin className="w-4 h-4" />
+                บริการในภูเก็ต
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  isMobilePhuketOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {isMobilePhuketOpen && (
+              <div className="border-t border-white/5 flex flex-col">
+                {phuketLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`text-sm font-semibold py-3 px-8 transition-colors ${
+                      pathname === link.href
+                        ? "text-blue-400 bg-blue-500/10"
+                        : "text-slate-300 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    → {link.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <div className="flex flex-col gap-3 mt-4 border-t border-white/10 pt-6 px-2">
             <a
               href="tel:0612402436"
@@ -133,17 +271,18 @@ export default function Navbar() {
               <span className="font-mono">โทรด่วน: 061-240-2436</span>
             </a>
             <a
-              href="https://line.me/ti/p/~@wmstransport"
+              href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact WMS Transport via LINE"
               className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl bg-gradient-to-r from-[#06C755] to-[#05B34F] text-white font-black text-sm shadow-[0_0_20px_rgba(6,199,85,0.3)] relative overflow-hidden group"
             >
-              <Image 
-                src="/images/LINE_Brand_icon.png" 
-                alt="LINE Logo" 
-                width={20} 
-                height={20} 
-                className="w-5 h-5 object-contain shrink-0 relative z-10" 
+              <Image
+                src="/images/LINE_Brand_icon.png"
+                alt="LINE Logo"
+                width={20}
+                height={20}
+                className="w-5 h-5 object-contain shrink-0 relative z-10"
               />
               <span className="relative z-10">ติดต่อขนส่งผ่าน LINE</span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>

@@ -13,23 +13,27 @@ const PROCESS_STEPS = [
 
 export default function PortfolioProcess() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-navy-dark relative overflow-hidden border-t border-slate-100 dark:border-white/5">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/[0.05] rounded-full blur-[180px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/[0.05] rounded-full blur-[180px] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <span className="px-3 py-1 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block">
-            Our Process
+          <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+            ขั้นตอนการทำงาน
           </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-navy dark:text-white tracking-tight font-sans">
-            ขั้นตอนการทำงานของเรา
+          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight font-sans mt-4">
+            ขั้นตอนการทำงาน <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">ของเรา</span>
           </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-lg">
+          <p className="mt-4 text-slate-400 max-w-2xl mx-auto text-lg">
             เราทำงานอย่างเป็นระบบทุกขั้นตอน เพื่อให้คุณมั่นใจได้ว่าสินค้าจะถึงที่หมายอย่างปลอดภัย
           </p>
         </div>
 
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute top-10 left-0 w-full h-0.5 bg-slate-200 dark:bg-white/10 hidden lg:block z-0" />
+          <div className="absolute top-10 left-0 w-full h-0.5 bg-white/5 hidden lg:block z-0" />
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4 relative z-10">
             {PROCESS_STEPS.map((step, i) => (
@@ -41,16 +45,16 @@ export default function PortfolioProcess() {
                 transition={{ delay: i * 0.15, duration: 0.6 }}
                 className="flex flex-col items-center text-center group"
               >
-                <div className="w-20 h-20 rounded-2xl bg-white dark:bg-navy-light shadow-[0_10px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-slate-100 dark:border-white/5 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 relative">
+                <div className="w-20 h-20 rounded-2xl bg-white/[0.04] backdrop-blur-md border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-400 transition-all duration-300 relative">
                   <step.icon className="w-8 h-8" />
-                  <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-red text-white flex items-center justify-center text-sm font-bold shadow-md">
+                  <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold shadow-[0_0_15px_rgba(59,130,246,0.5)]">
                     {step.id}
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-navy dark:text-white mb-2 font-sans group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 className="text-lg font-bold text-white mb-2 font-sans group-hover:text-blue-400 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed px-2">
+                <p className="text-sm text-slate-400 leading-relaxed px-2">
                   {step.desc}
                 </p>
               </motion.div>

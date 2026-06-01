@@ -21,7 +21,7 @@ export default function PortfolioCTA() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6">
-            พร้อมให้เราดูแลงานของคุณแล้วหรือยัง?
+            พร้อมให้เราดูแลงานของคุณ <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">แล้วหรือยัง?</span>
           </h2>
           <p className="text-lg text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             ติดต่อนัดหมายหรือสอบถามข้อมูลเพิ่มเติมได้ตลอด 24 ชั่วโมง เราพร้อมประเมินราคาฟรีและวางแผนการขนย้ายให้คุณอย่างดีที่สุด
@@ -37,9 +37,10 @@ export default function PortfolioCTA() {
             </a>
             
             <a 
-              href="https://line.me/ti/p/~@wmstransport"
+              href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="Contact WMS Transport via LINE"
               className="line-btn-pulse group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl text-white font-black text-base transform active:scale-95 hover:-translate-y-0.5 transition-all duration-300"
             >
               <Image 
@@ -69,9 +70,10 @@ export default function PortfolioCTA() {
             </a>
 
             <a 
-              href="https://line.me/ti/p/~@wmstransport"
+              href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="Get a free quote via LINE"
               className="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl bg-transparent border border-[#06C755]/30 hover:border-[#06C755] text-white hover:bg-[#06C755]/10 font-bold text-base transition-all duration-300 active:scale-95"
             >
               <Calculator className="h-5 w-5 text-emerald-400" />

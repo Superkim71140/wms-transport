@@ -2,28 +2,47 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, MessageCircleQuestion, HelpCircle } from "lucide-react";
+import { 
+  ChevronDown, 
+  MessageCircleQuestion, 
+  HelpCircle,
+  Calculator, 
+  Users, 
+  ShieldCheck, 
+  CalendarClock, 
+  Truck 
+} from "lucide-react";
 
 const faqs = [
   {
     question: "คิดค่าบริการอย่างไร? มีบวกเพิ่มหน้างานไหม?",
-    answer: "เราประเมินราคาตามระยะทางจริงและประเภทของรถที่ใช้ครับ รับรองความโปร่งใส เสนอราคาไหน จ่ายราคานั้น จบปัญหาการบวกเพิ่มจุกจิกหน้างาน 100%"
+    answer: "เราประเมินราคาตามระยะทางจริงและประเภทของรถที่ใช้ครับ รับรองความโปร่งใส เสนอราคาไหน จ่ายราคานั้น จบปัญหาการบวกเพิ่มจุกจิกหน้างาน 100%",
+    icon: Calculator,
+    colorTheme: "bg-amber-500/10 border-amber-500/20 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]"
   },
   {
     question: "มีพนักงานช่วยแพ็กของและยกของให้ด้วยไหม?",
-    answer: "มีครับ! เรามีทีมงานมืออาชีพที่ผ่านการอบรมด้านการขนย้ายโดยเฉพาะ พร้อมให้บริการทั้งแพ็กซีลกันกระแทกและยกของจัดวางถึงที่หมายตามที่คุณต้องการ"
+    answer: "มีครับ! เรามีทีมงานมืออาชีพที่ผ่านการอบรมด้านการขนย้ายโดยเฉพาะ พร้อมให้บริการทั้งแพ็กซีลกันกระแทกและยกของจัดวางถึงที่หมายตามที่คุณต้องการ",
+    icon: Users,
+    colorTheme: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
   },
   {
     question: "สินค้าเกิดความเสียหายระหว่างขนส่ง มีรับประกันไหม?",
-    answer: "อุ่นใจได้เลยครับ บริการของเรามาพร้อมวงเงินประกันภัยอุบัติเหตุระหว่างการขนส่งสูงสุดถึง 100,000 บาท (ตามเงื่อนไขที่ตกลง) เพื่อคุ้มครองทรัพย์สินของคุณตลอดเส้นทาง"
+    answer: "อุ่นใจได้เลยครับ บริการของเรามาพร้อมวงเงินประกันภัยอุบัติเหตุระหว่างการขนส่งสูงสุดถึง 100,000 บาท (ตามเงื่อนไขที่ตกลง) เพื่อคุ้มครองทรัพย์สินของคุณตลอดเส้นทาง",
+    icon: ShieldCheck,
+    colorTheme: "bg-rose-500/10 border-rose-500/20 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.2)]"
   },
   {
     question: "ต้องจองคิวล่วงหน้ากี่วัน? มีบริการด่วนไหม?",
-    answer: "แนะนำให้จองคิวล่วงหน้า 1-3 วันเพื่อล็อกคิวรถและทีมงานครับ แต่หากคุณมีความจำเป็นเร่งด่วน เรามีบริการ 24 ชม. ที่สามารถจัดรถเข้าหน้างานได้ภายใน 1-2 ชั่วโมง (ขึ้นอยู่กับสถานะรถว่าง)"
+    answer: "แนะนำให้จองคิวล่วงหน้า 1-3 วันเพื่อล็อกคิวรถและทีมงานครับ แต่หากคุณมีความจำเป็นเร่งด่วน เรามีบริการ 24 ชม. ที่สามารถจัดรถเข้าหน้างานได้ภายใน 1-2 ชั่วโมง (ขึ้นอยู่กับสถานะรถว่าง)",
+    icon: CalendarClock,
+    colorTheme: "bg-cyan-500/10 border-cyan-500/20 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
   },
   {
     question: "รถกระบะตู้ทึบสามารถกันฝนและกันฝุ่นได้ 100% หรือไม่?",
-    answer: "แน่นอนครับ เราใช้รถกระบะตู้ทึบโครงสร้างมาตรฐาน ปิดล็อกมิดชิดหนาแน่น สามารถกันน้ำ กันฝน และฝุ่นละอองได้ 100% ปลอดภัยต่อเฟอร์นิเจอร์และเครื่องใช้ไฟฟ้าแน่นอน"
+    answer: "แน่นอนครับ เราใช้รถกระบะตู้ทึบโครงสร้างมาตรฐาน ปิดล็อกมิดชิดหนาแน่น สามารถกันน้ำ กันฝน และฝุ่นละอองได้ 100% ปลอดภัยต่อเฟอร์นิเจอร์และเครื่องใช้ไฟฟ้าแน่นอน",
+    icon: Truck,
+    colorTheme: "bg-indigo-500/10 border-indigo-500/20 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
   }
 ];
 
@@ -34,12 +53,30 @@ export default function FAQ() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative w-full z-10 font-sans">
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} 
+      />
       
       {/* Premium Ambient Glow Orbs */}
       <div className="absolute top-0 left-0 md:left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
       <div className="absolute bottom-0 right-0 md:right-1/4 w-[700px] h-[700px] bg-indigo-500/10 rounded-full blur-[180px] pointer-events-none -z-10" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none -z-10 mix-blend-screen" />
       
       <div className="max-w-[880px] mx-auto relative z-10">
         
@@ -50,7 +87,7 @@ export default function FAQ() {
             <span>คำถามที่พบบ่อย</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight drop-shadow-md">
-            ข้อสงสัยในการขนย้าย?
+            ข้อสงสัย<span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">ในการขนย้าย?</span>
           </h2>
           <p className="text-slate-400 font-medium text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             รวบรวมข้อสงสัยยอดนิยมเกี่ยวกับการขนส่งและขนย้าย WMS พร้อมตอบอย่างจริงใจและโปร่งใสที่สุด
@@ -73,37 +110,55 @@ export default function FAQ() {
             return (
               <div
                 key={index}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden backdrop-blur-xl ${
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden relative ${
                   isActive
-                    ? "bg-slate-900/60 border-blue-500/35 shadow-[0_15px_40px_rgba(0,0,0,0.4)] shadow-blue-500/5"
-                    : "bg-white/[0.02] border-white/5 hover:border-blue-400/25 hover:bg-white/[0.04]"
+                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] backdrop-blur-2xl border-blue-400/30 shadow-[0_20px_50px_rgba(59,130,246,0.15)]"
+                    : "bg-white/[0.02] border-white/5 backdrop-blur-xl hover:border-white/20 hover:bg-white/[0.05]"
                 }`}
               >
+                {/* Left glowing border accent for active state */}
+                {isActive && (
+                  <div className="absolute left-0 top-0 bottom-0 border-l-4 border-l-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] z-10" />
+                )}
+
                 {/* Accordion Trigger Button */}
                 <button
                   id={`faq-title-${index}`}
                   onClick={() => toggleFaq(index)}
                   aria-expanded={isActive}
                   aria-controls={`faq-content-${index}`}
-                  className="w-full flex items-center justify-between p-6 sm:p-7 text-left focus:outline-none group cursor-pointer"
+                  className="w-full flex items-center justify-between p-6 sm:p-7 text-left focus:outline-none group cursor-pointer gap-4"
                 >
-                  <span className={`text-base sm:text-lg font-bold pr-6 transition-colors duration-300 ${
-                    isActive ? "text-blue-300" : "text-slate-200 group-hover:text-white"
-                  }`}>
-                    {faq.question}
-                  </span>
+                  <div className="flex items-center gap-4 flex-1">
+                    {/* Glassmorphic square for Lucide Icon */}
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 shrink-0 ${
+                      isActive
+                        ? faq.colorTheme
+                        : "bg-white/[0.02] border-white/10 text-slate-400 group-hover:bg-white/[0.05] group-hover:text-slate-300 group-hover:border-white/20 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.05)]"
+                    }`}>
+                      {(() => {
+                        const IconComponent = faq.icon;
+                        return <IconComponent className="w-5 h-5" />;
+                      })()}
+                    </div>
+                    <span className={`text-base sm:text-lg font-bold pr-2 transition-colors duration-300 ${
+                      isActive ? "text-white drop-shadow-md" : "text-slate-200 group-hover:text-white"
+                    }`}>
+                      {faq.question}
+                    </span>
+                  </div>
                   
                   {/* Rotating Chevron Icon */}
                   <div className={`w-9 h-9 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${
                     isActive 
-                      ? "border-blue-500/50 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.2)]" 
-                      : "border-white/10 bg-white/5 group-hover:bg-white/10 group-hover:border-blue-400/40"
+                      ? "border-cyan-400/50 bg-cyan-500/10 shadow-[0_0_15px_rgba(34,211,238,0.2)]" 
+                      : "border-white/10 bg-white/5 group-hover:bg-white/10 group-hover:border-white/30 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.1)]"
                   }`}>
                     <motion.div
                       animate={{ rotate: isActive ? 180 : 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <ChevronDown className={`w-4 h-4 transition-colors ${isActive ? "text-blue-400" : "text-slate-400 group-hover:text-blue-300"}`} />
+                      <ChevronDown className={`w-4 h-4 transition-colors ${isActive ? "text-cyan-400" : "text-slate-400 group-hover:text-white"}`} />
                     </motion.div>
                   </div>
                 </button>
@@ -120,10 +175,15 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 sm:px-7 pb-6">
-                        <div className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl">
+                      <div className="px-6 sm:px-7 pb-6 pl-[3.5rem] sm:pl-[4.25rem]">
+                        <motion.div 
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.35, delay: 0.05 }}
+                          className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl"
+                        >
                           {faq.answer}
-                        </div>
+                        </motion.div>
                       </div>
                     </motion.div>
                   )}

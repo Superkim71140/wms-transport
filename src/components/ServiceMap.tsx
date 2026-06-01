@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, animate } from "framer-motion";
 import Image from "next/image";
 import { 
   ShieldCheck, 
@@ -12,7 +12,16 @@ import {
   TrendingUp,
   Activity,
   Compass,
-  Globe
+  Globe,
+  Building2, 
+  Truck, 
+  Building, 
+  Home, 
+  Factory, 
+  Mountain, 
+  Wheat, 
+  Palmtree, 
+  Map
 } from "lucide-react";
 
 type Hub = {
@@ -24,20 +33,20 @@ type Hub = {
   price: string;
   routes: string[];
   isMainHub?: boolean;
-  icon: string;
+  icon: React.ComponentType<any>;
 };
 
 const hubs: Hub[] = [
   {
     id: "samutsakhon",
-    name: "สมุทรสาคร (ศูนย์บริการหลัก)",
-    engName: "Samut Sakhon (Main Hub)",
-    region: "จุดยุทธศาสตร์หลักและกระจายสินค้าภาคกลาง WMS TRANSPORT",
+    name: "สมุทรสาคร (จุดให้บริการหลัก)",
+    engName: "Samut Sakhon (Main Station)",
+    region: "จุดจอดรถหลักและพื้นที่ให้บริการครอบคลุมภาคกลาง WMS TRANSPORT",
     time: "บริการด่วนทันที / สแตนด์บาย 24 ชม.",
     price: "เริ่มต้น 500 บาท",
     routes: ["ต.บ้านเกาะ", "อ.เมืองสมุทรสาคร", "กระทุ่มแบน", "บ้านแพ้ว", "ถนนพระราม 2", "มหาชัย", "บางโทรัด"],
     isMainHub: true,
-    icon: "🏢"
+    icon: Building2
   },
   {
     id: "bkk",
@@ -47,7 +56,7 @@ const hubs: Hub[] = [
     time: "จัดส่งด่วนภายใน 1-3 ชั่วโมง",
     price: "เริ่มต้น 500 บาท",
     routes: ["ลาดกระบัง", "บางนา", "จตุจักร", "ดอนเมือง", "บางขุนเทียน", "ห้วยขวาง", "สาทร", "ปทุมวัน"],
-    icon: "🏙️"
+    icon: Building
   },
   {
     id: "nonthaburi",
@@ -57,7 +66,7 @@ const hubs: Hub[] = [
     time: "จัดส่งด่วนภายใน 1-3 ชั่วโมง",
     price: "เริ่มต้น 500 บาท",
     routes: ["ปากเกร็ด", "บางใหญ่", "บางบัวทอง", "เมืองนนทบุรี", "รังสิต", "คลองหลวง", "ธัญบุรี", "ไทรน้อย"],
-    icon: "🏡"
+    icon: Home
   },
   {
     id: "chonburi",
@@ -67,37 +76,37 @@ const hubs: Hub[] = [
     time: "บริการด่วนพิเศษภายใน 3-4 ชั่วโมง",
     price: "เริ่มต้น 1,800 บาท",
     routes: ["พัทยา", "ศรีราชา", "อมตะนคร", "บางแสน", "สัตหีบ", "แหลมฉบัง", "บ่อวิน"],
-    icon: "🏭"
+    icon: Factory
   },
   {
     id: "chiangmai",
     name: "เชียงใหม่ (ภาคเหนือ)",
     engName: "Chiang Mai (Northern Hub)",
-    region: "จุดกระจายสินค้าและเส้นทางภาคเหนือหลัก",
+    region: "เส้นทางวิ่งประจำภาคเหนือและจุดกระจายงาน",
     time: "ส่งถึงปลายทางภายใน 24 ชม. (1 วัน)",
     price: "เริ่มต้น 5,500 บาท",
     routes: ["เชียงราย", "ลำปาง", "ลำพูน", "แพร่", "พะเยา", "แม่ฮ่องสอน", "ฝาง"],
-    icon: "⛰️"
+    icon: Mountain
   },
   {
     id: "khonkaen",
     name: "ขอนแก่น (ภาคอีสาน)",
     engName: "Khon Kaen (Northeast Hub)",
-    region: "จุดประสานงานและเส้นทางภาคตะวันออกเฉียงเหนือ",
+    region: "เส้นทางวิ่งประจำภาคตะวันออกเฉียงเหนือ",
     time: "ส่งถึงปลายทางภายใน 12-24 ชั่วโมง",
     price: "เริ่มต้น 3,500 บาท",
     routes: ["อุดรธานี", "อุบลราชธานี", "นครราชสีมา", "บุรีรัมย์", "สุรินทร์", "ร้อยเอ็ด", "หนองคาย"],
-    icon: "🌾"
+    icon: Wheat
   },
   {
     id: "phuket",
     name: "ภูเก็ต (ภาคใต้)",
     engName: "Phuket (Southern Hub)",
-    region: "จุดประสานงานขนส่งและเส้นทางภาคใต้หลัก",
+    region: "เส้นทางลงใต้หลัก (เน้นส่งมอเตอร์ไซค์/บิ๊กไบค์)",
     time: "ส่งถึงปลายทางภายใน 24-48 ชม. (1-2 วัน)",
     price: "เริ่มต้น 6,500 บาท",
     routes: ["หาดใหญ่", "กระบี่", "พังงา", "สุราษฎร์ธานี", "นครศรีธรรมราช", "ชุมพร", "เกาะสมุย"],
-    icon: "🌴"
+    icon: Palmtree
   }
 ];
 
@@ -107,11 +116,33 @@ const serviceHighlights = [
   { icon: <Users className="w-5 h-5 text-sky-400" />, title: "บริการครบวงจร", desc: "มีพนักงานช่วยยกของ แพ็กกันกระแทกอย่างดี" }
 ];
 
+const parsePrice = (priceStr: string): number => {
+  const match = priceStr.replace(/,/g, "").match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+};
+
 export default function ServiceMap() {
   const [activeHub, setActiveHub] = useState<Hub>(hubs[0]);
+  
+  const [displayPrice, setDisplayPrice] = useState<number>(() => parsePrice(hubs[0].price));
+  const currentPriceRef = useRef(displayPrice);
+
+  useEffect(() => {
+    currentPriceRef.current = displayPrice;
+  }, [displayPrice]);
+
+  useEffect(() => {
+    const targetPrice = parsePrice(activeHub.price);
+    const controls = animate(currentPriceRef.current, targetPrice, {
+      duration: 0.5,
+      ease: "easeOut",
+      onUpdate: (latest) => setDisplayPrice(latest)
+    });
+    return () => controls.stop();
+  }, [activeHub.price]);
 
   return (
-    <div className="w-full text-white font-sans">
+    <div className="w-full text-white font-sans" style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}>
       
       {/* 1. SECTION HEADER */}
       <div className="text-center mb-16 relative">
@@ -135,7 +166,7 @@ export default function ServiceMap() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
         >
-          ศูนย์บริการและจุดจอดรถขนย้าย
+          เส้นทางและพื้นที่<span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">ให้บริการรับ-ส่ง</span>
         </motion.h2>
 
         <motion.p 
@@ -145,7 +176,7 @@ export default function ServiceMap() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-slate-400 text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-medium"
         >
-          กระจายครอบคลุมทั่วทุกภูมิภาคหลักของประเทศ ขนส่งเร็ว ตรงเวลา ปลอดภัย พร้อมประกันสินค้าทุกเที่ยว
+          บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ ครอบคลุมทั่วไทย ส่งตรงถึงหน้าบ้านอย่างรวดเร็ว ปลอดภัย พร้อมพนักงานช่วยยกของทุกเที่ยว
         </motion.p>
       </div>
 
@@ -168,23 +199,22 @@ export default function ServiceMap() {
                   whileHover={{ scale: isSelected ? 1 : 1.015, y: -2 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setActiveHub(hub)}
-                  className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex items-center justify-between shadow-lg relative overflow-hidden group ${
+                  className={`p-6 rounded-3xl border transition-all duration-300 cursor-pointer flex items-center justify-between shadow-lg relative overflow-hidden group ${
                     isSelected
-                      ? "bg-gradient-to-r from-blue-950/70 to-blue-900/60 border-blue-500/50 shadow-[0_10px_25px_rgba(37,99,235,0.15)]"
-                      : "bg-white/[0.02] border-white/10 hover:bg-white/[0.05] hover:border-white/20"
+                      ? "bg-blue-600/10 backdrop-blur-md border-blue-500/30 border-l-4 border-l-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                      : "bg-white/[0.02] border-white/5 hover:bg-white/[0.05] hover:border-white/10"
                   }`}
                 >
-                  {/* Subtle active indicator accent block */}
-                  {isSelected && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500" />
-                  )}
 
                   <div className="flex items-center gap-4">
                     {/* Region icon badge */}
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-inner ${
-                      isSelected ? "bg-blue-600/30 text-white" : "bg-white/5 text-slate-300 group-hover:bg-white/10"
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-inner ${
+                      isSelected ? "bg-blue-600/30 text-blue-400" : "bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-slate-300"
                     }`}>
-                      {hub.icon}
+                      {(() => {
+                        const IconComponent = hub.icon;
+                        return <IconComponent className="w-6 h-6" />;
+                      })()}
                     </div>
 
                     <div className="text-left">
@@ -194,7 +224,7 @@ export default function ServiceMap() {
                         </span>
                         {hub.isMainHub && (
                           <span className="text-[9px] bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                            Main Hub
+                            จุดจอดรถหลัก
                           </span>
                         )}
                       </div>
@@ -219,13 +249,20 @@ export default function ServiceMap() {
         </div>
 
         {/* RIGHT COLUMN: Highly Detailed Interactive Dashboard Panel */}
-        <div className="lg:col-span-7 bg-white/[0.01] backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden min-h-[500px]">
+        <div className="lg:col-span-7 bg-[#040b15]/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden min-h-[500px]">
           
           {/* Subtle grid backing and overlay glow */}
           <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
           <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
           
-          <div className="relative z-10 space-y-6">
+          <motion.div 
+            key={activeHub.id}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-10 space-y-6 flex-1 flex flex-col justify-between"
+          >
             
             {/* Header Area */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
@@ -238,7 +275,10 @@ export default function ServiceMap() {
               </div>
               
               <div className="flex items-center gap-2 self-start sm:self-auto bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-inner">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="relative flex h-2 w-2 mr-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
                 พร้อมให้บริการ 24 ชม.
               </div>
             </div>
@@ -251,18 +291,18 @@ export default function ServiceMap() {
             </div>
 
             {/* LIVE SVG ROUTE CONNECTIVITY SIMULATOR */}
-            <div className="bg-[#050f21] border border-white/5 rounded-2xl p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner h-[150px]">
+            <div className="bg-gradient-to-b from-blue-950/30 to-transparent border border-blue-500/20 rounded-2xl p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner h-[150px]">
               <div className="absolute top-3 left-4 flex items-center gap-1.5">
                 <Globe className="w-3.5 h-3.5 text-blue-400" />
-                <span className="text-[10px] text-slate-400 font-mono font-bold tracking-widest uppercase">LOGISTICS CONNECTOR</span>
+                <span className="text-[10px] text-slate-400 font-mono font-bold tracking-widest uppercase">TRANSPORT ROUTE</span>
               </div>
 
               {/* Connecting Nodes Layout */}
               <div className="w-full flex items-center justify-between px-2 sm:px-6 relative z-10 mt-2">
                 {/* Main Hub Node */}
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 border border-blue-400/40 shadow-[0_0_15px_rgba(59,130,246,0.6)] flex items-center justify-center text-lg select-none">
-                    🏢
+                  <div className="w-10 h-10 rounded-full bg-blue-600 border border-blue-400/40 shadow-[0_0_15px_rgba(59,130,246,0.6)] flex items-center justify-center text-white select-none">
+                    <Building2 className="w-5 h-5" />
                   </div>
                   <span className="text-[11px] font-black text-white whitespace-nowrap">สมุทรสาคร (หลัก)</span>
                 </div>
@@ -296,16 +336,19 @@ export default function ServiceMap() {
                   <motion.div 
                     animate={{ left: ["0%", "92%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                    className="absolute w-5 h-5 rounded-full bg-blue-500 border border-white flex items-center justify-center shadow-[0_0_10px_#3b82f6] text-[10px]"
+                    className="absolute w-6 h-6 rounded-full bg-blue-600 border border-blue-400 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.8)]"
                   >
-                    🚚
+                    <Truck className="w-3.5 h-3.5 text-white" />
                   </motion.div>
                 </div>
 
                 {/* Target Hub Node */}
                 <div className="flex flex-col items-center gap-1.5">
-                  <div className="w-10 h-10 rounded-full bg-slate-900 border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center justify-center text-lg select-none group-hover:scale-105 transition-transform duration-300">
-                    {activeHub.icon}
+                  <div className="w-10 h-10 rounded-full bg-slate-900 border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center justify-center text-slate-300 select-none group-hover:scale-105 transition-transform duration-300">
+                    {(() => {
+                      const IconComponent = activeHub.icon;
+                      return <IconComponent className="w-5 h-5" />;
+                    })()}
                   </div>
                   <span className="text-[11px] font-black text-blue-400 whitespace-nowrap">{activeHub.name.split(" ")[0]}</span>
                 </div>
@@ -314,7 +357,7 @@ export default function ServiceMap() {
 
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl text-left">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 transition-all text-left">
                 <span className="text-[10px] text-blue-400 font-bold uppercase tracking-wider block mb-1">ความเร็วในการจัดส่ง</span>
                 <p className="text-white text-base font-extrabold flex items-center gap-2">
                   <Clock className="w-4.5 h-4.5 text-blue-400 shrink-0" />
@@ -322,11 +365,11 @@ export default function ServiceMap() {
                 </p>
               </div>
 
-              <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl text-left">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 transition-all text-left">
                 <span className="text-[10px] text-blue-400 font-bold uppercase tracking-wider block mb-1">อัตราค่าบริการเริ่มต้น</span>
                 <p className="text-emerald-400 text-base font-black flex items-center gap-2">
                   <TrendingUp className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
-                  {activeHub.price}
+                  เริ่มต้น {Math.round(displayPrice).toLocaleString()} บาท
                 </p>
               </div>
             </div>
@@ -338,16 +381,16 @@ export default function ServiceMap() {
                 {activeHub.routes.map((route) => (
                   <span
                     key={route}
-                    className="px-3 py-1.5 bg-white/[0.03] border border-white/5 rounded-lg text-xs font-bold text-slate-300 hover:border-blue-500/30 hover:bg-blue-900/10 hover:text-white transition-all duration-200 flex items-center gap-1.5"
+                    className="px-3 py-1.5 bg-blue-500/5 border border-blue-500/20 text-blue-300 hover:bg-blue-500/20 rounded-lg text-xs font-bold transition-all duration-200 flex items-center gap-1.5 cursor-default"
                   >
-                    <CheckCircle className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <CheckCircle className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                     {route}
                   </span>
                 ))}
               </div>
             </div>
             
-          </div>
+          </motion.div>
 
           {/* Footer Highlights & CTA Buttons */}
           <div className="mt-8 pt-6 border-t border-white/10 relative z-10 space-y-6">
@@ -370,9 +413,9 @@ export default function ServiceMap() {
             {/* Contact Row */}
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://line.me/ti/p/~@wmstransport"
+                href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl line-btn-pulse text-white font-black text-base transition-all duration-300 hover:-translate-y-0.5 border border-[#06C755]/30 transform active:scale-95 shadow-md"
               >
                 <Image 
@@ -388,7 +431,7 @@ export default function ServiceMap() {
               <a
                 href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white font-black text-base transition-all duration-300 hover:-translate-y-0.5 border border-[#1877F2]/30 transform active:scale-95 shadow-[0_4px_15px_rgba(24,119,242,0.2)]"
               >
                 <Image 

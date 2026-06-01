@@ -8,18 +8,18 @@ const FILTERS = ["ทั้งหมด", "ย้ายบ้าน", "ย้า
 
 // Updated image dataset according to the requirements
 const GALLERY_IMAGES = [
-  { id: 1, src: "/images/WM8.jpg", category: "ขนส่งมอเตอร์ไซค์" },
-  { id: 2, src: "/images/WM9.jpg", category: "แพ็กของ" },
-  { id: 3, src: "/images/WM10.jpg", category: "ย้ายบ้าน" },
-  { id: 4, src: "/images/WM11.jpg", category: "ขนส่งมอเตอร์ไซค์" },
-  { id: 5, src: "/images/WM12.jpg", category: "งานขนส่งจริง" },
-  { id: 6, src: "/images/WM13.jpg", category: "แพ็กของ" },
-  { id: 8, src: "/images/WM15.jpg", category: "ย้ายคอนโด" },
-  { id: 9, src: "/images/WM16.jpg", category: "งานขนส่งจริง" },
-  { id: 10, src: "/images/WM17.jpg", category: "แพ็กของ" },
-  { id: 12, src: "/images/WMS4.jpg", category: "งานขนส่งจริง" },
-  { id: 13, src: "/images/WMS6.jpg", category: "งานขนส่งจริง" },
-  { id: 14, src: "/images/WMS24.png", category: "งานขนส่งจริง" },
+  { id: 1, src: "/images/WM8.webp", category: "ขนส่งมอเตอร์ไซค์" },
+  { id: 2, src: "/images/WM9.webp", category: "แพ็กของ" },
+  { id: 3, src: "/images/WM10.webp", category: "ย้ายบ้าน" },
+  { id: 4, src: "/images/WM11.webp", category: "ขนส่งมอเตอร์ไซค์" },
+  { id: 5, src: "/images/WM12.webp", category: "งานขนส่งจริง" },
+  { id: 6, src: "/images/WM13.webp", category: "แพ็กของ" },
+  { id: 8, src: "/images/WM15.webp", category: "ย้ายคอนโด" },
+  { id: 9, src: "/images/WM16.webp", category: "งานขนส่งจริง" },
+  { id: 10, src: "/images/WM17.webp", category: "แพ็กของ" },
+  { id: 12, src: "/images/WMS4.webp", category: "งานขนส่งจริง" },
+  { id: 13, src: "/images/WMS6.webp", category: "งานขนส่งจริง" },
+  { id: 14, src: "/images/WMS24.webp", category: "งานขนส่งจริง" },
 ];
 
 // Helper to convert filename to an elegant tag
@@ -41,7 +41,7 @@ export default function PortfolioGallery() {
   );
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#040b15] via-[#081325] to-[#040b15] min-h-screen relative overflow-hidden z-0">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] min-h-screen relative overflow-hidden z-0">
 
       {/* Subtle Dot Pattern Overlay (Matched with FAQ) */}
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none -z-10" />
@@ -53,11 +53,11 @@ export default function PortfolioGallery() {
 
       <div className="max-w-7xl mx-auto relative z-10 font-sans">
         <div className="text-center mb-16">
-          <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)] mb-4 inline-block">
-            Our Gallery
+          <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+            แกลเลอรีผลงาน
           </span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6">
-            ภาพผลงานจริงจากสถานที่
+            ภาพผลงานจริง <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">จากสถานที่</span>
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
             สัมผัสความเป็นมืออาชีพผ่านผลงานการขนย้ายจริงของเรา ที่ใส่ใจในทุกรายละเอียดเพื่อความพึงพอใจสูงสุดของคุณ
