@@ -3,23 +3,60 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import { Truck, ShieldCheck, Clock, Users, Phone, ChevronDown } from "lucide-react";
+import {
+  Truck,
+  ShieldCheck,
+  Users,
+  Phone,
+  ChevronDown,
+  Home,
+  Bike,
+  Package,
+  ArrowRight,
+} from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
-export const provinceMap: Record<string, string> = {
-  bangkok: "กรุงเทพมหานคร",
-  phuket: "ภูเก็ต",
-  chonburi: "ชลบุรี",
-  "chiang-mai": "เชียงใหม่",
+// ─────────────────────────────────────────────
+// Location data — add new regions here only
+// ─────────────────────────────────────────────
+export const provinceMap: Record<
+  string,
+  { name: string; shortName: string; region: string }
+> = {
+  bangkok: {
+    name: "กรุงเทพมหานคร",
+    shortName: "กรุงเทพฯ",
+    region: "ภาคกลาง",
+  },
+  phuket: {
+    name: "ภูเก็ต",
+    shortName: "ภูเก็ต",
+    region: "ภาคใต้",
+  },
+  chonburi: {
+    name: "ชลบุรี",
+    shortName: "ชลบุรี",
+    region: "ภาคตะวันออก",
+  },
+  "chiang-mai": {
+    name: "เชียงใหม่",
+    shortName: "เชียงใหม่",
+    region: "ภาคเหนือ",
+  },
+  samutsakhon: {
+    name: "สมุทรสาคร",
+    shortName: "สมุทรสาคร",
+    region: "ภาคกลาง",
+  },
+  "bkk-thonburi": {
+    name: "กรุงเทพฯ ฝั่งธนบุรี",
+    shortName: "ฝั่งธนบุรี",
+    region: "ภาคกลาง",
+  },
 };
 
 export async function generateStaticParams() {
-  return [
-    { province: "bangkok" },
-    { province: "phuket" },
-    { province: "chonburi" },
-    { province: "chiang-mai" },
-  ];
+  return Object.keys(provinceMap).map((province) => ({ province }));
 }
 
 export async function generateMetadata({
@@ -28,47 +65,77 @@ export async function generateMetadata({
   params: Promise<{ province: string }>;
 }): Promise<Metadata> {
   const { province } = await params;
-  const provinceThai = provinceMap[province] || province;
+  const loc = provinceMap[province];
+  const name = loc?.name ?? province;
   return {
-    title: `รถรับจ้างตู้ทึบ ย้ายบ้าน ขนส่งมอเตอร์ไซค์ จังหวัด ${provinceThai} | WMS`,
-    description: `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่จังหวัด ${provinceThai} และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`,
+    title: `ศูนย์รวมบริการขนส่ง รถกระบะรับจ้าง ${name} | WMS TRANSPORT`,
+    description: `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name}และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`,
   };
 }
 
-export default async function ProvinceServicePage({
+export default async function LocationHubPage({
   params,
 }: {
   params: Promise<{ province: string }>;
 }) {
   const { province } = await params;
-  const provinceThai = provinceMap[province] || province;
+  const loc = provinceMap[province];
+  const provinceThai = loc?.name ?? province;
+  const provinceShort = loc?.shortName ?? province;
+
+  const subServices = [
+    {
+      icon: Home,
+      title: `ย้ายหอพัก / คอนโด ${provinceShort}`,
+      description:
+        "บริการย้ายบ้าน คอนโด หอพัก พร้อมคนช่วยยกของ แพ็กซีลกันกระแทกอย่างหนาแน่น ส่งตรงถึงที่",
+      href: `/service/${province}/moving`,
+      badge: "ยอดนิยม",
+      badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+    },
+    {
+      icon: Bike,
+      title: `ขนส่งมอเตอร์ไซค์ ${provinceShort}`,
+      description:
+        "ขนส่งรถมอเตอร์ไซค์ บิ๊กไบค์ ทุกรุ่น ด้วยรถกระบะตู้ทึบปิดมิดชิด รัดตรึงด้วยสายรัดพิเศษ ปลอดภัย 100%",
+      href: `/service/${province}/motorcycle`,
+      badge: "มีประกัน",
+      badgeColor: "bg-blue-500/15 text-blue-400 border-blue-500/20",
+    },
+    {
+      icon: Package,
+      title: `ขนส่งสินค้า ${provinceShort}`,
+      description:
+        "รถรับจ้างขนส่งสินค้า เหมาคัน ตู้ทึบหลังคาสูง รับส่งสินค้าทั่วไป วัสดุก่อสร้าง อุปกรณ์สำนักงาน",
+      href: `/service/${province}/freight`,
+      badge: "เหมาคัน",
+      badgeColor: "bg-amber-500/15 text-amber-400 border-amber-500/20",
+    },
+  ];
 
   const faqs = [
     {
       q: `รถรับจ้างตู้ทึบใน ${provinceThai} คิดราคาอย่างไร?`,
-      a: `ค่าบริการรถรับจ้างตู้ทึบในพื้นที่ ${provinceThai} คิดราคาเริ่มต้นตามระยะทางจริงและขนาดของรถ โดยมีราคาเริ่มต้นสำหรับการขนของในเมืองที่โปร่งใส ไม่มีค่าใช้จ่ายลึกลับบวกเพิ่มหน้างาน 100%`
+      a: `ค่าบริการรถรับจ้างตู้ทึบในพื้นที่ ${provinceThai} คิดราคาเริ่มต้นตามระยะทางจริงและขนาดของรถ โดยมีราคาเริ่มต้นสำหรับการขนของในเมืองที่โปร่งใส ไม่มีค่าใช้จ่ายลึกลับบวกเพิ่มหน้างาน 100%`,
     },
     {
       q: `ใช้เวลาย้ายบ้านจากกรุงเทพไป ${provinceThai} กี่ชั่วโมง?`,
-      a: `ระยะเวลาในการขนย้ายขึ้นอยู่กับระยะทางจากกรุงเทพมหานครไปยังปลายทางใน ${provinceThai} โดยเฉลี่ยสำหรับการเดินทางระยะไกล ทีมงานของเราสามารถดำเนินการขนย้ายและจัดส่งถึงที่หมายอย่างปลอดภัยในเวลาที่รวดเร็วที่สุดตามที่กำหนด`
+      a: `ระยะเวลาในการขนย้ายขึ้นอยู่กับระยะทางจากกรุงเทพมหานครไปยังปลายทางใน ${provinceThai} โดยเฉลี่ยสำหรับการเดินทางระยะไกล ทีมงานของเราสามารถดำเนินการขนย้ายและจัดส่งถึงที่หมายอย่างปลอดภัยในเวลาที่รวดเร็วที่สุดตามที่กำหนด`,
     },
     {
       q: `มีบริการคนช่วยยกของในจังหวัด ${provinceThai} หรือไม่?`,
-      a: `เรามีทีมงานพนักงานช่วยยกของมืออาชีพคอยให้บริการในพื้นที่ ${provinceThai} เพื่อช่วยแบ่งเบาภาระในการยกของหนัก ขนย้ายเฟอร์นิเจอร์ หรือย้ายหอพัก คอนโด อย่างเป็นระบบและระมัดระวังสูงสุด`
-    }
+      a: `เรามีทีมงานพนักงานช่วยยกของมืออาชีพคอยให้บริการในพื้นที่ ${provinceThai} เพื่อช่วยแบ่งเบาภาระในการยกของหนัก ขนย้ายเฟอร์นิเจอร์ หรือย้ายหอพัก คอนโด อย่างเป็นระบบและระมัดระวังสูงสุด`,
+    },
   ];
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
   };
 
   return (
@@ -88,50 +155,54 @@ export default async function ProvinceServicePage({
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          
+
+          {/* Breadcrumbs */}
           <div className="flex justify-start">
             <Breadcrumbs
               items={[
-                { name: "บริการของเรา", item: "/#services" },
-                { name: `ย้ายบ้าน ${provinceThai}`, item: `/service/${province}` },
+                { name: "พื้นที่ให้บริการ", item: "/#areas" },
+                { name: provinceThai, item: `/service/${province}` },
               ]}
             />
           </div>
 
-          <div className="text-center mt-6">
+          {/* ── HERO SECTION ── */}
+          <div className="text-center mt-6 mb-20">
             <span className="text-blue-400 tracking-[0.2em] uppercase font-bold text-sm bg-blue-500/10 px-4 py-1.5 rounded-full border border-blue-500/20 mb-6 inline-block">
-              พื้นที่ให้บริการหลัก: {provinceThai}
+              {loc?.region ?? "ทั่วประเทศ"} · ศูนย์บริการขนส่ง
             </span>
-            
+
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
-              รถรับจ้างตู้ทึบ ย้ายบ้าน ขนส่งมอเตอร์ไซค์ <br />
+              บริการขนย้าย และรถรับจ้าง
+              <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                พื้นที่จังหวัด {provinceThai}
+                ในพื้นที่ {provinceThai}
               </span>
             </h1>
 
             <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
-              บริการรถกระบะตู้ทึบรับจ้าง ขนย้ายบ้าน คอนโด หอพัก ขนส่งมอเตอร์ไซค์ และบิ๊กไบค์ ในเขตพื้นที่ {provinceThai} และขนส่งข้ามจังหวัดทั่วประเทศ พร้อมทีมงานช่วยยกของมืออาชีพ ปลอดภัย มีประกันภัยอุบัติเหตุทุกเที่ยวการเดินทาง
+              WMS Transport ให้บริการรถกระบะตู้ทึบรับจ้างครอบคลุมพื้นที่{provinceThai}
+              และขนส่งข้ามจังหวัดทั่วประเทศ พร้อมทีมงานช่วยยกของมืออาชีพ
+              ปลอดภัย มีประกันภัยอุบัติเหตุทุกเที่ยวการเดินทาง
             </p>
 
             {/* Quick CTA */}
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-20">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
               <a
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(6,199,85,0.3)] transition-all duration-300 hover:-translate-y-0.5"
               >
-                <Image 
-                  src="/images/LINE_Brand_icon.png" 
-                  alt="LINE" 
-                  width={24} 
-                  height={24} 
-                  className="w-6 h-6 object-contain shrink-0" 
+                <Image
+                  src="/images/LINE_Brand_icon.png"
+                  alt="LINE"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6 object-contain shrink-0"
                 />
                 <span>ติดต่อผ่าน LINE</span>
               </a>
-              
               <a
                 href="tel:0612402436"
                 className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:-translate-y-0.5"
@@ -140,86 +211,156 @@ export default async function ProvinceServicePage({
                 <span className="font-mono tracking-wider">061-240-2436</span>
               </a>
             </div>
-
-            {/* Core Features Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-20">
-              <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-                <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
-                  <Truck className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-extrabold text-white mb-3">ขนส่งด้วยตู้ทึบมาตรฐาน</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  รถกระบะตู้ทึบหลังคาสูง กันฝน กันแดด กันฝุ่น 100% เหมาะสำหรับขนย้ายบ้าน ขนย้ายเฟอร์นิเจอร์ หรือขนส่งสินค้าทุกประเภท
-                </p>
-              </div>
-
-              <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-                <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
-                  <Users className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-extrabold text-white mb-3">พนักงานช่วยยกของมืออาชีพ</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  ไม่ต้องเหนื่อยยกของเอง เรามีทีมงานพนักงานขนย้ายที่มีความชำนาญ สุภาพ จัดเรียงสิ่งของประหยัดพื้นที่ และทะนุถนอมสิ่งของเป็นอย่างดี
-                </p>
-              </div>
-
-              <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-                <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-extrabold text-white mb-3">มีประกันสินค้าปลอดภัย</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  รับประกันความเสียหายระหว่างทาง ช่วยเพิ่มความอุ่นใจให้กับทุกขั้นตอนการส่งต่อ เพื่อให้ทรัพย์สินของคุณถึงปลายทางอย่างไร้กังวล
-                </p>
-              </div>
-            </div>
-
-            {/* Pricing Info Section */}
-            <div className="bg-gradient-to-r from-blue-600/[0.1] to-cyan-500/[0.05] border border-blue-500/20 p-8 md:p-12 rounded-[32px] text-left">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-6">อัตราค่าบริการและโปรโมชั่นพิเศษในพื้นที่ {provinceThai}</h2>
-              <ul className="space-y-4 text-slate-300 font-medium">
-                <li className="flex items-center gap-3">
-                  <span className="text-emerald-400">✓</span> <span>บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai} ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-emerald-400">✓</span> <span>บริการย้ายหอพัก คอนโด บ้าน พร้อมคนยกของ ดำเนินการโดยรวดเร็วในเขต {provinceThai}</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-emerald-400">✓</span> <span>คิดราคาจริงใจตามระยะทางและประเภทการใช้งาน ไม่มีบวกเพิ่มทีหลัง 100%</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Local FAQ Section */}
-            <div className="mt-24 text-left max-w-3xl mx-auto">
-              <h2 className="text-3xl font-black text-white text-center mb-12">คำถามที่พบบ่อย (FAQ) ใน {provinceThai}</h2>
-              <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <details
-                    key={index}
-                    className="group bg-white/[0.02] border border-white/5 open:border-blue-500/30 open:bg-gradient-to-br open:from-blue-950/20 open:via-[#040b15]/50 open:to-[#040b15] open:shadow-[0_20px_50px_rgba(59,130,246,0.1)] rounded-3xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all duration-300 hover:border-white/10 relative overflow-hidden"
-                  >
-                    {/* Left glowing border accent for active state */}
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-cyan-300 opacity-0 group-open:opacity-100 transition-opacity duration-300" />
-                    
-                    <summary className="flex justify-between items-center font-extrabold text-white text-lg list-none select-none">
-                      <span className="group-open:text-blue-400 transition-colors duration-300 pr-4">
-                        {faq.q}
-                      </span>
-                      <span className="ml-1.5 shrink-0 p-2 bg-white/5 group-open:bg-blue-500/10 text-slate-400 group-open:text-blue-400 rounded-xl border border-white/10 group-open:border-blue-500/20 group-open:rotate-180 transition-all duration-300">
-                        <ChevronDown className="w-5 h-5" />
-                      </span>
-                    </summary>
-                    
-                    <div className="mt-5 text-slate-300 leading-relaxed font-medium pl-4 border-l border-white/10 group-open:border-blue-500/30 transition-colors duration-300">
-                      {faq.a}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </div>
-
           </div>
+
+          {/* ── SUB-SERVICES GRID ── */}
+          <section className="mb-24">
+            <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-3">
+              เลือกบริการที่คุณต้องการใน{provinceShort}
+            </h2>
+            <p className="text-slate-400 text-center text-sm mb-10">
+              คลิกที่บริการเพื่อดูรายละเอียด ราคา และขั้นตอนการสั่งจอง
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {subServices.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className="group bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 hover:bg-white/[0.05] hover:-translate-y-2 transition-all duration-300 p-8 rounded-3xl flex flex-col gap-5 shadow-md hover:shadow-[0_20px_50px_rgba(59,130,246,0.08)] relative overflow-hidden"
+                  >
+                    {/* Top glow on hover */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-14 h-14 bg-blue-600/15 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600/25 group-hover:scale-110 transition-all duration-300 shrink-0">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-wider shrink-0 ${service.badgeColor}`}
+                      >
+                        {service.badge}
+                      </span>
+                    </div>
+
+                    <div className="flex-1">
+                      <h3 className="text-lg font-extrabold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-slate-400 text-sm leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 text-blue-400 text-sm font-bold group-hover:gap-3 transition-all duration-300">
+                      <span>ดูรายละเอียด</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* ── FEATURES STRIP ── */}
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
+              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                <Truck className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-extrabold text-white mb-3">
+                ขนส่งด้วยตู้ทึบมาตรฐาน
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                รถกระบะตู้ทึบหลังคาสูง กันฝน กันแดด กันฝุ่น 100%
+                เหมาะสำหรับขนย้ายบ้าน ขนย้ายเฟอร์นิเจอร์ หรือขนส่งสินค้าทุกประเภท
+              </p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
+              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                <Users className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-extrabold text-white mb-3">
+                พนักงานช่วยยกของมืออาชีพ
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                ไม่ต้องเหนื่อยยกของเอง เรามีทีมงานพนักงานขนย้ายที่มีความชำนาญ
+                สุภาพ จัดเรียงสิ่งของประหยัดพื้นที่ และทะนุถนอมสิ่งของเป็นอย่างดี
+              </p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
+              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-extrabold text-white mb-3">
+                มีประกันสินค้าปลอดภัย
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                รับประกันความเสียหายระหว่างทาง ช่วยเพิ่มความอุ่นใจให้กับทุกขั้นตอน
+                เพื่อให้ทรัพย์สินของคุณถึงปลายทางอย่างไร้กังวล
+              </p>
+            </div>
+          </section>
+
+          {/* ── PRICING INFO ── */}
+          <div className="bg-gradient-to-r from-blue-600/[0.1] to-cyan-500/[0.05] border border-blue-500/20 p-8 md:p-12 rounded-[32px] text-left mb-24">
+            <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+              อัตราค่าบริการและโปรโมชั่นพิเศษในพื้นที่ {provinceThai}
+            </h2>
+            <ul className="space-y-4 text-slate-300 font-medium">
+              <li className="flex items-center gap-3">
+                <span className="text-emerald-400">✓</span>
+                <span>
+                  บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai}{" "}
+                  ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-emerald-400">✓</span>
+                <span>
+                  บริการย้ายหอพัก คอนโด บ้าน พร้อมคนยกของ ดำเนินการโดยรวดเร็วในเขต{" "}
+                  {provinceThai}
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="text-emerald-400">✓</span>
+                <span>
+                  คิดราคาจริงใจตามระยะทางและประเภทการใช้งาน ไม่มีบวกเพิ่มทีหลัง 100%
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          {/* ── LOCAL FAQ ── */}
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-black text-white text-center mb-12">
+              คำถามที่พบบ่อย (FAQ) ใน {provinceThai}
+            </h2>
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <details
+                  key={index}
+                  className="group bg-white/[0.02] border border-white/5 open:border-blue-500/30 open:bg-gradient-to-br open:from-blue-950/20 open:via-[#040b15]/50 open:to-[#040b15] open:shadow-[0_20px_50px_rgba(59,130,246,0.1)] rounded-3xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all duration-300 hover:border-white/10 relative overflow-hidden"
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-cyan-300 opacity-0 group-open:opacity-100 transition-opacity duration-300" />
+                  <summary className="flex justify-between items-center font-extrabold text-white text-lg list-none select-none">
+                    <span className="group-open:text-blue-400 transition-colors duration-300 pr-4">
+                      {faq.q}
+                    </span>
+                    <span className="ml-1.5 shrink-0 p-2 bg-white/5 group-open:bg-blue-500/10 text-slate-400 group-open:text-blue-400 rounded-xl border border-white/10 group-open:border-blue-500/20 group-open:rotate-180 transition-all duration-300">
+                      <ChevronDown className="w-5 h-5" />
+                    </span>
+                  </summary>
+                  <div className="mt-5 text-slate-300 leading-relaxed font-medium pl-4 border-l border-white/10 group-open:border-blue-500/30 transition-colors duration-300">
+                    {faq.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+
         </div>
       </main>
 

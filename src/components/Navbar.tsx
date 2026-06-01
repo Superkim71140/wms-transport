@@ -6,10 +6,10 @@ import Link from "next/link";
 import { Phone, Menu, X, ChevronDown, MapPin } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const phuketLinks = [
-  { name: "ย้ายบ้าน/คอนโด ภูเก็ต", href: "/service/phuket/moving" },
-  { name: "ขนส่งมอเตอร์ไซค์ ภูเก็ต", href: "/service/phuket/motorcycle" },
-  { name: "ขนส่งสินค้า ภูเก็ต", href: "/service/phuket/freight" },
+const locationLinks = [
+  { name: "บริการขนส่ง ภูเก็ต", href: "/service/phuket" },
+  { name: "บริการขนส่ง สมุทรสาคร", href: "/service/samutsakhon" },
+  { name: "บริการขนส่ง กทม. ฝั่งธน", href: "/service/bkk-thonburi" },
 ];
 
 export default function Navbar() {
@@ -120,7 +120,7 @@ export default function Navbar() {
           );
         })}
 
-        {/* Phuket Dropdown */}
+        {/* Locations Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsPhuketDropdownOpen((v) => !v)}
@@ -131,7 +131,7 @@ export default function Navbar() {
             }`}
           >
             <MapPin className="w-3.5 h-3.5" />
-            บริการในภูเก็ต
+            📍 พื้นที่ให้บริการ
             <ChevronDown
               className={`w-3.5 h-3.5 transition-transform duration-200 ${
                 isPhuketDropdownOpen ? "rotate-180" : ""
@@ -143,7 +143,7 @@ export default function Navbar() {
           {isPhuketDropdownOpen && (
             <div className="absolute top-[calc(100%+0.75rem)] right-0 w-56 bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-50">
               <div className="p-1.5 flex flex-col gap-0.5">
-                {phuketLinks.map((link) => (
+                {locationLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -222,7 +222,7 @@ export default function Navbar() {
             );
           })}
 
-          {/* Mobile Phuket Submenu */}
+          {/* Mobile Locations Submenu */}
           <div className="border border-white/5 rounded-xl overflow-hidden">
             <button
               onClick={() => setIsMobilePhuketOpen((v) => !v)}
@@ -234,7 +234,7 @@ export default function Navbar() {
             >
               <span className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                บริการในภูเก็ต
+                📍 พื้นที่ให้บริการ
               </span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
@@ -244,7 +244,7 @@ export default function Navbar() {
             </button>
             {isMobilePhuketOpen && (
               <div className="border-t border-white/5 flex flex-col">
-                {phuketLinks.map((link) => (
+                {locationLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
