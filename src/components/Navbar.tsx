@@ -77,7 +77,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 w-[98%] max-w-7xl bg-[#040b15]/60 backdrop-blur-2xl border border-white/10 rounded-full px-8 flex items-center justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[100] transition-all duration-500 ease-out ${
+      className={`fixed left-1/2 -translate-x-1/2 w-[98%] max-w-7xl bg-[#040b15]/70 backdrop-blur-xl border border-white/10 rounded-full px-6 xl:px-8 flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] z-[100] transition-all duration-500 ease-out ${
         isScrolled ? "top-3 py-3 scale-[0.99]" : "top-5 py-4.5 scale-100"
       }`}
     >
@@ -102,7 +102,7 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Menu */}
-      <div className="hidden xl:flex items-center gap-2">
+      <div className="hidden xl:flex items-center gap-4 xl:gap-6">
         {navLinks.map((link) => {
           const active = isActiveLink(link.href);
           return (
@@ -168,7 +168,7 @@ export default function Navbar() {
       <div className="hidden lg:flex items-center gap-4 shrink-0">
         <a
           href="tel:0612402436"
-          className="whitespace-nowrap flex items-center gap-2 px-5 py-3 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-sm hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
+          className="whitespace-nowrap flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-sm hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
         >
           <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
           <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
@@ -178,7 +178,7 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact WMS Transport via LINE"
-          className="whitespace-nowrap flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] border border-[#06C755]/30 group"
+          className="whitespace-nowrap flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] border border-[#06C755]/30 group"
         >
           <Image
             src="/images/LINE_Brand_icon.png"

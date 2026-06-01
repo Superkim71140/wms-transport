@@ -71,8 +71,8 @@ export const provinceMap: Record<
     name: "กรุงเทพฯ ฝั่งธนบุรี",
     shortName: "ฝั่งธนบุรี",
     region: "ภาคกลาง",
-    lat: "13.7126",
-    lng: "100.4795",
+    lat: "13.7251",
+    lng: "100.4788",
   },
 };
 
@@ -91,7 +91,7 @@ const localReviews: Record<
   },
   phuket: {
     author: "คุณวรัญญา (ภูเก็ต)",
-    text: "ส่งบิ๊กไบค์ Vespa จากกรุงเทพฯ ลงไปภูเก็ต รวดเร็วและปลอดภัยมากค่ะ รถไม่มีริ้วรอยเลย แนะนำเจ้านี้เลยค่ะ",
+    text: "ขนส่งมอเตอร์ไซค์มาภูเก็ต รถไม่มีรอยเลย ทีมงานดูแลดีมาก",
     rating: 5,
     tag: "ส่งมอเตอร์ไซค์",
   },
@@ -109,13 +109,13 @@ const localReviews: Record<
   },
   samutsakhon: {
     author: "คุณเกรียงไกร (มหาชัย)",
-    text: "ย้ายของส่วนตัวจากมหาชัยรวดเร็วทันใจ พนักงานสุภาพและแข็งแรงมาก ขนย้ายตู้เย็นขนาดใหญ่ได้รวดเร็วแบบไม่มีปัญหาเลยครับ",
+    text: "ย้ายของจากกระทุ่มแบน รวดเร็ว ตรงเวลา แพ็กของแน่นหนาครับ",
     rating: 5,
     tag: "ย้ายบ้าน/หอพัก",
   },
   "bkk-thonburi": {
     author: "คุณจินดา (ฝั่งธนบุรี)",
-    text: "เรียกใช้บริการด่วนขนส่งของแถววงเวียนใหญ่มาส่งภาษีเจริญ รถกระบะตู้ทึบสะอาด บริการรวดเร็วทันใจ ประทับใจมากค่ะ",
+    text: "เรียกใช้บริการย้ายหอแถวปิ่นเกล้า น้องๆ ยกของระมัดระวังมาก",
     rating: 5,
     tag: "รถรับจ้างตู้ทึบ",
   },
@@ -373,11 +373,13 @@ export default async function LocationHubPage({
             <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-10">
               เสียงตอบรับจากผู้ใช้บริการในพื้นที่{provinceShort}
             </h2>
-            <div className="bg-gradient-to-br from-blue-950/20 via-[#040b15] to-[#040b15] border border-blue-500/20 p-8 rounded-[32px] shadow-[0_20px_50px_rgba(59,130,246,0.05)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+            <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8 group hover:border-blue-500/30 transition-all duration-500">
+              {/* Subtle accent glow */}
+              <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition-all duration-500" />
               <div className="absolute top-4 right-4 text-blue-500/10 pointer-events-none">
                 <Quote className="w-24 h-24 rotate-180" />
               </div>
-              <div className="flex flex-col gap-2 shrink-0 items-center md:items-start">
+              <div className="flex flex-col gap-2 shrink-0 items-center md:items-start relative z-10">
                 <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/25">
                   {review.tag}
                 </span>
@@ -387,10 +389,10 @@ export default async function LocationHubPage({
                   ))}
                 </div>
                 <p className="text-white font-extrabold text-lg mt-2">{review.author}</p>
-                <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริง</p>
+                <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริงในพื้นที่</p>
               </div>
-              <div className="flex-1 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
-                <p className="text-slate-300 text-base font-medium leading-relaxed italic">
+              <div className="flex-1 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 relative z-10">
+                <p className="text-slate-200 text-lg font-medium leading-relaxed italic">
                   "{review.text}"
                 </p>
               </div>

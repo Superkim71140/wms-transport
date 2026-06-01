@@ -185,8 +185,15 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Subtle SEO District Block */}
+        <div className="pt-6 border-t border-white/5 text-center md:text-left">
+          <p className="text-xs text-slate-500 leading-relaxed">
+            พื้นที่ให้บริการหลัก: [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง | [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [กทม. ฝั่งธน]: ธนบุรี, คลองสาน, บางกอกน้อย, บางกอกใหญ่, ตลิ่งชัน
+          </p>
+        </div>
+
         {/* Copyright & Developer Credit */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 mb-16 lg:mb-0">
+        <div className="pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 mb-16 lg:mb-0">
           <p>© {new Date().getFullYear()} WMS TRANSPORT. All rights reserved.</p>
           <div className="flex items-center gap-1 font-medium">
             <span>Developed by</span>

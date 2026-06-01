@@ -49,19 +49,36 @@ export default function TransitTimeVisualizer({ province }: { province: string }
     route: "กรุงเทพฯ - ปลายทางของท่าน",
   };
 
+  const summaries: Record<string, string> = {
+    phuket: "กทม. ➔ ภูเก็ต | ระยะทาง ~840 กม. | เวลาเดินทาง 12-14 ชม.",
+    samutsakhon: "กทม. ➔ สมุทรสาคร | ระยะทาง ~45 กม. | เวลาเดินทาง 1 ชม.",
+    "bkk-thonburi": "กทม. ➔ กทม. ฝั่งธนบุรี | ระยะทาง พื้นที่ กทม. ฝั่งธนบุรี | เวลาเดินทาง 45 นาที - 1.5 ชม.",
+    bangkok: "กทม. ➔ กรุงเทพฯ | ระยะทาง กรุงเทพฯ - ปริมณฑล | เวลาเดินทาง 1-3 ชม.",
+    chonburi: "กทม. ➔ ชลบุรี | ระยะทาง ~80 กม. | เวลาเดินทาง 1.5 - 2 ชม.",
+    "chiang-mai": "กทม. ➔ เชียงใหม่ | ระยะทาง ~690 กม. | เวลาเดินทาง 9-11 ชม.",
+  };
+  const summaryText = summaries[province] || "กทม. ➔ ปลายทางของท่าน | ระยะทาง ประเมินตามระยะทางจริง | เวลาเดินทาง ประเมินตามเส้นทาง";
+
   return (
     <div className="w-full bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-blue-500/20 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 relative overflow-hidden my-8">
       {/* Background radial glow */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[80px] pointer-events-none" />
       
       <div className="flex flex-col gap-6">
-        <div>
-          <span className="text-blue-400 tracking-[0.15em] uppercase font-bold text-xs bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 mb-3 inline-block">
-            ระยะเวลาขนส่งโดยประมาณ
-          </span>
-          <h3 className="text-xl md:text-2xl font-black text-white">
-            เส้นทางและการจัดส่งสินค้า
-          </h3>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span className="text-blue-400 tracking-[0.15em] uppercase font-bold text-xs bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 mb-3 inline-block">
+              ระยะเวลาขนส่งโดยประมาณ
+            </span>
+            <h3 className="text-xl md:text-2xl font-black text-white">
+              เส้นทางและการจัดส่งสินค้า
+            </h3>
+          </div>
+          
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-blue-300 font-bold tracking-wide flex items-center gap-2 self-start md:self-center shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+            <span className="text-emerald-400 animate-pulse">●</span>
+            <span>{summaryText}</span>
+          </div>
         </div>
 
         {/* Visual Timeline Row */}
