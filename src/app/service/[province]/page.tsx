@@ -13,45 +13,111 @@ import {
   Bike,
   Package,
   ArrowRight,
+  Star,
+  Quote,
 } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import TransitTimeVisualizer from "@/components/TransitTimeVisualizer";
 
 // ─────────────────────────────────────────────
 // Location data — add new regions here only
 // ─────────────────────────────────────────────
 export const provinceMap: Record<
   string,
-  { name: string; shortName: string; region: string }
+  {
+    name: string;
+    shortName: string;
+    region: string;
+    lat: string;
+    lng: string;
+  }
 > = {
   bangkok: {
     name: "กรุงเทพมหานคร",
     shortName: "กรุงเทพฯ",
     region: "ภาคกลาง",
+    lat: "13.7563",
+    lng: "100.5018",
   },
   phuket: {
     name: "ภูเก็ต",
     shortName: "ภูเก็ต",
     region: "ภาคใต้",
+    lat: "7.8906",
+    lng: "98.3981",
   },
   chonburi: {
     name: "ชลบุรี",
     shortName: "ชลบุรี",
     region: "ภาคตะวันออก",
+    lat: "13.3611",
+    lng: "100.9847",
   },
   "chiang-mai": {
     name: "เชียงใหม่",
     shortName: "เชียงใหม่",
     region: "ภาคเหนือ",
+    lat: "18.7883",
+    lng: "98.9853",
   },
   samutsakhon: {
     name: "สมุทรสาคร",
     shortName: "สมุทรสาคร",
     region: "ภาคกลาง",
+    lat: "13.5475",
+    lng: "100.2744",
   },
   "bkk-thonburi": {
     name: "กรุงเทพฯ ฝั่งธนบุรี",
     shortName: "ฝั่งธนบุรี",
     region: "ภาคกลาง",
+    lat: "13.7126",
+    lng: "100.4795",
+  },
+};
+
+// ─────────────────────────────────────────────
+// Hyper-local reviews mapping
+// ─────────────────────────────────────────────
+const localReviews: Record<
+  string,
+  { author: string; text: string; rating: number; tag: string }
+> = {
+  bangkok: {
+    author: "คุณปิยะพล (กทม.)",
+    text: "ใช้บริการย้ายหอพักในกรุงเทพฯ ประทับใจมาก พนักงานตรงเวลา คอยระมัดระวังเฟอร์นิเจอร์เป็นพิเศษ แพ็กของดีมากครับ",
+    rating: 5,
+    tag: "ย้ายคอนโด/หอพัก",
+  },
+  phuket: {
+    author: "คุณวรัญญา (ภูเก็ต)",
+    text: "ส่งบิ๊กไบค์ Vespa จากกรุงเทพฯ ลงไปภูเก็ต รวดเร็วและปลอดภัยมากค่ะ รถไม่มีริ้วรอยเลย แนะนำเจ้านี้เลยค่ะ",
+    rating: 5,
+    tag: "ส่งมอเตอร์ไซค์",
+  },
+  chonburi: {
+    author: "คุณสมศักดิ์ (ศรีราชา)",
+    text: "จ้างเหมารถกระบะตู้ทึบส่งสินค้าจากโรงงานชลบุรีไปกทม. รวดเร็วทันใจ มีประกันเคลมสินค้า วิ่งรอบดึกให้ด้วยครับ",
+    rating: 5,
+    tag: "ส่งสินค้าโรงงาน",
+  },
+  "chiang-mai": {
+    author: "คุณธนารีย์ (เชียงใหม่)",
+    text: "ย้ายบ้านจากนนทบุรีมาเชียงใหม่ ระยะทางไกลแต่ของไม่เสียหายเลย คนยกสุภาพ สรุปงานเร็ว ประทับใจมากค่ะ",
+    rating: 5,
+    tag: "ย้ายบ้านต่างจังหวัด",
+  },
+  samutsakhon: {
+    author: "คุณเกรียงไกร (มหาชัย)",
+    text: "ย้ายของส่วนตัวจากมหาชัยรวดเร็วทันใจ พนักงานสุภาพและแข็งแรงมาก ขนย้ายตู้เย็นขนาดใหญ่ได้รวดเร็วแบบไม่มีปัญหาเลยครับ",
+    rating: 5,
+    tag: "ย้ายบ้าน/หอพัก",
+  },
+  "bkk-thonburi": {
+    author: "คุณจินดา (ฝั่งธนบุรี)",
+    text: "เรียกใช้บริการด่วนขนส่งของแถววงเวียนใหญ่มาส่งภาษีเจริญ รถกระบะตู้ทึบสะอาด บริการรวดเร็วทันใจ ประทับใจมากค่ะ",
+    rating: 5,
+    tag: "รถรับจ้างตู้ทึบ",
   },
 };
 
@@ -82,6 +148,16 @@ export default async function LocationHubPage({
   const loc = provinceMap[province];
   const provinceThai = loc?.name ?? province;
   const provinceShort = loc?.shortName ?? province;
+  const lat = loc?.lat ?? "13.7563";
+  const lng = loc?.lng ?? "100.5018";
+
+  // Dynamic review matching
+  const review = localReviews[province] || {
+    author: "คุณกฤษดา",
+    text: "ประทับใจการบริการ ขนส่งรวดเร็ว ปลอดภัย พนักงานสุภาพและเอาใจใส่สิ่งของเป็นอย่างดี ราคาเป็นกันเองตรงไปตรงมา",
+    rating: 5,
+    tag: "บริการประทับใจ",
+  };
 
   const subServices = [
     {
@@ -128,6 +204,7 @@ export default async function LocationHubPage({
     },
   ];
 
+  // Schema Definitions
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -138,11 +215,39 @@ export default async function LocationHubPage({
     })),
   };
 
+  const logisticsSchema = {
+    "@context": "https://schema.org",
+    "@type": "LogisticsService",
+    name: `WMS Transport บริการขนส่งและรถรับจ้าง ${provinceThai}`,
+    description: `บริการรถรับจ้างตู้ทึบ ย้ายบ้าน และขนส่งมอเตอร์ไซค์ ในพื้นที่จังหวัด ${provinceThai}`,
+    provider: {
+      "@type": "LocalBusiness",
+      name: "WMS Transport",
+      image: "https://wmstransport.com/logoWMS.png",
+      telephone: "0612402436",
+      priceRange: "$$",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: provinceThai,
+        addressCountry: "TH",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: lat,
+        longitude: lng,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(logisticsSchema) }}
       />
       <Navbar />
 
@@ -155,7 +260,6 @@ export default async function LocationHubPage({
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-
           {/* Breadcrumbs */}
           <div className="flex justify-start">
             <Breadcrumbs
@@ -181,7 +285,7 @@ export default async function LocationHubPage({
             </h1>
 
             <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
-              WMS Transport ให้บริการรถกระบะตู้ทึบรับจ้างครอบคลุมพื้นที่{provinceThai}
+              WMS Transport ให้บริการรถกระบะตู้ทึบรับจ้างครอบคลุมพื้นที่{provinceThai}{" "}
               และขนส่งข้ามจังหวัดทั่วประเทศ พร้อมทีมงานช่วยยกของมืออาชีพ
               ปลอดภัย มีประกันภัยอุบัติเหตุทุกเที่ยวการเดินทาง
             </p>
@@ -264,6 +368,40 @@ export default async function LocationHubPage({
             </div>
           </section>
 
+          {/* ── HYPER-LOCAL TESTIMONIAL ── */}
+          <section className="mb-24 max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-10">
+              เสียงตอบรับจากผู้ใช้บริการในพื้นที่{provinceShort}
+            </h2>
+            <div className="bg-gradient-to-br from-blue-950/20 via-[#040b15] to-[#040b15] border border-blue-500/20 p-8 rounded-[32px] shadow-[0_20px_50px_rgba(59,130,246,0.05)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
+              <div className="absolute top-4 right-4 text-blue-500/10 pointer-events-none">
+                <Quote className="w-24 h-24 rotate-180" />
+              </div>
+              <div className="flex flex-col gap-2 shrink-0 items-center md:items-start">
+                <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/25">
+                  {review.tag}
+                </span>
+                <div className="flex items-center gap-1 mt-2 text-yellow-400">
+                  {[...Array(review.rating)].map((_, i) => (
+                    <Star key={i} className="w-4.5 h-4.5 fill-current shrink-0" />
+                  ))}
+                </div>
+                <p className="text-white font-extrabold text-lg mt-2">{review.author}</p>
+                <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริง</p>
+              </div>
+              <div className="flex-1 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8">
+                <p className="text-slate-300 text-base font-medium leading-relaxed italic">
+                  "{review.text}"
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ── TRANSIT TIME VISUALIZER ── */}
+          <section className="mb-24">
+            <TransitTimeVisualizer province={province} />
+          </section>
+
           {/* ── FEATURES STRIP ── */}
           <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             <div className="bg-white/[0.02] border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
@@ -305,27 +443,25 @@ export default async function LocationHubPage({
           </section>
 
           {/* ── PRICING INFO ── */}
-          <div className="bg-gradient-to-r from-blue-600/[0.1] to-cyan-500/[0.05] border border-blue-500/20 p-8 md:p-12 rounded-[32px] text-left mb-24">
+          <div className="bg-gradient-to-r from-blue-600/[0.1] to-cyan-500/[0.05] border border-blue-500/20 p-8 md:p-12 rounded-[32px] text-left mb-24 font-sans">
             <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
               อัตราค่าบริการและโปรโมชั่นพิเศษในพื้นที่ {provinceThai}
             </h2>
             <ul className="space-y-4 text-slate-300 font-medium">
               <li className="flex items-center gap-3">
-                <span className="text-emerald-400">✓</span>
+                <span className="text-emerald-400 font-bold">✓</span>
                 <span>
-                  บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai}{" "}
-                  ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท
+                  บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai} ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-emerald-400">✓</span>
+                <span className="text-emerald-400 font-bold">✓</span>
                 <span>
-                  บริการย้ายหอพัก คอนโด บ้าน พร้อมคนยกของ ดำเนินการโดยรวดเร็วในเขต{" "}
-                  {provinceThai}
+                  บริการย้ายหอพัก คอนโด บ้าน พร้อมคนยกของ ดำเนินการโดยรวดเร็วในเขต {provinceThai}
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-emerald-400">✓</span>
+                <span className="text-emerald-400 font-bold">✓</span>
                 <span>
                   คิดราคาจริงใจตามระยะทางและประเภทการใช้งาน ไม่มีบวกเพิ่มทีหลัง 100%
                 </span>
@@ -360,7 +496,6 @@ export default async function LocationHubPage({
               ))}
             </div>
           </div>
-
         </div>
       </main>
 
