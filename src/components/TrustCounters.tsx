@@ -119,7 +119,7 @@ export default function TrustCounters() {
                     startTrigger={isInView} 
                   />
                 ) : (
-                  <span className="bg-gradient-to-r from-blue-400 via-indigo-200 to-white bg-clip-text text-transparent">
+                  <span className="text-white">
                     {stat.value}
                   </span>
                 )}

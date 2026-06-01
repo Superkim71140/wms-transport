@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, MessageSquare, Menu, X } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,7 +34,8 @@ export default function Navbar() {
           : "bg-gradient-to-b from-[#040b15]/85 via-[#040b15]/40 to-transparent py-6 drop-shadow-[0_4px_30px_rgba(0,0,0,0.5)]" 
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-red-600/0 via-red-500 to-red-600/0 shadow-[0_0_10px_rgba(239,68,68,0.5)] z-[-1]"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-1">
         <div className="flex justify-between items-center gap-4">
           
           {/* Premium Logo Lockup */}
@@ -67,6 +68,7 @@ export default function Navbar() {
               >
                 {link.name}
                 <span className="absolute -bottom-1.5 left-0 w-0 h-[2px] bg-red-500 transition-all duration-300 group-hover:w-full drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+                <span className="absolute inset-0 bg-red-500/10 rounded-md scale-90 opacity-0 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 -z-10"></span>
               </Link>
             ))}
           </div>
@@ -74,11 +76,11 @@ export default function Navbar() {
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <a
-              href="tel:0981796946"
+              href="tel:0612402436"
               className="whitespace-nowrap flex items-center gap-2 px-4 xl:px-5 py-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-[13px] hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
             >
-              <Phone className="w-4 h-4 text-red-400 drop-shadow-md group-hover:animate-pulse" />
-              <span className="font-mono tracking-wide drop-shadow-lg">098-179-6946</span>
+              <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
+              <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
             </a>
             <a
               href="https://line.me/ti/p/~@wmstransport"
@@ -86,8 +88,14 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="whitespace-nowrap flex items-center gap-2 px-5 xl:px-6 py-2.5 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:from-[#05B34F] hover:to-[#04A045] text-white font-black text-[13px] transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:shadow-[0_0_30px_rgba(6,199,85,0.6)] hover:-translate-y-0.5 border border-[#06C755]/30 group"
             >
-              <MessageSquare className="w-4.5 h-4.5 fill-white drop-shadow-md group-hover:animate-pulse" />
-              <span className="drop-shadow-lg">ขอใบเสนอราคาฟรี</span>
+              <Image 
+                src="/images/LINE_Brand_icon.png" 
+                alt="LINE Logo" 
+                width={18} 
+                height={18} 
+                className="w-4.5 h-4.5 object-contain shrink-0 filter brightness-100" 
+              />
+              <span className="drop-shadow-lg">ติดต่อขนส่งผ่าน LINE</span>
             </a>
           </div>
 
@@ -118,11 +126,11 @@ export default function Navbar() {
           ))}
           <div className="flex flex-col gap-3 mt-4 border-t border-white/10 pt-6 px-2">
             <a
-              href="tel:0981796946"
+              href="tel:0612402436"
               className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl border border-white/20 text-white font-bold text-sm bg-white/5 hover:bg-white/10 transition-colors shadow-inner"
             >
-              <Phone className="w-5 h-5 text-red-400" />
-              <span className="font-mono">โทรด่วน: 098-179-6946</span>
+              <Phone className="w-5 h-5 text-blue-400" />
+              <span className="font-mono">โทรด่วน: 061-240-2436</span>
             </a>
             <a
               href="https://line.me/ti/p/~@wmstransport"
@@ -130,8 +138,14 @@ export default function Navbar() {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl bg-gradient-to-r from-[#06C755] to-[#05B34F] text-white font-black text-sm shadow-[0_0_20px_rgba(6,199,85,0.3)] relative overflow-hidden group"
             >
-              <MessageSquare className="w-5 h-5 fill-white relative z-10" />
-              <span className="relative z-10">ขอใบเสนอราคาฟรีผ่าน LINE</span>
+              <Image 
+                src="/images/LINE_Brand_icon.png" 
+                alt="LINE Logo" 
+                width={20} 
+                height={20} 
+                className="w-5 h-5 object-contain shrink-0 relative z-10" 
+              />
+              <span className="relative z-10">ติดต่อขนส่งผ่าน LINE</span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </a>
           </div>

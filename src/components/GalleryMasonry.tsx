@@ -19,11 +19,11 @@ const projects: Project[] = [
   {
     id: 1,
     category: "ขนส่งมอเตอร์ไซค์",
-    serviceType: "ขนส่งมอเตอร์ไซค์",
-    location: "กรุงเทพ",
+    serviceType: "ขนส่งรถมอเตอร์ไซค์ / บิ๊กไบค์",
+    location: "ผลงานจริง",
     icon: "🏍️",
-    imgUrl: "/images/WM8.jpg",
-    desc: "พันแรปพลาสติกและซีลกันรอยขีดข่วนทั่วทั้งคันก่อนทำการขนย้าย ปลอดภัยทุกเส้นทาง"
+    imgUrl: "/images/WMS24.png",
+    desc: "ตัวอย่างงานขนส่งรถมอเตอร์ไซค์และบิ๊กไบค์ โดยมีการดูแลการแพ็กและขนย้ายอย่างปลอดภัย"
   },
   {
     id: 2,
@@ -53,15 +53,6 @@ const projects: Project[] = [
     desc: "ขนย้ายสัมภาระส่วนตัว กล่องใส่ของ และเฟอร์นิเจอร์เข้าคอนโดมิเนียมชั้นสูงอย่างรวดเร็วและเป็นมืออาชีพ"
   },
   {
-    id: 5,
-    category: "ขนส่งสินค้าทั่วไป",
-    serviceType: "ขนส่งสินค้า",
-    location: "ชลบุรี",
-    icon: "🚛",
-    imgUrl: "/images/WM14.jpg",
-    desc: "บริการเหมารถกระบะตู้ทึบขนส่งสินค้าอุปโภคบริโภค สินค้าโรงงาน ส่งถึงที่หมายปลายทางทันใจ"
-  },
-  {
     id: 6,
     category: "ขนส่งสินค้าทั่วไป",
     serviceType: "ขนส่งทั่วไป",
@@ -82,8 +73,22 @@ export default function GalleryMasonry() {
     ? projects 
     : projects.filter(p => p.category === selectedFilter);
 
+  // Body scroll lock effect
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxIndex]);
+
   // Lightbox keyboard navigation
   useEffect(() => {
+    if (lightboxIndex === null) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxIndex(null);
       if (e.key === "ArrowRight") {
@@ -93,15 +98,10 @@ export default function GalleryMasonry() {
         setLightboxIndex((prev) => prev !== null ? (prev - 1 + filteredProjects.length) % filteredProjects.length : null);
       }
     };
-    if (lightboxIndex !== null) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "auto";
-    }
+
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto";
     };
   }, [lightboxIndex, filteredProjects.length]);
 
@@ -157,7 +157,7 @@ export default function GalleryMasonry() {
 
       {/* Category filter buttons */}
       <div className="flex flex-wrap gap-3 justify-center">
-        {categories.map((cat, i) => (
+        {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => {
@@ -248,25 +248,34 @@ export default function GalleryMasonry() {
 
       {/* Lightbox / Modal */}
       {lightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#020817]/95 backdrop-blur-xl animate-fade-in">
+        <div 
+          onClick={() => setLightboxIndex(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#020817]/95 backdrop-blur-xl animate-fade-in"
+        >
           
+          {/* Close Button - Glassmorphic, highly visible, and touch-friendly */}
           <button 
-            onClick={() => setLightboxIndex(null)}
-            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-blue-600 border border-white/20 rounded-full text-white transition-all duration-300 z-50 shadow-lg"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+            aria-label="Close image preview"
+            className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 md:w-14 md:h-14 bg-slate-950/85 hover:bg-red-600/90 active:scale-95 border border-white/25 rounded-full text-white transition-all duration-300 z-[120] shadow-[0_4px_25px_rgba(0,0,0,0.5)] flex items-center justify-center cursor-pointer backdrop-blur-md hover:scale-105"
           >
-            <X className="h-6 w-6" />
+            <X className="h-6 w-6 md:h-7 md:w-7" />
           </button>
 
           {/* Prev Button */}
           <button 
             onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-            className="absolute left-4 md:left-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-50 backdrop-blur-md"
+            aria-label="Previous image"
+            className="absolute left-4 md:left-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-[110] backdrop-blur-md cursor-pointer"
           >
             <ChevronLeft className="h-8 w-8" />
           </button>
 
           {/* Main Image Container */}
-          <div className="relative w-full max-w-6xl h-[80vh] md:h-[90vh] px-16 flex flex-col items-center justify-center">
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl h-[70vh] md:h-[80vh] px-4 md:px-16 flex flex-col items-center justify-center"
+          >
             <div className="relative w-full h-full drop-shadow-2xl">
               <Image
                 src={filteredProjects[lightboxIndex].imgUrl}
@@ -298,7 +307,8 @@ export default function GalleryMasonry() {
           {/* Next Button */}
           <button 
             onClick={(e) => { e.stopPropagation(); handleNext(); }}
-            className="absolute right-4 md:right-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-50 backdrop-blur-md"
+            aria-label="Next image"
+            className="absolute right-4 md:right-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-[110] backdrop-blur-md cursor-pointer"
           >
             <ChevronRight className="h-8 w-8" />
           </button>

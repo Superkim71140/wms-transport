@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, MessageSquare, ShieldCheck, Navigation } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ShieldCheck, Navigation } from "lucide-react";
 
 export default function Footer() {
   const seoKeywords = [
@@ -37,28 +37,32 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-gray-400">
               บริการรถกระบะตู้ทึบรับจ้าง ขนของย้ายบ้าน ย้ายหอ คอนโด และขนส่งสินค้าทั่วไทย ด้วยทีมงานคนยกของมืออาชีพ ปลอดภัย ตรงเวลา พร้อมประกันสินค้าทุกเที่ยว
             </p>
-            <div className="pt-2 flex items-center gap-4">
+            <div className="pt-4 flex items-center gap-3">
               <a
                 href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
                 aria-label="Facebook"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white transition-colors duration-200"
+                className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#1877F2] hover:border-[#1877F2] text-slate-300 hover:text-white transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(24,119,242,0.4)] hover:-translate-y-1 group"
               >
-                <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="h-5 w-5 fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
               </a>
               <a
-                href="https://youtube.com"
-                aria-label="Youtube"
+                href="https://line.me/ti/p/~@wmstransport"
+                aria-label="LINE"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 bg-white/5 rounded-full hover:bg-blue-600 hover:text-white transition-colors duration-200"
+                className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#06C755] hover:border-[#06C755] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:-translate-y-1 group"
               >
-                <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.003 3.003 0 00.5 6.163C0 8.07 0 12 0 12s0 3.93.5 5.837a3.003 3.003 0 002.11 2.108c1.858.555 9.388.555 9.388.555s7.53 0 9.388-.555a3.003 3.003 0 002.11-2.108C24 15.93 24 12 24 12s0-3.93-.5-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
+                <Image 
+                  src="/images/LINE_Brand_icon.png" 
+                  alt="LINE Logo" 
+                  width={20} 
+                  height={20} 
+                  className="w-5 h-5 object-contain shrink-0 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:brightness-0 group-hover:invert" 
+                />
               </a>
             </div>
           </div>
@@ -117,18 +121,18 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-1">
-                  <a href="tel:0612402436" className="hover:text-blue-500 transition-colors duration-200">
-                    061-240-2436 (คุณบอส)
+                  <a href="tel:0612402436" className="hover:text-blue-500 transition-colors duration-200 text-white font-bold text-base">
+                    061-240-2436
                   </a>
-                  <a href="tel:0981796946" className="hover:text-blue-500 transition-colors duration-200">
-                    098-179-6946 (คุณดาว)
+                  <a href="tel:0981796946" className="hover:text-blue-500 transition-colors duration-200 text-xs">
+                    098-179-6946 (คุณดาว - สำรอง)
                   </a>
                 </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-blue-500 shrink-0" />
-                <a href="mailto:info@wmstransport.com" className="hover:text-blue-500 transition-colors duration-200">
-                  info@wmstransport.com
+                <a href="mailto:1999.kittinanwimonset@gmail.com" className="hover:text-blue-500 transition-colors duration-200 break-all">
+                  1999.kittinanwimonset@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -149,17 +153,38 @@ export default function Footer() {
             <p className="text-xs text-gray-400">
               แอดไลน์ ส่งภาพของประเมินราคา ทราบผลภายใน 10 นาที
             </p>
-            <a
-              href="https://line.me/ti/p/~@wmstransport"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3 line-btn-pulse text-white font-bold rounded-lg text-sm transition-all duration-200 hover:scale-[1.02] transform active:scale-95"
-            >
-              <svg viewBox="0 0 24 24" className="h-4 w-4 fill-white shrink-0" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 10.304c0-4.757-5.37-8.561-12-8.561s-12 3.804-12 8.561c0 4.22 4.266 7.748 10.029 8.442.39.084.92.258.92.657v1.815c0 .428-.23.931.817.636 1.048-.296 5.629-3.284 7.683-5.507 3.023-3.111 4.551-6.185 4.551-9.479z" />
-              </svg>
-              <span>💬 ขอใบเสนอราคาฟรีผ่าน LINE</span>
-            </a>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://line.me/ti/p/~@wmstransport"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 line-btn-pulse text-white font-bold rounded-xl text-sm transition-all duration-200 hover:scale-[1.02] transform active:scale-95 shadow-[0_4px_15px_rgba(6,199,85,0.2)] border border-[#06C755]/30"
+              >
+                <Image 
+                  src="/images/LINE_Brand_icon.png" 
+                  alt="LINE Logo" 
+                  width={16} 
+                  height={16} 
+                  className="w-4 h-4 object-contain shrink-0" 
+                />
+                <span>ติดต่อผ่าน LINE</span>
+              </a>
+              <a
+                href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-[#1877F2] hover:bg-[#166FE5] text-white font-bold rounded-xl text-sm transition-all duration-200 hover:scale-[1.02] transform active:scale-95 shadow-[0_4px_15px_rgba(24,119,242,0.2)] border border-[#1877F2]/30"
+              >
+                <Image 
+                  src="/images/Facebook_Logo_.png" 
+                  alt="Facebook Logo" 
+                  width={16} 
+                  height={16} 
+                  className="w-4 h-4 object-contain shrink-0" 
+                />
+                <span>ติดต่อผ่าน Facebook</span>
+              </a>
+            </div>
 
             
             <div className="pt-3 flex flex-wrap gap-3">

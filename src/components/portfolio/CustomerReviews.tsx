@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, ShieldCheck, Quote, BadgeCheck } from "lucide-react";
+import { Star, Quote, BadgeCheck } from "lucide-react";
 
 const REVIEWS = [
   {

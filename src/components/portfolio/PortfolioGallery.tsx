@@ -8,25 +8,18 @@ const FILTERS = ["ทั้งหมด", "ย้ายบ้าน", "ย้า
 
 // Updated image dataset according to the requirements
 const GALLERY_IMAGES = [
-  { id: 1, src: "/images/cargo_packing.jpg", category: "แพ็กของ" },
-  { id: 2, src: "/images/condo_moving.jpg", category: "ย้ายคอนโด" },
-  { id: 3, src: "/images/home_moving.jpg", category: "ย้ายบ้าน" },
-  { id: 4, src: "/images/motorcycle_delivery.jpg", category: "ขนส่งมอเตอร์ไซค์" },
-  { id: 5, src: "/images/office_relocation.jpg", category: "ขนย้ายออฟฟิศ" },
-  { id: 6, src: "/images/truck_fleet.jpg", category: "งานขนส่งจริง" },
-  { id: 7, src: "/images/wms-cover.png", category: "งานขนส่งจริง" },
-  { id: 8, src: "/images/WM8.jpg", category: "งานขนส่งจริง" },
-  { id: 9, src: "/images/WM9.jpg", category: "แพ็กของ" },
-  { id: 10, src: "/images/WM10.jpg", category: "ย้ายบ้าน" },
-  { id: 11, src: "/images/WM11.jpg", category: "ขนส่งมอเตอร์ไซค์" },
-  { id: 12, src: "/images/WM12.jpg", category: "งานขนส่งจริง" },
-  { id: 13, src: "/images/WM13.jpg", category: "แพ็กของ" },
-  { id: 14, src: "/images/WM14.jpg", category: "ขนย้ายออฟฟิศ" },
-  { id: 15, src: "/images/WM15.jpg", category: "ย้ายคอนโด" },
-  { id: 16, src: "/images/WM16.jpg", category: "งานขนส่งจริง" },
-  { id: 17, src: "/images/WM17.jpg", category: "แพ็กของ" },
-  // Kept the woman standing at the bottom. Assuming WMS7 based on previous analysis.
-  { id: 18, src: "/images/WMS7.jpg", category: "งานขนส่งจริง" }, 
+  { id: 1, src: "/images/WM8.jpg", category: "ขนส่งมอเตอร์ไซค์" },
+  { id: 2, src: "/images/WM9.jpg", category: "แพ็กของ" },
+  { id: 3, src: "/images/WM10.jpg", category: "ย้ายบ้าน" },
+  { id: 4, src: "/images/WM11.jpg", category: "ขนส่งมอเตอร์ไซค์" },
+  { id: 5, src: "/images/WM12.jpg", category: "งานขนส่งจริง" },
+  { id: 6, src: "/images/WM13.jpg", category: "แพ็กของ" },
+  { id: 8, src: "/images/WM15.jpg", category: "ย้ายคอนโด" },
+  { id: 9, src: "/images/WM16.jpg", category: "งานขนส่งจริง" },
+  { id: 10, src: "/images/WM17.jpg", category: "แพ็กของ" },
+  { id: 12, src: "/images/WMS4.jpg", category: "งานขนส่งจริง" },
+  { id: 13, src: "/images/WMS6.jpg", category: "งานขนส่งจริง" },
+  { id: 14, src: "/images/WMS24.png", category: "งานขนส่งจริง" },
 ];
 
 // Helper to convert filename to an elegant tag

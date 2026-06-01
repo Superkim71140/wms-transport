@@ -3,23 +3,15 @@
 import { 
   Truck, 
   Clock, 
-  ArrowRight, 
-  Star, 
   CheckCircle, 
   Phone, 
-  MessageSquare, 
   Users, 
   Award,
   DollarSign, 
   Zap,
-  Home as HomeIcon,
   Building,
   Package,
-  Boxes,
-  ShieldCheck,
-  Clock3,
-  Map,
-  Sparkles
+  Bike
 } from "lucide-react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -35,12 +27,6 @@ import { motion } from "framer-motion";
 
 
 export default function Home() {
-  const stats = [
-    { value: "10,000+", label: "งานขนส่งเสร็จสิ้น", desc: "ความพึงพอใจสูง", icon: <ShieldCheck className="h-6 w-6 text-slate-300" /> },
-    { value: "24/7", label: "บริการตลอดเวลา", desc: "ไม่มีวันหยุดราชการ", icon: <Clock3 className="h-6 w-6 text-slate-300" /> },
-    { value: "77 จังหวัด", label: "ทั่วประเทศ", desc: "ครอบคลุมทุกภูมิภาค", icon: <Map className="h-6 w-6 text-slate-300" /> },
-    { value: "100%", label: "รับประกันสินค้า", desc: "คุ้มครองทุกการขนส่ง", icon: <Sparkles className="h-6 w-6 text-slate-300" /> }
-  ];
 
   const services = [
     {
@@ -51,13 +37,6 @@ export default function Home() {
       icon: <Building className="h-7 w-7" />
     },
     {
-      title: "ย้ายบ้าน / ทาวน์โฮม",
-      thaiName: "ย้ายบ้าน",
-      desc: "ย้ายบ้านเดี่ยว ทาวน์โฮม ทาวน์เฮาส์ ขนย้ายเฟอร์นิเจอร์ขนาดใหญ่ ตู้เตียง โซฟา เครื่องใช้ไฟฟ้าครบครัน",
-      features: ["วางแผนการขนย้ายล่วงหน้า", "ทีมงานจัดของเข้าที่เดิม", "รับประกันความเสียหาย"],
-      icon: <HomeIcon className="h-7 w-7" />
-    },
-    {
       title: "ขนส่งสินค้า / ทั่วไทย",
       thaiName: "ขนส่งสินค้า",
       desc: "รับส่งสินค้าอุปโภคบริโภค สินค้าโรงงาน วัสดุก่อสร้าง แบบเหมาเที่ยวทั่วประเทศ 77 จังหวัด",
@@ -65,25 +44,15 @@ export default function Home() {
       icon: <Package className="h-7 w-7" />
     },
     {
-      title: "ขนส่งมอเตอร์ไซค์ / ของชิ้นใหญ่",
+      title: "ขนส่งรถมอเตอร์ไซค์ / บิ๊กไบค์",
       thaiName: "ส่งมอเตอร์ไซค์",
-      desc: "ส่งมอเตอร์ไซค์ทั่วไป บิ๊กไบค์ เครื่องจักร หรือเฟอร์นิเจอร์ชิ้นเดี่ยวขนาดใหญ่พิเศษ",
-      features: ["รัดมัดหนาแน่นด้วยสายรัดเฉพาะ", "ใช้ทางลาดโหลดรถปลอดภัย", "มีประกันความเสียหาย"],
-      icon: <Boxes className="h-7 w-7" />
-    },
-    {
-      title: "เหมารถกระบะตู้ทึบ",
-      thaiName: "เหมารถกระบะตู้ทึบ",
-      desc: "บริการเช่าเหมารถกระบะตู้ทึบทั้งรายวันและรายเที่ยว ปิดล็อกตู้สนิท กันฝุ่น กันฝน 100%",
-      features: ["ตู้สูงพิเศษ 2.10 - 2.30 เมตร", "รถสภาพใหม่ ล้อเรียบสะอาด", "จองด่วนได้รถใน 1 ชม."],
-      icon: <Truck className="h-7 w-7" />
-    },
-    {
-      title: "บริการพร้อมคนช่วยยกของ",
-      thaiName: "บริการคนยกของ",
-      desc: "พนักงานยกของสุภาพ แข็งแรง ผ่านการอบรมการแพ็กและการจัดวางสิ่งของเพื่อป้องกันการกระแทก",
-      features: ["แก้ปัญหาของหนัก/ทางแคบ", "จัดของเข้าจุดตามใจลูกค้า", "บริการรวดเร็วตรงเวลา"],
-      icon: <Users className="h-7 w-7" />
+      desc: "บริการรับส่งรถมอเตอร์ไซค์และบิ๊กไบค์ทั่วไทย แพ็กป้องกันรอยอย่างดี ขึ้น-ลงอย่างปลอดภัย ดูแลทุกขั้นตอน พร้อมส่งตรงเวลา",
+      features: [
+        "แพ็กกันรอยและรัดยึดอย่างปลอดภัย",
+        "รองรับรถมอเตอร์ไซค์และบิ๊กไบค์",
+        "มีทีมงานดูแลการขนย้ายอย่างมืออาชีพ"
+      ],
+      icon: <Bike className="h-7 w-7" />
     }
   ];
 
@@ -139,20 +108,19 @@ export default function Home() {
         </div>
 
         {/* 1. HERO SECTION */}
-        <section className="relative w-full h-auto z-10 -mt-[2px] overflow-hidden">
+        <section className="relative w-full aspect-[1717/916] md:aspect-auto md:h-[68vh] md:min-h-[560px] md:max-h-[720px] z-10 -mt-[2px] overflow-hidden flex items-center justify-center bg-[#020817]">
           {/* Dark overlay gradient for seamless navbar transition */}
-          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#020817] via-[#020817]/60 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#04152D] via-[#020817]/50 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute top-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-b from-[#020817]/30 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-[#020817] via-[#020817]/30 to-transparent z-10 pointer-events-none"></div>
 
           {/* Luxury ambient glows behind image */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] md:w-[1000px] h-[400px] md:h-[600px] bg-blue-600/10 rounded-full blur-[120px] md:blur-[160px] pointer-events-none z-0"></div>
           
           <Image 
             src="/images/wms-cover.png" 
             alt="WMS Transport Cover" 
-            width={1920}
-            height={914}
-            className="w-full h-auto object-contain relative z-1"
+            fill
+            className="object-cover object-[center_32%] opacity-100 relative z-1"
             priority 
           />
         </section>
@@ -196,7 +164,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
             {services.map((service, i) => (
               <motion.div 
                 key={i}
@@ -242,22 +210,44 @@ export default function Home() {
                   <div className="mt-4 mb-5 flex items-center justify-between border-t border-white/5 pt-4">
                     <span className="text-sm font-bold text-slate-400">เริ่มต้นเพียง</span>
                     <span className="text-[17px] font-black text-red-500 bg-red-500/10 border border-red-500/20 px-3.5 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.2)]">
-                      เริ่มต้น 1,000 บาท
+                      เริ่มต้น 500 บาท
                     </span>
                   </div>
 
-                  {/* Redesigned pulsing green LINE button */}
-                  <a 
-                    href="https://line.me/ti/p/~@wmstransport"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full line-btn-pulse text-white font-sans font-black text-[15px] py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
-                  >
-                    <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white shrink-0" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M24 10.304c0-4.757-5.37-8.561-12-8.561s-12 3.804-12 8.561c0 4.22 4.266 7.748 10.029 8.442.39.084.92.258.92.657v1.815c0 .428-.23.931.817.636 1.048-.296 5.629-3.284 7.683-5.507 3.023-3.111 4.551-6.185 4.551-9.479z" />
-                    </svg>
-                    <span>💬 ขอใบเสนอราคาฟรีผ่าน LINE</span>
-                  </a>
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col gap-3">
+                    <a 
+                      href="https://line.me/ti/p/~@wmstransport"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full line-btn-pulse text-white font-sans font-black text-[15px] py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
+                    >
+                      <Image 
+                        src="/images/LINE_Brand_icon.png" 
+                        alt="LINE Logo" 
+                        width={20} 
+                        height={20} 
+                        className="w-5 h-5 object-contain shrink-0" 
+                      />
+                      <span>💬 ติดต่อขนส่งผ่าน LINE</span>
+                    </a>
+                    
+                    <a 
+                      href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-[#1877F2] hover:bg-[#166FE5] shadow-[0_4px_15px_rgba(24,119,242,0.3)] text-white font-sans font-black text-[15px] py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
+                    >
+                      <Image 
+                        src="/images/Facebook_Logo_.png" 
+                        alt="Facebook Logo" 
+                        width={20} 
+                        height={20} 
+                        className="w-5 h-5 object-contain shrink-0" 
+                      />
+                      <span>สอบถามขนส่งผ่าน Facebook</span>
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -357,30 +347,53 @@ export default function Home() {
 
                 <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6">
                   <a
-                    href="tel:0981796946"
-                    className="flex items-center justify-center gap-3 px-8 py-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.2)] group"
-                  >
-                    <Phone className="h-6 w-6 text-blue-400 group-hover:animate-pulse" />
-                    <span className="font-mono tracking-wider">098-179-6946 (คุณดาว)</span>
-                  </a>
-                  <a
                     href="tel:0612402436"
                     className="flex items-center justify-center gap-3 px-8 py-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.2)] group"
                   >
                     <Phone className="h-6 w-6 text-blue-400 group-hover:animate-pulse" />
-                    <span className="font-mono tracking-wider">061-240-2436 (คุณบอส)</span>
+                    <span className="font-mono tracking-wider text-xl">061-240-2436</span>
                   </a>
                   <a
-                    href="https://line.me/ti/p/~@wmstransport"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-3 px-10 py-5 line-btn-pulse hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(6,199,85,0.3)] hover:shadow-[0_20px_50px_rgba(6,199,85,0.5)] border border-[#06C755]/30 transform hover:-translate-y-1"
+                    href="tel:0981796946"
+                    className="flex items-center justify-center gap-3 px-8 py-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.2)] group"
                   >
-                    <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white shrink-0" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M24 10.304c0-4.757-5.37-8.561-12-8.561s-12 3.804-12 8.561c0 4.22 4.266 7.748 10.029 8.442.39.084.92.258.92.657v1.815c0 .428-.23.931.817.636 1.048-.296 5.629-3.284 7.683-5.507 3.023-3.111 4.551-6.185 4.551-9.479z" />
-                    </svg>
-                    <span className="tracking-wide">💬 ขอใบเสนอราคาฟรีผ่าน LINE</span>
+                    <Phone className="h-5 w-5 text-blue-400 group-hover:animate-pulse" />
+                    <span className="font-mono tracking-wider text-sm">098-179-6946 (คุณดาว - สำรอง)</span>
                   </a>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a
+                      href="https://line.me/ti/p/~@wmstransport"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-3 px-8 py-5 line-btn-pulse hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(6,199,85,0.3)] hover:shadow-[0_20px_50px_rgba(6,199,85,0.5)] border border-[#06C755]/30 transform hover:-translate-y-1"
+                    >
+                      <Image 
+                        src="/images/LINE_Brand_icon.png" 
+                        alt="LINE Logo" 
+                        width={24} 
+                        height={24} 
+                        className="w-6 h-6 object-contain shrink-0" 
+                      />
+                      <span className="tracking-wide">ติดต่อผ่าน LINE</span>
+                    </a>
+                    
+                    <a
+                      href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center justify-center gap-3 px-8 py-5 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(24,119,242,0.3)] hover:shadow-[0_20px_50px_rgba(24,119,242,0.5)] border border-[#1877F2]/30 transform hover:-translate-y-1"
+                    >
+                      <Image 
+                        src="/images/Facebook_Logo_.png" 
+                        alt="Facebook Logo" 
+                        width={24} 
+                        height={24} 
+                        className="w-6 h-6 object-contain shrink-0" 
+                      />
+                      <span className="tracking-wide">สอบถามขนส่งผ่าน Facebook</span>
+                    </a>
+                  </div>
                 </div>
                 
                 <p className="text-sm text-slate-400 mt-10 font-medium">

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Phone, ArrowRight, Calculator } from "lucide-react";
+import Image from "next/image";
 
 export default function PortfolioCTA() {
   return (
@@ -28,11 +29,11 @@ export default function PortfolioCTA() {
 
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-6">
             <a 
-              href="tel:0981796946"
+              href="tel:0612402436"
               className="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-[#040b15] font-bold text-base hover:bg-slate-100 transition-colors shadow-xl"
             >
               <Phone className="h-5 w-5 text-blue-600" />
-              <span>โทรเลย: 098-179-6946</span>
+              <span>โทรเลย: 061-240-2436</span>
             </a>
             
             <a 
@@ -41,10 +42,30 @@ export default function PortfolioCTA() {
               rel="noreferrer"
               className="line-btn-pulse group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl text-white font-black text-base transform active:scale-95 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <svg viewBox="0 0 24 24" className="h-5 w-5 fill-white shrink-0" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 10.304c0-4.757-5.37-8.561-12-8.561s-12 3.804-12 8.561c0 4.22 4.266 7.748 10.029 8.442.39.084.92.258.92.657v1.815c0 .428-.23.931.817.636 1.048-.296 5.629-3.284 7.683-5.507 3.023-3.111 4.551-6.185 4.551-9.479z" />
-              </svg>
-              <span>💬 ขอใบเสนอราคาฟรีผ่าน LINE</span>
+              <Image 
+                src="/images/LINE_Brand_icon.png" 
+                alt="LINE Logo" 
+                width={20} 
+                height={20} 
+                className="w-5 h-5 object-contain shrink-0" 
+              />
+              <span>💬 ติดต่อขนส่งผ่าน LINE</span>
+            </a>
+
+            <a 
+              href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white font-black text-base transform active:scale-95 hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_15px_rgba(24,119,242,0.3)]"
+            >
+              <Image 
+                src="/images/Facebook_Logo_.png" 
+                alt="Facebook Logo" 
+                width={20} 
+                height={20} 
+                className="w-5 h-5 object-contain shrink-0" 
+              />
+              <span>สอบถามขนส่งผ่าน Facebook</span>
             </a>
 
             <a 

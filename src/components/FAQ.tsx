@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, MessageCircleQuestion } from "lucide-react";
+import { ChevronDown, MessageCircleQuestion, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -35,62 +35,75 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 relative w-full z-10 font-sans">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 relative w-full z-10 font-sans">
       
       {/* Premium Ambient Glow Orbs */}
       <div className="absolute top-0 left-0 md:left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
       <div className="absolute bottom-0 right-0 md:right-1/4 w-[700px] h-[700px] bg-indigo-500/10 rounded-full blur-[180px] pointer-events-none -z-10" />
       
-      <div className="max-w-[1000px] mx-auto relative z-10">
+      <div className="max-w-[880px] mx-auto relative z-10">
         
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase mb-6 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
             <MessageCircleQuestion className="w-4 h-4" />
-            <span>Any Questions?</span>
+            <span>คำถามที่พบบ่อย</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-md">
-            คำถามที่พบบ่อย (FAQ)
+          <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight drop-shadow-md">
+            ข้อสงสัยในการขนย้าย?
           </h2>
-          <p className="text-slate-400 font-medium text-lg max-w-2xl mx-auto leading-relaxed">
-            รวบรวมข้อสงสัยเกี่ยวกับการขนย้าย เรามีคำตอบที่ชัดเจนและโปร่งใสให้กับคุณ
+          <p className="text-slate-400 font-medium text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            รวบรวมข้อสงสัยยอดนิยมเกี่ยวกับการขนส่งและขนย้าย WMS พร้อมตอบอย่างจริงใจและโปร่งใสที่สุด
+          </p>
+        </div>
+
+        {/* Short info note above FAQ */}
+        <div className="mb-8 flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/10 rounded-2xl text-xs sm:text-sm text-slate-300 backdrop-blur-md">
+          <HelpCircle className="w-5 h-5 text-blue-400 shrink-0" />
+          <p>
+            หากมีคำถามเพิ่มเติมหรือบริการนอกเหนือจากนี้ สามารถติดต่อแอดมินเพื่อสอบถามข้อมูลได้ตลอด 24 ชั่วโมง
           </p>
         </div>
 
         {/* Accordion List */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           {faqs.map((faq, index) => {
             const isActive = activeIndex === index;
 
             return (
               <div
                 key={index}
-                className={`rounded-2xl border transition-all duration-500 overflow-hidden backdrop-blur-xl ${
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden backdrop-blur-xl ${
                   isActive
-                    ? "bg-white/[0.04] border-blue-500/40 shadow-[0_15px_40px_rgba(0,0,0,0.3)] shadow-blue-500/5"
-                    : "bg-white/[0.02] border-white/10 hover:border-blue-400/30 hover:bg-white/[0.03]"
+                    ? "bg-slate-900/60 border-blue-500/35 shadow-[0_15px_40px_rgba(0,0,0,0.4)] shadow-blue-500/5"
+                    : "bg-white/[0.02] border-white/5 hover:border-blue-400/25 hover:bg-white/[0.04]"
                 }`}
               >
                 {/* Accordion Trigger Button */}
                 <button
+                  id={`faq-title-${index}`}
                   onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-6 sm:p-8 text-left focus:outline-none group"
+                  aria-expanded={isActive}
+                  aria-controls={`faq-content-${index}`}
+                  className="w-full flex items-center justify-between p-6 sm:p-7 text-left focus:outline-none group cursor-pointer"
                 >
-                  <span className={`text-lg sm:text-xl font-bold pr-6 transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-slate-300 group-hover:text-blue-200"
+                  <span className={`text-base sm:text-lg font-bold pr-6 transition-colors duration-300 ${
+                    isActive ? "text-blue-300" : "text-slate-200 group-hover:text-white"
                   }`}>
                     {faq.question}
                   </span>
                   
-                  {/* Rotating Circular Plus/X Button */}
-                  <div className={`w-10 h-10 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${
-                    isActive ? "border-blue-500/50 bg-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.3)]" : "border-white/20 bg-white/5 group-hover:bg-white/10 group-hover:border-blue-400/50"
+                  {/* Rotating Chevron Icon */}
+                  <div className={`w-9 h-9 shrink-0 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                    isActive 
+                      ? "border-blue-500/50 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.2)]" 
+                      : "border-white/10 bg-white/5 group-hover:bg-white/10 group-hover:border-blue-400/40"
                   }`}>
                     <motion.div
-                      animate={{ rotate: isActive ? 45 : 0 }}
-                      transition={{ duration: 0.4, ease: "backInOut" }}
+                      animate={{ rotate: isActive ? 180 : 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <Plus className={`w-5 h-5 transition-colors ${isActive ? "text-blue-400" : "text-slate-400 group-hover:text-blue-300"}`} />
+                      <ChevronDown className={`w-4 h-4 transition-colors ${isActive ? "text-blue-400" : "text-slate-400 group-hover:text-blue-300"}`} />
                     </motion.div>
                   </div>
                 </button>
@@ -99,14 +112,16 @@ export default function FAQ() {
                 <AnimatePresence initial={false}>
                   {isActive && (
                     <motion.div
+                      id={`faq-content-${index}`}
+                      role="region"
+                      aria-labelledby={`faq-title-${index}`}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 sm:px-8 pb-8">
-                        {/* Premium Left Accent Border */}
-                        <div className="pl-5 border-l-4 border-blue-500/60 text-slate-300 text-base font-medium leading-relaxed bg-white/5 p-4 rounded-r-xl">
+                      <div className="px-6 sm:px-7 pb-6">
+                        <div className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl">
                           {faq.answer}
                         </div>
                       </div>

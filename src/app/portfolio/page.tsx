@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PortfolioHero from "@/components/portfolio/PortfolioHero";
 import AchievementStats from "@/components/portfolio/AchievementStats";
-import FeaturedPortfolio from "@/components/portfolio/FeaturedPortfolio";
 import PortfolioProcess from "@/components/portfolio/PortfolioProcess";
 import PortfolioGallery from "@/components/portfolio/PortfolioGallery";
 import DeliveryMap from "@/components/portfolio/DeliveryMap";
@@ -23,7 +22,6 @@ export default function PortfolioPage() {
       <main className="flex-1">
         <PortfolioHero />
         <AchievementStats />
-        <FeaturedPortfolio />
         <PortfolioProcess />
         <PortfolioGallery />
         <CustomerReviews />

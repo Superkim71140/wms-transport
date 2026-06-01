@@ -25,11 +25,11 @@ export default function DeliveryMap() {
 
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors shadow-lg">
-              <p className="text-4xl font-black text-white mb-2 font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">77</p>
+              <p className="text-4xl font-black text-blue-400 mb-2 font-mono tracking-tight">77</p>
               <p className="text-sm font-semibold text-slate-300">จังหวัดทั่วไทย</p>
             </div>
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors shadow-lg">
-              <p className="text-4xl font-black text-white mb-2 font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">24/7</p>
+              <p className="text-4xl font-black text-blue-400 mb-2 font-mono tracking-tight">24/7</p>
               <p className="text-sm font-semibold text-slate-300">ให้บริการตลอดเวลา</p>
             </div>
           </div>
