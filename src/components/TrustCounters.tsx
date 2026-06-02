@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useInView, animate, useMotionValue, useTransform } from "framer-motion";
 import { ShieldCheck, Clock3, Award, Map } from "lucide-react";
 
 interface CounterProps {
@@ -12,29 +12,21 @@ interface CounterProps {
 }
 
 function CountUp({ end, suffix = "", duration = 1.5, startTrigger }: CounterProps) {
-  const [count, setCount] = useState(0);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest).toLocaleString() + suffix);
 
   useEffect(() => {
     if (!startTrigger) return;
-    let startTime: number | null = null;
+    
+    const controls = animate(count, end, {
+      duration: duration,
+      ease: "easeOut",
+    });
 
-    const animateCount = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      const currentValue = Math.floor(progress * end);
-      setCount(currentValue);
+    return () => controls.stop();
+  }, [end, duration, startTrigger, count]);
 
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      } else {
-        setCount(end);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [end, duration, startTrigger]);
-
-  return <span>{count.toLocaleString()}{suffix}</span>;
+  return <motion.span>{rounded}</motion.span>;
 }
 
 export default function TrustCounters() {
@@ -81,9 +73,9 @@ export default function TrustCounters() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 will-change-transform"
         >
           <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
             สถิติและความน่าเชื่อถือ
@@ -102,10 +94,10 @@ export default function TrustCounters() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "100px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-500/30 transition-all duration-300 shadow-[0_15px_45px_rgba(0,0,0,0.3)] flex flex-col items-center text-center group"
+              className="bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-500/30 transition-all duration-300 shadow-[0_15px_45px_rgba(0,0,0,0.3)] flex flex-col items-center text-center group will-change-transform"
             >
               <div className="p-4 bg-white/5 border border-white/10 rounded-2xl mb-6 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-inner">
                 {stat.icon}

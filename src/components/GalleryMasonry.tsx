@@ -95,13 +95,13 @@ function GalleryCard({
           src={project.imgUrl}
           alt={`${project.serviceType} ${project.location}`}
           fill
-          sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, 33vw"
           quality={80}
           className={`object-cover object-center transition-all duration-700 ease-out group-hover:scale-110 ${
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
           onLoad={() => setIsLoaded(true)}
-          priority={idx <= 1}
+          loading="lazy"
         />
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#020817] via-[#020817]/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500"></div>
@@ -238,9 +238,9 @@ export default function GalleryMasonry() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-4 mb-4"
+          className="flex flex-col items-center gap-4 mb-4 will-change-transform"
         >
           <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase">
             ผลงานจริงของเรา
@@ -250,9 +250,9 @@ export default function GalleryMasonry() {
         <motion.h2 
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-sans font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-6"
+          className="font-sans font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-6 will-change-transform"
         >
           ผลงานจริง<span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">จากลูกค้าของเรา</span>
         </motion.h2>
@@ -260,9 +260,9 @@ export default function GalleryMasonry() {
         <motion.p 
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed"
+          className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed will-change-transform"
         >
           ภาพหน้างานจริง ไม่มีภาพสต็อก ทุกงานดำเนินการโดยทีมงาน WMS TRANSPORT
         </motion.p>
@@ -367,9 +367,10 @@ export default function GalleryMasonry() {
                   src={filteredProjects[lightboxIndex].imgUrl}
                   alt={`${filteredProjects[lightboxIndex].serviceType} ${filteredProjects[lightboxIndex].location}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className={`object-contain transition-opacity duration-500 ${lightboxLoaded ? "opacity-100" : "opacity-0"}`}
                   onLoad={() => setLightboxLoaded(true)}
-                  priority
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -430,7 +431,7 @@ export default function GalleryMasonry() {
                   className={`object-contain transition-opacity duration-500 ${lightboxLoaded ? "opacity-100" : "opacity-0"}`}
                   sizes="100vw"
                   onLoad={() => setLightboxLoaded(true)}
-                  priority
+                  loading="lazy"
                 />
               </div>
               

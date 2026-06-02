@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Thai } from "next/font/google";
+import { Partytown } from '@builder.io/partytown/react';
 import "./globals.css";
+
+export const revalidate = 3600;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -112,6 +115,12 @@ export default function RootLayout({
       className={`${inter.variable} ${notoSansThai.variable} h-full antialiased`}
       style={{ scrollBehavior: "smooth" }}
     >
+      <head>
+        <link rel="preconnect" href="https://line.me" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://line.me" />
+        <link rel="preconnect" href="https://www.facebook.com" crossOrigin="anonymous" />
+        <Partytown debug={true} forward={['dataLayer.push']} />
+      </head>
       <body className="min-h-full flex flex-col bg-[#040b15] text-slate-200 selection:bg-red-500/30 selection:text-white">
         <script
           type="application/ld+json"

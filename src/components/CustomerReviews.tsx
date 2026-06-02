@@ -54,9 +54,9 @@ export default function CustomerReviews() {
         <motion.span 
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.5 }}
-          className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 inline-block shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+          className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 inline-block shadow-[0_0_20px_rgba(59,130,246,0.15)] will-change-transform"
         >
           รีวิวจากลูกค้า
         </motion.span>
@@ -64,9 +64,9 @@ export default function CustomerReviews() {
         <motion.h2 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-md"
+          className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-md will-change-transform"
         >
           เสียงตอบรับจากลูกค้าจริง
         </motion.h2>
@@ -74,9 +74,9 @@ export default function CustomerReviews() {
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-medium"
+          className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto mt-6 leading-relaxed font-medium will-change-transform"
         >
           การันตีความประทับใจ ความตรงเวลา และงานบริการที่ยอดเยี่ยมจากผู้ใช้บริการจริงของเรา
         </motion.p>

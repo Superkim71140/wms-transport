@@ -126,6 +126,9 @@ export default function ServiceMap() {
   
   const [displayPrice, setDisplayPrice] = useState<number>(() => parsePrice(hubs[0].price));
   const currentPriceRef = useRef(displayPrice);
+  
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const facadeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     currentPriceRef.current = displayPrice;
@@ -140,6 +143,57 @@ export default function ServiceMap() {
     });
     return () => controls.stop();
   }, [activeHub.price]);
+
+  useEffect(() => {
+    if (isMapLoaded) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsMapLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2, rootMargin: "200px" } // Load slightly before it comes into full view
+    );
+    
+    if (facadeRef.current) {
+      observer.observe(facadeRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, [isMapLoaded]);
+
+  if (!isMapLoaded) {
+    return (
+      <div 
+        ref={facadeRef}
+        className="w-full min-h-[600px] flex items-center justify-center rounded-3xl bg-[#040b15]/40 backdrop-blur-2xl border border-white/10 relative overflow-hidden group cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.5)] font-sans"
+        style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}
+        onClick={() => setIsMapLoaded(true)}
+      >
+        {/* Subtle grid and glows */}
+        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-blue-600/20 transition-all duration-700" />
+        
+        <div className="relative z-10 flex flex-col items-center gap-6 text-center px-4">
+          <div className="w-24 h-24 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-blue-400 mb-2 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+            <Map className="w-12 h-12 opacity-80" />
+          </div>
+          <button 
+            className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-black text-lg shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_10px_40px_rgba(37,99,235,0.5)] transition-all duration-300 transform group-hover:-translate-y-1 animate-pulse flex items-center gap-3"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMapLoaded(true);
+            }}
+          >
+            📍 คลิกเพื่อโหลดแผนที่
+          </button>
+          <p className="text-slate-400 text-sm font-medium">โหลดแผนที่และพื้นที่ให้บริการแบบอินเทอร์แอคทีฟ</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full text-white font-sans" style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}>
@@ -418,13 +472,9 @@ export default function ServiceMap() {
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl line-btn-pulse text-white font-black text-base transition-all duration-300 hover:-translate-y-0.5 border border-[#06C755]/30 transform active:scale-95 shadow-md"
               >
-                <Image 
-                  src="/images/LINE_Brand_icon.png" 
-                  alt="LINE Logo" 
-                  width={20} 
-                  height={20} 
-                  className="w-5 h-5 object-contain shrink-0" 
-                />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0">
+                  <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                </svg>
                 <span>ติดต่อผ่าน LINE</span>
               </a>
 
@@ -434,13 +484,9 @@ export default function ServiceMap() {
                 rel="noopener noreferrer"
                 className="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white font-black text-base transition-all duration-300 hover:-translate-y-0.5 border border-[#1877F2]/30 transform active:scale-95 shadow-[0_4px_15px_rgba(24,119,242,0.2)]"
               >
-                <Image 
-                  src="/images/Facebook_Logo_.png" 
-                  alt="Facebook Logo" 
-                  width={20} 
-                  height={20} 
-                  className="w-5 h-5 object-contain shrink-0" 
-                />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
                 <span>สอบถามผ่าน Facebook</span>
               </a>
 

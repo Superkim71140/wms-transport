@@ -1,4 +1,3 @@
-"use client";
 
 import { 
   Truck, 
@@ -16,19 +15,21 @@ import {
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FloatingLine from "@/components/FloatingLine";
-import ServiceMap from "@/components/ServiceMap";
-import GalleryMasonry from "@/components/GalleryMasonry";
 import ServiceSteps from "@/components/ServiceSteps";
-import CustomerReviews from "@/components/CustomerReviews";
 import FAQ from "@/components/FAQ";
-import TrustCounters from "@/components/TrustCounters";
-import { motion, useScroll, useTransform } from "framer-motion";
+import FloatingLine from "@/components/FloatingLine";
+import dynamic from "next/dynamic";
 
+const ServiceMap = dynamic(() => import('@/components/ServiceMap'), { ssr: true });
+const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), { ssr: true });
+const CustomerReviews = dynamic(() => import('@/components/CustomerReviews'), { ssr: true });
+const TrustCounters = dynamic(() => import('@/components/TrustCounters'), { ssr: true });
+import HeroBackground from "@/components/HeroBackground";
+
+// ISR: Revalidate every hour
+export const revalidate = 3600;
 
 export default function Home() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 2000], ["0%", "30%"]);
 
   const services = [
     {
@@ -106,45 +107,12 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow relative bg-gradient-to-b from-[#020817] via-[#04152D] to-[#061F45] text-slate-200 overflow-hidden">
+      <main className="flex-grow relative bg-gradient-to-b from-[#020817] via-[#04152D] to-[#061F45] text-slate-200">
         
         {/* Hidden H1 for SEO */}
         <h1 className="sr-only">รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ ย้ายบ้านทั่วไทย บริการพร้อมคนช่วยยก</h1>
         
-        {/* GLOBAL CONTINUOUS BACKGROUND EFFECTS */}
-        <motion.div style={{ y }} className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          {/* Subtle Grid / Particles */}
-          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px]"></div>
-          
-          {/* Floating Blurred Light Sources for Depth */}
-          <div className="absolute top-[5%] left-[-5%] w-[1200px] h-[1200px] bg-blue-600/[0.04] rounded-full blur-[200px]"></div>
-          <div className="absolute top-[30%] right-[-10%] w-[1000px] h-[1000px] bg-indigo-500/[0.05] rounded-full blur-[250px]"></div>
-          <div className="absolute top-[60%] left-[-10%] w-[1400px] h-[1400px] bg-sky-500/[0.03] rounded-full blur-[250px]"></div>
-          <div className="absolute bottom-[5%] right-[5%] w-[900px] h-[900px] bg-blue-700/[0.06] rounded-full blur-[200px]"></div>
-        </motion.div>
-
-        {/* 1. HERO SECTION */}
-        <section className="relative w-full aspect-[1717/916] md:aspect-auto md:h-[68vh] md:min-h-[560px] md:max-h-[720px] z-10 -mt-[2px] overflow-hidden flex items-center justify-center bg-[#020817]">
-          {/* Dark overlay gradient for seamless navbar transition */}
-          <div className="absolute top-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-b from-[#020817]/30 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-t from-[#020817] via-[#020817]/30 to-transparent z-10 pointer-events-none"></div>
-
-          {/* Luxury ambient glows behind image */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] md:w-[1000px] h-[400px] md:h-[600px] bg-blue-600/10 rounded-full blur-[120px] md:blur-[160px] pointer-events-none z-0"></div>
-          
-          <motion.div 
-            style={{ y }}
-            className="absolute inset-0 w-full h-full z-1"
-          >
-            <Image 
-              src="/images/wms-cover.webp" 
-              alt="WMS Transport Cover" 
-              fill
-              className="object-cover object-[center_32%] opacity-100"
-              priority 
-            />
-          </motion.div>
-        </section>
+        <HeroBackground />
 
         {/* 2. PREMIUM SERVICES SECTION */}
         <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -167,33 +135,22 @@ export default function Home() {
                 { text: "ให้บริการทั่วไทย", delay: 0.4 },
                 { text: "ตอบกลับเร็ว", delay: 0.6 }
               ].map((badge, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: badge.delay
-                  }}
-                  className="px-6 py-3 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 rounded-full text-sm font-black text-blue-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center gap-2"
+                  className="px-6 py-3 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 rounded-full text-sm font-black text-blue-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center gap-2 animate-float"
                 >
                   <span className="text-emerald-400 font-extrabold text-lg">✓</span>
                   <span className="text-slate-100">{badge.text}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
           <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center">
             {services.map((service, i) => (
-              <motion.div 
+              <div 
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_rgba(59,130,246,0.15)] group/card font-sans overflow-hidden"
+                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_rgba(59,130,246,0.15)] group/card font-sans overflow-hidden will-change-transform"
               >
                 {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none"></div>
@@ -244,18 +201,14 @@ export default function Home() {
                       aria-label="Contact WMS Transport via LINE"
                       className="w-full bg-[#00B900] hover:bg-[#009900] shadow-[0_4px_15px_rgba(0,185,0,0.3)] hover:shadow-[0_8px_25px_rgba(0,185,0,0.5)] text-white font-sans font-black text-[15px] py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                     >
-                      <Image 
-                        src="/images/LINE_Brand_icon.png" 
-                        alt="LINE Logo" 
-                        width={20} 
-                        height={20} 
-                        className="w-5 h-5 object-contain shrink-0 drop-shadow-md" 
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0 drop-shadow-md">
+                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                      </svg>
                       <span>💬 ติดต่อขนส่งผ่าน LINE</span>
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -284,12 +237,8 @@ export default function Home() {
             {/* Pricing Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
               {/* Card 1: 100-125cc */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0 }}
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
+              <div
+                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -307,19 +256,17 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Image src="/images/LINE_Brand_icon.png" alt="LINE" width={16} height={16} className="w-4 h-4 object-contain shrink-0" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                    </svg>
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Card 2: 150-300cc */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
+              <div
+                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -337,19 +284,17 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Image src="/images/LINE_Brand_icon.png" alt="LINE" width={16} height={16} className="w-4 h-4 object-contain shrink-0" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                    </svg>
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Card 3: BigBike 400cc — PREMIUM HIGHLIGHT */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-500 hover:-translate-y-2 group overflow-hidden"
+              <div
+                className="relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-500 hover:-translate-y-2 group overflow-hidden will-change-transform"
               >
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-blue-500/[0.06] group-hover:bg-blue-500/[0.10] transition-colors duration-500 rounded-3xl pointer-events-none" />
@@ -373,19 +318,17 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Image src="/images/LINE_Brand_icon.png" alt="LINE" width={16} height={16} className="w-4 h-4 object-contain shrink-0" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                    </svg>
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Card 4: เหมาขนส่ง */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
+              <div
+                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -403,11 +346,13 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Image src="/images/LINE_Brand_icon.png" alt="LINE" width={16} height={16} className="w-4 h-4 object-contain shrink-0" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                    </svg>
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Main CTA + note */}
@@ -419,7 +364,9 @@ export default function Home() {
                 aria-label="Contact WMS Transport via LINE for pricing"
                 className="inline-flex items-center gap-3 px-10 py-5 text-white font-black text-lg rounded-2xl shadow-[0_0_25px_rgba(225,29,72,0.5)] transform transition-all duration-300 hover:scale-105 animate-[pulse_2s_ease-in-out_infinite] border border-red-400/50 bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 relative overflow-hidden shimmer-btn mb-6"
               >
-                <Image src="/images/LINE_Brand_icon.png" alt="LINE" width={24} height={24} className="w-6 h-6 object-contain shrink-0 relative z-10" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0 relative z-10">
+                  <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                </svg>
                 <span className="relative z-10">🔥 ล็อกคิวราคานี้ (ทัก LINE)</span>
               </a>
               <p className="text-sm text-slate-500 max-w-2xl mx-auto">
@@ -430,7 +377,7 @@ export default function Home() {
         </section>
 
         {/* 4. REAL JOB PORTFOLIO SECTION */}
-        <section id="gallery" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+        <section id="gallery" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 content-auto">
           <div className="max-w-[1600px] mx-auto">
             <GalleryMasonry />
           </div>
@@ -442,12 +389,12 @@ export default function Home() {
         </div>
 
         {/* 5. CUSTOMER REVIEW SECTION */}
-        <section id="reviews" className="relative z-10 w-full py-12">
+        <section id="reviews" className="relative z-10 w-full py-12 content-auto">
           <CustomerReviews />
         </section>
 
         {/* 6. SERVICE COVERAGE MAP */}
-        <section id="areas" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+        <section id="areas" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 content-auto">
           <div className="max-w-[1600px] mx-auto">
             <ServiceMap />
           </div>
@@ -469,13 +416,9 @@ export default function Home() {
 
           <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyChooseUs.map((item, i) => (
-              <motion.div 
+              <div 
                 key={i} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 flex flex-col sm:flex-row items-start gap-6 transition-all duration-500 ease-out hover:bg-white/[0.05] hover:border-blue-500/30 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] group font-sans"
+                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 flex flex-col sm:flex-row items-start gap-6 transition-all duration-500 ease-out hover:bg-white/[0.05] hover:border-blue-500/30 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] group font-sans will-change-transform"
               >
                 <div className="p-5 bg-gradient-to-br from-blue-600 to-indigo-800 border border-blue-500/40 text-white rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.3)] shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]">
                   {item.icon}
@@ -488,7 +431,7 @@ export default function Home() {
                     {item.desc}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </section>
@@ -544,13 +487,9 @@ export default function Home() {
                       aria-label="Contact WMS Transport via LINE"
                       className="flex items-center justify-center gap-3 px-8 py-5 line-btn-pulse hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(6,199,85,0.3)] hover:shadow-[0_20px_50px_rgba(6,199,85,0.5)] border border-[#06C755]/30 transform hover:-translate-y-1"
                     >
-                      <Image 
-                        src="/images/LINE_Brand_icon.png" 
-                        alt="LINE Logo" 
-                        width={24} 
-                        height={24} 
-                        className="w-6 h-6 object-contain shrink-0" 
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0">
+                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
+                      </svg>
                       <span className="tracking-wide">ติดต่อผ่าน LINE</span>
                     </a>
                     
@@ -560,13 +499,9 @@ export default function Home() {
                       rel="noreferrer"
                       className="flex items-center justify-center gap-3 px-8 py-5 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(24,119,242,0.3)] hover:shadow-[0_20px_50px_rgba(24,119,242,0.5)] border border-[#1877F2]/30 transform hover:-translate-y-1"
                     >
-                      <Image 
-                        src="/images/Facebook_Logo_.png" 
-                        alt="Facebook Logo" 
-                        width={24} 
-                        height={24} 
-                        className="w-6 h-6 object-contain shrink-0" 
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
                       <span className="tracking-wide">สอบถามขนส่งผ่าน Facebook</span>
                     </a>
                   </div>

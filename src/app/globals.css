@@ -269,3 +269,8 @@ body {
   100% { left: 150%; }
 }
 
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
