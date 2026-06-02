@@ -19,7 +19,7 @@ export default function HeroBackground() {
   }, []);
 
   return (
-    <section className="relative w-full h-[280px] sm:h-[340px] md:h-[68vh] md:min-h-[560px] overflow-hidden">
+    <section className="relative w-full max-w-full pt-16 sm:pt-20 md:pt-0 h-[280px] sm:h-[340px] md:h-[68vh] md:min-h-[560px] overflow-hidden bg-[#020817]">
       {/* Hero Cover Image with Parallax */}
       <motion.div
         style={{ y: isMobile ? "0%" : y }}

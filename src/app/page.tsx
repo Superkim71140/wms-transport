@@ -106,7 +106,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow relative bg-gradient-to-b from-[#020817] via-[#04152D] to-[#061F45] text-slate-200">
+      <main className="flex-grow relative bg-gradient-to-b from-[#020817] via-[#04152D] to-[#061F45] text-slate-200 pb-28 md:pb-0">
         
         {/* Hidden H1 for SEO */}
         <h1 className="sr-only">รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ ย้ายบ้านทั่วไทย บริการพร้อมคนช่วยยก</h1>
@@ -114,8 +114,8 @@ export default function Home() {
         <HeroBackground />
 
         {/* 2. PREMIUM SERVICES SECTION */}
-        <section id="services" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-[1600px] mx-auto text-center mb-10 md:mb-16">
+        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10">
+          <div className="w-full max-w-7xl mx-auto text-center mb-10 md:mb-16 min-w-0">
             <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
               บริการของเรา
             </span>
@@ -145,11 +145,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="max-w-[1600px] mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center min-w-0">
             {services.map((service, i) => (
               <div 
                 key={i}
-                className="bg-white/[0.02] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-blue-500/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden will-change-transform"
+                className="w-full min-w-0 bg-white/[0.02] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-blue-500/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden will-change-transform"
               >
                 {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-2xl pointer-events-none"></div>
@@ -225,13 +225,13 @@ export default function Home() {
         </section>
 
         {/* 3. MOTORCYCLE PRICING SECTION */}
-        <section id="pricing" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+        <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
           {/* Section ambient glow */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-blue-600/[0.07] rounded-full blur-[180px]" />
           </div>
 
-          <div className="max-w-[1400px] mx-auto relative z-10">
+          <div className="w-full max-w-7xl mx-auto relative z-10 min-w-0">
             {/* Section header */}
             <div className="text-center mb-16">
               <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
@@ -246,10 +246,10 @@ export default function Home() {
             </div>
 
             {/* Pricing Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 w-full max-w-7xl mx-auto min-w-0">
               {/* Card 1: 100-125cc */}
               <div
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -277,7 +277,7 @@ export default function Home() {
 
               {/* Card 2: 150-300cc */}
               <div
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -305,7 +305,7 @@ export default function Home() {
 
               {/* Card 3: BigBike 400cc — PREMIUM HIGHLIGHT */}
               <div
-                className="relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-500 hover:-translate-y-2 group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-500 hover:-translate-y-2 group overflow-hidden will-change-transform"
               >
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-blue-500/[0.06] group-hover:bg-blue-500/[0.10] transition-colors duration-500 rounded-3xl pointer-events-none" />
@@ -339,7 +339,7 @@ export default function Home() {
 
               {/* Card 4: เหมาขนส่ง */}
               <div
-                className="relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -388,8 +388,8 @@ export default function Home() {
         </section>
 
         {/* 4. REAL JOB PORTFOLIO SECTION */}
-        <section id="gallery" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 content-auto">
-          <div className="max-w-[1600px] mx-auto">
+        <section id="gallery" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10 content-auto">
+          <div className="w-full max-w-7xl mx-auto min-w-0">
             <GalleryMasonry />
           </div>
         </section>
@@ -405,15 +405,15 @@ export default function Home() {
         </section>
 
         {/* 6. SERVICE COVERAGE MAP */}
-        <section id="areas" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 content-auto">
-          <div className="max-w-[1600px] mx-auto">
+        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10 content-auto">
+          <div className="w-full max-w-7xl mx-auto min-w-0">
             <ServiceMap />
           </div>
         </section>
 
         {/* WHY CHOOSE US */}
-        <section id="why-choose-us" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-[1600px] mx-auto text-center mb-20">
+        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
+          <div className="w-full max-w-7xl mx-auto text-center mb-20 min-w-0">
             <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
               ทำไมต้องเลือกเรา
             </span>
@@ -425,7 +425,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-w-0">
             {whyChooseUs.map((item, i) => (
               <div 
                 key={i} 
@@ -458,8 +458,8 @@ export default function Home() {
         </div>
 
         {/* 8. FINAL CTA SECTION */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-[1400px] mx-auto">
+        <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
+          <div className="w-full max-w-7xl mx-auto min-w-0">
             <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-r from-[#04152D] via-[#061F45] to-[#04152D] border border-blue-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
               {/* Decorative elements */}
               <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>

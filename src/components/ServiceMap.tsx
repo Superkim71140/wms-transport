@@ -54,9 +54,9 @@ export default function ServiceMap() {
       </div>
 
       {/* 2. CONTENT CONTAINER */}
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10 min-w-0">
         {/* LEFT COLUMN: Route chips & CTA buttons */}
-        <div className="lg:col-span-5 flex flex-col justify-between bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_15px_40px_rgba(0,0,0,0.3)]">
+        <div className="lg:col-span-5 flex flex-col justify-between bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_15px_40px_rgba(0,0,0,0.3)] w-full min-w-0">
           <div className="space-y-6">
             <div className="flex items-center gap-2.5 pb-3 border-b border-white/10">
               <Route className="w-5 h-5 text-blue-400 shrink-0" />
@@ -72,11 +72,11 @@ export default function ServiceMap() {
               {routes.map((route, idx) => (
                 <div 
                   key={idx}
-                  className="flex items-center justify-between p-3.5 bg-white/[0.02] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all duration-300 group/route"
+                  className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-white/[0.02] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all duration-300 group/route"
                 >
-                  <div className="flex items-center gap-2.5 font-bold text-xs sm:text-sm">
+                  <div className="flex flex-wrap items-center gap-2 font-bold text-xs sm:text-sm">
                     <span className="text-slate-200">{route.from}</span>
-                    <ArrowRight className="w-4 h-4 text-blue-400 group-hover/route:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 text-blue-400 group-hover/route:translate-x-1 transition-transform shrink-0" />
                     <span className="text-blue-400">{route.to}</span>
                   </div>
                   <span className="text-[10px] font-bold bg-blue-500/10 text-blue-300 border border-blue-500/20 px-2 py-0.5 rounded-md">

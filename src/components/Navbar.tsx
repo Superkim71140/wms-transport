@@ -77,9 +77,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 w-[95%] sm:w-[98%] max-w-7xl bg-[#040b15]/80 backdrop-blur-2xl border border-white/10 rounded-full px-4 sm:px-6 xl:px-8 flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] z-[100] transition-all duration-300 ease-in-out ${
-        isScrolled ? "top-2 py-2.5 scale-[0.99]" : "top-4 py-3.5 scale-100"
-      }`}
+      className={`fixed z-[100] transition-all duration-300 ease-in-out
+        /* Mobile Layout */
+        top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3 py-2 bg-[#040b15]/90 backdrop-blur-2xl border border-white/10
+        flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)]
+        
+        /* Desktop Layout (lg screens and up) */
+        lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3.5
+        ${isScrolled ? "lg:top-2 lg:py-2.5 lg:scale-[0.99]" : "lg:top-4 lg:py-3.5 lg:scale-100"}`}
     >
       {/* Premium Logo Lockup */}
       <div className="flex-shrink-0 flex items-center">
