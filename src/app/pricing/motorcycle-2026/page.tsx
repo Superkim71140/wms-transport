@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Phone, CheckCircle, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -49,7 +49,7 @@ export default function MotorcyclePricing2026Page() {
             
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
               อัปเดตราคาขนส่งมอเตอร์ไซค์ <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              <span className="text-blue-400">
                 และบิ๊กไบค์ ทั่วไทย ปี 2569
               </span>
             </h1>

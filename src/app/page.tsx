@@ -10,9 +10,8 @@ import {
   Zap,
   Building,
   Package,
-  Bike
+  Bike,
 } from "lucide-react";
-import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServiceSteps from "@/components/ServiceSteps";
@@ -115,20 +114,20 @@ export default function Home() {
         <HeroBackground />
 
         {/* 2. PREMIUM SERVICES SECTION */}
-        <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-[1600px] mx-auto text-center mb-16">
+        <section id="services" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-[1600px] mx-auto text-center mb-10 md:mb-16">
             <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
               บริการของเรา
             </span>
-            <h2 className="font-sans text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 mt-8">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 md:mb-6 mt-6 md:mt-8">
               บริการ<span className="text-blue-400">รถกระบะตู้ทึบรับจ้าง</span> และขนย้ายระดับพรีเมียม
             </h2>
-            <p className="text-lg text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed mb-12">
+            <p className="text-sm sm:text-base md:text-lg text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
               ครอบคลุมทุกความต้องการด้านการขนส่ง ขนย้ายสิ่งของด้วยมาตรฐานระดับสากล ปลอดภัย ตรงเวลา ไร้กังวล
             </p>
 
             {/* FLOATING TRUST BADGES */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-16">
               {[
                 { text: "มีผลงานจริง", delay: 0 },
                 { text: "มีทีมงานมืออาชีพ", delay: 0.2 },
@@ -137,74 +136,86 @@ export default function Home() {
               ].map((badge, idx) => (
                 <div
                   key={idx}
-                  className="px-6 py-3 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 rounded-full text-sm font-black text-blue-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center gap-2 animate-float"
+                  className="px-5 py-2.5 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 rounded-full text-xs sm:text-sm font-black text-blue-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center gap-2 animate-float"
                 >
-                  <span className="text-emerald-400 font-extrabold text-lg">✓</span>
+                  <span className="text-emerald-400 font-extrabold text-base">✓</span>
                   <span className="text-slate-100">{badge.text}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center">
+          <div className="max-w-[1600px] mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center">
             {services.map((service, i) => (
               <div 
                 key={i}
-                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50 hover:bg-white/[0.05] hover:shadow-[0_20px_60px_rgba(59,130,246,0.15)] group/card font-sans overflow-hidden will-change-transform"
+                className="bg-white/[0.02] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-blue-500/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden will-change-transform"
               >
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none"></div>
+                <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-2xl pointer-events-none"></div>
 
                 <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="p-4 bg-white/5 text-blue-400 border border-white/10 rounded-2xl group-hover/card:bg-blue-500/20 group-hover/card:text-blue-300 group-hover/card:border-blue-400/50 transition-all duration-500 shadow-lg">
+                  <div className="flex justify-between items-start mb-5">
+                    <div className="p-3 bg-white/5 text-blue-400 border border-white/10 rounded-xl group-hover/card:bg-blue-500/20 group-hover/card:text-blue-300 group-hover/card:border-blue-400/50 transition-all duration-500 shadow-lg">
                       {service.icon}
                     </div>
-                    <span className="text-[10px] bg-blue-500/10 text-blue-300 border border-blue-500/20 font-bold px-3 py-1.5 rounded-full tracking-wider uppercase backdrop-blur-sm">
+                    <span className="text-[10px] bg-blue-500/10 text-blue-300 border border-blue-500/20 font-bold px-3 py-1 rounded-full tracking-wider uppercase backdrop-blur-sm">
                       มาตรฐาน WMS
                     </span>
                   </div>
                   
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-3 group-hover/card:text-blue-300 transition-colors duration-300">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight mb-2 group-hover/card:text-blue-300 transition-colors duration-300">
                     {service.title}
                   </h3>
                   
-                  <p className="text-sm text-slate-400 font-normal leading-relaxed mb-6 min-h-[4rem]">
+                  <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed mb-4 line-clamp-3 md:line-clamp-none min-h-0 md:min-h-[4rem]">
                     {service.desc}
                   </p>
                   
-                  <ul className="space-y-3 border-t border-white/10 pt-5">
+                  <ul className="space-y-2 border-t border-white/10 pt-4">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-[14px] font-semibold text-slate-200">
-                        <CheckCircle className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-200">
+                        <CheckCircle className="h-4.5 w-4.5 text-blue-500 shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-auto pt-8 relative z-10">
+                <div className="mt-auto pt-6 relative z-10">
                   {/* Pricing highlight under description */}
-                  <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/5 pt-5 gap-2">
-                    <span className="text-sm font-bold text-slate-400">เริ่มต้นเพียง</span>
-                    <span className="text-lg font-black text-red-400 bg-red-500/10 border border-red-500/20 px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+                  <div className="mb-4 flex items-center justify-between border-t border-white/10 pt-4 gap-2">
+                    <span className="text-xs font-bold text-slate-400">เริ่มต้นเพียง</span>
+                    <span className="text-sm sm:text-base font-black text-red-400 bg-red-500/10 border border-red-500/20 px-3.5 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.2)]">
                       {service.price} บาท
                     </span>
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2">
                     <a 
                       href="https://line.me/ti/p/DtICkMaDet"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Contact WMS Transport via LINE"
-                      className="w-full bg-[#00B900] hover:bg-[#009900] shadow-[0_4px_15px_rgba(0,185,0,0.3)] hover:shadow-[0_8px_25px_rgba(0,185,0,0.5)] text-white font-sans font-black text-[15px] py-4 px-6 rounded-2xl flex items-center justify-center gap-3 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                      className="w-full bg-[#06C755] hover:bg-[#05B34F] text-white font-sans font-black text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[44px]"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0 drop-shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current shrink-0">
                         <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
                       </svg>
-                      <span>💬 ติดต่อขนส่งผ่าน LINE</span>
+                      <span>ติดต่อผ่าน LINE</span>
+                    </a>
+                    <a 
+                      href="https://www.facebook.com/share/1DnN6iGodp/?mibextid=wwXIfr"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Contact WMS Transport via Facebook"
+                      className="w-full bg-[#1877F2] hover:bg-[#166FE5] text-white font-sans font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[44px]"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                      <span>สอบถามผ่าน Facebook</span>
                     </a>
                   </div>
                 </div>
@@ -449,7 +460,7 @@ export default function Home() {
         {/* 8. FINAL CTA SECTION */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-[1400px] mx-auto">
-            <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-[#04152D] via-[#061F45] to-[#04152D] border border-blue-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+            <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-r from-[#04152D] via-[#061F45] to-[#04152D] border border-blue-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
               {/* Decorative elements */}
               <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
               <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[150px] -translate-y-1/2"></div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Navigation } from "lucide-react";
+import { Phone, Clock, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
   const seoKeywords = [
@@ -69,7 +69,7 @@ export default function Footer() {
 
           {/* Column 2: Services */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l-2 border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
               บริการของเรา
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
@@ -98,7 +98,7 @@ export default function Footer() {
 
           {/* Column 3: Top Areas */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l-2 border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
               พื้นที่ยอดฮิต
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
@@ -132,7 +132,7 @@ export default function Footer() {
 
           {/* Column 4: Trust & Contact */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l-2 border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
               ติดต่อเรา
             </h3>
             

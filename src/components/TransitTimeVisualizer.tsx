@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, Truck, ShieldCheck, ArrowRight } from "lucide-react";
+import { MapPin, Truck, ShieldCheck } from "lucide-react";
 
 type TransitInfo = {
   distance: string;

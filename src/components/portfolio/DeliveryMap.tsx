@@ -83,7 +83,7 @@ export default function DeliveryMap() {
   const activeRegion = regionsData.find((r) => r.id === activeTab) || regionsData[0];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] relative overflow-hidden font-sans w-full" style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}>
+    <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#040b15] relative overflow-hidden font-sans w-full" style={{ fontFamily: "var(--font-noto-sans-thai), sans-serif" }}>
       {/* Background patterns and glowing orbs */}
       <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] pointer-events-none z-0" />
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
@@ -166,7 +166,7 @@ export default function DeliveryMap() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 min-w-[100px] py-3 text-xs sm:text-sm font-bold text-center rounded-xl transition-all duration-300 relative select-none cursor-pointer ${
+                  className={`flex-1 min-w-[100px] py-3.5 text-xs sm:text-sm font-bold text-center rounded-xl transition-all duration-300 relative select-none cursor-pointer min-h-[44px] flex items-center justify-center ${
                     isActive ? "text-white" : "text-slate-400 hover:text-slate-200"
                   }`}
                 >
@@ -199,8 +199,8 @@ export default function DeliveryMap() {
 
                 <div className="space-y-6 text-left">
                   
-                  {/* Region Title (Massive Gradient) */}
-                  <h3 className="text-3xl sm:text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-400 flex items-center gap-2.5 pb-2">
+                  {/* Region Title (Solid White text) */}
+                  <h3 className="text-3xl sm:text-4xl font-black text-white flex items-center gap-2.5 pb-2">
                     {activeRegion.name}
                   </h3>
 
@@ -210,7 +210,7 @@ export default function DeliveryMap() {
                   </p>
 
                   {/* Delivery Speed Highlight Banner */}
-                  <div className="bg-gradient-to-r from-blue-900/40 to-transparent border-l-4 border-red-500 p-5 rounded-r-2xl text-left">
+                  <div className="bg-gradient-to-r from-blue-950/40 via-blue-900/20 to-transparent border border-blue-500/20 p-5 rounded-2xl text-left">
                     <span className="text-[10px] text-red-400 font-bold uppercase tracking-wider block mb-1">
                       ระยะเวลาจัดส่งสินค้าโดยประมาณ
                     </span>

@@ -9,7 +9,7 @@ declare module '@builder.io/partytown/react' {
     mainWindowAccessors?: string[];
     resolveUrl?: (url: URL, location: Location, type: string) => URL | undefined | null;
     sandbox?: string;
-    scripts?: { [key: string]: any }[];
+    scripts?: { [key: string]: unknown }[];
   }
 
   export const Partytown: React.ComponentType<PartytownProps>;

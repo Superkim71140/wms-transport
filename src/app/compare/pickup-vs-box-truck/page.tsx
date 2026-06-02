@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Phone, CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/TableOfContents";
 
@@ -41,7 +41,7 @@ export default function CompareTrucksPage() {
             
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
               เปรียบเทียบรถกระบะคอก VS รถกระบะตู้ทึบ <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              <span className="text-blue-400">
                 ย้ายบ้านแบบไหนตอบโจทย์ที่สุด?
               </span>
             </h1>

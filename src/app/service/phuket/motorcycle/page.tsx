@@ -58,7 +58,7 @@ export default function PhuketMotorcyclePage() {
             
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
               บริการขนส่งมอเตอร์ไซค์ <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              <span className="text-blue-400">
                 ส่งตรงถึงภูเก็ต และทั่วประเทศ
               </span>
             </h1>

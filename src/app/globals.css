@@ -55,9 +55,22 @@ html {
 }
 
 body {
-  /* Removed hardcoded background and color to allow layout.tsx Tailwind classes to function! */
+  background-color: #040b15;
+  color: #e2e8f0;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Glassmorphism utilities */

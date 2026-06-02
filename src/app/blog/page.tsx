@@ -50,7 +50,7 @@ export default function BlogHubPage() {
               WMS Content Hub
             </span>
             <h1 className="text-4xl md:text-6xl font-black text-white mb-6">
-              บล็อกรวมความรู้ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">เรื่องการขนย้าย</span>
+              บล็อกรวมความรู้ <span className="text-blue-400">เรื่องการขนย้าย</span>
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
               เคล็ดลับการย้ายบ้าน วิธีแพ็กสินค้า การส่งมอเตอร์ไซค์ และข่าวสารน่ารู้จากผู้เชี่ยวชาญด้านการขนส่ง

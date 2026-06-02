@@ -112,14 +112,10 @@ export default function FAQ() {
                 key={index}
                 className={`rounded-2xl border transition-all duration-300 overflow-hidden relative ${
                   isActive
-                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] backdrop-blur-2xl border-blue-400/30 shadow-[0_20px_50px_rgba(59,130,246,0.15)]"
+                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] backdrop-blur-2xl border-cyan-400/50 shadow-[0_20px_50px_rgba(34,211,238,0.15)]"
                     : "bg-white/[0.02] border-white/5 backdrop-blur-xl hover:border-white/20 hover:bg-white/[0.05]"
                 }`}
               >
-                {/* Left glowing border accent for active state */}
-                {isActive && (
-                  <div className="absolute left-0 top-0 bottom-0 border-l-4 border-l-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] z-10" />
-                )}
 
                 {/* Accordion Trigger Button */}
                 <button

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Truck,
@@ -282,7 +281,7 @@ export default async function LocationHubPage({
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
               บริการขนย้าย และรถรับจ้าง
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              <span className="text-blue-400">
                 ในพื้นที่ {provinceThai}
               </span>
             </h1>
@@ -392,7 +391,7 @@ export default async function LocationHubPage({
               </div>
               <div className="flex-1 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 relative z-10">
                 <p className="text-slate-200 text-lg font-medium leading-relaxed italic">
-                  "{review.text}"
+                  &ldquo;{review.text}&rdquo;
                 </p>
               </div>
             </div>

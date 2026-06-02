@@ -136,11 +136,7 @@ export default function ServiceSteps() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.5, delay: 0.15 }}
-                    className={`bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 relative overflow-hidden group/card shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/40 hover:shadow-[0_15px_50px_rgba(59,130,246,0.2)] hover:bg-white/[0.04] ${
-                      isEven 
-                        ? "border-l-4 border-l-blue-500 md:border-l-0 md:border-r-4 md:border-r-blue-500" 
-                        : "border-l-4 border-l-blue-500"
-                    }`}
+                    className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 relative overflow-hidden group/card shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/40 hover:shadow-[0_15px_50px_rgba(59,130,246,0.2)] hover:bg-white/[0.04]"
                   >
                     {/* Giant Watermark Numbers */}
                     <div className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-black text-white/[0.03] select-none pointer-events-none font-mono transition-all duration-500 group-hover/card:text-blue-500/[0.05]">

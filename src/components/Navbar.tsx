@@ -77,8 +77,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 w-[98%] max-w-7xl bg-[#040b15]/70 backdrop-blur-xl border border-white/10 rounded-full px-6 xl:px-8 flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] z-[100] transition-all duration-500 ease-out ${
-        isScrolled ? "top-3 py-3 scale-[0.99]" : "top-5 py-4.5 scale-100"
+      className={`fixed left-1/2 -translate-x-1/2 w-[95%] sm:w-[98%] max-w-7xl bg-[#040b15]/80 backdrop-blur-2xl border border-white/10 rounded-full px-4 sm:px-6 xl:px-8 flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] z-[100] transition-all duration-300 ease-in-out ${
+        isScrolled ? "top-2 py-2.5 scale-[0.99]" : "top-4 py-3.5 scale-100"
       }`}
     >
       {/* Premium Logo Lockup */}
@@ -88,15 +88,15 @@ export default function Navbar() {
             <Image
               src="/logoWMS.png"
               alt="WMS Transport Logo"
-              width={130}
-              height={130}
-              className="w-auto h-11 sm:h-13 object-contain mix-blend-screen"
+              width={120}
+              height={120}
+              className="w-auto h-8 sm:h-10 md:h-12 object-contain mix-blend-screen"
               priority
             />
           </div>
           <div className="hidden sm:flex flex-col justify-center">
-            <span className="text-white font-black text-xl leading-none tracking-wide drop-shadow-lg whitespace-nowrap">WMS</span>
-            <span className="text-blue-400 font-bold text-[11px] tracking-widest uppercase drop-shadow-lg whitespace-nowrap">Transport</span>
+            <span className="text-white font-black text-lg leading-none tracking-wide drop-shadow-lg whitespace-nowrap">WMS</span>
+            <span className="text-blue-400 font-bold text-[10px] tracking-widest uppercase drop-shadow-lg whitespace-nowrap">Transport</span>
           </div>
         </Link>
       </div>
@@ -111,7 +111,7 @@ export default function Navbar() {
               href={link.href}
               className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 relative group drop-shadow-lg px-4 py-2 hover:text-white ${
                 active
-                  ? "text-red-400 border-b-2 border-red-500 rounded-none"
+                  ? "text-blue-400 border-b-2 border-blue-500 rounded-none"
                   : "text-slate-300 rounded-full"
               }`}
             >
@@ -124,14 +124,14 @@ export default function Navbar() {
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsPhuketDropdownOpen((v) => !v)}
-            className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 px-4 py-2 rounded-full flex items-center gap-1.5 ${
+            className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer ${
               isLocationActive
                 ? "text-blue-400"
                 : "text-slate-300 hover:text-white"
             }`}
           >
             <MapPin className="w-4 h-4 text-blue-400" />
-            📍 พื้นที่ให้บริการ
+            พื้นที่ให้บริการ
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-300 ${
                 isPhuketDropdownOpen ? "rotate-180 text-blue-400" : ""
@@ -168,7 +168,7 @@ export default function Navbar() {
       <div className="hidden lg:flex items-center gap-4 shrink-0">
         <a
           href="tel:0612402436"
-          className="whitespace-nowrap flex items-center gap-2 px-5 py-2 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-sm hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
+          className="whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-sm hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
         >
           <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
           <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
@@ -178,12 +178,12 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact WMS Transport via LINE"
-          className="whitespace-nowrap flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-r from-[#06C755] to-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] border border-[#06C755]/30 group"
+          className="whitespace-nowrap flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#06C755] hover:bg-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] border border-[#06C755]/30 group"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current shrink-0">
             <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
           </svg>
-          <span className="drop-shadow-lg">ติดต่อขนส่งผ่าน LINE</span>
+          <span className="drop-shadow-lg">ติดต่อผ่าน LINE</span>
         </a>
       </div>
 
@@ -191,15 +191,16 @@ export default function Navbar() {
       <div className="flex xl:hidden items-center">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-white drop-shadow-lg p-2 focus:outline-none hover:text-red-400 transition-colors"
+          className="text-white drop-shadow-lg min-w-[44px] min-h-[44px] flex items-center justify-center p-2 focus:outline-none hover:text-blue-400 transition-colors cursor-pointer"
+          aria-label={isMobileMenuOpen ? "ปิดเมนู" : "เปิดเมนู"}
         >
-          {isMobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-[calc(100%+0.75rem)] left-0 w-full bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 py-6 px-4 flex flex-col gap-2 rounded-3xl shadow-2xl z-50">
+        <div className="xl:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 py-5 px-4 flex flex-col gap-2 rounded-3xl shadow-2xl z-50">
           {navLinks.map((link) => {
             const active = isActiveLink(link.href);
             return (
@@ -207,10 +208,10 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-base font-bold block py-3.5 px-5 rounded-xl transition-colors border ${
+                className={`text-sm font-bold block py-3 px-4 rounded-xl transition-colors border ${
                   active
-                    ? "text-red-400 bg-red-500/10 border-red-500/30"
-                    : "text-slate-200 hover:text-red-400 hover:bg-white/5 border-transparent"
+                    ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
+                    : "text-slate-200 hover:text-blue-400 hover:bg-white/5 border-transparent"
                 }`}
               >
                 {link.name}
@@ -222,7 +223,7 @@ export default function Navbar() {
           <div className="border border-white/5 rounded-xl overflow-hidden">
             <button
               onClick={() => setIsMobilePhuketOpen((v) => !v)}
-              className={`w-full flex items-center justify-between text-base font-bold py-3.5 px-5 transition-colors ${
+              className={`w-full flex items-center justify-between text-sm font-bold py-3 px-4 transition-colors cursor-pointer ${
                 isLocationActive
                   ? "text-blue-400 bg-blue-500/10"
                   : "text-slate-200 hover:text-blue-400 hover:bg-white/5"
@@ -230,7 +231,7 @@ export default function Navbar() {
             >
               <span className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-blue-400" />
-                📍 พื้นที่ให้บริการ
+                พื้นที่ให้บริการ
               </span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
@@ -239,13 +240,13 @@ export default function Navbar() {
               />
             </button>
             {isMobilePhuketOpen && (
-              <div className="border-t border-white/5 flex flex-col">
+              <div className="border-t border-white/5 flex flex-col bg-black/20">
                 {locationLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-sm font-semibold py-3 px-8 transition-colors ${
+                    className={`text-xs font-semibold py-2.5 px-8 transition-colors ${
                       pathname === link.href
                         ? "text-blue-400 bg-blue-500/10"
                         : "text-slate-300 hover:text-white hover:bg-white/5"
@@ -258,26 +259,25 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="flex flex-col gap-3 mt-4 border-t border-white/10 pt-6 px-2">
+          <div className="flex flex-col gap-2.5 mt-2 border-t border-white/10 pt-4 px-1">
             <a
               href="tel:0612402436"
-              className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl border border-white/20 text-white font-bold text-sm bg-white/5 hover:bg-white/10 transition-colors shadow-inner"
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border border-white/10 text-white font-bold text-sm bg-white/5 hover:bg-white/10 transition-colors shadow-inner min-h-[44px]"
             >
-              <Phone className="w-5 h-5 text-blue-400" />
-              <span className="font-mono">โทรด่วน: 061-240-2436</span>
+              <Phone className="w-4.5 h-4.5 text-blue-400 animate-pulse" />
+              <span className="font-mono">โทร 061-240-2436</span>
             </a>
             <a
               href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact WMS Transport via LINE"
-              className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-xl bg-gradient-to-r from-[#06C755] to-[#05B34F] text-white font-black text-sm shadow-[0_0_20px_rgba(6,199,85,0.3)] relative overflow-hidden group"
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-black text-sm shadow-[0_0_20px_rgba(6,199,85,0.3)] min-h-[44px]"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0 relative z-10">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current shrink-0">
                 <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
               </svg>
-              <span className="relative z-10">ติดต่อขนส่งผ่าน LINE</span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <span>ติดต่อผ่าน LINE</span>
             </a>
           </div>
         </div>

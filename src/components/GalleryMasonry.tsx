@@ -66,11 +66,9 @@ const projects: Project[] = [
 
 function GalleryCard({
   project,
-  idx,
   onClick,
 }: {
   project: Project;
-  idx: number;
   onClick: () => void;
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -170,10 +168,6 @@ export default function GalleryMasonry() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
-    setLightboxLoaded(false);
-  }, [lightboxIndex]);
-
   // Body scroll lock effect
   useEffect(() => {
     if (lightboxIndex !== null) {
@@ -193,10 +187,12 @@ export default function GalleryMasonry() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxIndex(null);
       if (e.key === "ArrowRight") {
-        setLightboxIndex((prev) => prev !== null ? (prev + 1) % filteredProjects.length : null);
+        setLightboxIndex((prev) => (prev !== null ? (prev + 1) % filteredProjects.length : null));
+        setLightboxLoaded(false);
       }
       if (e.key === "ArrowLeft") {
-        setLightboxIndex((prev) => prev !== null ? (prev - 1 + filteredProjects.length) % filteredProjects.length : null);
+        setLightboxIndex((prev) => (prev !== null ? (prev - 1 + filteredProjects.length) % filteredProjects.length : null));
+        setLightboxLoaded(false);
       }
     };
 
@@ -209,12 +205,14 @@ export default function GalleryMasonry() {
   const handleNext = () => {
     if (lightboxIndex !== null) {
       setLightboxIndex((lightboxIndex + 1) % filteredProjects.length);
+      setLightboxLoaded(false);
     }
   };
 
   const handlePrev = () => {
     if (lightboxIndex !== null) {
       setLightboxIndex((lightboxIndex - 1 + filteredProjects.length) % filteredProjects.length);
+      setLightboxLoaded(false);
     }
   };
 
@@ -300,8 +298,7 @@ export default function GalleryMasonry() {
             <GalleryCard
               key={project.id}
               project={project}
-              idx={idx}
-              onClick={() => setLightboxIndex(idx)}
+              onClick={() => { setLightboxIndex(idx); setLightboxLoaded(false); }}
             />
           ))}
         </AnimatePresence>

@@ -41,7 +41,7 @@ export default function PortfolioGallery() {
   );
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] min-h-screen relative overflow-hidden z-0">
+    <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-[#040b15] min-h-screen relative overflow-hidden z-0">
 
       {/* Subtle Dot Pattern Overlay (Matched with FAQ) */}
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none -z-10" />
@@ -52,25 +52,25 @@ export default function PortfolioGallery() {
       <div className="absolute -bottom-32 right-0 md:right-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto relative z-10 font-sans">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
             แกลเลอรีผลงาน
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 md:mb-6">
             ภาพผลงานจริง <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">จากสถานที่</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed">
             สัมผัสความเป็นมืออาชีพผ่านผลงานการขนย้ายจริงของเรา ที่ใส่ใจในทุกรายละเอียดเพื่อความพึงพอใจสูงสุดของคุณ
           </p>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 mb-10 md:mb-16">
           {FILTERS.map(filter => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 relative ${
+              className={`px-5 py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 relative min-h-[44px] flex items-center justify-center cursor-pointer ${
                 activeFilter === filter
                   ? "bg-blue-600 text-white shadow-lg"
                   : "bg-white/5 text-slate-300 border border-white/10 hover:bg-white/10 hover:text-white"

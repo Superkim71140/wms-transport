@@ -28,8 +28,10 @@ export default function TableOfContents() {
       level: el.tagName === "H2" ? 2 : 3,
     }));
 
-    setHeadings(items);
-    if (items.length > 0) setActiveId(items[0].id);
+    const timer = setTimeout(() => {
+      setHeadings(items);
+      if (items.length > 0) setActiveId(items[0].id);
+    }, 0);
 
     // IntersectionObserver — tracks which heading is in the top zone of viewport
     const observer = new IntersectionObserver(
@@ -52,6 +54,7 @@ export default function TableOfContents() {
     headingElements.forEach((el) => observer.observe(el));
 
     return () => {
+      clearTimeout(timer);
       headingElements.forEach((el) => observer.unobserve(el));
     };
   }, []);
@@ -137,7 +140,7 @@ export default function TableOfContents() {
                   onClick={(e) => handleScroll(e, h.id)}
                   className={`flex items-center gap-2 py-2 px-3 rounded-xl text-sm leading-snug transition-all duration-200 ${
                     isActive
-                      ? "text-blue-400 font-bold bg-blue-500/10 border-l-2 border-blue-400 rounded-l-none pl-2.5"
+                      ? "text-blue-400 font-bold bg-blue-500/10 border-l border-blue-400 rounded-l-none pl-2.5"
                       : "text-slate-400 hover:text-white hover:bg-white/5"
                   }`}
                 >

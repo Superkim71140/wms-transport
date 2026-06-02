@@ -58,7 +58,7 @@ export default function PhuketMovingPage() {
             
             <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-8">
               บริการรับย้ายบ้าน <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+              <span className="text-blue-400">
                 ย้ายคอนโด หอพัก ถึงภูเก็ต
               </span>
             </h1>
