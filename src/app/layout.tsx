@@ -41,9 +41,17 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "WMS TRANSPORT" }],
   icons: {
-    icon: "/logoWMS.png",
-    shortcut: "/logoWMS.png",
-    apple: "/logoWMS.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    other: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "512x512",
+        url: "/logoWMS.png",
+      },
+    ],
   },
   openGraph: {
     title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ พร้อมคนยก | WMS TRANSPORT",
@@ -51,11 +59,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "th_TH",
     siteName: "WMS TRANSPORT",
+    images: ["/logoWMS.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ พร้อมคนยก | WMS TRANSPORT",
     description: "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ สินค้าปลอดภัย มีประกันอุบัติเหตุทุกเที่ยว ประเมินราคาฟรี 24 ชม.",
+    images: ["/logoWMS.png"],
   },
   robots: "index, follow",
 };
