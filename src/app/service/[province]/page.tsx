@@ -331,10 +331,13 @@ export default async function LocationHubPage({
                   <Link
                     key={service.href}
                     href={service.href}
-                    className="group bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 hover:bg-white/[0.05] hover:-translate-y-2 transition-all duration-300 p-8 rounded-3xl flex flex-col gap-5 shadow-md hover:shadow-[0_20px_50px_rgba(59,130,246,0.08)] relative overflow-hidden"
+                    className="group bg-gradient-to-br from-white/[0.02] to-white/[0.04] hover:from-blue-900/20 hover:to-slate-900/50 backdrop-blur-xl border border-white/5 hover:border-blue-500/50 hover:-translate-y-2 transition-all duration-300 p-8 rounded-3xl flex flex-col gap-5 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] relative overflow-hidden"
                   >
                     {/* Top glow on hover */}
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Bottom animated gradient line */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-[2px] bg-gradient-to-r from-blue-400 to-cyan-300 transition-all duration-500" />
 
                     <div className="flex items-start justify-between gap-3">
                       <div className="w-14 h-14 bg-blue-600/15 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600/25 group-hover:scale-110 transition-all duration-300 shrink-0">
@@ -363,6 +366,26 @@ export default async function LocationHubPage({
                   </Link>
                 );
               })}
+            </div>
+          </section>
+
+          {/* ── PORTFOLIO CTA BANNER ── */}
+          <section className="mb-24">
+            <div className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 backdrop-blur-xl rounded-[32px] p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-xl md:text-2xl font-black text-white mb-2">
+                  มั่นใจทุกการขนย้าย ด้วยผลงานจริงระดับมืออาชีพ
+                </h3>
+                <p className="text-slate-300 text-sm font-medium">
+                  ดูรูปภาพและรีวิวผลงานการขนย้ายของเราที่ผ่านมาได้ที่นี่
+                </p>
+              </div>
+              <Link
+                href="/portfolio"
+                className="shrink-0 whitespace-nowrap bg-white/10 hover:bg-blue-500 text-white border border-blue-400/50 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300 font-bold flex items-center gap-2 group/btn"
+              >
+                ดูภาพผลงาน <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </section>
 

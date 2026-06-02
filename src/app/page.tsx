@@ -15,15 +15,21 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServiceSteps from "@/components/ServiceSteps";
-import FAQ from "@/components/FAQ";
+import ServiceMap from "@/components/ServiceMap";
+import CustomerReviews from "@/components/CustomerReviews";
+import HeroBackground from "@/components/HeroBackground";
 import FloatingLine from "@/components/FloatingLine";
 import dynamic from "next/dynamic";
 
-const ServiceMap = dynamic(() => import('@/components/ServiceMap'), { ssr: true });
-const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), { ssr: true });
-const CustomerReviews = dynamic(() => import('@/components/CustomerReviews'), { ssr: true });
-const TrustCounters = dynamic(() => import('@/components/TrustCounters'), { ssr: true });
-import HeroBackground from "@/components/HeroBackground";
+const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), {
+  loading: () => <div className="h-[400px] w-full rounded-[32px] bg-white/[0.02] border border-white/5 animate-pulse" />,
+});
+const TrustCounters = dynamic(() => import('@/components/TrustCounters'), {
+  loading: () => <div className="h-40 w-full rounded-[32px] bg-white/[0.02] border border-white/5 animate-pulse" />,
+});
+const FAQ = dynamic(() => import('@/components/FAQ'), {
+  loading: () => <div className="h-[300px] w-full rounded-[32px] bg-white/[0.02] border border-white/5 animate-pulse" />,
+});
 
 // ISR: Revalidate every hour
 export const revalidate = 3600;
@@ -149,7 +155,7 @@ export default function Home() {
             {services.map((service, i) => (
               <div 
                 key={i}
-                className="w-full min-w-0 bg-white/[0.02] backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-blue-500/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] flex flex-col justify-between relative transition-all duration-500 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden will-change-transform"
+                className="w-full min-w-0 perf-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden"
               >
                 {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-2xl pointer-events-none"></div>
@@ -225,9 +231,9 @@ export default function Home() {
         </section>
 
         {/* 3. MOTORCYCLE PRICING SECTION */}
-        <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
+        <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10">
           {/* Section ambient glow */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-blue-600/[0.07] rounded-full blur-[180px]" />
           </div>
 
@@ -249,7 +255,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 w-full max-w-7xl mx-auto min-w-0">
               {/* Card 1: 100-125cc */}
               <div
-                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -277,7 +283,7 @@ export default function Home() {
 
               {/* Card 2: 150-300cc */}
               <div
-                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -305,7 +311,7 @@ export default function Home() {
 
               {/* Card 3: BigBike 400cc — PREMIUM HIGHLIGHT */}
               <div
-                className="w-full min-w-0 relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-500 hover:-translate-y-2 group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative bg-gradient-to-b from-blue-600/[0.12] to-blue-900/[0.08] backdrop-blur-sm md:backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-300 md:hover:-translate-y-2 group overflow-hidden"
               >
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-blue-500/[0.06] group-hover:bg-blue-500/[0.10] transition-colors duration-500 rounded-3xl pointer-events-none" />
@@ -339,7 +345,7 @@ export default function Home() {
 
               {/* Card 4: เหมาขนส่ง */}
               <div
-                className="w-full min-w-0 relative bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-blue-400/40 shadow-[0_15px_50px_rgba(0,0,0,0.3)] flex flex-col transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden will-change-transform"
+                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/[0.05] group overflow-hidden"
               >
                 <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
                 <div className="mb-6">
@@ -388,7 +394,7 @@ export default function Home() {
         </section>
 
         {/* 4. REAL JOB PORTFOLIO SECTION */}
-        <section id="gallery" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10 content-auto">
+        <section id="gallery" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 content-auto section-contain">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <GalleryMasonry />
           </div>
@@ -400,19 +406,19 @@ export default function Home() {
         </div>
 
         {/* 5. CUSTOMER REVIEW SECTION */}
-        <section id="reviews" className="relative z-10 w-full py-12 content-auto">
+        <section id="reviews" className="relative z-10 w-full py-12 content-auto section-contain">
           <CustomerReviews />
         </section>
 
         {/* 6. SERVICE COVERAGE MAP */}
-        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10 content-auto">
+        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 content-auto section-contain">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <ServiceMap />
           </div>
         </section>
 
         {/* WHY CHOOSE US */}
-        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
+        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 section-contain">
           <div className="w-full max-w-7xl mx-auto text-center mb-20 min-w-0">
             <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
               ทำไมต้องเลือกเรา
@@ -429,7 +435,7 @@ export default function Home() {
             {whyChooseUs.map((item, i) => (
               <div 
                 key={i} 
-                className="bg-white/[0.02] backdrop-blur-xl rounded-3xl p-8 border border-white/10 flex flex-col sm:flex-row items-start gap-6 transition-all duration-500 ease-out hover:bg-white/[0.05] hover:border-blue-500/30 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] group font-sans will-change-transform"
+                className="perf-card rounded-3xl p-8 flex flex-col sm:flex-row items-start gap-6 transition-all duration-300 md:hover:bg-white/[0.05] hover:border-blue-500/30 md:hover:-translate-y-2 group font-sans"
               >
                 <div className="p-5 bg-gradient-to-br from-blue-600 to-indigo-800 border border-blue-500/40 text-white rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.3)] shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]">
                   {item.icon}
@@ -458,13 +464,13 @@ export default function Home() {
         </div>
 
         {/* 8. FINAL CTA SECTION */}
-        <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-24 z-10">
+        <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 section-contain">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-r from-[#04152D] via-[#061F45] to-[#04152D] border border-blue-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
               {/* Decorative elements */}
               <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-              <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[150px] -translate-y-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px]"></div>
+              <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[150px] -translate-y-1/2 hidden md:block"></div>
+              <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px] hidden md:block"></div>
               
               <div className="relative z-10 py-20 px-8 text-center flex flex-col items-center">
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 drop-shadow-md">

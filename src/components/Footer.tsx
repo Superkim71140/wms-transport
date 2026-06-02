@@ -4,18 +4,17 @@ import { Phone, Clock, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
   const seoKeywords = [
-    "รถกระบะตู้ทึบรับจ้าง",
-    "ย้ายบ้าน",
-    "ย้ายคอนโด",
-    "ย้ายหอพัก",
-    "รถรับจ้างพร้อมคนยก",
-    "ขนส่งมอเตอร์ไซค์",
-    "ส่งของชิ้นใหญ่",
-    "รถกระบะตู้ทึบกรุงเทพ",
-    "ขนส่งสินค้าทั่วไทย",
-    "ขนของด่วนวันเดียว",
-    "รถรับจ้างปทุมธานี",
-    "รถรับจ้างนนทบุรี"
+    { text: "#รถกระบะตู้ทึบรับจ้าง", href: "/service/samutsakhon" },
+    { text: "#ย้ายบ้าน", href: "/service/bangkok" },
+    { text: "#ย้ายคอนโด", href: "/service/bkk-thonburi" },
+    { text: "#ย้ายหอพัก", href: "/service/bangkok" },
+    { text: "#รถรับจ้างพร้อมคนยก", href: "/service/samutsakhon" },
+    { text: "#ขนส่งมอเตอร์ไซค์", href: "/service/phuket" },
+    { text: "#ส่งของชิ้นใหญ่", href: "/service/chonburi" },
+    { text: "#รถกระบะตู้ทึบกรุงเทพ", href: "/service/bangkok" },
+    { text: "#ขนส่งสินค้าทั่วไทย", href: "/#services" },
+    { text: "#รถรับจ้างปทุมธานี", href: "/service/bangkok" },
+    { text: "#รถรับจ้างนนทบุรี", href: "/service/bangkok" }
   ];
 
   return (
@@ -168,27 +167,28 @@ export default function Footer() {
 
         </div>
 
-        {/* SEO Keywords Block */}
+        {/* SEO Keywords Block - Dynamic Spiderweb Links */}
         <div className="py-8 border-b border-white/5">
           <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">
             พื้นที่ให้บริการ & คีย์เวิร์ด
           </h4>
-          <div className="flex flex-wrap gap-2">
-            {seoKeywords.map((word) => (
-              <span
-                key={word}
-                className="text-xs bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white px-2 py-1 rounded transition-colors duration-150 cursor-default"
+          <div className="flex flex-wrap gap-2.5">
+            {seoKeywords.map((item) => (
+              <Link
+                key={item.text}
+                href={item.href}
+                className="inline-block text-xs font-semibold text-slate-400 bg-white/[0.02] border border-white/10 px-3 py-1.5 rounded-md hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
               >
-                #{word}
-              </span>
+                {item.text}
+              </Link>
             ))}
           </div>
         </div>
 
         {/* Subtle SEO District Block */}
         <div className="pt-6 border-t border-white/5 text-center md:text-left">
-          <p className="text-xs text-slate-500 leading-relaxed">
-            พื้นที่ให้บริการหลัก: [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง | [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [กทม. ฝั่งธน]: ธนบุรี, คลองสาน, บางกอกน้อย, บางกอกใหญ่, ตลิ่งชัน
+          <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+            พื้นที่ให้บริการหลัก: [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [กรุงเทพฯ และปริมณฑล]: ฝั่งธนบุรี, นนทบุรี, ปทุมธานี | [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง
           </p>
         </div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { 
   ChevronDown, 
   MessageCircleQuestion, 
@@ -67,35 +66,35 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 relative w-full z-10 font-sans">
+    <section className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 relative w-full z-10 font-sans section-contain">
       <script 
         type="application/ld+json" 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} 
       />
       
-      {/* Premium Ambient Glow Orbs */}
-      <div className="absolute top-0 left-0 md:left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 right-0 md:right-1/4 w-[700px] h-[700px] bg-indigo-500/10 rounded-full blur-[180px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none -z-10 mix-blend-screen" />
+      {/* Premium Ambient Glow Orbs - Desktop Only */}
+      <div className="absolute top-0 left-0 md:left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none -z-10 hidden md:block" />
+      <div className="absolute bottom-0 right-0 md:right-1/4 w-[700px] h-[700px] bg-indigo-500/10 rounded-full blur-[180px] pointer-events-none -z-10 hidden md:block" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none -z-10 mix-blend-screen hidden md:block" />
       
       <div className="max-w-[880px] mx-auto relative z-10">
         
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase mb-6 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
             <MessageCircleQuestion className="w-4 h-4" />
             <span>คำถามที่พบบ่อย</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 tracking-tight drop-shadow-md">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tight drop-shadow-md">
             ข้อสงสัย<span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">ในการขนย้าย?</span>
           </h2>
-          <p className="text-slate-400 font-medium text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-400 font-medium text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             รวบรวมข้อสงสัยยอดนิยมเกี่ยวกับการขนส่งและขนย้าย WMS พร้อมตอบอย่างจริงใจและโปร่งใสที่สุด
           </p>
         </div>
 
         {/* Short info note above FAQ */}
-        <div className="mb-8 flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/10 rounded-2xl text-xs sm:text-sm text-slate-300 backdrop-blur-md">
+        <div className="mb-8 flex items-center gap-3 p-4 bg-blue-500/5 border border-blue-500/10 rounded-2xl text-xs sm:text-sm text-slate-300">
           <HelpCircle className="w-5 h-5 text-blue-400 shrink-0" />
           <p>
             หากมีคำถามเพิ่มเติมหรือบริการนอกเหนือจากนี้ สามารถติดต่อแอดมินเพื่อสอบถามข้อมูลได้ตลอด 24 ชั่วโมง
@@ -112,8 +111,8 @@ export default function FAQ() {
                 key={index}
                 className={`rounded-2xl border transition-all duration-300 overflow-hidden relative ${
                   isActive
-                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] backdrop-blur-2xl border-cyan-400/50 shadow-[0_20px_50px_rgba(34,211,238,0.15)]"
-                    : "bg-white/[0.02] border-white/5 backdrop-blur-xl hover:border-white/20 hover:bg-white/[0.05]"
+                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] border-cyan-400/50 shadow-[0_20px_50px_rgba(34,211,238,0.15)]"
+                    : "perf-card hover:border-white/20 hover:bg-white/[0.05]"
                 }`}
               >
 
@@ -150,40 +149,27 @@ export default function FAQ() {
                       ? "border-cyan-400/50 bg-cyan-500/10 shadow-[0_0_15px_rgba(34,211,238,0.2)]" 
                       : "border-white/10 bg-white/5 group-hover:bg-white/10 group-hover:border-white/30 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.1)]"
                   }`}>
-                    <motion.div
-                      animate={{ rotate: isActive ? 180 : 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                      <ChevronDown className={`w-4 h-4 transition-colors ${isActive ? "text-cyan-400" : "text-slate-400 group-hover:text-white"}`} />
-                    </motion.div>
+                    <ChevronDown className={`w-4 h-4 transition-all duration-300 ${isActive ? "rotate-180 text-cyan-400" : "text-slate-400 group-hover:text-white"}`} />
                   </div>
                 </button>
 
-                {/* Animated Answer Panel */}
-                <AnimatePresence initial={false}>
-                  {isActive && (
-                    <motion.div
-                      id={`faq-content-${index}`}
-                      role="region"
-                      aria-labelledby={`faq-title-${index}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
-                      <div className="px-6 sm:px-7 pb-6 pl-[3.5rem] sm:pl-[4.25rem]">
-                        <motion.div 
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.35, delay: 0.05 }}
-                          className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl"
-                        >
-                          {faq.answer}
-                        </motion.div>
+                {/* Animated Answer Panel via Native CSS Grid */}
+                <div 
+                  id={`faq-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-title-${index}`}
+                  className={`grid transition-all duration-300 ease-in-out ${
+                    isActive ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-6 sm:px-7 pb-6 pl-[3.5rem] sm:pl-[4.25rem]">
+                      <div className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl">
+                        {faq.answer}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
               </div>
             );
           })}

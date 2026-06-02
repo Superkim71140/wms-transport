@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Thai } from "next/font/google";
 import { Partytown } from '@builder.io/partytown/react';
 import "./globals.css";
+import SocialProofPopup from "@/components/SocialProofPopup";
 
 export const revalidate = 3600;
 
@@ -14,7 +15,7 @@ const inter = Inter({
 const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "700", "800"],
   display: "swap",
 });
 
@@ -67,10 +68,20 @@ const schemaObject = {
   "description": "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ",
   "telephone": "+66612402436",
   "priceRange": "$$",
-  "areaServed": {
-    "@type": "Country",
-    "name": "Thailand"
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "75/535 ซ.13 หมู่บ้านสุขถาวร",
+    "addressLocality": "ต.บ้านเกาะ, อ.เมือง",
+    "addressRegion": "สมุทรสาคร",
+    "postalCode": "74000",
+    "addressCountry": "TH"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "13.5475",
+    "longitude": "100.2744"
+  },
+  "areaServed": ["สมุทรสาคร", "กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "ภูเก็ต"],
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",
@@ -119,7 +130,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://line.me" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://line.me" />
         <link rel="preconnect" href="https://www.facebook.com" crossOrigin="anonymous" />
-        <Partytown debug={true} forward={['dataLayer.push']} />
+        <Partytown debug={false} forward={['dataLayer.push']} />
       </head>
       <body className="min-h-full flex flex-col bg-[#040b15] text-slate-200 selection:bg-red-500/30 selection:text-white">
         <script
@@ -127,6 +138,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaObject) }}
         />
         {children}
+        <SocialProofPopup />
       </body>
     </html>
   );

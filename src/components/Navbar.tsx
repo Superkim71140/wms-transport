@@ -79,11 +79,11 @@ export default function Navbar() {
     <nav
       className={`fixed z-[100] transition-all duration-300 ease-in-out
         /* Mobile Layout */
-        top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3 py-2 bg-[#040b15]/90 backdrop-blur-2xl border border-white/10
+        top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3 py-2 bg-[#040b15]/95 border border-white/10
         flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)]
         
         /* Desktop Layout (lg screens and up) */
-        lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3.5
+        lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3.5 lg:bg-[#040b15]/90 lg:backdrop-blur-2xl
         ${isScrolled ? "lg:top-2 lg:py-2.5 lg:scale-[0.99]" : "lg:top-4 lg:py-3.5 lg:scale-100"}`}
     >
       {/* Premium Logo Lockup */}
@@ -146,23 +146,40 @@ export default function Navbar() {
 
           {/* Dropdown Panel with fade-in and slide-up */}
           {isPhuketDropdownOpen && (
-            <div className="absolute top-[calc(100%+0.75rem)] right-0 w-64 bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="p-2 flex flex-col gap-1">
-                {locationLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsPhuketDropdownOpen(false)}
-                    className={`text-sm font-semibold px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-2.5 ${
-                      pathname === link.href
-                        ? "bg-blue-500/15 text-blue-400 border border-blue-500/20"
-                        : "text-slate-300 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    <span className="text-blue-400 text-sm">→</span>
-                    {link.name}
-                  </Link>
-                ))}
+            <div className="absolute top-[calc(100%+0.75rem)] right-0 w-[500px] bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="grid grid-cols-[1.3fr_1fr] gap-4 p-4">
+                <div className="flex flex-col gap-1">
+                  {locationLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsPhuketDropdownOpen(false)}
+                      className={`text-sm font-semibold px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap ${
+                        pathname === link.href
+                          ? "bg-blue-500/15 text-blue-400 border border-blue-500/20"
+                          : "text-slate-300 hover:text-white hover:bg-white/5"
+                      }`}
+                    >
+                      <span className="text-blue-400 text-sm">→</span>
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+                
+                {/* Featured Portfolio Card */}
+                <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-800 bg-[url('/portfolio-bg.jpg')] bg-cover bg-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent group-hover/portfolio:via-slate-900/50 transition-all duration-300" />
+                  <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col items-start gap-2 transform group-hover/portfolio:-translate-y-1 transition-transform duration-300">
+                    <span className="text-white font-bold text-sm drop-shadow-md">ผลงานขนย้ายล่าสุด</span>
+                    <Link 
+                      href="/portfolio" 
+                      onClick={() => setIsPhuketDropdownOpen(false)} 
+                      className="inline-flex items-center text-[11px] text-white hover:text-white font-bold bg-blue-600/80 hover:bg-blue-500 border border-blue-400/50 px-3 py-1.5 rounded-lg shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all"
+                    >
+                      ดูภาพผลงาน →
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -260,6 +277,15 @@ export default function Navbar() {
                     → {link.name}
                   </Link>
                 ))}
+                <div className="px-6 py-3">
+                  <Link
+                    href="/portfolio"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 rounded-xl text-xs font-bold transition-all shadow-[0_0_10px_rgba(59,130,246,0.2)]"
+                  >
+                    ผลงานขนย้ายล่าสุด →
+                  </Link>
+                </div>
               </div>
             )}
           </div>

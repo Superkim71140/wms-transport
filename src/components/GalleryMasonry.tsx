@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Search, X, ChevronLeft, ChevronRight, Bike, Truck, Package } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
 
 type Project = {
@@ -74,14 +73,9 @@ function GalleryCard({
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.4 }}
+    <div
       onClick={onClick}
-      className="relative cursor-pointer group aspect-[4/3] sm:aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/5] xl:aspect-[3/4] h-[380px] sm:h-[420px] md:h-[450px] lg:h-[480px] xl:h-[500px] shine-effect w-[85vw] sm:w-[70vw] md:w-auto shrink-0 snap-center md:snap-align-none"
+      className="relative cursor-pointer group aspect-[4/3] sm:aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/5] xl:aspect-[3/4] h-[380px] sm:h-[420px] md:h-[450px] lg:h-[480px] xl:h-[500px] shine-effect w-[85vw] sm:w-[70vw] md:w-auto shrink-0 snap-center md:snap-align-none transition-all duration-300 transform scale-100 hover:scale-[1.01]"
     >
       {/* Image Container with reflection and skeleton loader */}
       <div
@@ -95,7 +89,7 @@ function GalleryCard({
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           quality={80}
-          className={`object-cover object-center transition-all duration-700 ease-out group-hover:scale-110 ${
+          className={`object-cover object-center transition-all duration-700 ease-out md:group-hover:scale-110 ${
             isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
           }`}
           onLoad={() => setIsLoaded(true)}
@@ -142,7 +136,7 @@ function GalleryCard({
 
       {/* Expand Indicator on Hover Bottom */}
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-30 rounded-b-3xl" />
-    </motion.div>
+    </div>
   );
 }
 
@@ -233,37 +227,19 @@ export default function GalleryMasonry() {
       
       {/* Headlines */}
       <div className="text-center max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "100px" }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-4 mb-4 will-change-transform"
-        >
+        <div className="flex flex-col items-center gap-4 mb-4">
           <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase">
             ผลงานจริงของเรา
           </span>
-        </motion.div>
+        </div>
         
-        <motion.h2 
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-sans font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-6 will-change-transform"
-        >
+        <h2 className="font-sans font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight mb-6">
           ผลงานจริง<span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">จากลูกค้าของเรา</span>
-        </motion.h2>
+        </h2>
         
-        <motion.p 
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "100px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed will-change-transform"
-        >
+        <p className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed">
           ภาพหน้างานจริง ไม่มีภาพสต็อก ทุกงานดำเนินการโดยทีมงาน WMS TRANSPORT
-        </motion.p>
+        </p>
       </div>
 
       {/* Category filter buttons */}
@@ -288,21 +264,18 @@ export default function GalleryMasonry() {
       </div>
 
       {/* Grid Layout (3 desktop, 2 tablet, 1 mobile) */}
-      <motion.div 
-        layout
+      <div 
         onScroll={handleScroll}
         className="flex flex-nowrap w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide gap-6 pb-12 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-12"
       >
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => (
-            <GalleryCard
-              key={project.id}
-              project={project}
-              onClick={() => { setLightboxIndex(idx); setLightboxLoaded(false); }}
-            />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+        {filteredProjects.map((project, idx) => (
+          <GalleryCard
+            key={project.id}
+            project={project}
+            onClick={() => { setLightboxIndex(idx); setLightboxLoaded(false); }}
+          />
+        ))}
+      </div>
 
       {/* Mobile Scroll Progress Indicator */}
       <div className="flex md:hidden justify-center items-center gap-2 mt-2">

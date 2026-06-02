@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Star, ShieldCheck, Quote } from "lucide-react";
 
 type Testimonial = {
@@ -43,11 +40,11 @@ export default function CustomerReviews() {
   return (
     <section 
       id="reviews" 
-      className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative w-full font-sans overflow-hidden"
+      className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative w-full font-sans overflow-hidden section-contain"
     >
-      {/* Dynamic ambient glow effects */}
-      <div className="absolute top-12 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse-slow" />
-      <div className="absolute bottom-12 right-1/4 w-96 h-96 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+      {/* Dynamic ambient glow effects - Desktop Only */}
+      <div className="absolute top-12 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10 hidden md:block" />
+      <div className="absolute bottom-12 right-1/4 w-96 h-96 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none -z-10 hidden md:block" />
 
       {/* Header */}
       <div className="max-w-7xl mx-auto text-center mb-10 md:mb-16 relative z-10">
@@ -68,14 +65,9 @@ export default function CustomerReviews() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-center">
           {testimonials.map((test, idx) => (
-            <motion.div 
+            <div 
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }}
-              className="bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl border border-blue-500/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between gap-6 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-blue-400/40 hover:from-white/[0.05] hover:to-blue-950/20 transition-all duration-300 min-h-[300px] group relative overflow-hidden text-left"
+              className="perf-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between gap-6 relative transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:from-white/[0.05] hover:to-blue-950/20 min-h-[300px] group overflow-hidden text-left"
             >
               {/* Ambient inner card glow */}
               <div className="absolute -inset-px bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -125,7 +117,7 @@ export default function CustomerReviews() {
                   </span>
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

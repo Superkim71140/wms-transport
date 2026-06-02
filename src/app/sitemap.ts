@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { provinceMap } from "./service/[province]/page";
-import { posts } from "./blog/[slug]/page";
+import { posts } from "./blog/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const domain = "https://wmstransport.com";
