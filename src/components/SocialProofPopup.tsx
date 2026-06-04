@@ -2,15 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, X } from "lucide-react";
 
-const mockNotifications = [
-  "🚚 เพิ่งจัดส่งมอเตอร์ไซค์สำเร็จ: กทม. -> ภูเก็ต (เมื่อ 15 นาทีที่แล้ว)",
-  "📦 คิวรถกระบะตู้ทึบ ถูกจองที่สมุทรสาคร (เมื่อ 2 นาทีที่แล้ว)",
-  "🏠 ย้ายบ้านครบชุดสำเร็จ: ชลบุรี -> เชียงใหม่ (เมื่อ 1 ชั่วโมงที่แล้ว)",
-  "✅ ประเมินราคาขนส่งด่วนสำเร็จ: ลูกค้าจากปทุมธานี (เมื่อ 5 นาทีที่แล้ว)",
-  "🚚 คิวรถรับจ้าง ถูกจองเหมาคันที่ กทม. ฝั่งธน (เมื่อ 10 นาทีที่แล้ว)"
+const liveUpdates = [
+  { text: "เพิ่งส่งมอบรถมอเตอร์ไซค์สำเร็จ: กรุงเทพฯ → ภูเก็ต", time: "เมื่อ 15 นาทีที่แล้ว" },
+  { text: "รถรับจ้างย้ายหอเข้ารับงานแล้ว: รังสิต → ลาดพร้าว", time: "เมื่อ 8 นาทีที่แล้ว" },
+  { text: "จัดส่งสินค้าทั่วไทยสำเร็จ: สมุทรสาคร → เชียงใหม่", time: "เมื่อ 23 นาทีที่แล้ว" },
+  { text: "ขนย้ายคอนโดเรียบร้อยแล้ว: พระราม 2 → บางนา", time: "เมื่อ 5 นาทีที่แล้ว" },
+  { text: "รับงานขนส่งด่วนแล้ว: หาดใหญ่ → กรุงเทพฯ", time: "เมื่อ 12 นาทีที่แล้ว" }
 ];
+
+const INITIAL_DELAY = 4500;
+const AUTO_HIDE_DELAY = 7000;
+const RE_SHOW_INTERVAL = 45000;
+const SNOOZE_DURATION = 180000; // 3 minutes
 
 export default function SocialProofPopup() {
   const [isMounted, setIsMounted] = useState(false);
@@ -20,63 +25,137 @@ export default function SocialProofPopup() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
-    // Initial delay before first popup
-    const initialDelay = setTimeout(() => {
-      setIsVisible(true);
-    }, 5000);
 
-    return () => clearTimeout(initialDelay);
+    const checkSnooze = () => {
+      if (typeof window !== "undefined") {
+        const dismissedAt = localStorage.getItem("wms-live-update-dismissed-at");
+        if (dismissedAt) {
+          const timePassed = Date.now() - parseInt(dismissedAt, 10);
+          if (timePassed < SNOOZE_DURATION) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    let initialTimer: NodeJS.Timeout;
+    if (!checkSnooze()) {
+      initialTimer = setTimeout(() => {
+        setIsVisible(true);
+      }, INITIAL_DELAY);
+    }
+
+    return () => {
+      if (initialTimer) clearTimeout(initialTimer);
+    };
   }, []);
 
   useEffect(() => {
-    if (!isVisible) {
-      // If not visible, wait and then show next message
-      const timer = setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % mockNotifications.length);
-        setIsVisible(true);
-      }, Math.random() * 7000 + 8000); // 8-15s delay between popups
-      return () => clearTimeout(timer);
-    } else {
-      // If visible, wait and then hide
-      const timer = setTimeout(() => {
+    let hideTimer: NodeJS.Timeout;
+    let cycleTimer: NodeJS.Timeout;
+
+    if (isVisible) {
+      // Auto hide after 7 seconds
+      hideTimer = setTimeout(() => {
         setIsVisible(false);
-      }, 6000); // show for 6 seconds
-      return () => clearTimeout(timer);
+      }, AUTO_HIDE_DELAY);
+    } else if (isMounted) {
+      // Check snooze before scheduling the next cycle
+      const checkSnooze = () => {
+        if (typeof window !== "undefined") {
+          const dismissedAt = localStorage.getItem("wms-live-update-dismissed-at");
+          if (dismissedAt) {
+            const timePassed = Date.now() - parseInt(dismissedAt, 10);
+            if (timePassed < SNOOZE_DURATION) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
+      if (!checkSnooze()) {
+        cycleTimer = setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % liveUpdates.length);
+          setIsVisible(true);
+        }, RE_SHOW_INTERVAL);
+      }
     }
-  }, [isVisible]);
+
+    return () => {
+      if (hideTimer) clearTimeout(hideTimer);
+      if (cycleTimer) clearTimeout(cycleTimer);
+    };
+  }, [isVisible, isMounted]);
+
+  const handleManualDismiss = () => {
+    setIsVisible(false);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("wms-live-update-dismissed-at", Date.now().toString());
+    }
+  };
 
   if (!isMounted) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-[100] pointer-events-none w-full max-w-[320px] sm:max-w-[360px]">
+    <div className="fixed bottom-4 left-4 z-[70] w-[calc(100vw-24px)] max-w-[360px] pointer-events-none sm:bottom-6 sm:left-6">
       <AnimatePresence>
         {isVisible && (
           <motion.div
+            drag="x"
+            dragConstraints={{ left: -100, right: 100 }}
+            dragElastic={0.4}
+            onDragEnd={(event, info) => {
+              // Dismiss if swiped more than 80px horizontally
+              if (Math.abs(info.offset.x) > 80) {
+                handleManualDismiss();
+              }
+            }}
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", damping: 20, stiffness: 200 }}
-            className="bg-[#040b15]/80 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-2xl p-4 flex items-start gap-4"
+            className="pointer-events-auto relative cursor-grab active:cursor-grabbing w-full rounded-2xl border border-white/10 bg-slate-950/85 p-4 shadow-2xl backdrop-blur-xl flex items-start gap-3.5 pr-10"
           >
+            {/* Status dot / Live icon */}
             <div className="relative mt-1 shrink-0">
-              <div className="w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+              <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                <CheckCircle2 className="w-4.5 h-4.5 text-blue-400" />
               </div>
               {/* Pulsing green dot indicator */}
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#06C755] rounded-full border-2 border-[#040b15]">
+              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#06C755] rounded-full border border-slate-950">
                 <div className="absolute inset-0 bg-[#06C755] rounded-full animate-ping opacity-75" />
               </div>
             </div>
+
+            {/* Middle Content */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-white bg-white/5 px-2 py-0.5 rounded-full border border-white/5">
+                <span className="text-[10px] font-black text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20 uppercase tracking-wider">
                   Live Update
                 </span>
+                <span className="text-[10px] text-slate-500 font-medium">
+                  • กำลังให้บริการทั่วไทย
+                </span>
               </div>
-              <p className="text-sm font-semibold text-slate-300 leading-snug">
-                {mockNotifications[currentIndex]}
+              <p className="text-xs sm:text-sm font-semibold text-slate-200 leading-snug">
+                {liveUpdates[currentIndex].text}
               </p>
+              <span className="text-[10px] text-slate-400 mt-1.5 block font-bold">
+                {liveUpdates[currentIndex].time}
+              </span>
             </div>
+
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={handleManualDismiss}
+              aria-label="ปิดการแจ้งเตือน"
+              className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors duration-200"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

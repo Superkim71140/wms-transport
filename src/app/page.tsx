@@ -109,6 +109,25 @@ export default function Home() {
     }
   ];
 
+  const trustItems = [
+    {
+      title: "รับงานจริง มีผลงานจริงให้ดู",
+      desc: "ดูตัวอย่างงานจากลูกค้าจริงได้",
+    },
+    {
+      title: "แจ้งสถานะงาน ไม่ปล่อยให้รอเงียบ",
+      desc: "อัปเดตความคืบหน้าระหว่างรับงาน",
+    },
+    {
+      title: "ดูแลของลูกค้าอย่างระมัดระวัง",
+      desc: "จัดวางและดูแลของอย่างระวัง",
+    },
+    {
+      title: "ตอบไว คุยง่าย ประเมินราคาชัดเจน",
+      desc: "ตอบ LINE ไว พร้อมแนะนำตามงานจริง",
+    },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -120,38 +139,139 @@ export default function Home() {
         
         <HeroBackground />
 
-        {/* 2. PREMIUM SERVICES SECTION */}
-        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10">
-          <div className="w-full max-w-7xl mx-auto text-center mb-10 md:mb-16 min-w-0">
-            <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
-              บริการของเรา
-            </span>
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 md:mb-6 mt-6 md:mt-8">
-              บริการ<span className="text-blue-400">รถกระบะตู้ทึบรับจ้าง</span> และขนย้ายระดับพรีเมียม
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed mb-8 md:mb-12">
-              ครอบคลุมทุกความต้องการด้านการขนส่ง ขนย้ายสิ่งของด้วยมาตรฐานระดับสากล ปลอดภัย ตรงเวลา ไร้กังวล
-            </p>
-
-            {/* FLOATING TRUST BADGES */}
-            <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-8 md:mb-16">
-              {[
-                { text: "มีผลงานจริง", delay: 0 },
-                { text: "มีทีมงานมืออาชีพ", delay: 0.2 },
-                { text: "ให้บริการทั่วไทย", delay: 0.4 },
-                { text: "ตอบกลับเร็ว", delay: 0.6 }
-              ].map((badge, idx) => (
-                <div
-                  key={idx}
-                  className="px-5 py-2.5 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-blue-400/40 rounded-full text-xs sm:text-sm font-black text-blue-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center gap-2 animate-float"
-                >
-                  <span className="text-emerald-400 font-extrabold text-base">✓</span>
-                  <span className="text-slate-100">{badge.text}</span>
+        {/* 2. TRUST SECTION ("Why Choose WMS") */}
+        <section className="relative overflow-hidden py-14 sm:py-18 lg:py-24 z-10">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8 items-stretch">
+              
+              {/* Left Tile: Real Image Proof */}
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-slate-950/40 p-2 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+                <div className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full min-h-[300px] lg:min-h-[520px] rounded-2.5xl overflow-hidden">
+                  <Image
+                    src="/images/S__5652673.jpg"
+                    alt="ทีมงาน WMS TRANSPORT ให้บริการขนส่งมอเตอร์ไซค์จริง"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
+                  
+                  {/* Sleek Floating Pill - Top Left */}
+                  <div className="absolute top-4 left-4 z-20 rounded-full border border-white/10 bg-slate-950/80 px-3.5 py-1.5 backdrop-blur-md shadow-md flex items-center gap-2">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-[11px] font-extrabold text-slate-100">
+                      งานจริงล่าสุด: <span className="text-emerald-400">กทม. → ภูเก็ต</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium border-l border-white/10 pl-2">
+                      ขนส่งมอเตอร์ไซค์
+                    </span>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Right Tile: Value Props & Action */}
+              <div className="rounded-[2rem] border border-white/5 bg-slate-950/40 p-6 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+                <div>
+                  {/* Small badge */}
+                  <div className="mb-4">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-black uppercase tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                      งานจริง ทีมจริง ส่งจริงทั่วไทย
+                    </span>
+                  </div>
+
+                  {/* Heading */}
+                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-black text-white tracking-tight leading-none mb-4">
+                    ขนส่งจริง มีทีมดูแลจริง<br />
+                    <span className="text-blue-400">ไม่ปล่อยให้ลูกค้ารอลุ้น</span>
+                  </h2>
+
+                  {/* Supporting line */}
+                  <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed mb-6">
+                    รับงานขนส่งมอเตอร์ไซค์ ย้ายหอ/คอนโด และขนส่งสินค้า พร้อมอัปเดตงานระหว่างทาง
+                  </p>
+
+                  {/* Trust checklist - minimalist & clean */}
+                  <div className="space-y-4 mb-8">
+                    {trustItems.map((item, idx) => (
+                      <div key={idx} className="flex gap-3 items-start group">
+                        <span className="text-emerald-400 shrink-0 mt-0.5 select-none">✓</span>
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-bold text-white leading-tight group-hover:text-blue-300 transition-colors">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-slate-400 mt-0.5 leading-normal">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Service Route Chips */}
+                  <div className="mb-8">
+                    <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase block mb-3">
+                      พื้นที่ให้บริการประจำ
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {["กรุงเทพฯ", "นนทบุรี", "ปทุมธานี", "สมุทรสาคร", "ชลบุรี", "ภูเก็ต", "หาดใหญ่", "ทั่วไทย", "ขนส่งมอเตอร์ไซค์", "ย้ายหอ/คอนโด"].map((chip, idx) => (
+                        <span 
+                          key={idx} 
+                          className="text-xs text-slate-400 bg-[#0c1524] hover:bg-[#122036] border border-white/5 hover:border-blue-500/30 hover:text-white px-3.5 py-1.5 rounded-lg transition-all duration-200 cursor-default font-medium"
+                        >
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a 
+                      href="https://line.me/ti/p/DtICkMaDet"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-[#06C755] hover:bg-[#05B34F] text-white font-sans font-black text-xs sm:text-sm py-4 px-6 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[48px]"
+                    >
+                      <Image
+                        src="/images/LINE_icon.webp"
+                        alt="LINE"
+                        width={20}
+                        height={20}
+                        className="h-5 w-5 object-contain shrink-0"
+                      />
+                      <span>ขอราคาผ่าน LINE</span>
+                    </a>
+                    <a 
+                      href="#gallery"
+                      className="flex-1 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-blue-400/40 font-sans font-extrabold text-xs sm:text-sm py-4 px-6 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[48px]"
+                    >
+                      <span>ดูผลงานจริง</span>
+                    </a>
+                  </div>
+
+                  {/* Trust Proof Strip */}
+                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 pt-4 border-t border-white/5 justify-center sm:justify-start">
+                    {["มีผลงานจริง", "รับงานทั่วไทย", "ตอบกลับไว", "แจ้งสถานะงาน"].map((proof, idx) => (
+                      <span key={idx} className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
+                        <span className="text-emerald-400 font-bold">✓</span> {proof}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+        </section>
 
+        {/* 2.5 PREMIUM SERVICES GRID SECTION */}
+        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10">
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center min-w-0">
             {services.map((service, i) => (
               <div 
