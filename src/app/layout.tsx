@@ -68,6 +68,9 @@ export const metadata: Metadata = {
     images: ["/logoWMS.png"],
   },
   robots: "index, follow",
+  verification: {
+    google: "XBZroDGp_kA28tbvOnFUymh1DsDybkbicMoyPmsQ8JY",
+  },
 };
 
 const schemaObject = {

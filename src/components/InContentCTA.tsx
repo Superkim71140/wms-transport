@@ -30,13 +30,13 @@ export default function InContentCTA({
         className="relative z-10 shrink-0 inline-flex items-center gap-3 px-6 py-4 bg-[#06C755] hover:bg-[#05B34F] active:scale-95 text-white font-black text-base rounded-2xl shadow-[0_8px_25px_rgba(6,199,85,0.35)] transition-all duration-300 hover:-translate-y-0.5 border border-[#06C755]/40 whitespace-nowrap"
       >
         <Image
-          src="/images/LINE_Brand_icon.png"
+          src="/images/LINE_icon.webp"
           alt="LINE"
-          width={22}
-          height={22}
-          className="w-5 h-5 object-contain shrink-0"
+          width={20}
+          height={20}
+          className="h-5 w-5 object-contain shrink-0"
         />
-        <span>💬 ปรึกษาและประเมินราคาฟรี</span>
+        <span>ปรึกษาและประเมินราคาฟรี</span>
       </a>
     </div>
   );

@@ -18,7 +18,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-navy-dark border-t border-white/5 text-gray-400 font-sans pt-16 pb-8 lg:pb-16">
+    <footer className="bg-navy-dark border-t border-white/5 text-gray-400 font-sans pt-16 pb-[calc(env(safe-area-inset-bottom)+96px)] md:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/10">
           
@@ -56,11 +56,11 @@ export default function Footer() {
                 className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#06C755] hover:border-[#06C755] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:-translate-y-1 group"
               >
                 <Image 
-                  src="/images/LINE_Brand_icon.png" 
+                  src="/images/LINE_icon.webp" 
                   alt="LINE Logo" 
                   width={20} 
                   height={20} 
-                  className="w-5 h-5 object-contain shrink-0 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:brightness-0 group-hover:invert" 
+                  className="h-5 w-5 object-contain shrink-0 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:brightness-0 group-hover:invert" 
                 />
               </a>
             </div>
@@ -193,20 +193,19 @@ export default function Footer() {
         </div>
 
         {/* Copyright & Developer Credit */}
-        <div className="pt-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500 mb-16 lg:mb-0">
-          <p>© {new Date().getFullYear()} WMS TRANSPORT. All rights reserved.</p>
-          <div className="flex items-center gap-1 font-medium">
-            <span>Developed by</span>
-            <a 
-              href="https://kimx-wed.vercel.app/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-blue-400 hover:text-blue-300 hover:underline transition-all duration-300 relative group"
+        <div className="mt-6 border-t border-white/10 pt-5 flex flex-col items-center justify-center gap-2 text-center">
+          <p className="text-xs text-slate-500">© {new Date().getFullYear()} WMS TRANSPORT. All rights reserved.</p>
+          <p className="text-sm text-slate-400">
+            Developed by{" "}
+            <a
+              href="https://kimx-wed.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-blue-400 transition-colors hover:text-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
             >
-              kimx-wed
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+              KIMXWED
             </a>
-          </div>
+          </p>
         </div>
 
       </div>

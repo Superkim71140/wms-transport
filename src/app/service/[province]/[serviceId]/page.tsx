@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   CheckCircle,
@@ -388,13 +389,13 @@ export default async function ServiceDetailPage({
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(6,199,85,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(6,199,85,0.4)]"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  className="w-6 h-6 fill-current shrink-0"
-                >
-                  <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z" />
-                </svg>
+                <Image
+                  src="/images/LINE_icon.webp"
+                  alt="LINE"
+                  width={24}
+                  height={24}
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0"
+                />
                 <span>ติดต่อผ่าน LINE ฟรี</span>
               </a>
               <a
@@ -489,9 +490,13 @@ export default async function ServiceDetailPage({
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2.5 px-7 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-base shadow-[0_8px_25px_rgba(6,199,85,0.3)] transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0">
-                    <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z" />
-                  </svg>
+                  <Image
+                    src="/images/LINE_icon.webp"
+                    alt="LINE"
+                    width={20}
+                    height={20}
+                    className="h-5 w-5 object-contain shrink-0"
+                  />
                   <span>ส่ง LINE ฟรี</span>
                 </a>
                 <a

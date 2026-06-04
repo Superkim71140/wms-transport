@@ -52,11 +52,11 @@ export default function FloatingLine() {
             className="w-11 h-11 flex items-center justify-center rounded-full line-btn-pulse border border-[#06C755]/30 cursor-pointer shadow-[0_4px_15px_rgba(6,199,85,0.3)] p-2.5 transition-all duration-300 hover:scale-110 md:active:scale-95"
           >
             <Image 
-              src="/images/LINE_Brand_icon.png" 
+              src="/images/LINE_icon.webp" 
               alt="LINE Logo" 
               width={20} 
               height={20} 
-              className="w-full h-full object-contain shrink-0" 
+              className="h-5 w-5 object-contain shrink-0" 
             />
           </a>
 

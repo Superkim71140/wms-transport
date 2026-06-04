@@ -57,14 +57,13 @@ export default function FloatingContactBar() {
               className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full bg-[#06C755] hover:bg-[#05B34F] active:scale-95 transition-all shadow-[0_4px_10px_rgba(6,199,85,0.3)] p-2 hover:scale-105"
               aria-label="Contact LINE"
             >
-              <div className="relative w-full h-full">
-                <Image
-                  src="/images/LINE_Brand_icon.png"
-                  alt="LINE Logo"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/images/LINE_icon.webp"
+                alt="LINE Logo"
+                width={20}
+                height={20}
+                className="h-5 w-5 object-contain shrink-0"
+              />
             </a>
 
             {/* Facebook Button */}

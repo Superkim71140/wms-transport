@@ -144,7 +144,6 @@ export default function GalleryMasonry() {
   const [selectedFilter, setSelectedFilter] = useState("ทั้งหมด");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeSnapIndex, setActiveSnapIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
   const [lightboxLoaded, setLightboxLoaded] = useState(false);
 
   const categories = ["ทั้งหมด", "ย้ายบ้าน/คอนโด", "ขนส่งมอเตอร์ไซค์", "ขนส่งสินค้าทั่วไป"];
@@ -152,15 +151,6 @@ export default function GalleryMasonry() {
   const filteredProjects = selectedFilter === "ทั้งหมด" 
     ? projects 
     : projects.filter(p => p.category === selectedFilter);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Body scroll lock effect
   useEffect(() => {
@@ -293,149 +283,88 @@ export default function GalleryMasonry() {
 
       {/* Lightbox / Modal */}
       {lightboxIndex !== null && (
-        isMobile ? (
-          /* Mobile "IG Story" style Lightbox */
-          <div 
-            className="fixed inset-0 z-[120] bg-black flex flex-col justify-between select-none overflow-hidden"
-            onClick={() => setLightboxIndex(null)}
+        <div 
+          onClick={() => setLightboxIndex(null)}
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#020617]/95 p-3 backdrop-blur-xl sm:p-6 select-none animate-fade-in"
+          role="dialog"
+          aria-modal="true"
+          aria-label="ดูรูปผลงาน"
+        >
+          {/* Back button */}
+          <button 
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+            aria-label="ย้อนกลับ"
+            className="fixed left-3 top-3 z-[100000] inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-slate-950/90 px-4 py-2 text-sm font-bold text-white shadow-2xl backdrop-blur-xl transition hover:bg-white/10 sm:left-6 sm:top-6"
           >
-            {/* Top Segmented Progress Bar */}
-            <div className="absolute top-4 left-4 right-4 z-[140] flex gap-1">
-              {filteredProjects.map((_, i) => (
-                <div
-                  key={i}
-                  className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-                    i === lightboxIndex ? "bg-white" : "bg-white/30"
-                  }`}
-                />
-              ))}
+            <span aria-hidden="true">←</span>
+            <span>ย้อนกลับ</span>
+          </button>
+
+          {/* Close button */}
+          <button 
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
+            aria-label="ปิดรูปภาพ"
+            className="fixed right-3 top-3 z-[100000] inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-slate-950/90 text-white shadow-2xl backdrop-blur-xl transition hover:bg-red-600/90 sm:right-6 sm:top-6"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          {/* Prev Button */}
+          <button 
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+            aria-label="Previous image"
+            className="fixed left-4 top-1/2 z-[100000] flex h-10 w-10 md:h-12 md:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-white backdrop-blur-xl transition hover:bg-blue-600/70 sm:left-6 md:left-8 active:scale-95"
+          >
+            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+          </button>
+
+          {/* Main Image Container */}
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="relative mx-auto flex w-full max-w-[min(92vw,920px)] flex-col items-center justify-center rounded-3xl border border-white/10 bg-slate-950/85 p-2 shadow-[0_30px_120px_rgba(0,0,0,0.75)] sm:p-3 lg:max-w-[min(86vw,980px)] z-[10005]"
+          >
+            <div className={`relative flex max-h-[62vh] min-h-[280px] w-full items-center justify-center overflow-hidden rounded-2xl bg-black/40 sm:max-h-[70vh] lg:max-h-[74vh] ${!lightboxLoaded ? "animate-pulse" : ""}`}>
+              <Image
+                src={filteredProjects[lightboxIndex].imgUrl}
+                alt={`${filteredProjects[lightboxIndex].serviceType} ${filteredProjects[lightboxIndex].location}`}
+                width={1200}
+                height={900}
+                className={`h-auto max-h-[62vh] w-auto max-w-full rounded-2xl object-contain sm:max-h-[70vh] lg:max-h-[74vh] transition-opacity duration-500 ${lightboxLoaded ? "opacity-100" : "opacity-0"}`}
+                priority
+                sizes="(max-width: 768px) 94vw, 920px"
+                onLoad={() => setLightboxLoaded(true)}
+              />
             </div>
-
-            {/* Close Button - Highly visible, touch-friendly */}
-            <button 
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
-              aria-label="Close preview"
-              className="absolute top-8 right-4 z-[140] w-12 h-12 bg-black/40 border border-white/20 rounded-full text-white flex items-center justify-center backdrop-blur-md active:scale-95 transition-transform"
-            >
-              <X className="h-6 w-6" />
-            </button>
-
-            {/* Tap Zones */}
-            <div 
-              onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-              className="absolute left-0 top-0 bottom-0 w-[30%] z-[130] cursor-pointer"
-            />
-            <div 
-              onClick={(e) => { e.stopPropagation(); handleNext(); }}
-              className="absolute right-0 top-0 bottom-0 w-[70%] z-[130] cursor-pointer"
-            />
-
-            {/* Main Image Container with Skeleton */}
-            <div className="relative w-full h-full flex items-center justify-center bg-black">
-              <div className={`relative w-full h-[80vh] ${!lightboxLoaded ? "bg-slate-900 animate-pulse" : ""}`}>
-                <Image
-                  src={filteredProjects[lightboxIndex].imgUrl}
-                  alt={`${filteredProjects[lightboxIndex].serviceType} ${filteredProjects[lightboxIndex].location}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className={`object-contain transition-opacity duration-500 ${lightboxLoaded ? "opacity-100" : "opacity-0"}`}
-                  onLoad={() => setLightboxLoaded(true)}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            {/* Bottom Details Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 pt-24 text-left bg-gradient-to-t from-black via-black/80 to-transparent z-[135] pointer-events-none">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-blue-400 font-bold text-sm flex items-center gap-1.5">
-                  <div className="flex items-center justify-center p-1 bg-blue-500/10 border border-blue-400/20 rounded-md">
-                    {filteredProjects[lightboxIndex].icon}
-                  </div>
+            
+            {/* Caption Area */}
+            <div className="w-full px-3 py-3 text-center sm:px-5 sm:py-4">
+              <div className="mb-1 flex flex-wrap items-center justify-center gap-2">
+                <span className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 px-3 py-1 text-xs font-bold text-blue-300 ring-1 ring-blue-400/20">
                   {filteredProjects[lightboxIndex].serviceType}
                 </span>
-                <span className="text-slate-500">•</span>
-                <span className="text-xs bg-white/10 border border-white/10 px-2.5 py-0.5 rounded-md text-slate-200">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-slate-200 ring-1 ring-white/10">
                   {filteredProjects[lightboxIndex].location}
                 </span>
               </div>
-              <p className="text-slate-300 text-sm font-medium leading-relaxed max-w-xl">
+              <p className="mx-auto max-w-2xl text-xs leading-relaxed text-slate-300 sm:text-sm">
                 {filteredProjects[lightboxIndex].desc}
               </p>
             </div>
           </div>
-        ) : (
-          /* Desktop style Lightbox */
-          <div 
-            onClick={() => setLightboxIndex(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#020817]/95 backdrop-blur-xl animate-fade-in"
+
+          {/* Next Button */}
+          <button 
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handleNext(); }}
+            aria-label="Next image"
+            className="fixed right-4 top-1/2 z-[100000] flex h-10 w-10 md:h-12 md:w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-white backdrop-blur-xl transition hover:bg-blue-600/70 sm:right-6 md:right-8 active:scale-95"
           >
-            {/* Close Button - Glassmorphic, highly visible, and touch-friendly */}
-            <button 
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex(null); }}
-              aria-label="Close image preview"
-              className="absolute top-4 right-4 md:top-8 md:right-8 w-12 h-12 md:w-14 md:h-14 bg-slate-950/85 hover:bg-red-600/90 active:scale-95 border border-white/25 rounded-full text-white transition-all duration-300 z-[120] shadow-[0_4px_25px_rgba(0,0,0,0.5)] flex items-center justify-center cursor-pointer backdrop-blur-md hover:scale-105"
-            >
-              <X className="h-6 w-6 md:h-7 md:w-7" />
-            </button>
-
-            {/* Prev Button */}
-            <button 
-              onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-              aria-label="Previous image"
-              className="absolute left-4 md:left-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-[110] backdrop-blur-md cursor-pointer"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </button>
-
-            {/* Main Image Container */}
-            <div 
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl h-[70vh] md:h-[80vh] px-4 md:px-16 flex flex-col items-center justify-center"
-            >
-              <div className={`relative w-full h-full drop-shadow-2xl ${!lightboxLoaded ? "bg-slate-900 animate-pulse rounded-2xl" : ""}`}>
-                <Image
-                  src={filteredProjects[lightboxIndex].imgUrl}
-                  alt={`${filteredProjects[lightboxIndex].serviceType} ${filteredProjects[lightboxIndex].location}`}
-                  fill
-                  className={`object-contain transition-opacity duration-500 ${lightboxLoaded ? "opacity-100" : "opacity-0"}`}
-                  sizes="100vw"
-                  onLoad={() => setLightboxLoaded(true)}
-                  loading="lazy"
-                />
-              </div>
-              
-              {/* Caption */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-center bg-gradient-to-t from-[#020817] via-[#020817]/85 to-transparent">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-blue-400 font-black text-base md:text-lg flex items-center gap-2">
-                    <div className="flex items-center justify-center p-1 bg-blue-500/10 border border-blue-400/20 rounded-md shadow-[0_0_10px_rgba(59,130,246,0.2)]">
-                      {filteredProjects[lightboxIndex].icon}
-                    </div>
-                    {filteredProjects[lightboxIndex].serviceType}
-                  </span>
-                  <span className="text-slate-500">•</span>
-                  <span className="text-xs bg-white/10 border border-white/10 px-2.5 py-1 rounded-md text-slate-200">
-                    {filteredProjects[lightboxIndex].location}
-                  </span>
-                </div>
-                <p className="text-slate-300 text-sm md:text-base mt-2 max-w-2xl mx-auto font-medium leading-relaxed">
-                  {filteredProjects[lightboxIndex].desc}
-                </p>
-              </div>
-            </div>
-
-            {/* Next Button */}
-            <button 
-              onClick={(e) => { e.stopPropagation(); handleNext(); }}
-              aria-label="Next image"
-              className="absolute right-4 md:right-8 p-4 bg-white/5 hover:bg-blue-600/50 border border-white/10 rounded-full text-white transition-all duration-300 z-[110] backdrop-blur-md cursor-pointer"
-            >
-              <ChevronRight className="h-8 w-8" />
-            </button>
-
-          </div>
-        )
+            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+          </button>
+        </div>
       )}
     </div>
   );

@@ -15,6 +15,7 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServiceSteps from "@/components/ServiceSteps";
+import Image from "next/image";
 import ServiceMap from "@/components/ServiceMap";
 import CustomerReviews from "@/components/CustomerReviews";
 import HeroBackground from "@/components/HeroBackground";
@@ -51,7 +52,7 @@ export default function Home() {
       desc: "รับส่งสินค้าอุปโภคบริโภค สินค้าโรงงาน วัสดุก่อสร้าง แบบเหมาเที่ยวทั่วประเทศ 77 จังหวัด",
       features: ["ออกใบเสร็จ/ใบกำกับภาษีได้", "พนักงานขับรถชำนาญทาง", "เช็กสถานะ GPS ตลอดทาง"],
       icon: <Package className="h-7 w-7" />,
-      price: "500"
+      price: "1,000"
     },
     {
       title: "ขนส่งรถมอเตอร์ไซค์ / บิ๊กไบค์",
@@ -206,9 +207,13 @@ export default function Home() {
                       aria-label="Contact WMS Transport via LINE"
                       className="w-full bg-[#06C755] hover:bg-[#05B34F] text-white font-sans font-black text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[44px]"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current shrink-0">
-                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                      </svg>
+                      <Image
+                        src="/images/LINE_icon.webp"
+                        alt="LINE"
+                        width={20}
+                        height={20}
+                        className="h-5 w-5 object-contain shrink-0"
+                      />
                       <span>ติดต่อผ่าน LINE</span>
                     </a>
                     <a 
@@ -273,9 +278,13 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
-                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                    </svg>
+                    <Image
+                      src="/images/LINE_icon.webp"
+                      alt="LINE"
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain shrink-0"
+                    />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
@@ -301,9 +310,13 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
-                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                    </svg>
+                    <Image
+                      src="/images/LINE_icon.webp"
+                      alt="LINE"
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain shrink-0"
+                    />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
@@ -335,9 +348,13 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
-                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                    </svg>
+                    <Image
+                      src="/images/LINE_icon.webp"
+                      alt="LINE"
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain shrink-0"
+                    />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
@@ -363,9 +380,13 @@ export default function Home() {
                     aria-label="Contact WMS Transport via LINE"
                     className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
-                      <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                    </svg>
+                    <Image
+                      src="/images/LINE_icon.webp"
+                      alt="LINE"
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain shrink-0"
+                    />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
                 </div>
@@ -381,9 +402,13 @@ export default function Home() {
                 aria-label="Contact WMS Transport via LINE for pricing"
                 className="inline-flex items-center gap-3 px-10 py-5 text-white font-black text-lg rounded-2xl shadow-[0_0_25px_rgba(225,29,72,0.5)] transform transition-all duration-300 hover:scale-105 animate-[pulse_2s_ease-in-out_infinite] border border-red-400/50 bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 relative overflow-hidden shimmer-btn mb-6"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0 relative z-10">
-                  <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                </svg>
+                <Image
+                  src="/images/LINE_icon.webp"
+                  alt="LINE"
+                  width={24}
+                  height={24}
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0 relative z-10"
+                />
                 <span className="relative z-10">🔥 ล็อกคิวราคานี้ (ทัก LINE)</span>
               </a>
               <p className="text-sm text-slate-500 max-w-2xl mx-auto">
@@ -504,9 +529,13 @@ export default function Home() {
                       aria-label="Contact WMS Transport via LINE"
                       className="flex items-center justify-center gap-3 px-8 py-5 line-btn-pulse hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(6,199,85,0.3)] hover:shadow-[0_20px_50px_rgba(6,199,85,0.5)] border border-[#06C755]/30 transform hover:-translate-y-1"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0">
-                        <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-15.008 3.018h-2.158c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h2.158c.287 0 .521.233.521.521v3.954h1.479c.287 0 .521.234.521.521v1.041c0 .287-.234.521-.521.521zm4.842 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v4.996c0 .287-.234.521-.521.521zm2.355 0h-1.042c-.287 0-.521-.233-.521-.52v-4.996c0-.287.234-.521.521-.521h1.042c.287 0 .521.233.521.521v1.942l1.62-1.942c.13-.156.326-.239.531-.239h1.018c.36 0 .584.382.399.696l-1.688 2.015 1.776 2.456c.164.228-.002.548-.283.548h-.988c-.173 0-.336-.084-.438-.224l-1.306-1.851v1.597c0 .287-.234.521-.521.521z"/>
-                      </svg>
+                      <Image
+                        src="/images/LINE_icon.webp"
+                        alt="LINE"
+                        width={24}
+                        height={24}
+                        className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0"
+                      />
                       <span className="tracking-wide">ติดต่อผ่าน LINE</span>
                     </a>
                     

@@ -1,13 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
-let sharp;
-try {
-  sharp = require('sharp');
-} catch (err) {
-  console.log("Please install 'sharp' first by running: npm install sharp");
-  process.exit(1);
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const imagesDir = path.join(__dirname, '../public/images');
 

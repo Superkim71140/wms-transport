@@ -18,6 +18,7 @@ export default function SocialProofPopup() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
     // Initial delay before first popup
     const initialDelay = setTimeout(() => {
