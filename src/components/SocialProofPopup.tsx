@@ -99,7 +99,7 @@ export default function SocialProofPopup() {
   if (!isMounted) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 z-[70] w-[calc(100vw-24px)] max-w-[360px] pointer-events-none sm:bottom-6 sm:left-6">
+    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[90] w-[calc(100vw-24px)] max-w-[300px] pointer-events-none sm:top-24 sm:right-4 sm:left-auto sm:translate-x-0">
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -112,37 +112,37 @@ export default function SocialProofPopup() {
                 handleManualDismiss();
               }
             }}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, y: -50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ type: "spring", damping: 20, stiffness: 200 }}
-            className="pointer-events-auto relative cursor-grab active:cursor-grabbing w-full rounded-2xl border border-white/10 bg-slate-950/85 p-4 shadow-2xl backdrop-blur-xl flex items-start gap-3.5 pr-10"
+            className="pointer-events-auto relative cursor-grab active:cursor-grabbing w-full rounded-xl border border-white/10 bg-slate-950/85 p-3 shadow-2xl backdrop-blur-xl flex items-start gap-2.5 pr-8"
           >
             {/* Status dot / Live icon */}
-            <div className="relative mt-1 shrink-0">
-              <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                <CheckCircle2 className="w-4.5 h-4.5 text-blue-400" />
+            <div className="relative mt-0.5 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
               </div>
               {/* Pulsing green dot indicator */}
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#06C755] rounded-full border border-slate-950">
+              <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-[#06C755] rounded-full border border-slate-950">
                 <div className="absolute inset-0 bg-[#06C755] rounded-full animate-ping opacity-75" />
               </div>
             </div>
 
             {/* Middle Content */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[10px] font-black text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full border border-blue-500/20 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 mb-1">
+                <span className="text-[9px] font-black text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded-full border border-blue-500/20 uppercase tracking-wider">
                   Live Update
                 </span>
-                <span className="text-[10px] text-slate-500 font-medium">
+                <span className="text-[9px] text-slate-500 font-medium">
                   • กำลังให้บริการทั่วไทย
                 </span>
               </div>
-              <p className="text-xs sm:text-sm font-semibold text-slate-200 leading-snug">
+              <p className="text-[11px] sm:text-xs font-semibold text-slate-200 leading-normal">
                 {liveUpdates[currentIndex].text}
               </p>
-              <span className="text-[10px] text-slate-400 mt-1.5 block font-bold">
+              <span className="text-[9px] text-slate-400 mt-1 block font-bold">
                 {liveUpdates[currentIndex].time}
               </span>
             </div>
@@ -152,9 +152,9 @@ export default function SocialProofPopup() {
               type="button"
               onClick={handleManualDismiss}
               aria-label="ปิดการแจ้งเตือน"
-              className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors duration-200"
+              className="absolute right-2 top-2 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors duration-200"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3.5 w-3.5" />
             </button>
           </motion.div>
         )}
