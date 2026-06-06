@@ -62,14 +62,14 @@ export default function FloatingLine() {
 
           {/* Facebook Button */}
           <a
-            href="https://www.facebook.com/share/1DnN6iGodp/?mibextid=wwXIfr"
+            href="https://www.facebook.com/profile.php?id=100090046868733&mibextid=wwXIfr&rdid=UzfYNWw0oZsh7xGR&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DnN6iPogp%2F%3Fmibextid%3DwwXIfr"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact via Facebook"
             className="w-11 h-11 flex items-center justify-center rounded-full bg-[#1877F2] hover:bg-[#166FE5] cursor-pointer shadow-[0_4px_15px_rgba(24,119,242,0.3)] p-2.5 transition-all duration-300 hover:scale-110 md:active:scale-95"
           >
             <Image 
-              src="/images/Facebook_Logo_.png" 
+              src="/images/Facebook_Logo_.webp" 
               alt="Facebook Logo" 
               width={18} 
               height={18} 

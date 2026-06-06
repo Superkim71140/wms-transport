@@ -60,7 +60,7 @@ export default function PortfolioCTA() {
               className="group flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white font-black text-base transform active:scale-95 hover:-translate-y-0.5 transition-all duration-300 shadow-[0_4px_15px_rgba(24,119,242,0.3)]"
             >
               <Image 
-                src="/images/Facebook_Logo_.png" 
+                src="/images/Facebook_Logo_.webp"
                 alt="Facebook Logo" 
                 width={20} 
                 height={20} 

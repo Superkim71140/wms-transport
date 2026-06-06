@@ -91,7 +91,7 @@ export default function Navbar() {
         <Link href="/" className="relative group flex items-center gap-3">
           <div className="relative group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
             <Image
-              src="/logoWMS.png"
+              src="/logoWMS.webp"
               alt="WMS Transport Logo"
               width={120}
               height={120}
@@ -167,7 +167,7 @@ export default function Navbar() {
                 </div>
                 
                 {/* Featured Portfolio Card */}
-                <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-800 bg-[url('/portfolio-bg.jpg')] bg-cover bg-center">
+                <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-800 bg-[url('/images/WMS24.webp')] bg-cover bg-center">
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent group-hover/portfolio:via-slate-900/50 transition-all duration-300" />
                   <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col items-start gap-2 transform group-hover/portfolio:-translate-y-1 transition-transform duration-300">
                     <span className="text-white font-bold text-sm drop-shadow-md">ผลงานขนย้ายล่าสุด</span>

@@ -76,7 +76,7 @@ export default function FloatingContactBar() {
             >
               <div className="relative w-full h-full">
                 <Image
-                  src="/images/Facebook_Logo_.png"
+                  src="/images/Facebook_Logo_.webp"
                   alt="Facebook Logo"
                   fill
                   className="object-contain"

@@ -1,4 +1,5 @@
 
+import React from "react";
 import { 
   Truck, 
   Clock, 
@@ -109,25 +110,6 @@ export default function Home() {
     }
   ];
 
-  const trustItems = [
-    {
-      title: "รับงานจริง มีผลงานจริงให้ดู",
-      desc: "ดูตัวอย่างงานจากลูกค้าจริงได้",
-    },
-    {
-      title: "แจ้งสถานะงาน ไม่ปล่อยให้รอเงียบ",
-      desc: "อัปเดตความคืบหน้าระหว่างรับงาน",
-    },
-    {
-      title: "ดูแลของลูกค้าอย่างระมัดระวัง",
-      desc: "จัดวางและดูแลของอย่างระวัง",
-    },
-    {
-      title: "ตอบไว คุยง่าย ประเมินราคาชัดเจน",
-      desc: "ตอบ LINE ไว พร้อมแนะนำตามงานจริง",
-    },
-  ];
-
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -140,127 +122,89 @@ export default function Home() {
         <HeroBackground />
 
         {/* 2. TRUST SECTION ("Why Choose WMS") */}
-        <section className="relative overflow-hidden py-14 sm:py-18 lg:py-24 z-10">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8 items-stretch">
+        <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24 z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
               
               {/* Left Tile: Real Image Proof */}
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-slate-950/40 p-2 shadow-2xl backdrop-blur-md flex flex-col justify-between">
-                <div className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-auto lg:h-full min-h-[300px] lg:min-h-[520px] rounded-2.5xl overflow-hidden">
+              <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] flex flex-col justify-between group">
+                {/* Soft blue glow behind the image container */}
+                <div className="absolute inset-0 bg-blue-500/10 blur-xl z-0 pointer-events-none"></div>
+                
+                <div className="relative w-full aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:h-full min-h-[380px] lg:min-h-[560px] overflow-hidden z-10">
                   <Image
-                    src="/images/S__5652673.jpg"
-                    alt="ทีมงาน WMS TRANSPORT ให้บริการขนส่งมอเตอร์ไซค์จริง"
+                    src="/images/S__5668870.webp"
+                    alt="WMS TRANSPORT ให้บริการขนส่งมอเตอร์ไซค์และรถกระบะตู้ทึบจริง"
                     fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority={false}
+                    className="object-cover object-[center_55%] transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
+                    priority
+                    quality={82}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#040B15]/75 via-[#040B15]/15 to-transparent pointer-events-none" />
                   
-                  {/* Sleek Floating Pill - Top Left */}
-                  <div className="absolute top-4 left-4 z-20 rounded-full border border-white/10 bg-slate-950/80 px-3.5 py-1.5 backdrop-blur-md shadow-md flex items-center gap-2">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                    </span>
-                    <span className="text-[11px] font-extrabold text-slate-100">
-                      งานจริงล่าสุด: <span className="text-emerald-400">กทม. → ภูเก็ต</span>
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-medium border-l border-white/10 pl-2">
-                      ขนส่งมอเตอร์ไซค์
-                    </span>
+                  {/* Floating Pill - Top Left */}
+                  <div className="absolute top-5 left-5 md:top-6 md:left-6 z-20 flex flex-col gap-2">
+                    <div className="inline-flex rounded-full border border-white/10 bg-slate-950/70 px-4 py-2 backdrop-blur-md shadow-lg items-center gap-2.5">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      <span className="text-xs font-black text-slate-100 tracking-wide">
+                        งานจริงล่าสุด
+                      </span>
+                      <span className="text-[11px] text-blue-300 font-bold border-l border-white/20 pl-2.5">
+                        ขนส่งมอเตอร์ไซค์
+                      </span>
+                    </div>
+                    <div className="inline-flex rounded-full border border-white/5 bg-slate-950/60 px-3 py-1 backdrop-blur-sm ml-1 w-max">
+                      <span className="text-[10px] text-slate-300 font-medium">
+                        แพ็กกันรอย • รถตู้ทึบ WMS
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Right Tile: Value Props & Action */}
-              <div className="rounded-[2rem] border border-white/5 bg-slate-950/40 p-6 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-md flex flex-col justify-between">
-                <div>
-                  {/* Small badge */}
-                  <div className="mb-4">
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-black uppercase tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.15)]">
-                      งานจริง ทีมจริง ส่งจริงทั่วไทย
+              <div className="rounded-[2.25rem] border border-white/10 bg-[#071426]/70 p-6 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-md flex flex-col justify-center relative overflow-hidden">
+                {/* Decorative radial glow */}
+                <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div className="relative z-10">
+                  {/* Badge */}
+                  <div className="mb-6">
+                    <span className="inline-flex items-center px-4 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.1)]">
+                      บริการของเรา
                     </span>
                   </div>
 
                   {/* Heading */}
-                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-black text-white tracking-tight leading-none mb-4">
-                    ขนส่งจริง มีทีมดูแลจริง<br />
-                    <span className="text-blue-400">ไม่ปล่อยให้ลูกค้ารอลุ้น</span>
+                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-black tracking-tight leading-[1.1] mb-5 text-white">
+                    บริการ<span className="text-blue-400">รถกระบะตู้ทึบรับจ้าง</span> และ<br className="hidden sm:block" />
+                    ขนย้ายระดับพรีเมียม
                   </h2>
 
-                  {/* Supporting line */}
-                  <p className="text-sm sm:text-base text-slate-300 font-medium leading-relaxed mb-6">
-                    รับงานขนส่งมอเตอร์ไซค์ ย้ายหอ/คอนโด และขนส่งสินค้า พร้อมอัปเดตงานระหว่างทาง
+                  {/* Subtitle */}
+                  <p className="text-sm sm:text-base text-slate-300/90 leading-relaxed max-w-xl">
+                    ครอบคลุมทุกความต้องการด้านการขนส่ง ขนย้ายสิ่งของด้วยมาตรฐานระดับสากล ปลอดภัย ตรงเวลา ไร้กังวล
                   </p>
 
-                  {/* Trust checklist - minimalist & clean */}
-                  <div className="space-y-4 mb-8">
-                    {trustItems.map((item, idx) => (
-                      <div key={idx} className="flex gap-3 items-start group">
-                        <span className="text-emerald-400 shrink-0 mt-0.5 select-none">✓</span>
-                        <div className="min-w-0">
-                          <h4 className="text-sm font-bold text-white leading-tight group-hover:text-blue-300 transition-colors">
-                            {item.title}
-                          </h4>
-                          <p className="text-xs text-slate-400 mt-0.5 leading-normal">
-                            {item.desc}
-                          </p>
-                        </div>
+                  {/* Proof Pills 2x2 */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mt-8 sm:mt-10">
+                    {[
+                      "มีผลงานจริง",
+                      "มีทีมงานมืออาชีพ",
+                      "ให้บริการทั่วไทย",
+                      "ตอบกลับเร็ว",
+                    ].map((item, idx) => (
+                      <div 
+                        key={idx} 
+                        className="flex items-center gap-3 bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 transition-all duration-300 hover:bg-white/[0.06] hover:border-blue-400/30 hover:-translate-y-0.5 group cursor-default"
+                      >
+                        <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                        <span className="text-sm sm:text-base text-white font-extrabold tracking-wide">{item}</span>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Service Route Chips */}
-                  <div className="mb-8">
-                    <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase block mb-3">
-                      พื้นที่ให้บริการประจำ
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {["กรุงเทพฯ", "นนทบุรี", "ปทุมธานี", "สมุทรสาคร", "ชลบุรี", "ภูเก็ต", "หาดใหญ่", "ทั่วไทย", "ขนส่งมอเตอร์ไซค์", "ย้ายหอ/คอนโด"].map((chip, idx) => (
-                        <span 
-                          key={idx} 
-                          className="text-xs text-slate-400 bg-[#0c1524] hover:bg-[#122036] border border-white/5 hover:border-blue-500/30 hover:text-white px-3.5 py-1.5 rounded-lg transition-all duration-200 cursor-default font-medium"
-                        >
-                          {chip}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <a 
-                      href="https://line.me/ti/p/DtICkMaDet"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 bg-[#06C755] hover:bg-[#05B34F] text-white font-sans font-black text-xs sm:text-sm py-4 px-6 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[48px]"
-                    >
-                      <Image
-                        src="/images/LINE_icon.webp"
-                        alt="LINE"
-                        width={20}
-                        height={20}
-                        className="h-5 w-5 object-contain shrink-0"
-                      />
-                      <span>ขอราคาผ่าน LINE</span>
-                    </a>
-                    <a 
-                      href="#gallery"
-                      className="flex-1 bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-blue-400/40 font-sans font-extrabold text-xs sm:text-sm py-4 px-6 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[48px]"
-                    >
-                      <span>ดูผลงานจริง</span>
-                    </a>
-                  </div>
-
-                  {/* Trust Proof Strip */}
-                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 pt-4 border-t border-white/5 justify-center sm:justify-start">
-                    {["มีผลงานจริง", "รับงานทั่วไทย", "ตอบกลับไว", "แจ้งสถานะงาน"].map((proof, idx) => (
-                      <span key={idx} className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                        <span className="text-emerald-400 font-bold">✓</span> {proof}
-                      </span>
                     ))}
                   </div>
                 </div>
@@ -271,7 +215,10 @@ export default function Home() {
         </section>
 
         {/* 2.5 PREMIUM SERVICES GRID SECTION */}
-        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10">
+        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-0 z-10">
+
+          {/* Premium header block has been removed */}
+
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center min-w-0">
             {services.map((service, i) => (
               <div 

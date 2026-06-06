@@ -41,6 +41,11 @@
   100% { transform: translateY(-2px); }
 }
 
+@keyframes wms-hairline-sweep {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
 /* PERMANENT DARK THEME VARIABLES */
 :root {
   --background: #040b15;
