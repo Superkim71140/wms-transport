@@ -91,7 +91,7 @@ export default function Navbar() {
         <Link href="/" className="relative group flex items-center gap-3">
           <div className="relative group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
             <Image
-              src="/logoWMS.webp"
+              src="/images/logoWMS.webp"
               alt="WMS Transport Logo"
               width={120}
               height={120}

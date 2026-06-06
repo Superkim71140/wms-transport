@@ -26,7 +26,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex flex-col items-start gap-4">
               <Image 
-                src="/logoWMS.webp"
+                src="/images/logoWMS.webp"
                 alt="WMS Transport Logo Badge" 
                 width={112} 
                 height={112} 
