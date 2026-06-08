@@ -3,11 +3,7 @@ import { provinceMap } from "./service/[province]/page";
 import { posts } from "./blog/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const domain = process.env.NEXT_PUBLIC_SITE_URL 
-    ? process.env.NEXT_PUBLIC_SITE_URL 
-    : process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}` 
-      : "https://wms-transport.com";
+  const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com";
 
   // 1. Guaranteed Core Routes
   const coreRoutes: MetadataRoute.Sitemap = [
