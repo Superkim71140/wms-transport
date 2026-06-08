@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://wmstransport.com/sitemap.xml",
+    sitemap: "https://wms-transport.com/sitemap.xml",
   };
 }

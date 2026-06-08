@@ -22,7 +22,7 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
       "name": item.name,
       "item": item.item.startsWith("http")
         ? item.item
-        : `https://wmstransport.com${item.item}`,
+        : `https://wms-transport.com${item.item}`,
     })),
   };
 

@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ? process.env.NEXT_PUBLIC_SITE_URL 
     : process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
-      : "https://wms-transport.vercel.app";
+      : "https://wms-transport.com";
 
   // 1. Guaranteed Core Routes
   const coreRoutes: MetadataRoute.Sitemap = [

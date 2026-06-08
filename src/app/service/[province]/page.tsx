@@ -226,7 +226,7 @@ export default async function LocationHubPage({
     provider: {
       "@type": "LocalBusiness",
       name: "WMS Transport",
-      image: "https://wmstransport.com/logoWMS.png",
+      image: "https://wms-transport.com/logoWMS.png",
       telephone: "0612402436",
       priceRange: "$$",
       address: {

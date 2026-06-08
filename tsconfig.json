@@ -31,5 +31,5 @@
     "**/*.mts",
     "src/**/*"
   ],
-  "exclude": ["node_modules", "impeccable-main"]
+  "exclude": ["node_modules", "impeccable-main", "KIMX-Wed-main"]
 }

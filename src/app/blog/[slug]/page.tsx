@@ -47,7 +47,7 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
-    "image": `https://www.wmstransport.com${post.image}`,
+    "image": `https://wms-transport.com${post.image}`,
     "datePublished": post.dateISO,
     "author": {
       "@type": "Organization",
@@ -58,7 +58,7 @@ export default async function BlogPostPage({
       "name": "WMS TRANSPORT",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.wmstransport.com/logoWMS.png"
+        "url": "https://wms-transport.com/logoWMS.png"
       }
     },
     "description": post.description
