@@ -35,6 +35,11 @@ const transitData: Record<string, TransitInfo> = {
     time: "1 ชั่วโมง",
     route: "กรุงเทพฯ - พระราม 2 - สมุทรสาคร (มหาชัย)",
   },
+  "samut-songkhram": {
+    distance: "~70 กม.",
+    time: "1.5 ชั่วโมง",
+    route: "กรุงเทพฯ - พระราม 2 - สมุทรสงคราม",
+  },
   "bkk-thonburi": {
     distance: "พื้นที่ กทม. ฝั่งธนบุรี",
     time: "45 นาที - 1.5 ชั่วโมง",
@@ -52,6 +57,7 @@ export default function TransitTimeVisualizer({ province }: { province: string }
   const summaries: Record<string, string> = {
     phuket: "กทม. ➔ ภูเก็ต | ระยะทาง ~840 กม. | เวลาเดินทาง 12-14 ชม.",
     samutsakhon: "กทม. ➔ สมุทรสาคร | ระยะทาง ~45 กม. | เวลาเดินทาง 1 ชม.",
+    "samut-songkhram": "กทม. ➔ สมุทรสงคราม | ระยะทาง ~70 กม. | เวลาเดินทาง 1.5 ชม.",
     "bkk-thonburi": "กทม. ➔ กทม. ฝั่งธนบุรี | ระยะทาง พื้นที่ กทม. ฝั่งธนบุรี | เวลาเดินทาง 45 นาที - 1.5 ชม.",
     bangkok: "กทม. ➔ กรุงเทพฯ | ระยะทาง กรุงเทพฯ - ปริมณฑล | เวลาเดินทาง 1-3 ชม.",
     chonburi: "กทม. ➔ ชลบุรี | ระยะทาง ~80 กม. | เวลาเดินทาง 1.5 - 2 ชม.",
@@ -117,7 +123,7 @@ export default function TransitTimeVisualizer({ province }: { province: string }
             <div>
               <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">ปลายทาง</p>
               <p className="text-sm font-extrabold text-emerald-400">
-                {province === "bangkok" ? "กรุงเทพฯ" : province === "phuket" ? "ภูเก็ต" : province === "chonburi" ? "ชลบุรี" : province === "chiang-mai" ? "เชียงใหม่" : province === "samutsakhon" ? "สมุทรสาคร" : province === "bkk-thonburi" ? "กทม. ฝั่งธน" : "ปลายทางของท่าน"}
+                {province === "bangkok" ? "กรุงเทพฯ" : province === "phuket" ? "ภูเก็ต" : province === "chonburi" ? "ชลบุรี" : province === "chiang-mai" ? "เชียงใหม่" : province === "samutsakhon" ? "สมุทรสาคร" : province === "samut-songkhram" ? "สมุทรสงคราม" : province === "bkk-thonburi" ? "กทม. ฝั่งธน" : "ปลายทางของท่าน"}
               </p>
             </div>
           </div>

@@ -12,6 +12,9 @@ import PortfolioCTA from "@/components/portfolio/PortfolioCTA";
 export const metadata: Metadata = {
   title: "ผลงานขนส่งของเรา | WMS Transport",
   description: "รวมผลงานและรีวิวการขนย้ายสินค้าจากลูกค้าทั่วประเทศไทย โดยทีมงานคุณภาพ WMS Transport พร้อมบริการด้วยมาตรฐานสากล",
+  alternates: {
+    canonical: "/portfolio",
+  },
 };
 
 export default function PortfolioPage() {

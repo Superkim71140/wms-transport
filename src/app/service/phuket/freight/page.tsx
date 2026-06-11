@@ -10,6 +10,9 @@ import InContentCTA from "@/components/InContentCTA";
 export const metadata: Metadata = {
   title: "รถรับจ้างขนส่งสินค้า ภูเก็ต ทั่วไทย เริ่มต้นราคากันเอง | WMS TRANSPORT",
   description: "บริการรถรับจ้างขนส่งสินค้าทั่วไป สินค้าโรงงาน วัสดุก่อสร้าง ไปกลับภูเก็ต-กรุงเทพฯ ทั่วประเทศ ด้วยรถกระบะตู้ทึบ มีคนช่วยยกยกของอย่างปลอดภัย มีประกันภัยอุบัติเหตุ 24 ชม.",
+  alternates: {
+    canonical: "/service/phuket/freight",
+  },
 };
 
 export default function PhuketFreightPage() {

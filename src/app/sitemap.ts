@@ -3,7 +3,10 @@ import { provinceMap } from "./service/[province]/page";
 import { posts } from "./blog/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const domain = process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com";
+  let domain = (process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com").trim();
+  if (domain.endsWith("/")) {
+    domain = domain.slice(0, -1);
+  }
 
   // 1. Guaranteed Core Routes
   const coreRoutes: MetadataRoute.Sitemap = [
@@ -12,6 +15,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1.0,
+    },
+    {
+      url: `${domain}/portfolio`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     {
       url: `${domain}/blog`,
@@ -53,16 +62,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-    // Phuket specific nested services
-    const phuketServices = ["motorcycle", "freight", "moving"];
-    const phuketServiceUrls: MetadataRoute.Sitemap = phuketServices.map((service) => ({
-      url: `${domain}/service/phuket/${service}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    }));
+    // Dynamic nested services for all provinces (moving, motorcycle, freight)
+    const serviceIds = ["moving", "motorcycle", "freight"];
+    const provinceServiceUrls: MetadataRoute.Sitemap = provinces.flatMap((province) =>
+      serviceIds.map((serviceId) => ({
+        url: `${domain}/service/${province}/${serviceId}`,
+        lastModified: new Date(),
+        changeFrequency: "weekly",
+        priority: 0.8,
+      }))
+    );
 
-    return [...coreRoutes, ...provinceUrls, ...blogUrls, ...phuketServiceUrls];
+    return [...coreRoutes, ...provinceUrls, ...blogUrls, ...provinceServiceUrls];
   } catch (error) {
     // 3. The Fail-Safe
     console.error("Sitemap generation failed for dynamic routes, returning core routes instead.", error);

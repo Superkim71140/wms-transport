@@ -10,6 +10,9 @@ import InContentCTA from "@/components/InContentCTA";
 export const metadata: Metadata = {
   title: "ขนส่งมอเตอร์ไซค์ ภูเก็ต ทั่วไทย ปลอดภัย 100% | WMS TRANSPORT",
   description: "บริการส่งรถมอเตอร์ไซค์ บิ๊กไบค์ จากกรุงเทพฯ และทั่วประเทศ ส่งตรงถึงภูเก็ต ด้วยรถกระบะตู้ทึบมาตรฐานความปลอดภัยสูง บริการพร้อมคนช่วยยกของ ประเมินราคาฟรี 24 ชม.",
+  alternates: {
+    canonical: "/service/phuket/motorcycle",
+  },
 };
 
 export default function PhuketMotorcyclePage() {

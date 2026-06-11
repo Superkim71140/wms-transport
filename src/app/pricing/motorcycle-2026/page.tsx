@@ -8,6 +8,9 @@ import TableOfContents from "@/components/TableOfContents";
 export const metadata: Metadata = {
   title: "อัปเดตราคาขนส่งมอเตอร์ไซค์และบิ๊กไบค์ ทั่วไทย ปี 2569 | WMS TRANSPORT",
   description: "เช็กอัตราค่าบริการส่งมอเตอร์ไซค์ ขนส่งบิ๊กไบค์ ทั่วไทย ปี 2569 รายละเอียดราคาตามระยะทางจริงและรุ่นรถ ขนส่งด้วยรถกระบะตู้ทึบมีประกัน 100,000 บาท",
+  alternates: {
+    canonical: "/pricing/motorcycle-2026",
+  },
 };
 
 export default function MotorcyclePricing2026Page() {

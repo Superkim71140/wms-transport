@@ -250,6 +250,9 @@ export async function generateMetadata({
   return {
     title: `${serviceLabel} ${provinceName} | WMS TRANSPORT`,
     description: `บริการ${serviceLabel}ในพื้นที่${provinceName} และทั่วไทย โดย WMS Transport — รถกระบะตู้ทึบมาตรฐาน พร้อมคนยกของ มีประกัน ติดต่อได้ 24 ชม.`,
+    alternates: {
+      canonical: `/service/${province}/${serviceId}`,
+    },
   };
 }
 

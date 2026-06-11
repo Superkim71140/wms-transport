@@ -95,7 +95,7 @@ const schemaObject = {
     "latitude": "13.5475",
     "longitude": "100.2744"
   },
-  "areaServed": ["สมุทรสาคร", "กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "ภูเก็ต"],
+  "areaServed": ["สมุทรสาคร", "กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "ภูเก็ต", "สมุทรสงคราม"],
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.9",

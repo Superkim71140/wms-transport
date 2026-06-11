@@ -67,6 +67,13 @@ export const provinceMap: Record<
     lat: "13.5475",
     lng: "100.2744",
   },
+  "samut-songkhram": {
+    name: "สมุทรสงคราม",
+    shortName: "สมุทรสงคราม",
+    region: "ภาคกลาง",
+    lat: "13.4098",
+    lng: "100.0022",
+  },
   "bkk-thonburi": {
     name: "กรุงเทพฯ ฝั่งธนบุรี",
     shortName: "ฝั่งธนบุรี",
@@ -139,6 +146,9 @@ export async function generateMetadata({
   return {
     title: `ศูนย์รวมบริการขนส่ง รถกระบะรับจ้าง ${name} | WMS TRANSPORT`,
     description: `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name}และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`,
+    alternates: {
+      canonical: `/service/${province}`,
+    },
   };
 }
 

@@ -28,6 +28,9 @@ export async function generateMetadata({
   return {
     title: `${post.title} | WMS TRANSPORT`,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
   };
 }
 

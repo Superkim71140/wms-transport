@@ -3,13 +3,17 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import { posts } from "./posts";
+import { Metadata } from "next";
 
 // Re-export posts so sitemap.ts can import it from here if configured
 export { posts };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "บล็อกความรู้การขนย้ายและขนส่ง | WMS TRANSPORT",
   description: "อ่านบทความ เคล็ดลับ และคู่มือการย้ายบ้าน การแพ็กของ และการเตรียมตัวขนส่งมอเตอร์ไซค์อย่างมืออาชีพจาก WMS Transport",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function BlogHubPage() {

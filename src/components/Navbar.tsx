@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 const locationLinks = [
   { name: "บริการขนส่ง ภูเก็ต", href: "/service/phuket" },
   { name: "บริการขนส่ง สมุทรสาคร", href: "/service/samutsakhon" },
+  { name: "บริการขนส่ง สมุทรสงคราม", href: "/service/samut-songkhram" },
   { name: "บริการขนส่ง กทม. ฝั่งธน", href: "/service/bkk-thonburi" },
 ];
 

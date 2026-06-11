@@ -8,6 +8,9 @@ import TableOfContents from "@/components/TableOfContents";
 export const metadata: Metadata = {
   title: "เปรียบเทียบรถกระบะคอก VS รถกระบะตู้ทึบ ย้ายบ้านแบบไหนดีกว่ากัน? | WMS TRANSPORT",
   description: "เจาะลึกข้อดีข้อเสียระหว่างรถกระบะคอกและรถกระบะตู้ทึบสำหรับการขนย้ายบ้าน หอพัก คอนโด เลือกแบบไหนปลอดภัยที่สุด ประหยัดที่สุด คุ้มค่าที่สุดสำหรับคุณ",
+  alternates: {
+    canonical: "/compare/pickup-vs-box-truck",
+  },
 };
 
 export default function CompareTrucksPage() {

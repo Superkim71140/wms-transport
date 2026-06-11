@@ -33,8 +33,16 @@ const FAQ = dynamic(() => import('@/components/FAQ'), {
   loading: () => <div className="h-[300px] w-full rounded-[32px] bg-white/[0.02] border border-white/5 animate-pulse" />,
 });
 
+import { Metadata } from "next";
+
 // ISR: Revalidate every hour
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
 

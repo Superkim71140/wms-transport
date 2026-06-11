@@ -8,6 +8,7 @@ export default function Footer() {
     { text: "#ย้ายบ้าน", href: "/service/bangkok" },
     { text: "#ย้ายคอนโด", href: "/service/bkk-thonburi" },
     { text: "#ย้ายหอพัก", href: "/service/bangkok" },
+    { text: "#รถรับจ้างสมุทรสงคราม", href: "/service/samut-songkhram" },
     { text: "#รถรับจ้างพร้อมคนยก", href: "/service/samutsakhon" },
     { text: "#ขนส่งมอเตอร์ไซค์", href: "/service/phuket" },
     { text: "#ส่งของชิ้นใหญ่", href: "/service/chonburi" },
@@ -113,6 +114,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                  สมุทรสงคราม
+                </Link>
+              </li>
+              <li>
+                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
                   ชลบุรี
                 </Link>
               </li>
@@ -188,7 +194,7 @@ export default function Footer() {
         {/* Subtle SEO District Block */}
         <div className="pt-6 border-t border-white/5 text-center md:text-left">
           <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-            พื้นที่ให้บริการหลัก: [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [กรุงเทพฯ และปริมณฑล]: ฝั่งธนบุรี, นนทบุรี, ปทุมธานี | [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง
+            พื้นที่ให้บริการหลัก: [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [สมุทรสงคราม]: อ.เมืองสมุทรสงคราม, อัมพวา, บางคนที | [กรุงเทพฯ และปริมณฑล]: ฝั่งธนบุรี, นนทบุรี, ปทุมธานี | [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง
           </p>
         </div>
 

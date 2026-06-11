@@ -10,6 +10,9 @@ import InContentCTA from "@/components/InContentCTA";
 export const metadata: Metadata = {
   title: "รับย้ายบ้าน ภูเก็ต ย้ายหอ คอนโด อพาร์ทเม้นท์ | WMS TRANSPORT",
   description: "บริการรับย้ายบ้าน ภูเก็ต ขนย้ายหอพัก คอนโดมิเนียม เฟอร์นิเจอร์สำนักงาน จากกรุงเทพฯ ไปภูเก็ต หรือภายในจังหวัดภูเก็ต พร้อมคนช่วยยกของ แพ็กซีลกันกระแทกอย่างหนาแน่น 24 ชม.",
+  alternates: {
+    canonical: "/service/phuket/moving",
+  },
 };
 
 export default function PhuketMovingPage() {
