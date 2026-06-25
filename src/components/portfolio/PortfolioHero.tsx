@@ -51,10 +51,10 @@ export default function PortfolioHero() {
               opacity: { duration: 0.8, delay: 0.2 },
               y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }
             }}
-            className="relative hidden md:block w-1/3 aspect-[3/4] md:aspect-[4/5] rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-10 -rotate-6"
+            className="relative hidden md:block w-1/3 aspect-[3/4] md:aspect-4/5 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-10 -rotate-6"
           >
             <Image src="/images/WM11.webp" alt="Transport Work 1" fill sizes="33vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
           </motion.div>
 
           <motion.div
@@ -64,10 +64,10 @@ export default function PortfolioHero() {
               opacity: { duration: 0.8, delay: 0.3 },
               y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
             }}
-            className="relative w-[70%] sm:w-1/2 md:w-2/5 aspect-[4/5] md:aspect-square rounded-2xl border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)] overflow-hidden z-20"
+            className="relative w-[70%] sm:w-1/2 md:w-2/5 aspect-4/5 md:aspect-square rounded-2xl border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.6)] overflow-hidden z-20"
           >
             <Image src="/images/WM15.webp" alt="Transport Work 2" fill sizes="(max-width: 768px) 70vw, 40vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
           </motion.div>
 
           <motion.div
@@ -77,10 +77,10 @@ export default function PortfolioHero() {
               opacity: { duration: 0.8, delay: 0.4 },
               y: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }
             }}
-            className="relative hidden md:block w-1/3 aspect-[3/4] md:aspect-[4/5] rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-10 rotate-6"
+            className="relative hidden md:block w-1/3 aspect-[3/4] md:aspect-4/5 rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-10 rotate-6"
           >
             <Image src="/images/WMS24.webp" alt="Transport Work 3" fill sizes="33vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#040b15]/80 via-transparent to-transparent opacity-80" />
           </motion.div>
 
         </div>

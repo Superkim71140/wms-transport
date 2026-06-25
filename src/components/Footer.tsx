@@ -183,7 +183,7 @@ export default function Footer() {
               <Link
                 key={item.text}
                 href={item.href}
-                className="inline-block text-xs font-semibold text-slate-400 bg-white/[0.02] border border-white/10 px-3 py-1.5 rounded-md hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
+                className="inline-block text-xs font-semibold text-slate-400 bg-white/2 border border-white/10 px-3 py-1.5 rounded-md hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
               >
                 {item.text}
               </Link>

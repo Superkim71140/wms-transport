@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Thai } from "next/font/google";
 import { Partytown } from '@builder.io/partytown/react';
 import "./globals.css";
 import SocialProofPopup from "@/components/SocialProofPopup";
+import EntityGraphSchema from "@/components/EntityGraphSchema";
 
 export const revalidate = 3600;
 
@@ -74,60 +75,7 @@ export const metadata: Metadata = {
   },
 };
 
-const schemaObject = {
-  "@context": "https://schema.org",
-  "@type": "MovingCompany",
-  "name": "WMS TRANSPORT",
-  "image": "https://wms-transport.com/logoWMS.png",
-  "description": "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ",
-  "telephone": "+66612402436",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "75/535 ซ.13 หมู่บ้านสุขถาวร",
-    "addressLocality": "ต.บ้านเกาะ, อ.เมือง",
-    "addressRegion": "สมุทรสาคร",
-    "postalCode": "74000",
-    "addressCountry": "TH"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "13.5475",
-    "longitude": "100.2744"
-  },
-  "areaServed": ["สมุทรสาคร", "กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "ภูเก็ต", "สมุทรสงคราม"],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "128"
-  },
-  "offers": [
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "บริการย้ายบ้าน / คอนโด / หอพัก",
-        "description": "บริการย้ายห้องชุด หอพัก อพาร์ทเม้นท์ คอนโดมิเนียม แพ็กซีลกันกระแทกอย่างดี"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "บริการขนส่งรถมอเตอร์ไซค์และบิ๊กไบค์",
-        "description": "บริการขนส่งรถมอเตอร์ไซค์และบิ๊กไบค์ทั่วไทย มีการแพ็กกันรอย รัดยึดแน่นหนา"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "บริการรถกระบะตู้ทึบรับจ้างขนสินค้า",
-        "description": "รับส่งสินค้าอุปโภคบริโภค สินค้าโรงงาน วัสดุก่อสร้าง แบบเหมาเที่ยวทั่วประเทศ"
-      }
-    }
-  ]
-};
+
 
 export default function RootLayout({
   children,
@@ -147,10 +95,8 @@ export default function RootLayout({
         <Partytown debug={false} forward={['dataLayer.push']} />
       </head>
       <body className="min-h-full flex flex-col bg-[#040b15] text-slate-200 selection:bg-red-500/30 selection:text-white">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaObject) }}
-        />
+
+        <EntityGraphSchema />
         {children}
         <SocialProofPopup />
       </body>

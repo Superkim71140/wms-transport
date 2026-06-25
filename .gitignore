@@ -42,3 +42,10 @@ next-env.d.ts
 
 # temp/external folders
 /KIMX-Wed-main/
+
+# Extracted skills and temporary files
+claude-seo/
+ui-ux-pro-max-skill-main/
+lint-output.txt
+public/~partytown/
+docs/

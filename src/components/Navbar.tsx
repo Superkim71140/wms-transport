@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, Menu, X, ChevronDown, MapPin } from "lucide-react";
@@ -11,6 +11,16 @@ const locationLinks = [
   { name: "บริการขนส่ง สมุทรสาคร", href: "/service/samutsakhon" },
   { name: "บริการขนส่ง สมุทรสงคราม", href: "/service/samut-songkhram" },
   { name: "บริการขนส่ง กทม. ฝั่งธน", href: "/service/bkk-thonburi" },
+  { name: "บริการขนส่ง กทม. ฝั่งพระนคร", href: "/service/bkk-phra-nakhon" },
+];
+
+const navLinks = [
+  { name: "บริการของเรา", href: "/#services" },
+  { name: "ขั้นตอนการขนย้าย", href: "/#process" },
+  { name: "ราคาขนส่ง", href: "/#pricing" },
+  { name: "พื้นที่บริการ", href: "/#areas" },
+  { name: "ผลงาน", href: "/portfolio" },
+  { name: "รีวิวลูกค้า", href: "/#reviews" },
 ];
 
 export default function Navbar() {
@@ -21,27 +31,83 @@ export default function Navbar() {
   const pathname = usePathname();
   const [activeHash, setActiveHash] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
+  
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [isIndicatorReady, setIsIndicatorReady] = useState(false);
+  const navItemsRef = useRef<Map<string, HTMLElement>>(new Map());
 
   useEffect(() => {
+    let frameId: number;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        setIsScrolled((prev) => {
+          const next = window.scrollY > 20;
+          return prev !== next ? next : prev;
+        });
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(frameId);
+    };
   }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
-      setActiveHash(window.location.hash);
+      setActiveHash((prev) => {
+        const next = window.location.hash;
+        return prev !== next ? next : prev;
+      });
     };
     handleHashChange();
-    window.addEventListener("hashchange", handleHashChange);
-    const interval = setInterval(handleHashChange, 500);
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      clearInterval(interval);
+
+    if (pathname !== "/") {
+      window.addEventListener("hashchange", handleHashChange, { passive: true });
+      return () => window.removeEventListener("hashchange", handleHashChange);
+    }
+
+    const sections = navLinks
+      .map((link) => link.href)
+      .filter((href) => href.startsWith("/#"))
+      .map((href) => href.replace("/#", ""));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const newHash = `#${entry.target.id}`;
+            setActiveHash((prev) => {
+              if (prev !== newHash) {
+                window.history.replaceState(null, "", newHash);
+                return newHash;
+              }
+              return prev;
+            });
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px" }
+    );
+
+    const observeSections = () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
     };
-  }, []);
+
+    const timeout = setTimeout(observeSections, 150);
+    window.addEventListener("hashchange", handleHashChange, { passive: true });
+
+    return () => {
+      clearTimeout(timeout);
+      observer.disconnect();
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [pathname]);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -50,20 +116,11 @@ export default function Navbar() {
         setIsPhuketDropdownOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside, { passive: true });
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const navLinks = [
-    { name: "บริการของเรา", href: "/#services" },
-    { name: "ขั้นตอนการขนย้าย", href: "/#process" },
-    { name: "ราคาขนส่ง", href: "/#pricing" },
-    { name: "พื้นที่บริการ", href: "/#areas" },
-    { name: "ผลงาน", href: "/portfolio" },
-    { name: "รีวิวลูกค้า", href: "/#reviews" },
-  ];
-
-  const isActiveLink = (href: string) => {
+  const isActiveLink = useCallback((href: string) => {
     if (href === "/portfolio") {
       return pathname === "/portfolio";
     }
@@ -72,23 +129,71 @@ export default function Navbar() {
       return activeHash === `#${hash}` || (activeHash === "" && hash === "services");
     }
     return false;
-  };
+  }, [pathname, activeHash]);
 
   const isLocationActive = pathname.startsWith("/service/");
 
+  // Dynamic Indicator Effect
+  useEffect(() => {
+    const updateIndicator = () => {
+      let activeElement: HTMLElement | null = null;
+
+      for (const link of navLinks) {
+        if (isActiveLink(link.href)) {
+          activeElement = navItemsRef.current.get(link.href) || null;
+          break;
+        }
+      }
+
+      if (!activeElement && isLocationActive) {
+        activeElement = navItemsRef.current.get("location") || null;
+      }
+
+      if (activeElement && activeElement.offsetWidth > 0) {
+        setIndicatorStyle({
+          left: activeElement.offsetLeft,
+          width: activeElement.offsetWidth,
+          opacity: 1,
+        });
+        setTimeout(() => setIsIndicatorReady(true), 50);
+      } else {
+        setIndicatorStyle((prev) => ({ ...prev, opacity: 0 }));
+      }
+    };
+
+    const timer = setTimeout(updateIndicator, 100);
+    window.addEventListener("resize", updateIndicator);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [pathname, activeHash, isLocationActive, isActiveLink]);
+
   return (
     <nav
-      className={`fixed z-[100] transition-all duration-300 ease-in-out
+      className={`fixed z-100 transition-all duration-300 ease-in-out
         /* Mobile Layout */
         top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3 py-2 bg-[#040b15]/95 border border-white/10
-        flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)]
+        flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] overflow-hidden lg:overflow-visible
         
         /* Desktop Layout (lg screens and up) */
         lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3.5 lg:bg-[#040b15]/90 lg:backdrop-blur-2xl
         ${isScrolled ? "lg:top-2 lg:py-2.5 lg:scale-[0.99]" : "lg:top-4 lg:py-3.5 lg:scale-100"}`}
     >
+      <div 
+        aria-hidden="true" 
+        className={`absolute top-0 h-[2px] rounded-full bg-linear-to-r from-transparent via-blue-500 to-transparent ${
+          isIndicatorReady ? "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" : ""
+        }`}
+        style={{
+          left: `${indicatorStyle.left}px`,
+          width: `${indicatorStyle.width}px`,
+          opacity: indicatorStyle.opacity,
+        }}
+      />
       {/* Premium Logo Lockup */}
-      <div className="flex-shrink-0 flex items-center">
+      <div className="shrink-0 flex items-center">
         <Link href="/" className="relative group flex items-center gap-3">
           <div className="relative group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
             <Image
@@ -115,6 +220,10 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
+              ref={(el) => {
+                if (el) navItemsRef.current.set(link.href, el);
+                else navItemsRef.current.delete(link.href);
+              }}
               className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 relative group drop-shadow-lg px-4 py-2 hover:text-white ${
                 active
                   ? "text-blue-400 border-b-2 border-blue-500 rounded-none"
@@ -129,6 +238,10 @@ export default function Navbar() {
         {/* Locations Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button
+            ref={(el) => {
+              if (el) navItemsRef.current.set("location", el);
+              else navItemsRef.current.delete("location");
+            }}
             onClick={() => setIsPhuketDropdownOpen((v) => !v)}
             className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer ${
               isLocationActive
@@ -169,7 +282,7 @@ export default function Navbar() {
                 
                 {/* Featured Portfolio Card */}
                 <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-800 bg-[url('/images/WMS24.webp')] bg-cover bg-center">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent group-hover/portfolio:via-slate-900/50 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/60 to-transparent group-hover/portfolio:via-slate-900/50 transition-all duration-300" />
                   <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col items-start gap-2 transform group-hover/portfolio:-translate-y-1 transition-transform duration-300">
                     <span className="text-white font-bold text-sm drop-shadow-md">ผลงานขนย้ายล่าสุด</span>
                     <Link 

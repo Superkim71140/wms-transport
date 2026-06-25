@@ -9,7 +9,7 @@ export default function PortfolioCTA() {
     <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#040b15]">
       {/* Cinematic Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#040b15] via-[#061224] to-[#040b15] opacity-90" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#040b15] via-[#061224] to-[#040b15] opacity-90" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
       </div>
 

@@ -1,4 +1,4 @@
-"use client";
+
 
 import React from "react";
 import { MapPin, Truck, ShieldCheck } from "lucide-react";
@@ -66,9 +66,9 @@ export default function TransitTimeVisualizer({ province }: { province: string }
   const summaryText = summaries[province] || "กทม. ➔ ปลายทางของท่าน | ระยะทาง ประเมินตามระยะทางจริง | เวลาเดินทาง ประเมินตามเส้นทาง";
 
   return (
-    <div className="w-full bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-blue-500/20 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 relative overflow-hidden my-8">
+    <div className="w-full bg-white/2 backdrop-blur-xl border border-white/10 hover:border-blue-500/20 rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 relative overflow-hidden my-8">
       {/* Background radial glow */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/3 rounded-full blur-[80px] pointer-events-none" />
       
       <div className="flex flex-col gap-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -88,7 +88,7 @@ export default function TransitTimeVisualizer({ province }: { province: string }
         </div>
 
         {/* Visual Timeline Row */}
-        <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 py-4 px-4 bg-white/[0.01] border border-white/5 rounded-2xl">
+        <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 py-4 px-4 bg-white/1 border border-white/5 rounded-2xl">
           {/* Start Point */}
           <div className="flex items-center gap-3 w-full md:w-auto">
             <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
@@ -103,12 +103,12 @@ export default function TransitTimeVisualizer({ province }: { province: string }
           {/* Connection Line & Icon */}
           <div className="flex flex-col items-center justify-center flex-1 w-full md:w-auto py-2 md:py-0">
             <div className="w-full flex items-center justify-center gap-2 relative">
-              <div className="hidden md:block flex-1 h-[2px] bg-gradient-to-r from-blue-500/20 to-blue-500/60" />
+              <div className="hidden md:block flex-1 h-[2px] bg-linear-to-r from-blue-500/20 to-blue-500/60" />
               <div className="px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center gap-2 text-blue-400 text-xs font-bold animate-pulse">
                 <Truck className="w-3.5 h-3.5" />
                 <span>กำลังขนส่ง</span>
               </div>
-              <div className="hidden md:block flex-1 h-[2px] bg-gradient-to-r from-blue-500/60 to-blue-500/20" />
+              <div className="hidden md:block flex-1 h-[2px] bg-linear-to-r from-blue-500/60 to-blue-500/20" />
             </div>
             <p className="text-[10px] text-slate-400 mt-1 text-center font-mono">
               {info.distance}
@@ -131,13 +131,13 @@ export default function TransitTimeVisualizer({ province }: { province: string }
 
         {/* Detailed Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl bg-white/[0.01] border border-white/5">
+          <div className="p-4 rounded-xl bg-white/1 border border-white/5">
             <p className="text-xs font-bold text-slate-500 mb-1">ระยะเวลาเดินทางปกติ</p>
             <p className="text-base font-extrabold text-blue-400">
               {info.time}
             </p>
           </div>
-          <div className="p-4 rounded-xl bg-white/[0.01] border border-white/5">
+          <div className="p-4 rounded-xl bg-white/1 border border-white/5">
             <p className="text-xs font-bold text-slate-500 mb-1">เส้นทางหลัก</p>
             <p className="text-sm font-semibold text-slate-300 leading-snug">
               {info.route}

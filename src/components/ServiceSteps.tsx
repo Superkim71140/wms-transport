@@ -70,7 +70,7 @@ export default function ServiceSteps() {
           จากนาทีแรกที่ทักไลน์หาเรา จนส่งมอบงานเรียบร้อยแบบไร้กังวล ด้วยระบบจัดการที่ได้มาตรฐาน
         </p>
 
-        <div className="relative w-48 h-[2px] mx-auto mt-8 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+        <div className="relative w-48 h-[2px] mx-auto mt-8 bg-linear-to-r from-transparent via-blue-500/50 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
       </div>
 
       <div className="max-w-[1200px] mx-auto relative z-10 font-sans">
@@ -80,11 +80,11 @@ export default function ServiceSteps() {
           {/* Faint background track */}
           <div className="absolute inset-0 w-full bg-white/5" />
           {/* Blue glowing gradient overlay */}
-          <div className="absolute inset-0 w-full bg-gradient-to-b from-blue-400 via-blue-600 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
+          <div className="absolute inset-0 w-full bg-linear-to-b from-blue-400 via-blue-600 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
         </div>
 
         {/* Mobile vertical line */}
-        <div className="absolute left-6 top-0 bottom-0 -translate-x-1/2 w-[3px] md:hidden bg-gradient-to-b from-blue-400 via-blue-600 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
+        <div className="absolute left-6 top-0 bottom-0 -translate-x-1/2 w-[3px] md:hidden bg-linear-to-b from-blue-400 via-blue-600 to-transparent shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
 
         <div className="space-y-12 md:space-y-32">
           {steps.map((step, i) => {
@@ -99,7 +99,7 @@ export default function ServiceSteps() {
               >
                 {/* Timeline node number badge */}
                 <div 
-                  className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-14 h-14 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-white text-lg font-black font-mono shadow-[0_0_25px_rgba(59,130,246,0.8)] ring-8 ring-[#04152D]"
+                  className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-14 h-14 flex items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-blue-700 text-white text-lg font-black font-mono shadow-[0_0_25px_rgba(59,130,246,0.8)] ring-8 ring-[#04152D]"
                 >
                   {i + 1}
                 </div>
@@ -107,10 +107,10 @@ export default function ServiceSteps() {
                 {/* Card side: left or right */}
                 <div className="w-full md:w-1/2 pl-16 md:pl-0 md:px-16">
                   <div
-                    className="perf-card rounded-2xl p-6 sm:p-8 relative overflow-hidden group/card transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.04]"
+                    className="perf-card rounded-2xl p-6 sm:p-8 relative overflow-hidden group/card transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/4"
                   >
                     {/* Giant Watermark Numbers */}
-                    <div className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-black text-white/[0.03] select-none pointer-events-none font-mono transition-all duration-500 group-hover/card:text-blue-500/[0.05]">
+                    <div className="absolute -right-4 -bottom-6 text-8xl sm:text-9xl font-black text-white/3 select-none pointer-events-none font-mono transition-all duration-500 group-hover/card:text-blue-500/5">
                       {step.step}
                     </div>
 

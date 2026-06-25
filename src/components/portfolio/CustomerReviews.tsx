@@ -69,7 +69,7 @@ export default function CustomerReviews() {
 
       <div className="max-w-7xl mx-auto relative z-10 font-sans">
         <div className="text-center mb-16">
-          <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+          <span className="px-5 py-2 bg-white/3 text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
             รีวิวจากลูกค้า
           </span>
           <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight mt-4 mb-6">
@@ -89,10 +89,10 @@ export default function CustomerReviews() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               whileHover={{ y: -6, scale: 1.01 }}
-              className="bg-gradient-to-b from-white/[0.03] to-white/[0.01] backdrop-blur-xl p-8 rounded-3xl border border-white/10 hover:border-blue-500/30 hover:from-white/[0.05] hover:to-blue-950/20 transition-all duration-300 relative group flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[300px]"
+              className="bg-linear-to-b from-white/3 to-white/1 backdrop-blur-xl p-8 rounded-3xl border border-white/10 hover:border-blue-500/30 hover:from-white/5 hover:to-blue-950/20 transition-all duration-300 relative group flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.3)] min-h-[300px]"
             >
               {/* Ambient inner card glow */}
-              <div className="absolute -inset-px bg-gradient-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute -inset-px bg-linear-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
               {/* Top Row: Stars & Quote Watermark */}
               <div className="flex items-center justify-between z-10 mb-4">
@@ -111,7 +111,7 @@ export default function CustomerReviews() {
 
               {/* Reviewer Row */}
               <div className="flex items-center gap-4 border-t border-white/10 pt-5 mt-auto relative z-10">
-                <div className="relative h-11 w-11 rounded-full overflow-hidden shrink-0 bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-[0_4px_12px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform">
+                <div className="relative h-11 w-11 rounded-full overflow-hidden shrink-0 bg-linear-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-[0_4px_12px_rgba(37,99,235,0.3)] group-hover:scale-105 transition-transform">
                   <span className="text-white font-extrabold text-base">{review.initial}</span>
                 </div>
                 

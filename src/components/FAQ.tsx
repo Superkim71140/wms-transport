@@ -111,8 +111,8 @@ export default function FAQ() {
                 key={index}
                 className={`rounded-2xl border transition-all duration-300 overflow-hidden relative ${
                   isActive
-                    ? "bg-gradient-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] border-cyan-400/50 shadow-[0_20px_50px_rgba(34,211,238,0.15)]"
-                    : "perf-card hover:border-white/20 hover:bg-white/[0.05]"
+                    ? "bg-linear-to-br from-blue-900/40 via-[#040b15]/80 to-[#040b15] border-cyan-400/50 shadow-[0_20px_50px_rgba(34,211,238,0.15)]"
+                    : "perf-card hover:border-white/20 hover:bg-white/5"
                 }`}
               >
 
@@ -129,7 +129,7 @@ export default function FAQ() {
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 shrink-0 ${
                       isActive
                         ? faq.colorTheme
-                        : "bg-white/[0.02] border-white/10 text-slate-400 group-hover:bg-white/[0.05] group-hover:text-slate-300 group-hover:border-white/20 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.05)]"
+                        : "bg-white/2 border-white/10 text-slate-400 group-hover:bg-white/5 group-hover:text-slate-300 group-hover:border-white/20 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.05)]"
                     }`}>
                       {(() => {
                         const IconComponent = faq.icon;
@@ -164,7 +164,7 @@ export default function FAQ() {
                 >
                   <div className="overflow-hidden">
                     <div className="px-6 sm:px-7 pb-6 pl-[3.5rem] sm:pl-[4.25rem]">
-                      <div className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/[0.01] p-4 rounded-r-xl">
+                      <div className="pl-4 border-l-2 border-blue-500/60 text-slate-300 text-sm sm:text-base font-normal leading-relaxed bg-white/1 p-4 rounded-r-xl">
                         {faq.answer}
                       </div>
                     </div>

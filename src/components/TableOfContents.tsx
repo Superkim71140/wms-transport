@@ -80,7 +80,7 @@ export default function TableOfContents() {
   return (
     <>
       {/* ── Mobile Collapsible TOC ── */}
-      <div className="lg:hidden w-full mb-8 bg-white/[0.02] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl">
+      <div className="lg:hidden w-full mb-8 bg-white/2 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex items-center justify-between p-4 font-bold text-white text-left focus:outline-none"
@@ -123,7 +123,7 @@ export default function TableOfContents() {
       </div>
 
       {/* ── Desktop Sticky Sidebar TOC ── */}
-      <nav className="hidden lg:block sticky top-36 bg-white/[0.01] border border-white/5 hover:border-white/10 rounded-3xl p-6 backdrop-blur-xl transition-all duration-300 max-h-[calc(100vh-180px)] overflow-y-auto">
+      <nav className="hidden lg:block sticky top-36 bg-white/1 border border-white/5 hover:border-white/10 rounded-3xl p-6 backdrop-blur-xl transition-all duration-300 max-h-[calc(100vh-180px)] overflow-y-auto">
         <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4 border-b border-white/5 pb-3">
           สารบัญเนื้อหา
         </h4>

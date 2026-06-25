@@ -53,7 +53,7 @@ export default function PortfolioGallery() {
 
       <div className="max-w-7xl mx-auto relative z-10 font-sans">
         <div className="text-center mb-10 md:mb-16">
-          <span className="px-5 py-2 bg-white/[0.03] text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+          <span className="px-5 py-2 bg-white/3 text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
             แกลเลอรีผลงาน
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight mb-4 md:mb-6">
@@ -99,7 +99,7 @@ export default function PortfolioGallery() {
                 exit={{ opacity: 0, scale: 0.8, y: 20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 key={img.id}
-                className="relative rounded-2xl overflow-hidden group break-inside-avoid bg-white/[0.02] border border-white/10 cursor-pointer shadow-md hover:shadow-2xl hover:border-blue-500/30 dark:hover:shadow-[0_20px_50px_rgba(59,130,246,0.15)] transition-all duration-500"
+                className="relative rounded-2xl overflow-hidden group break-inside-avoid bg-white/2 border border-white/10 cursor-pointer shadow-md hover:shadow-2xl hover:border-blue-500/30 dark:hover:shadow-[0_20px_50px_rgba(59,130,246,0.15)] transition-all duration-500"
                 onMouseEnter={() => setHoveredImage(img.id)}
                 onMouseLeave={() => setHoveredImage(null)}
               >
@@ -116,7 +116,7 @@ export default function PortfolioGallery() {
                 />
                 
                 {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 pointer-events-none">

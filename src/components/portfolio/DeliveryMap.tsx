@@ -95,7 +95,7 @@ export default function DeliveryMap() {
         {/* LEFT COLUMN: Headings & Stat Cards */}
         <div className="lg:col-span-5 flex flex-col gap-6 text-left relative z-10">
           <div>
-            <span className="px-5 py-2 bg-gradient-to-r from-red-500/10 to-blue-500/10 border border-red-500/20 text-red-400 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)] mb-4 inline-block">
+            <span className="px-5 py-2 bg-linear-to-r from-red-500/10 to-blue-500/10 border border-red-500/20 text-red-400 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)] mb-4 inline-block">
               พื้นที่ให้บริการทั่วประเทศ
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mt-2">
@@ -113,7 +113,7 @@ export default function DeliveryMap() {
             {/* Stat 1: 77 จังหวัด */}
             <motion.div
               whileHover={{ y: -3, scale: 1.01 }}
-              className="bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/[0.05] rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
+              className="bg-white/2 backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/5 rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
             >
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:bg-blue-600/20 transition-all shadow-[0_0_15px_rgba(59,130,246,0.2)]">
                 <MapPin className="w-5 h-5 text-blue-400 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
@@ -127,7 +127,7 @@ export default function DeliveryMap() {
             {/* Stat 2: 24/7 บริการ */}
             <motion.div
               whileHover={{ y: -3, scale: 1.01 }}
-              className="bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/[0.05] rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
+              className="bg-white/2 backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/5 rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
             >
               <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0 group-hover:bg-red-500/10 group-hover:border-red-500/20 transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)]">
                 <Clock className="w-5 h-5 text-sky-400 group-hover:text-red-400 filter drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
@@ -141,7 +141,7 @@ export default function DeliveryMap() {
             {/* Stat 3: ประกันภัยสินค้า */}
             <motion.div
               whileHover={{ y: -3, scale: 1.01 }}
-              className="bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/[0.05] rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
+              className="bg-white/2 backdrop-blur-xl border border-white/10 hover:border-red-500/30 hover:bg-white/5 rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.15)] group"
             >
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-emerald-600/20 transition-all shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                 <ShieldCheck className="w-5 h-5 text-emerald-400 filter drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
@@ -159,7 +159,7 @@ export default function DeliveryMap() {
         <div className="lg:col-span-7 flex flex-col gap-4 relative z-10 w-full">
           
           {/* Tab Navigation selectors - Scrollable on mobile */}
-          <div className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl p-1.5 flex gap-1.5 overflow-x-auto whitespace-nowrap flex-nowrap w-full lg:flex-wrap pb-2 scrollbar-hide relative z-20">
+          <div className="bg-white/2 backdrop-blur-xl border border-white/10 rounded-2xl p-1.5 flex gap-1.5 overflow-x-auto whitespace-nowrap flex-nowrap w-full lg:flex-wrap pb-2 scrollbar-hide relative z-20">
             {regionsData.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -192,7 +192,7 @@ export default function DeliveryMap() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.25 }}
-                className="bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.3)] relative overflow-hidden h-full group"
+                className="bg-white/2 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-[0_15px_40px_rgba(0,0,0,0.3)] relative overflow-hidden h-full group"
               >
                 {/* Visual Glow */}
                 <div className="absolute -top-12 -right-12 w-40 h-40 bg-blue-500/5 rounded-full blur-[40px] pointer-events-none" />
@@ -210,7 +210,7 @@ export default function DeliveryMap() {
                   </p>
 
                   {/* Delivery Speed Highlight Banner */}
-                  <div className="bg-gradient-to-r from-blue-950/40 via-blue-900/20 to-transparent border border-blue-500/20 p-5 rounded-2xl text-left">
+                  <div className="bg-linear-to-r from-blue-950/40 via-blue-900/20 to-transparent border border-blue-500/20 p-5 rounded-2xl text-left">
                     <span className="text-[10px] text-red-400 font-bold uppercase tracking-wider block mb-1">
                       ระยะเวลาจัดส่งสินค้าโดยประมาณ
                     </span>
@@ -229,7 +229,7 @@ export default function DeliveryMap() {
                       {activeRegion.routes.map((route, i) => (
                         <div
                           key={i}
-                          className="relative overflow-hidden bg-gradient-to-r from-white/[0.03] to-white/[0.01] border border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-md hover:border-blue-500/20 transition-all duration-300 group/ticket"
+                          className="relative overflow-hidden bg-linear-to-r from-white/3 to-white/1 border border-white/5 rounded-2xl p-4 flex items-center justify-between shadow-md hover:border-blue-500/20 transition-all duration-300 group/ticket"
                         >
                           {/* Left ticket notch */}
                           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-4 bg-[#040b15] rounded-r-full border-r border-t border-b border-white/10 group-hover/ticket:border-r-blue-500/30 transition-colors duration-300" />

@@ -12,6 +12,10 @@
   --color-gray-bg: #F4F6F8;
   --color-gray-card: #F9FAFB;
   --color-gray-dark: #1E293B;
+  --color-white: #ffffff;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-900: #1e3a8a;
   
   --font-sans: var(--font-noto-sans-thai), var(--font-inter), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
@@ -324,11 +328,11 @@ main {
 
 .content-auto {
   content-visibility: auto;
-  contain-intrinsic-size: 800px;
+  contain-intrinsic-size: auto 800px;
 }
 
 .section-contain {
-  contain: layout paint;
+  contain: layout style paint;
 }
 
 @media (max-width: 767px) {

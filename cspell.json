@@ -39,7 +39,18 @@
     "webp",
     "webps",
     "mibextid",
-    "wwXIfr"
+    "wwXIfr",
+    "nakhon",
+    "pathum",
+    "phra",
+    "samut",
+    "songkhram",
+    "thani",
+    "thonburi",
+    "subheadline",
+    "khae",
+    "maha",
+    "pinklao"
   ],
   "ignoreRegExpList": [
     "/[\\u0E00-\\u0E7F]+/g",

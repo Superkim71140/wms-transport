@@ -18,7 +18,7 @@ export default function FloatingContactBar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,7 +34,7 @@ export default function FloatingContactBar() {
             stiffness: 260,
             damping: 20,
           }}
-          className="fixed bottom-6 right-6 sm:left-1/2 sm:-translate-x-1/2 sm:right-auto flex items-center gap-2 sm:gap-3 bg-[#040b15]/90 backdrop-blur-2xl border border-white/10 p-2 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-[100] select-none"
+          className="fixed bottom-6 right-6 sm:left-1/2 sm:-translate-x-1/2 sm:right-auto flex items-center gap-2 sm:gap-3 bg-[#040b15]/90 backdrop-blur-2xl border border-white/10 p-2 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] z-100 select-none"
         >
           {/* Status Indicator & Label */}
           <div className="flex items-center gap-2 pl-3 pr-2 border-r border-white/10 py-1">

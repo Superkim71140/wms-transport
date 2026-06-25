@@ -63,12 +63,12 @@ const projects: Project[] = [
   }
 ];
 
-function GalleryCard({ project }: { project: Project }) {
+function GalleryCard({ project, index }: { project: Project; index: number }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#071426] shadow-[0_18px_50px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30">
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-900 lg:aspect-[16/11]">
+      <div className="relative aspect-4/3 overflow-hidden bg-slate-900 lg:aspect-16/11">
         <Image
           src={project.imgUrl}
           alt={`${project.serviceType} ${project.location}`}
@@ -79,14 +79,14 @@ function GalleryCard({ project }: { project: Project }) {
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setIsLoaded(true)}
-          loading="lazy"
+          priority={index < 2}
         />
 
         {!isLoaded && (
           <div className="absolute inset-0 animate-pulse bg-slate-800/70" />
         )}
 
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#071426] to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#071426] to-transparent pointer-events-none" />
 
         <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/70 px-3 py-1.5 text-xs font-bold text-slate-100 backdrop-blur-md">
           <span className="inline-flex h-2 w-2 rounded-full bg-[#06C755] shadow-[0_0_8px_rgba(6,199,85,0.8)]" />
@@ -101,7 +101,7 @@ function GalleryCard({ project }: { project: Project }) {
             {project.serviceType}
           </span>
 
-          <span className="rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2 text-xs font-bold text-slate-200">
+          <span className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200">
             {project.location}
           </span>
         </div>
@@ -129,8 +129,24 @@ export default function GalleryMasonry() {
       ? projects
       : projects.filter((p) => p.category === selectedFilter);
 
+  const imageSchema = filteredProjects.map(project => ({
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    "contentUrl": `https://wms-transport.com${project.imgUrl}`,
+    "name": `${project.serviceType} - ${project.location}`,
+    "caption": project.desc,
+    "creator": {
+      "@type": "LocalBusiness",
+      "name": "WMS Transport"
+    }
+  }));
+
   return (
-    <div className="relative z-10 w-full font-sans">
+    <div className="relative z-10 w-full font-sans content-auto section-contain">
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }} 
+      />
       <div className="mx-auto max-w-3xl text-center mb-10">
         <span className="inline-flex rounded-full border border-blue-400/20 bg-blue-500/10 px-5 py-2 text-xs font-bold text-blue-300 tracking-wide">
           ผลงานจริงของเรา
@@ -146,7 +162,7 @@ export default function GalleryMasonry() {
         </p>
       </div>
 
-      <div className="mx-auto mb-10 flex w-fit max-w-full gap-2 overflow-x-auto sm:flex-wrap rounded-2xl border border-white/10 bg-white/[0.03] p-1.5 scrollbar-hide">
+      <div className="mx-auto mb-10 flex w-fit max-w-full gap-2 overflow-x-auto sm:flex-wrap rounded-2xl border border-white/10 bg-white/3 p-1.5 scrollbar-hide">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -155,7 +171,7 @@ export default function GalleryMasonry() {
             className={`min-h-[44px] shrink-0 rounded-xl px-4 py-2 text-sm font-bold transition-all duration-300 ${
               selectedFilter === cat
                 ? "bg-blue-600 text-white shadow-[0_8px_24px_rgba(37,99,235,0.25)]"
-                : "text-slate-300 hover:bg-white/[0.06] hover:text-white"
+                : "text-slate-300 hover:bg-white/6 hover:text-white"
             }`}
           >
             {cat}
@@ -165,8 +181,8 @@ export default function GalleryMasonry() {
 
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
-          {filteredProjects.map((project) => (
-            <GalleryCard key={project.id} project={project} />
+          {filteredProjects.map((project, index) => (
+            <GalleryCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>

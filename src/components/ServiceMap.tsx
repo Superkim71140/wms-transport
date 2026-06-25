@@ -71,7 +71,7 @@ export default function ServiceMap() {
               {routes.map((route, idx) => (
                 <div 
                   key={idx}
-                  className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-white/[0.02] border border-white/5 rounded-xl hover:bg-blue-900/20 hover:border-blue-400/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] md:hover:-translate-y-1 transition-all duration-300 group/route"
+                  className="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-white/2 border border-white/5 rounded-xl hover:bg-blue-900/20 hover:border-blue-400/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] md:hover:-translate-y-1 transition-all duration-300 group/route"
                 >
                   <div className="flex flex-wrap items-center gap-2 font-bold text-xs sm:text-sm">
                     <span className="text-slate-200">{route.from}</span>
@@ -118,7 +118,7 @@ export default function ServiceMap() {
           {blocks.map((block, idx) => (
             <div 
               key={idx}
-              className="bg-gradient-to-br from-white/[0.02] to-white/[0.05] hover:to-blue-900/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-[0_10px_30px_rgba(0,0,0,0.15)] flex items-start gap-4 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-500 group relative overflow-hidden"
+              className="bg-linear-to-br from-white/2 to-white/5 hover:to-blue-900/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-[0_10px_30px_rgba(0,0,0,0.15)] flex items-start gap-4 hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-500 group relative overflow-hidden"
             >
               <div className="p-3 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-xl group-hover:bg-blue-600/20 group-hover:text-blue-300 transition-all duration-300 shadow-inner shrink-0">
                 <block.icon className="w-5 h-5 sm:w-6 sm:h-6" />

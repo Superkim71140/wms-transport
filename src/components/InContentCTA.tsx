@@ -10,7 +10,7 @@ export default function InContentCTA({
   subtext = "ไม่มีค่าใช้จ่าย ไม่ผูกมัด — แค่ส่งรูปถ่ายหรือวิดีโอสิ่งของทาง LINE เจ้าหน้าที่จะประเมินราคาให้ภายใน 5 นาที",
 }: InContentCTAProps) {
   return (
-    <div className="my-10 bg-gradient-to-r from-blue-900/40 to-[#040b15] border-y border-blue-500/20 py-8 px-6 flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl shadow-[0_0_30px_rgba(59,130,246,0.1)] relative overflow-hidden">
+    <div className="my-10 bg-linear-to-r from-blue-900/40 to-[#040b15] border-y border-blue-500/20 py-8 px-6 flex flex-col md:flex-row items-center justify-between gap-6 rounded-2xl shadow-[0_0_30px_rgba(59,130,246,0.1)] relative overflow-hidden">
       {/* Glow accent */}
       <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none" />
 
