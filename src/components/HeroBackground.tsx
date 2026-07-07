@@ -3,7 +3,7 @@ import React from "react";
 
 export default function HeroBackground({ children }: { children?: React.ReactNode }) {
   return (
-    <section className="relative w-full max-w-full pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-0 md:pb-0 min-h-[380px] md:h-[68vh] md:min-h-[560px] overflow-hidden bg-[#020817] flex items-center justify-center">
+    <section className="relative w-full max-w-full pt-20 pb-10 sm:pt-24 sm:pb-12 md:py-16 min-h-[380px] md:min-h-[68vh] overflow-hidden bg-[#020817] flex items-center justify-center">
       {/* Hero Cover Image */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -11,7 +11,7 @@ export default function HeroBackground({ children }: { children?: React.ReactNod
           alt="WMS Transport Cover — รถกระบะตู้ทึบรับจ้าง"
           fill
           sizes="100vw"
-          className="object-cover object-[center_32%]"
+          className="object-cover object-[center_32%] opacity-35"
           priority
           fetchPriority="high"
         />
