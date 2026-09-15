@@ -17,10 +17,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = posts[slug];
+  const decoded = decodeURIComponent(slug);
+  const post = posts[slug] || posts[decoded];
   if (!post) {
     return {
       title: "ไม่พบหน้าบทความ | WMS TRANSPORT",
+      robots: { index: false, follow: false },
     };
   }
   return {
@@ -38,7 +40,8 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = posts[slug];
+  const decoded = decodeURIComponent(slug);
+  const post = posts[slug] || posts[decoded];
 
   if (!post) {
     notFound();
@@ -66,40 +69,35 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans">
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden font-sans text-slate-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
       />
-      <main className="grow pt-32 pb-24 md:pt-40 md:pb-36 relative">
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[10%] left-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-indigo-500/5 to-transparent" />
-        </div>
-
+      <main className="grow pt-12 pb-20 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Back button */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white mb-8 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-500 hover:text-blue-600 mb-6 transition-colors"
           >
             <span>← กลับไปยังหน้าบล็อก</span>
           </Link>
 
           <article>
-            <header className="mb-12">
-              <span className="text-sm text-blue-400 font-bold mb-3 inline-block">
+            <header className="mb-8">
+              <span className="text-xs text-blue-700 font-bold mb-2.5 inline-block bg-blue-50 px-3 py-1 rounded-md border border-blue-200">
                 เผยแพร่เมื่อ {post.date}
               </span>
-              <h1 className="text-3xl md:text-5xl font-black text-white leading-tight mb-6">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] leading-tight mb-4 tracking-tight">
                 {post.title}
               </h1>
-              <p className="text-lg text-slate-300 font-medium leading-relaxed">
+              <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
                 {post.description}
               </p>
             </header>
 
-            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden mb-12 border border-white/10 shadow-2xl">
+            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden mb-8 border border-slate-200/90 shadow-xs bg-slate-100">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -110,21 +108,21 @@ export default async function BlogPostPage({
             </div>
 
             {/* Render formatted paragraphs */}
-            <div className="text-slate-300 text-base md:text-lg leading-relaxed space-y-6 font-medium whitespace-pre-line">
+            <div className="text-slate-700 text-base md:text-lg leading-relaxed space-y-6 font-normal whitespace-pre-line">
               {post.content}
             </div>
 
             {/* Inline Conversion CTA */}
-            <div className="mt-12 bg-linear-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 backdrop-blur-xl rounded-3xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-white shadow-md">
               <div>
-                <p className="text-white font-black text-xl mb-1">ต้องการย้ายบ้านด่วน? ทัก LINE เลย</p>
-                <p className="text-slate-300 text-sm">ทีมงาน WMS พร้อมช่วยคุณตลอด 24 ชั่วโมง ประเมินราคาฟรี ไม่มีค่าใช้จ่าย</p>
+                <p className="text-white font-extrabold text-lg sm:text-xl mb-1">ต้องการย้ายบ้านด่วน? ทัก LINE เลย</p>
+                <p className="text-slate-300 text-xs sm:text-sm">ทีมงาน WMS พร้อมช่วยคุณตลอด 24 ชั่วโมง ประเมินราคาฟรี ไม่มีค่าใช้จ่าย</p>
               </div>
               <a
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 whitespace-nowrap flex items-center gap-2.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-black px-7 py-3.5 rounded-2xl shadow-[0_0_25px_rgba(6,199,85,0.4)] transition-all duration-300 hover:scale-105 border border-[#06C755]/30"
+                className="shrink-0 whitespace-nowrap flex items-center gap-2 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold px-6 py-3 rounded-xl shadow-xs transition-colors"
               >
                 <Image
                   src="/images/LINE_icon.webp"
@@ -133,13 +131,12 @@ export default async function BlogPostPage({
                   height={20}
                   className="h-5 w-5 object-contain shrink-0"
                 />
-                ทัก LINE เลย
+                <span>ทัก LINE เลย</span>
               </a>
             </div>
           </article>
         </div>
       </main>
-
-      </div>
+    </div>
   );
 }

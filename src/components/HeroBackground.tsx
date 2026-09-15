@@ -1,36 +1,15 @@
-import Image from "next/image";
 import React from "react";
 
 export default function HeroBackground({ children }: { children?: React.ReactNode }) {
   return (
-    <section className="relative w-full max-w-full pt-20 pb-10 sm:pt-24 sm:pb-12 md:py-16 min-h-[380px] md:min-h-[68vh] overflow-hidden bg-[#020817] flex items-center justify-center">
-      {/* Hero Cover Image */}
-      <div className="absolute inset-0 w-full h-full">
-        <Image
-          src="/images/wms-cover.webp"
-          alt="WMS Transport Cover — รถกระบะตู้ทึบรับจ้าง"
-          fill
-          sizes="100vw"
-          className="object-cover object-[center_32%] opacity-35"
-          priority
-          fetchPriority="high"
-        />
+    <section className="relative w-full max-w-full pt-20 pb-10 sm:pt-22 sm:pb-12 md:pt-24 md:pb-14 overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-white flex flex-col items-center justify-center border-b border-slate-200/60">
+      {/* Soft atmospheric ambient tints */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-10%] left-[15%] w-[600px] h-[350px] bg-blue-400/8 rounded-full blur-[100px]" />
+        <div className="absolute top-[20%] right-[10%] w-[500px] h-[300px] bg-sky-400/6 rounded-full blur-[120px]" />
       </div>
 
-      {/* Dark overlay gradient to blend into the page below */}
-      <div className="absolute inset-0 bg-linear-to-b from-[#020817]/40 via-transparent to-[#020817] pointer-events-none z-10" />
-
-      {/* Subtle floating blurred light sources (depth effect) - Desktop Only */}
-      <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden hidden md:block">
-        <div className="absolute top-[5%] left-[-5%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[150px]" />
-        <div className="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-indigo-500/6 rounded-full blur-[150px]" />
-      </div>
-
-      {/* Subtle dot grid overlay — kept inside hero section only */}
-      <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[32px_32px] pointer-events-none z-20" />
-
-      {children && <div className="relative z-30 w-full">{children}</div>}
+      {children && <div className="relative z-10 w-full">{children}</div>}
     </section>
   );
 }
-

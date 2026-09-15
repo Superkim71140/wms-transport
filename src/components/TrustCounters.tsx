@@ -1,134 +1,202 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView, animate, useMotionValue, useTransform } from "framer-motion";
-import { ShieldCheck, Clock3, Award, Map } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { ShieldCheck, Clock3, Award, Map, CheckCircle2 } from "lucide-react";
 
-interface CounterProps {
-  end: number;
+interface StatItem {
+  value: number | string;
   suffix?: string;
-  duration?: number;
-  startTrigger: boolean;
+  label: string;
+  desc: string;
+  badge: string;
+  accentGradient: string;
+  iconBg: string;
+  iconBorder: string;
+  icon: React.ReactNode;
+  type: "number" | "text";
 }
 
-function CountUp({ end, suffix = "", duration = 1.5, startTrigger }: CounterProps) {
-  const [isMobile, setIsMobile] = useState(false);
-  
+function StatNumber({ value, suffix = "", type }: { value: number | string; suffix?: string; type: "number" | "text" }) {
+  const [displayValue, setDisplayValue] = useState<number | string>(value);
+  const containerRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+    if (type !== "number" || typeof value !== "number") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let startTime: number | null = null;
+    const duration = 1400; // ms
+    let animationFrameId: number;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry?.isIntersecting) {
+        observer.disconnect();
+
+        const step = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          // Ease-out cubic
+          const ease = 1 - Math.pow(1 - progress, 3);
+          setDisplayValue(Math.floor(ease * value));
+
+          if (progress < 1) {
+            animationFrameId = requestAnimationFrame(step);
+          } else {
+            setDisplayValue(value);
+          }
+        };
+
+        animationFrameId = requestAnimationFrame(step);
+      }
+    }, { threshold: 0.2 });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
-    checkMobile();
-  }, []);
+  }, [value, type]);
 
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest).toLocaleString() + suffix);
-
-  useEffect(() => {
-    if (isMobile) return;
-    if (!startTrigger) return;
-    
-    const controls = animate(count, end, {
-      duration: duration,
-      ease: "easeOut",
-    });
-
-    return () => controls.stop();
-  }, [end, duration, startTrigger, count, isMobile]);
-
-  if (isMobile) {
-    return <span>{end.toLocaleString() + suffix}</span>;
-  }
-
-  return <motion.span>{rounded}</motion.span>;
+  return (
+    <span ref={containerRef} className="tabular-nums">
+      {typeof displayValue === "number" ? displayValue.toLocaleString() + suffix : displayValue}
+    </span>
+  );
 }
 
 export default function TrustCounters() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const stats = [
+  const stats: StatItem[] = [
     {
-      value: 10000,
-      suffix: "+",
-      label: "งานที่ให้บริการ",
-      desc: "ความไว้วางใจจากลูกค้ากว่าหมื่นราย",
-      icon: <ShieldCheck className="h-7 w-7 text-blue-400" />,
-      type: "number"
+      value: "ครบวงจร",
+      label: "บริการขนย้ายครอบคลุม",
+      desc: "ย้ายบ้าน คอนโด ส่งมอเตอร์ไซค์ และสินค้าทั่วไป",
+      badge: "บริการทุกประเภท",
+      accentGradient: "from-blue-600 via-sky-500 to-blue-400",
+      iconBg: "bg-blue-50",
+      iconBorder: "border-blue-200",
+      icon: <ShieldCheck className="h-6 w-6 text-blue-600" />,
+      type: "text"
     },
     {
       value: 24,
       suffix: "/7",
-      label: "พร้อมให้บริการ",
-      desc: "ดูแลช่วยเหลือตลอด 24 ชั่วโมง ไม่มีวันหยุด",
-      icon: <Clock3 className="h-7 w-7 text-emerald-400" />,
+      label: "พร้อมประสานงาน",
+      desc: "สอบถามข้อมูลและประเมินราคาล่วงหน้าได้ตลอดเวลา",
+      badge: "ติดต่อได้ตลอด",
+      accentGradient: "from-emerald-500 via-teal-500 to-emerald-400",
+      iconBg: "bg-emerald-50",
+      iconBorder: "border-emerald-200",
+      icon: <Clock3 className="h-6 w-6 text-emerald-600" />,
       type: "number"
     },
     {
-      value: 99,
-      suffix: "%",
-      label: "ความพึงพอใจลูกค้า",
-      desc: "คะแนนรีวิวระดับ 5 ดาวจากผู้ใช้จริง",
-      icon: <Award className="h-7 w-7 text-amber-400" />,
-      type: "number"
+      value: "มืออาชีพ",
+      label: "ใส่ใจทุกขั้นตอน",
+      desc: "ทีมงานยกของระมัดระวัง พร้อมอุปกรณ์ป้องกันรอย",
+      badge: "ดูแลด้วยใจ",
+      accentGradient: "from-blue-600 via-indigo-500 to-emerald-500",
+      iconBg: "bg-blue-50",
+      iconBorder: "border-blue-200",
+      icon: <Award className="h-6 w-6 text-blue-600" />,
+      type: "text"
     },
     {
       value: "ทั่วไทย",
-      label: "ครอบคลุมทุกจังหวัด",
-      desc: "ขนส่งขนย้ายสินค้าได้ทุกภูมิภาคทั่วประเทศ",
-      icon: <Map className="h-7 w-7 text-sky-400" />,
+      label: "ครอบคลุมทุกภูมิภาค",
+      desc: "ขนส่งขนย้ายสินค้าได้ทุกเส้นทางทั่วประเทศ",
+      badge: "บริการทั่วไทย",
+      accentGradient: "from-sky-500 via-blue-500 to-emerald-400",
+      iconBg: "bg-sky-50",
+      iconBorder: "border-sky-200",
+      icon: <Map className="h-6 w-6 text-sky-600" />,
       type: "text"
     }
   ];
 
   return (
-    <section ref={sectionRef} className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 relative z-10 font-sans section-contain">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="text-center mb-16">
-          <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
-            สถิติและความน่าเชื่อถือ
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4 mt-6">
-            ความน่าเชื่อถือที่พิสูจน์ได้ด้วย<span className="text-blue-400">ตัวเลข</span>
+    <section 
+      id="trust" 
+      ref={sectionRef} 
+      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-gradient-to-br from-[#071A33] via-[#0B2A50] to-[#0F3B6D] text-white"
+    >
+      {/* Subtle ambient radial blue glow */}
+      <div 
+        className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_25%,rgba(37,99,235,0.18),transparent)] pointer-events-none" 
+        aria-hidden="true" 
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header Area */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            มาตรฐานบริการที่สร้างความมั่นใจในทุก<span className="text-sky-400">เส้นทาง</span>
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            ผลงานจริงและมาตรฐานการบริการระดับประเทศที่พร้อมรองรับงานขนย้ายทุกประเภทของท่าน
+
+          <p className="text-sm sm:text-base text-blue-100/80 max-w-2xl mx-auto mt-4 font-normal leading-relaxed">
+            ความพร้อมด้านยานพาหนะ ทีมงาน และการดูแลความปลอดภัยของสิ่งของทุกชิ้นตลอดการขนย้าย
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className="perf-card rounded-3xl p-8 hover:border-blue-500/30 transition-all duration-300 md:hover:-translate-y-2 md:hover:scale-[1.02] flex flex-col items-center text-center group"
-            >
-              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl mb-6 group-hover:bg-blue-500/10 group-hover:scale-110 transition-all duration-300 shadow-inner">
-                {stat.icon}
-              </div>
-              
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black text-white font-mono tracking-tight mb-3 select-none">
-                {stat.type === "number" ? (
-                  <CountUp 
-                    end={stat.value as number} 
+        {/* Statistics Cards Grid with Connected Route Line */}
+        <div className="relative">
+          {/* Decorative horizontal route line connecting cards on desktop */}
+          <div 
+            className="hidden lg:block absolute top-[44%] left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-blue-400/25 z-0 pointer-events-none" 
+            aria-hidden="true" 
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center min-w-0 relative z-10">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl sm:rounded-3xl border border-white/20 p-6 sm:p-7 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/15 transition-all duration-200 hover:-translate-y-1.5 motion-reduce:transform-none flex flex-col items-center text-center group min-w-0 relative overflow-hidden"
+              >
+                {/* Subtle top accent strip */}
+                <div 
+                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.accentGradient}`} 
+                  aria-hidden="true" 
+                />
+
+                {/* Card Icon Node */}
+                <div className={`w-14 h-14 rounded-2xl ${stat.iconBg} border ${stat.iconBorder} flex items-center justify-center mb-5 shadow-xs group-hover:scale-105 transition-transform duration-200 motion-reduce:transform-none`}>
+                  {stat.icon}
+                </div>
+                
+                {/* Metric / Value */}
+                <div className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#0B1F3A] font-mono tracking-tight mb-2 select-none">
+                  <StatNumber 
+                    value={stat.value} 
                     suffix={stat.suffix} 
-                    startTrigger={isInView} 
+                    type={stat.type} 
                   />
-                ) : (
-                  <span className="text-white">
-                    {stat.value}
+                </div>
+                
+                {/* Label */}
+                <h3 className="text-base sm:text-lg font-bold text-blue-700 mb-1.5 tracking-tight">
+                  {stat.label}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-0 sm:min-h-[2.5rem]">
+                  {stat.desc}
+                </p>
+
+                {/* Controlled Trust Badge */}
+                <div className="mt-auto pt-3 border-t border-slate-100 w-full flex items-center justify-center">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-800 bg-[#ECFDF5] border border-[#A7F3D0] px-2.5 py-0.5 rounded-full">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" aria-hidden="true" />
+                    <span>{stat.badge}</span>
                   </span>
-                )}
+                </div>
               </div>
-              
-              <h3 className="text-lg font-bold text-blue-300 mb-2 group-hover:text-blue-400 transition-colors">
-                {stat.label}
-              </h3>
-              
-              <p className="text-sm text-slate-400 leading-relaxed max-w-[200px]">
-                {stat.desc}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

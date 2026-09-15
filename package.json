@@ -7,20 +7,21 @@
     "build": "npm run setup:partytown && next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node tools/verify-seo-data.js",
+    "seo:verify": "node tools/verify-seo-data.js",
     "optimize:images": "node scripts/optimize-images.mjs",
     "setup:partytown": "partytown copylib public/~partytown"
   },
   "dependencies": {
     "@builder.io/partytown": "^0.10.3",
-    "@vercel/og": "^0.11.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.17.0",
-    "next": "16.2.6",
+    "next": "^16.3.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-masonry-css": "^1.0.16",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.4",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
@@ -30,7 +31,7 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "eslint-config-next": "^16.3.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

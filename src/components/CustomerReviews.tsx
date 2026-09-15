@@ -14,62 +14,36 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
     .filter(r => r.moderationStatus === "approved")
     .slice(0, 3);
 
-  const reviewSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "WMS Transport",
-    "image": "https://wms-transport.com/images/logoWMS.webp",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": reviewEvidenceData.length.toString()
-    },
-    "review": displayTestimonials.map(t => ({
-      "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": t.displayName
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": t.rating.toString(),
-        "bestRating": "5"
-      },
-      "reviewBody": t.reviewText
-    }))
-  };
-
   return (
     <section 
       id="reviews" 
-      className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 relative w-full font-sans overflow-hidden section-contain"
+      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-gradient-to-b from-[#F7FAFF] via-white to-white"
     >
-      <script 
-        type="application/ld+json" 
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }} 
+      {/* Ambient subtle decorative background element */}
+      <div 
+        className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_20%,rgba(37,99,235,0.03),transparent)] pointer-events-none" 
+        aria-hidden="true" 
       />
-      {/* Dynamic ambient glow effects - Desktop Only */}
-      <div className="absolute top-12 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10 hidden md:block" />
-      <div className="absolute bottom-12 right-1/4 w-96 h-96 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none -z-10 hidden md:block" />
 
-      {/* Header */}
-      <div className="max-w-7xl mx-auto text-center mb-10 md:mb-16 relative z-10">
-        <span className="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-6 inline-block shadow-[0_0_20px_rgba(59,130,246,0.15)]">
-          รีวิวจากลูกค้า
-        </span>
+      {/* Header Area */}
+      <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16 relative z-10">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#ECFDF5] border border-[#A7F3D0] text-emerald-800 text-xs font-semibold mb-3.5 shadow-xs">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" aria-hidden="true" />
+          <span>ความคิดเห็นจากผู้ใช้บริการ</span>
+        </div>
         
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight drop-shadow-md">
-          เสียงตอบรับจากลูกค้าจริง
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+          เสียงตอบรับจาก<span className="text-blue-600">ลูกค้าผู้ใช้บริการ</span>
         </h2>
         
-        <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mt-4 md:mt-6 leading-relaxed font-medium">
-          การันตีความประทับใจ ความตรงเวลา และงานบริการที่ยอดเยี่ยมจากผู้ใช้บริการจริงของเรา
+        <p className="text-sm sm:text-base text-slate-600 font-normal mt-3 max-w-xl mx-auto leading-relaxed">
+          ความประทับใจ ความตรงเวลา และงานบริการขนย้ายที่ตั้งใจดูแลสิ่งของของลูกค้าทุกชิ้น
         </p>
       </div>
 
-      {/* Grid container: 1 col on mobile, 2 on tablet, 3 on desktop */}
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-center">
+      {/* Review Cards Grid */}
+      <div className="max-w-7xl mx-auto relative z-10 min-w-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-center min-w-0">
           {displayTestimonials.map((test) => {
             const initial = test.displayName.startsWith("คุณ") ? test.displayName.charAt(3) : test.displayName.charAt(0);
             const role = 
@@ -80,55 +54,62 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
             return (
               <div 
                 key={test.id}
-                className="perf-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between gap-6 relative transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:from-white/5 hover:to-blue-950/20 min-h-[300px] group overflow-hidden text-left"
+                className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-5 shadow-xs transition-all duration-200 hover:shadow-xl hover:shadow-blue-900/5 hover:border-blue-300 hover:-translate-y-1 motion-reduce:transform-none text-left relative overflow-hidden group min-w-0"
               >
-                {/* Ambient inner card glow */}
-                <div className="absolute -inset-px bg-linear-to-b from-blue-500/0 via-blue-500/0 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* Subtle top accent */}
+                <div 
+                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-emerald-400" 
+                  aria-hidden="true" 
+                />
 
-                {/* Top Row: Stars & Quote Watermark */}
-                <div className="flex items-center justify-between z-10">
-                  <div className="flex gap-1 text-amber-400">
+                {/* Top Row: Stars & Pale Blue Quote Watermark */}
+                <div className="flex items-center justify-between">
+                  <div 
+                    className="flex gap-1 text-amber-400"
+                    role="img"
+                    aria-label={`คะแนน ${test.rating} เต็ม 5 ดาว`}
+                  >
                     {Array.from({ length: test.rating }).map((_, sIdx) => (
                       <Star 
                         key={sIdx} 
-                        className="h-4.5 w-4.5 fill-current filter drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]" 
+                        className="h-4 w-4 fill-amber-400 text-amber-400 shrink-0" 
+                        aria-hidden="true" 
                       />
                     ))}
                   </div>
-                  <Quote className="h-9 w-9 text-blue-500/10 group-hover:text-blue-500/20 group-hover:scale-110 transition-all duration-300 shrink-0" />
+                  <Quote className="h-8 w-8 text-blue-100/80 group-hover:text-blue-200/80 transition-colors shrink-0" aria-hidden="true" />
                 </div>
 
-                {/* Comment Body */}
-                <div className="z-10 flex-1 py-1">
-                  <p className="text-slate-100 font-bold leading-relaxed text-sm sm:text-base line-clamp-4 group-hover:text-white transition-colors">
-                    &quot;{test.reviewText}&quot;
+                {/* Review Quotation Body */}
+                <div className="flex-1 py-1">
+                  <p className="text-slate-700 leading-relaxed text-sm sm:text-base font-normal">
+                    &ldquo;{test.reviewText}&rdquo;
                   </p>
                 </div>
 
-                {/* Reviewer Row */}
-                <div className="flex items-center justify-between mt-2 pt-4 border-t border-white/10 z-10 gap-2">
+                {/* Reviewer Identity Row */}
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100 gap-2">
                   <div className="flex items-center gap-3 min-w-0">
-                    {/* Initial Avatar with Gradient */}
-                    <div className="w-10 h-10 bg-linear-to-tr from-blue-600 to-sky-400 rounded-full flex items-center justify-center text-white font-extrabold text-sm sm:text-base shadow-[0_4px_12px_rgba(37,99,235,0.3)] shrink-0">
+                    {/* Initial Avatar */}
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs shrink-0 select-none">
                       {initial}
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-300 transition-colors truncate">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#0B1F3A] truncate">
                         {test.displayName}
                       </h4>
-                      <p className="text-[10px] sm:text-xs text-slate-400 font-medium mt-0.5 truncate">
+                      <p className="text-[11px] sm:text-xs text-slate-500 font-normal mt-0.5 truncate">
                         {role} • {test.broadServiceArea}
                       </p>
                     </div>
                   </div>
                   
-                  {/* Verified Trust Badge */}
-                  {test.isVerified && (
-                    <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-wide flex items-center gap-1 shadow-[0_0_15px_rgba(16,185,129,0.05)] select-none shrink-0" title={`Token: ${test.bookingToken}`}>
-                      <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
-                      <span>ยืนยันจองจริง</span>
-                    </span>
-                  )}
+                  {/* Source Badge (Non-simulated) */}
+                  <span 
+                    className="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium tracking-tight shrink-0" 
+                  >
+                    {test.source}
+                  </span>
                 </div>
               </div>
             );

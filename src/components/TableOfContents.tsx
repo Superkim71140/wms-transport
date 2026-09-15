@@ -36,7 +36,6 @@ export default function TableOfContents() {
     // IntersectionObserver — tracks which heading is in the top zone of viewport
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the topmost intersecting entry (first one visible near the top)
         const intersecting = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -80,25 +79,25 @@ export default function TableOfContents() {
   return (
     <>
       {/* ── Mobile Collapsible TOC ── */}
-      <div className="lg:hidden w-full mb-8 bg-white/2 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl">
+      <div className="lg:hidden w-full mb-8 bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between p-4 font-bold text-white text-left focus:outline-none"
+          className="w-full flex items-center justify-between p-4 font-bold text-slate-800 text-left focus:outline-none"
         >
-          <span className="flex items-center gap-2 text-sm uppercase tracking-wider text-slate-300">
-            <Menu className="w-4 h-4 text-blue-400" />
+          <span className="flex items-center gap-2 text-sm font-bold text-slate-700">
+            <Menu className="w-4 h-4 text-blue-600" />
             สารบัญเนื้อหา
           </span>
           <ChevronRight
-            className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${
-              isOpen ? "rotate-90 text-blue-400" : ""
+            className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+              isOpen ? "rotate-90 text-blue-600" : ""
             }`}
           />
         </button>
 
         {isOpen && (
-          <nav className="px-5 pb-5 border-t border-white/5 pt-3">
-            <ul className="space-y-1.5 text-sm">
+          <nav className="px-4 pb-4 border-t border-slate-100 pt-3">
+            <ul className="space-y-1 text-sm">
               {headings.map((h) => (
                 <li
                   key={h.id}
@@ -107,10 +106,10 @@ export default function TableOfContents() {
                   <a
                     href={`#${h.id}`}
                     onClick={(e) => handleScroll(e, h.id)}
-                    className={`block py-1.5 px-3 rounded-lg transition-all duration-200 ${
+                    className={`block py-1.5 px-3 rounded-lg transition-colors ${
                       activeId === h.id
-                        ? "text-blue-400 font-bold bg-blue-500/10"
-                        : "text-slate-400 hover:text-white"
+                        ? "text-blue-700 font-bold bg-blue-50"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                     }`}
                   >
                     {h.text}
@@ -123,11 +122,11 @@ export default function TableOfContents() {
       </div>
 
       {/* ── Desktop Sticky Sidebar TOC ── */}
-      <nav className="hidden lg:block sticky top-36 bg-white/1 border border-white/5 hover:border-white/10 rounded-3xl p-6 backdrop-blur-xl transition-all duration-300 max-h-[calc(100vh-180px)] overflow-y-auto">
-        <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4 border-b border-white/5 pb-3">
+      <nav className="hidden lg:block sticky top-32 bg-white border border-slate-200/90 rounded-2xl p-5 shadow-xs max-h-[calc(100vh-160px)] overflow-y-auto">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 border-b border-slate-100 pb-2.5">
           สารบัญเนื้อหา
         </h4>
-        <ul className="space-y-0.5">
+        <ul className="space-y-1">
           {headings.map((h) => {
             const isActive = activeId === h.id;
             return (
@@ -138,14 +137,14 @@ export default function TableOfContents() {
                 <a
                   href={`#${h.id}`}
                   onClick={(e) => handleScroll(e, h.id)}
-                  className={`flex items-center gap-2 py-2 px-3 rounded-xl text-sm leading-snug transition-all duration-200 ${
+                  className={`flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm leading-snug transition-colors ${
                     isActive
-                      ? "text-blue-400 font-bold bg-blue-500/10 border-l border-blue-400 rounded-l-none pl-2.5"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                      ? "text-blue-700 font-bold bg-blue-50"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                   }`}
                 >
                   {isActive && (
-                    <span className="w-1 h-1 rounded-full bg-blue-400 shrink-0 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0" />
                   )}
                   {h.text}
                 </a>

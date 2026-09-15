@@ -13,7 +13,12 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "agent-skills-/**",
-    "KIMX-Wed-main/**"
+    "KIMX-Wed-main/**",
+    "ui-ux-pro-max-skill-main/**",
+    "public/~partytown/**",
+    "scripts/**",
+    "claude-seo/**",
+    "tools/**"
   ]),
 ]);
 

@@ -13,48 +13,44 @@ const PROCESS_STEPS = [
 
 export default function PortfolioProcess() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#040b15] relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[180px] translate-x-1/3 -translate-y-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[180px] -translate-x-1/3 translate-y-1/3 pointer-events-none" />
-
+    <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/60 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <span className="px-5 py-2 bg-white/3 text-blue-400 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest backdrop-blur-md mb-4 inline-block">
+        <div className="text-center mb-14">
+          <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide mb-3 inline-block">
             ขั้นตอนการทำงาน
           </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight font-sans mt-4">
-            ขั้นตอนการทำงาน <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">ของเรา</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B1F3A] tracking-tight font-sans mt-2">
+            ขั้นตอนการทำงาน <span className="text-blue-600">ของเรา</span>
           </h2>
-          <p className="mt-4 text-slate-400 max-w-2xl mx-auto text-lg">
+          <p className="mt-3 text-slate-600 max-w-2xl mx-auto text-base">
             เราทำงานอย่างเป็นระบบทุกขั้นตอน เพื่อให้คุณมั่นใจได้ว่าสินค้าจะถึงที่หมายอย่างปลอดภัย
           </p>
         </div>
 
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute top-10 left-0 w-full h-0.5 bg-white/5 hidden lg:block z-0" />
+          <div className="absolute top-10 left-0 w-full h-0.5 bg-blue-200 hidden lg:block z-0" />
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4 relative z-10">
             {PROCESS_STEPS.map((step, i) => (
               <motion.div
                 key={step.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="flex flex-col items-center text-center group"
               >
-                <div className="w-20 h-20 rounded-2xl bg-white/4 backdrop-blur-md border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.3)] flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-400 transition-all duration-300 relative">
-                  <step.icon className="w-8 h-8" />
-                  <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                <div className="w-18 h-18 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-center justify-center text-blue-600 mb-5 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-200 relative">
+                  <step.icon className="w-7 h-7" />
+                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold ring-4 ring-white shadow-xs">
                     {step.id}
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 font-sans group-hover:text-blue-400 transition-colors">
+                <h3 className="text-base font-bold text-[#0B1F3A] mb-2 font-sans group-hover:text-blue-600 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed px-2">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed px-1 font-medium">
                   {step.desc}
                 </p>
               </motion.div>

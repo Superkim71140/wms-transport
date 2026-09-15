@@ -32,7 +32,7 @@ const projects: Project[] = [
     location: "กรุงเทพ",
     icon: <Bike className="w-4 h-4" />,
     imgUrl: "/images/WM12.webp",
-    desc: "ส่งมอบรถมอเตอร์ไซค์บิ๊กไบค์ถึงมือลูกค้าอย่างปลอดภัย รวดเร็วทันใจ พร้อมประกันความเสียหาย"
+    desc: "ส่งมอบรถมอเตอร์ไซค์บิ๊กไบค์ถึงมือลูกค้าอย่างปลอดภัย รวดเร็วทันใจ พร้อมดูแลความปลอดภัยของสิ่งของ"
   },
   {
     id: 3,
@@ -67,15 +67,15 @@ function GalleryCard({ project, index }: { project: Project; index: number }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#071426] shadow-[0_18px_50px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30">
-      <div className="relative aspect-4/3 overflow-hidden bg-slate-900 lg:aspect-16/11">
+    <article className="group relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-md">
+      <div className="relative aspect-4/3 overflow-hidden bg-slate-100 lg:aspect-16/11">
         <Image
           src={project.imgUrl}
           alt={`${project.serviceType} ${project.location}`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           quality={78}
-          className={`object-cover transition-all duration-700 group-hover:scale-[1.03] ${
+          className={`object-cover transition-opacity duration-500 ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setIsLoaded(true)}
@@ -83,34 +83,32 @@ function GalleryCard({ project, index }: { project: Project; index: number }) {
         />
 
         {!isLoaded && (
-          <div className="absolute inset-0 animate-pulse bg-slate-800/70" />
+          <div className="absolute inset-0 animate-pulse bg-slate-200" />
         )}
 
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#071426] to-transparent pointer-events-none" />
-
-        <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/70 px-3 py-1.5 text-xs font-bold text-slate-100 backdrop-blur-md">
-          <span className="inline-flex h-2 w-2 rounded-full bg-[#06C755] shadow-[0_0_8px_rgba(6,199,85,0.8)]" />
+        <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-slate-900/80 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+          <span className="inline-flex h-2 w-2 rounded-full bg-[#06C755]" />
           งานจริง
         </div>
       </div>
 
       <div className="p-5 relative z-10">
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-2 text-sm font-bold text-blue-300">
+          <span className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700">
             {project.icon}
             {project.serviceType}
           </span>
 
-          <span className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200">
+          <span className="rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700">
             {project.location}
           </span>
         </div>
 
-        <p className="text-sm leading-6 text-slate-300 line-clamp-3">
+        <p className="text-sm leading-6 text-slate-600 line-clamp-3">
           {project.desc}
         </p>
 
-        <div className="mt-5 flex items-center gap-2 border-t border-white/10 pt-4 text-xs font-medium text-slate-400">
+        <div className="mt-5 flex items-center gap-2 border-t border-slate-100 pt-4 text-xs font-medium text-slate-500">
           <CheckCircle2 className="h-4 w-4 text-[#06C755]" />
           <span>งานจริงโดยทีม WMS TRANSPORT</span>
         </div>
@@ -136,8 +134,7 @@ export default function GalleryMasonry() {
     "name": `${project.serviceType} - ${project.location}`,
     "caption": project.desc,
     "creator": {
-      "@type": "LocalBusiness",
-      "name": "WMS Transport"
+      "@id": "https://wms-transport.com/#moving-company"
     }
   }));
 
@@ -148,30 +145,30 @@ export default function GalleryMasonry() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(imageSchema) }} 
       />
       <div className="mx-auto max-w-3xl text-center mb-10">
-        <span className="inline-flex rounded-full border border-blue-400/20 bg-blue-500/10 px-5 py-2 text-xs font-bold text-blue-300 tracking-wide">
+        <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-bold text-blue-700 tracking-wide">
           ผลงานจริงของเรา
         </span>
 
-        <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white">
+        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#0B1F3A]">
           ผลงานจริง
-          <span className="text-blue-400">จากลูกค้าของเรา</span>
+          <span className="text-blue-600">จากลูกค้าของเรา</span>
         </h2>
 
-        <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
+        <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
           ภาพหน้างานจริง ไม่มีภาพสต็อก ทุกงานดำเนินการโดยทีมงาน WMS TRANSPORT
         </p>
       </div>
 
-      <div className="mx-auto mb-10 flex w-fit max-w-full gap-2 overflow-x-auto sm:flex-wrap rounded-2xl border border-white/10 bg-white/3 p-1.5 scrollbar-hide">
+      <div className="mx-auto mb-10 flex w-fit max-w-full gap-2 overflow-x-auto sm:flex-wrap rounded-xl border border-slate-200 bg-slate-100 p-1.5 scrollbar-hide">
         {categories.map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => setSelectedFilter(cat)}
-            className={`min-h-[44px] shrink-0 rounded-xl px-4 py-2 text-sm font-bold transition-all duration-300 ${
+            className={`min-h-[40px] shrink-0 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-200 ${
               selectedFilter === cat
-                ? "bg-blue-600 text-white shadow-[0_8px_24px_rgba(37,99,235,0.25)]"
-                : "text-slate-300 hover:bg-white/6 hover:text-white"
+                ? "bg-blue-600 text-white shadow-xs"
+                : "text-slate-600 hover:bg-white hover:text-slate-900"
             }`}
           >
             {cat}
@@ -180,7 +177,7 @@ export default function GalleryMasonry() {
       </div>
 
       <div className="mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {filteredProjects.map((project, index) => (
             <GalleryCard key={project.id} project={project} index={index} />
           ))}

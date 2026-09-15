@@ -174,16 +174,16 @@ export default function Navbar() {
     <nav
       className={`fixed z-100 transition-all duration-300 ease-in-out
         /* Mobile Layout */
-        top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3 py-2 bg-[#040b15]/95 border border-white/10
-        flex items-center justify-between shadow-[0_15px_40px_rgba(0,0,0,0.6)] overflow-hidden lg:overflow-visible
+        top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3.5 py-2.5 bg-white/95 backdrop-blur-md border border-slate-200/90
+        flex items-center justify-between shadow-[0_4px_20px_-2px_rgba(11,31,58,0.08)] overflow-hidden lg:overflow-visible
         
         /* Desktop Layout (lg screens and up) */
-        lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3.5 lg:bg-[#040b15]/90 lg:backdrop-blur-2xl
-        ${isScrolled ? "lg:top-2 lg:py-2.5 lg:scale-[0.99]" : "lg:top-4 lg:py-3.5 lg:scale-100"}`}
+        lg:left-1/2 lg:-translate-x-1/2 lg:right-auto lg:w-[98%] lg:max-w-7xl lg:rounded-full lg:px-6 lg:py-3 lg:bg-white/95 lg:backdrop-blur-md
+        ${isScrolled ? "lg:top-2 lg:py-2.5 shadow-[0_10px_30px_-5px_rgba(11,31,58,0.12)] border-slate-300/80" : "lg:top-4 lg:py-3.5 border-slate-200/80"}`}
     >
       <div 
         aria-hidden="true" 
-        className={`absolute top-0 h-[2px] rounded-full bg-linear-to-r from-transparent via-blue-500 to-transparent ${
+        className={`absolute top-0 h-[2px] rounded-full bg-linear-to-r from-transparent via-blue-600 to-transparent ${
           isIndicatorReady ? "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" : ""
         }`}
         style={{
@@ -192,28 +192,28 @@ export default function Navbar() {
           opacity: indicatorStyle.opacity,
         }}
       />
-      {/* Premium Logo Lockup */}
+      {/* Brand Logo Lockup */}
       <div className="shrink-0 flex items-center">
         <Link href="/" className="relative group flex items-center gap-3">
-          <div className="relative group-hover:scale-105 transition-transform duration-300 flex items-center justify-center shrink-0">
+          <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-[#0B1F3A] flex items-center justify-center border border-slate-200/80 shadow-xs shrink-0 transition-transform duration-300 group-hover:scale-105">
             <Image
               src="/images/logoWMS.webp"
               alt="WMS Transport Logo"
-              width={120}
-              height={120}
-              className="w-auto h-8 sm:h-10 md:h-12 object-contain mix-blend-screen"
+              width={56}
+              height={56}
+              className="w-full h-full object-cover"
               priority
             />
           </div>
           <div className="hidden sm:flex flex-col justify-center">
-            <span className="text-white font-black text-lg leading-none tracking-wide drop-shadow-lg whitespace-nowrap">WMS</span>
-            <span className="text-blue-400 font-bold text-[10px] tracking-widest uppercase drop-shadow-lg whitespace-nowrap">Transport</span>
+            <span className="text-[#0B1F3A] font-black text-lg leading-none tracking-wide whitespace-nowrap">WMS</span>
+            <span className="text-blue-600 font-bold text-[10px] tracking-widest uppercase whitespace-nowrap">Transport</span>
           </div>
         </Link>
       </div>
 
       {/* Desktop Menu */}
-      <div className="hidden xl:flex items-center gap-4 xl:gap-6">
+      <div className="hidden xl:flex items-center gap-2 xl:gap-3">
         {navLinks.map((link) => {
           const active = isActiveLink(link.href);
           return (
@@ -224,10 +224,10 @@ export default function Navbar() {
                 if (el) navItemsRef.current.set(link.href, el);
                 else navItemsRef.current.delete(link.href);
               }}
-              className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 relative group drop-shadow-lg px-4 py-2 hover:text-white ${
+              className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-200 px-3.5 py-1.5 rounded-full ${
                 active
-                  ? "text-blue-400 border-b-2 border-blue-500 rounded-none"
-                  : "text-slate-300 rounded-full"
+                  ? "text-blue-600 font-bold bg-blue-50"
+                  : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
               }`}
             >
               {link.name}
@@ -243,52 +243,58 @@ export default function Navbar() {
               else navItemsRef.current.delete("location");
             }}
             onClick={() => setIsPhuketDropdownOpen((v) => !v)}
-            className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-300 px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer ${
+            className={`whitespace-nowrap text-[15px] font-semibold transition-all duration-200 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 cursor-pointer ${
               isLocationActive
-                ? "text-blue-400"
-                : "text-slate-300 hover:text-white"
+                ? "text-blue-600 font-bold bg-blue-50"
+                : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
             }`}
           >
-            <MapPin className="w-4 h-4 text-blue-400" />
-            พื้นที่ให้บริการ
+            <MapPin className="w-4 h-4 text-blue-600" />
+            <span>พื้นที่ให้บริการ</span>
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-300 ${
-                isPhuketDropdownOpen ? "rotate-180 text-blue-400" : ""
+                isPhuketDropdownOpen ? "rotate-180 text-blue-600" : "text-slate-400"
               }`}
             />
           </button>
 
-          {/* Dropdown Panel with fade-in and slide-up */}
+          {/* Dropdown Panel */}
           {isPhuketDropdownOpen && (
-            <div className="absolute top-[calc(100%+0.75rem)] right-0 w-[500px] bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="grid grid-cols-[1.3fr_1fr] gap-4 p-4">
+            <div className="absolute top-[calc(100%+0.75rem)] right-0 w-[480px] bg-white border border-slate-200 rounded-2xl shadow-[0_15px_40px_-5px_rgba(11,31,58,0.15)] overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="grid grid-cols-[1.3fr_1fr] gap-3 p-3.5">
                 <div className="flex flex-col gap-1">
                   {locationLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsPhuketDropdownOpen(false)}
-                      className={`text-sm font-semibold px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap ${
+                      className={`text-sm font-semibold px-3.5 py-2.5 rounded-xl transition-all duration-200 flex items-center gap-2.5 whitespace-nowrap ${
                         pathname === link.href
-                          ? "bg-blue-500/15 text-blue-400 border border-blue-500/20"
-                          : "text-slate-300 hover:text-white hover:bg-white/5"
+                          ? "bg-blue-50 text-blue-600 border border-blue-100"
+                          : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
                       }`}
                     >
-                      <span className="text-blue-400 text-sm">→</span>
-                      {link.name}
+                      <span className="text-blue-500 text-xs">→</span>
+                      <span>{link.name}</span>
                     </Link>
                   ))}
                 </div>
                 
                 {/* Featured Portfolio Card */}
-                <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-800 bg-[url('/images/WMS24.webp')] bg-cover bg-center">
-                  <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/60 to-transparent group-hover/portfolio:via-slate-900/50 transition-all duration-300" />
-                  <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col items-start gap-2 transform group-hover/portfolio:-translate-y-1 transition-transform duration-300">
-                    <span className="text-white font-bold text-sm drop-shadow-md">ผลงานขนย้ายล่าสุด</span>
+                <div className="relative rounded-xl overflow-hidden group/portfolio block h-full min-h-[140px] bg-slate-900">
+                  <Image 
+                    src="/images/WMS24.webp" 
+                    alt="ผลงานขนย้าย WMS" 
+                    fill 
+                    className="object-cover opacity-80"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0B1F3A]/90 via-[#0B1F3A]/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 w-full p-3.5 flex flex-col items-start gap-1.5 z-10">
+                    <span className="text-white font-bold text-xs">ผลงานขนย้ายจริง</span>
                     <Link 
                       href="/portfolio" 
                       onClick={() => setIsPhuketDropdownOpen(false)} 
-                      className="inline-flex items-center text-[11px] text-white hover:text-white font-bold bg-blue-600/80 hover:bg-blue-500 border border-blue-400/50 px-3 py-1.5 rounded-lg shadow-[0_0_15px_rgba(59,130,246,0.4)] transition-all"
+                      className="inline-flex items-center text-[11px] text-white font-bold bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg shadow-sm transition-colors"
                     >
                       ดูภาพผลงาน →
                     </Link>
@@ -301,29 +307,29 @@ export default function Navbar() {
       </div>
 
       {/* Desktop CTA Buttons */}
-      <div className="hidden lg:flex items-center gap-4 shrink-0">
+      <div className="hidden lg:flex items-center gap-3 shrink-0">
         <a
           href="tel:0612402436"
-          className="whitespace-nowrap flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/50 backdrop-blur-md border border-white/15 text-white font-bold text-sm hover:bg-slate-800 hover:border-white/30 transition-all duration-300 shadow-lg group"
+          className="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm hover:bg-slate-100 hover:border-slate-300 transition-all duration-200 shadow-xs group"
         >
-          <Phone className="w-4 h-4 text-blue-400 drop-shadow-md group-hover:animate-pulse" />
-          <span className="font-mono tracking-wide drop-shadow-lg">061-240-2436</span>
+          <Phone className="w-3.5 h-3.5 text-blue-600 group-hover:scale-110 transition-transform" />
+          <span className="font-mono tracking-wide text-xs sm:text-sm">061-240-2436</span>
         </a>
         <a
           href="https://line.me/ti/p/DtICkMaDet"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact WMS Transport via LINE"
-          className="whitespace-nowrap flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#06C755] hover:bg-[#05B34F] hover:scale-105 active:scale-95 text-white font-black text-sm transition-all duration-300 shadow-[0_0_20px_rgba(6,199,85,0.4)] border border-[#06C755]/30 group"
+          className="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-full bg-[#06C755] hover:bg-[#05B34F] active:scale-95 text-white font-bold text-sm transition-all duration-200 shadow-xs border border-[#06C755]/40"
         >
           <Image
             src="/images/LINE_icon.webp"
             alt="LINE"
-            width={20}
-            height={20}
-            className="h-5 w-5 object-contain shrink-0"
+            width={18}
+            height={18}
+            className="h-4.5 w-4.5 object-contain shrink-0"
           />
-          <span className="drop-shadow-lg">ติดต่อผ่าน LINE</span>
+          <span>ติดต่อ LINE</span>
         </a>
       </div>
 
@@ -331,7 +337,7 @@ export default function Navbar() {
       <div className="flex xl:hidden items-center">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="text-white drop-shadow-lg min-w-[44px] min-h-[44px] flex items-center justify-center p-2 focus:outline-none hover:text-blue-400 transition-colors cursor-pointer"
+          className="text-slate-800 min-w-[44px] min-h-[44px] flex items-center justify-center p-2 focus:outline-none hover:text-blue-600 transition-colors cursor-pointer"
           aria-label={isMobileMenuOpen ? "ปิดเมนู" : "เปิดเมนู"}
         >
           {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -340,7 +346,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-[#040b15]/95 backdrop-blur-3xl border border-white/10 py-5 px-4 flex flex-col gap-2 rounded-3xl shadow-2xl z-50">
+        <div className="xl:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-white/98 backdrop-blur-xl border border-slate-200 py-4 px-4 flex flex-col gap-1.5 rounded-2xl shadow-xl z-50">
           {navLinks.map((link) => {
             const active = isActiveLink(link.href);
             return (
@@ -348,10 +354,10 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-sm font-bold block py-3 px-4 rounded-xl transition-colors border ${
+                className={`text-sm font-bold block py-2.5 px-3.5 rounded-xl transition-colors ${
                   active
-                    ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
-                    : "text-slate-200 hover:text-blue-400 hover:bg-white/5 border-transparent"
+                    ? "text-blue-600 bg-blue-50 border border-blue-100"
+                    : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
                 }`}
               >
                 {link.name}
@@ -360,46 +366,46 @@ export default function Navbar() {
           })}
 
           {/* Mobile Locations Submenu */}
-          <div className="border border-white/5 rounded-xl overflow-hidden">
+          <div className="border border-slate-200 rounded-xl overflow-hidden my-1">
             <button
               onClick={() => setIsMobilePhuketOpen((v) => !v)}
-              className={`w-full flex items-center justify-between text-sm font-bold py-3 px-4 transition-colors cursor-pointer ${
+              className={`w-full flex items-center justify-between text-sm font-bold py-2.5 px-3.5 transition-colors cursor-pointer ${
                 isLocationActive
-                  ? "text-blue-400 bg-blue-500/10"
-                  : "text-slate-200 hover:text-blue-400 hover:bg-white/5"
+                  ? "text-blue-600 bg-blue-50"
+                  : "text-slate-700 hover:text-blue-600 hover:bg-slate-50"
               }`}
             >
               <span className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-blue-400" />
+                <MapPin className="w-4 h-4 text-blue-600" />
                 พื้นที่ให้บริการ
               </span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform duration-200 ${
-                  isMobilePhuketOpen ? "rotate-180" : ""
+                  isMobilePhuketOpen ? "rotate-180 text-blue-600" : "text-slate-400"
                 }`}
               />
             </button>
             {isMobilePhuketOpen && (
-              <div className="border-t border-white/5 flex flex-col bg-black/20">
+              <div className="border-t border-slate-200 flex flex-col bg-slate-50/70">
                 {locationLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-xs font-semibold py-2.5 px-8 transition-colors ${
+                    className={`text-xs font-semibold py-2.5 px-6 transition-colors ${
                       pathname === link.href
-                        ? "text-blue-400 bg-blue-500/10"
-                        : "text-slate-300 hover:text-white hover:bg-white/5"
+                        ? "text-blue-600 bg-blue-50 font-bold"
+                        : "text-slate-600 hover:text-blue-600 hover:bg-white"
                     }`}
                   >
                     → {link.name}
                   </Link>
                 ))}
-                <div className="px-6 py-3">
+                <div className="px-4 py-2.5">
                   <Link
                     href="/portfolio"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 rounded-xl text-xs font-bold transition-all shadow-[0_0_10px_rgba(59,130,246,0.2)]"
+                    className="flex items-center justify-center gap-2 w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
                   >
                     ผลงานขนย้ายล่าสุด →
                   </Link>
@@ -408,12 +414,12 @@ export default function Navbar() {
             )}
           </div>
 
-          <div className="flex flex-col gap-2.5 mt-2 border-t border-white/10 pt-4 px-1">
+          <div className="flex flex-col gap-2 mt-2 border-t border-slate-200 pt-3 px-1">
             <a
               href="tel:0612402436"
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl border border-white/10 text-white font-bold text-sm bg-white/5 hover:bg-white/10 transition-colors shadow-inner min-h-[44px]"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-slate-200 text-slate-800 font-bold text-sm bg-slate-50 hover:bg-slate-100 transition-colors shadow-xs min-h-[44px]"
             >
-              <Phone className="w-4.5 h-4.5 text-blue-400 animate-pulse" />
+              <Phone className="w-4 h-4 text-blue-600" />
               <span className="font-mono">โทร 061-240-2436</span>
             </a>
             <a
@@ -421,14 +427,14 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact WMS Transport via LINE"
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-black text-sm shadow-[0_0_20px_rgba(6,199,85,0.3)] min-h-[44px]"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm shadow-xs min-h-[44px]"
             >
               <Image
                 src="/images/LINE_icon.webp"
                 alt="LINE"
-                width={20}
-                height={20}
-                className="h-5 w-5 object-contain shrink-0"
+                width={18}
+                height={18}
+                className="h-4.5 w-4.5 object-contain shrink-0"
               />
               <span>ติดต่อผ่าน LINE</span>
             </a>

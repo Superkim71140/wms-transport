@@ -1,22 +1,20 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/seo/site-config";
 import { provinceMap } from "./(marketing)/service/[province]/page";
 import { posts } from "./(marketing)/blog/posts";
 import { searchIntentMap } from "@/data/searchIntentMap";
 import { districtLandingPages, isDistrictPageIndexable } from "@/data/districtLandingPages";
 import { guidesData } from "@/data/guidesData";
 import { portfolioCasesData } from "@/data/mediaEvidence";
+import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  let domain = (process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com").trim();
-  if (domain.endsWith("/")) {
-    domain = domain.slice(0, -1);
-  }
+  const domain = siteConfig.baseUrl;
 
-  // Helper to parse Thai/English dates into standard Date objects safely
+  // Helper to parse dates into standard Date objects safely
   const parseLastmodDate = (dateStr: string): Date => {
     try {
       if (!dateStr) return new Date("2026-06-25");
-      // Handle Thai dates like "25 มิถุนายน 2026"
       if (dateStr.includes("มิถุนายน")) {
         return new Date("2026-06-25");
       }
@@ -63,6 +61,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: parseLastmodDate(searchIntentMap["pricing-motorcycle"]?.lastReviewedDate || "2026-06-25"),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${domain}/pricing/motorcycle-2026`,
+      lastModified: new Date("2026-06-25"),
+      changeFrequency: "monthly",
+      priority: 0.75,
     },
     {
       url: `${domain}/pricing/freight`,
@@ -121,35 +125,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }))
     );
 
-    // Dynamic Route-to-Route pages
-    const routeHubs = [
-      "bangkok",
-      "phuket",
-      "samutsakhon",
-      "samut-songkhram",
-      "chiang-mai",
-      "chonburi",
-      "nonthaburi",
-      "pathum-thani",
-      "bkk-thonburi",
-      "bkk-phra-nakhon",
-    ];
-    const routeUrls: MetadataRoute.Sitemap = routeHubs.flatMap((from) =>
-      routeHubs
-        .filter((to) => to !== from)
-        .map((to) => ({
-          url: `${domain}/route/${from}/${to}`,
-          lastModified: new Date("2026-06-25"),
-          changeFrequency: "monthly",
-          priority: 0.7,
-        }))
-    );
+    // Controlled Route-to-Route Allowlist from approvedRouteCorridors
+    const routeUrls: MetadataRoute.Sitemap = approvedRouteCorridors
+      .filter(({ from, to }) => provinceMap[from] && provinceMap[to] && from !== to)
+      .map(({ from, to }) => ({
+        url: `${domain}/route/${from}/${to}`,
+        lastModified: new Date("2026-06-25"),
+        changeFrequency: "monthly",
+        priority: 0.7,
+      }));
 
-    // ─────────────────────────────────────────────
-    // Phase 2: Indexation Gate checks
-    // ─────────────────────────────────────────────
-
-    // 1. Approved District Pages (where indexable)
+    // Approved District Pages (where indexable)
     const approvedDistrictUrls: MetadataRoute.Sitemap = Object.values(districtLandingPages)
       .filter(isDistrictPageIndexable)
       .map((district) => ({
@@ -159,7 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
       }));
 
-    // 2. Approved Portfolio Case Studies
+    // Approved Portfolio Case Studies
     const approvedPortfolioUrls: MetadataRoute.Sitemap = Object.values(portfolioCasesData).map((caseStudy) => ({
       url: `${domain}/portfolio/${caseStudy.slug}`,
       lastModified: new Date("2026-06-25"),
@@ -167,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     }));
 
-    // 3. Valid Guides (where marked indexable)
+    // Valid Guides (where marked indexable)
     const validGuidesUrls: MetadataRoute.Sitemap = Object.values(guidesData)
       .filter((g) => g.isIndexable)
       .map((guide) => ({

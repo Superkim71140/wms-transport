@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { siteConfig } from "@/lib/seo/site-config";
+import { escapeJsonLd } from "@/lib/seo/schema";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,7 +15,6 @@ import {
   Package,
   ArrowRight,
   Star,
-  Quote,
   MapPin,
 } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -116,7 +118,7 @@ const localReviews: Record<
   },
   chonburi: {
     author: "คุณสมศักดิ์ (ศรีราชา)",
-    text: "จ้างเหมารถกระบะตู้ทึบส่งสินค้าจากโรงงานชลบุรีไปกทม. รวดเร็วทันใจ มีประกันเคลมสินค้า วิ่งรอบดึกให้ด้วยครับ",
+    text: "จ้างเหมารถกระบะตู้ทึบส่งสินค้าจากโรงงานชลบุรีไปกทม. รวดเร็วทันใจ ดูแลความปลอดภัยสินค้า วิ่งรอบดึกให้ด้วยครับ",
     rating: 5,
     tag: "ส่งสินค้าโรงงาน",
   },
@@ -140,7 +142,7 @@ const localReviews: Record<
   },
   "bkk-phra-nakhon": {
     author: "คุณศิริชัย (ฝั่งพระนคร)",
-    text: "ขนย้ายร้านอาหารย่านเมืองเก่า ทีมงานมืออาชีพมาก เข้าซอยแคบได้สบาย รวดเร็วและของปลอดภัย 100%",
+    text: "ขนย้ายร้านอาหารย่านเมืองเก่า ทีมงานมืออาชีพมาก เข้าซอยแคบได้สบาย รวดเร็วและของปลอดภัยเรียบร้อย",
     rating: 5,
     tag: "ย้ายร้าน/ธุรกิจ",
   },
@@ -152,6 +154,7 @@ export async function generateStaticParams() {
 
 // ISR: Revalidate every hour
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -160,6 +163,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { province } = await params;
   const loc = provinceMap[province];
+  if (!loc) {
+    return {
+      title: "ไม่พบหน้าที่ต้องการ | WMS TRANSPORT",
+      robots: { index: false, follow: false },
+    };
+  }
   const name = loc?.name ?? province;
   
   let description = `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name}และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`;
@@ -184,6 +193,9 @@ export default async function LocationHubPage({
 }) {
   const { province } = await params;
   const loc = provinceMap[province];
+  if (!loc) {
+    notFound();
+  }
   const provinceThai = loc?.name ?? province;
   const provinceShort = loc?.shortName ?? province;
   const lat = loc?.lat ?? "13.7563";
@@ -226,9 +238,9 @@ export default async function LocationHubPage({
         ? "ส่งมอเตอร์ไซค์ บิ๊กไบค์ มหาชัย กระทุ่มแบน"
         : `ขนส่งมอเตอร์ไซค์ ${provinceShort}`,
       description:
-        "ขนส่งรถมอเตอร์ไซค์ บิ๊กไบค์ ทุกรุ่น ด้วยรถกระบะตู้ทึบปิดมิดชิด รัดตรึงด้วยสายรัดพิเศษ ปลอดภัย 100%",
+        "ขนส่งรถมอเตอร์ไซค์ บิ๊กไบค์ ทุกรุ่น ด้วยรถกระบะตู้ทึบปิดมิดชิด รัดตรึงด้วยสายรัดพิเศษ ปลอดภัยมั่นใจได้",
       href: `/service/${province}/motorcycle`,
-      badge: "มีประกัน",
+      badge: "ดูแลปลอดภัย",
       badgeColor: "bg-blue-500/15 text-blue-400 border-blue-500/20",
     },
     {
@@ -251,7 +263,7 @@ export default async function LocationHubPage({
   const faqs = [
     {
       q: `รถรับจ้างตู้ทึบใน ${provinceThai} คิดราคาอย่างไร?`,
-      a: `ค่าบริการรถรับจ้างตู้ทึบในพื้นที่ ${provinceThai} คิดราคาเริ่มต้นตามระยะทางจริงและขนาดของรถ โดยมีราคาเริ่มต้นสำหรับการขนของในเมืองที่โปร่งใส ไม่มีค่าใช้จ่ายลึกลับบวกเพิ่มหน้างาน 100%`,
+      a: `ค่าบริการรถรับจ้างตู้ทึบในพื้นที่ ${provinceThai} คิดราคาเริ่มต้นตามระยะทางจริงและขนาดของรถ โดยมีราคาเริ่มต้นสำหรับการขนของในเมืองที่โปร่งใส ประเมินราคาโปร่งใส แจ้งรายละเอียดชัดเจนก่อนเริ่มงาน`,
     },
     {
       q: `ใช้เวลาย้ายบ้านจากกรุงเทพไป ${provinceThai} กี่ชั่วโมง?`,
@@ -276,111 +288,35 @@ export default async function LocationHubPage({
 
   const logisticsSchema = {
     "@context": "https://schema.org",
-    "@type": "LogisticsService",
+    "@type": "Service",
+    "@id": `${siteConfig.baseUrl}/service/${province}#service`,
     name: `WMS Transport บริการขนส่งและรถรับจ้าง ${provinceThai}`,
     description: `บริการรถรับจ้างตู้ทึบ ย้ายบ้าน และขนส่งมอเตอร์ไซค์ ในพื้นที่จังหวัด ${provinceThai}`,
-    ...(geoData?.wikidata ? { 
-      about: {
-        "@type": "Place",
-        name: provinceThai,
-        sameAs: [geoData.wikidata, geoData.wikipedia].filter(Boolean)
-      } 
-    } : {}),
+    provider: {
+      "@id": `${siteConfig.baseUrl}/#moving-company`
+    },
+    serviceType: "Moving and Transportation Service",
     areaServed: [
       {
-        "@type": "GeoShape",
-        polygon: `${(parseFloat(lat)+0.1).toFixed(4)},${(parseFloat(lng)-0.1).toFixed(4)} ${(parseFloat(lat)+0.1).toFixed(4)},${(parseFloat(lng)+0.1).toFixed(4)} ${(parseFloat(lat)-0.1).toFixed(4)},${(parseFloat(lng)+0.1).toFixed(4)} ${(parseFloat(lat)-0.1).toFixed(4)},${(parseFloat(lng)-0.1).toFixed(4)} ${(parseFloat(lat)+0.1).toFixed(4)},${(parseFloat(lng)-0.1).toFixed(4)}`
+        "@type": "AdministrativeArea",
+        name: provinceThai
       },
-      ...(geoData ? [
-        {
-          "@type": "AdministrativeArea",
-          name: geoData.name
-        },
-        ...geoData.districts.map(d => ({
-          "@type": "Place",
-          name: d
-        })),
-        ...geoData.landmarks.map(l => ({
-          "@type": "Place",
-          name: l
-        }))
-      ] : [])
-    ],
-    provider: {
-      "@type": "LocalBusiness",
-      name: "WMS Transport",
-      image: "https://wms-transport.com/logoWMS.png",
-      telephone: "0612402436",
-      priceRange: "$$",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: provinceThai,
-        addressCountry: "TH",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: lat,
-        longitude: lng,
-      },
-    },
-    offers: {
-      "@type": "Offer",
-      "priceSpecification": {
-        "@type": "PriceSpecification",
-        "price": "1500",
-        "priceCurrency": "THB",
-        "valueAddedTaxIncluded": true
-      }
-    },
-    potentialAction: {
-      "@type": "OrderAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://line.me/ti/p/DtICkMaDet",
-        "inLanguage": "th",
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform"
-        ]
-      }
-    }
+      ...(geoData?.districts ? geoData.districts.map(d => ({
+        "@type": "AdministrativeArea",
+        name: d
+      })) : [])
+    ]
   };
 
   return (
-    <div 
-      className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans"
-      itemScope
-      itemType="https://schema.org/MovingCompany"
-    >
-      <meta itemProp="name" content="WMS TRANSPORT" />
-      <meta itemProp="telephone" content="0612402436" />
-      <meta itemProp="priceRange" content="$$" />
-      <meta itemProp="image" content="https://wms-transport.com/logoWMS.png" />
-      <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-        <meta itemProp="addressLocality" content={provinceThai} />
-        <meta itemProp="addressCountry" content="TH" />
-      </div>
-      {geoData && (
-        <div className="hidden">
-          {geoData.districts.map((d, i) => (
-            <span key={`dist-${i}`} itemProp="serviceArea" itemScope itemType="https://schema.org/Place">
-              <meta itemProp="name" content={d} />
-            </span>
-          ))}
-          {geoData.landmarks.map((l, i) => (
-            <span key={`land-${i}`} itemProp="serviceArea" itemScope itemType="https://schema.org/Place">
-              <meta itemProp="name" content={l} />
-            </span>
-          ))}
-        </div>
-      )}
+    <div className="min-h-screen flex flex-col bg-slate-50 overflow-x-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(logisticsSchema) }}
+        dangerouslySetInnerHTML={{ __html: escapeJsonLd(JSON.stringify(logisticsSchema)) }}
       />
       {geoData && (
         <script
@@ -421,12 +357,11 @@ export default async function LocationHubPage({
           }}
         />
       )}
-      <main className="flex-1 relative pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Ambient background glows */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[32px_32px]" />
-          <div className="absolute top-[10%] left-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-indigo-500/5 to-transparent" />
+      <main className="flex-1 relative pt-28 pb-20 md:pt-36 md:pb-28">
+        {/* Ambient subtle light background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -441,19 +376,19 @@ export default async function LocationHubPage({
           </div>
 
           {/* ── HERO SECTION ── */}
-          <div className="text-center mt-6 mb-20">
+          <div className="text-center mt-6 mb-16">
             <IntentHero
               h1={provinceIntent.h1}
               supporting={provinceIntent.heroSupportingStatement}
               badge={`${loc?.region ?? "ทั่วประเทศ"} · บริการขนส่ง`}
-              className="pt-8 pb-4"
+              className="pt-6 pb-2"
             />
 
             <DecisionAnswerSurface data={{
               directAnswer: `บริการรถรับจ้างขนของและย้ายบ้านในพื้นที่${provinceThai} พร้อมคนยกของมืออาชีพ ราคามาตรฐานชัดเจน ไม่มีบวกเพิ่มหน้างาน`,
               bestFitCustomer: "ผู้ที่ต้องการย้ายบ้าน หอพัก คอนโด หรือขนส่งสินค้า",
               serviceCoverage: `ครอบคลุมพื้นที่${provinceThai} และจังหวัดใกล้เคียงทั่วประเทศ`,
-              vehicleSuitability: "รถกระบะตู้ทึบหลังคาสูง 2.1 เมตร กันแดดกันฝน 100%",
+              vehicleSuitability: "รถกระบะตู้ทึบหลังคาสูง 2.1 เมตร ป้องกันแดดและฝนอย่างมิดชิด",
               priceFactors: ["ระยะทางขนส่ง", "จำนวนคนยกของ", "จุดโหลดสินค้า (ลิฟต์/บันได)"],
               timingExpectations: "จองคิวด่วนได้ภายใน 2-4 ชั่วโมง หรือจองล่วงหน้า",
               preparationRequirements: ["แพ็คของใส่กล่องให้เรียบร้อย", "แจ้งขอนุญาตนิติบุคคลล่วงหน้า (คอนโด/หมู่บ้าน)"],
@@ -469,30 +404,30 @@ export default async function LocationHubPage({
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(6,199,85,0.3)] transition-all duration-300 hover:-translate-y-0.5"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-base shadow-sm hover:-translate-y-0.5 active:scale-[0.98] transition-all"
               >
                 <Image
                   src="/images/LINE_icon.webp"
                   alt="LINE"
-                  width={24}
-                  height={24}
-                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0"
+                  width={20}
+                  height={20}
+                  className="h-5 w-5 object-contain shrink-0"
                 />
                 <span>ติดต่อผ่าน LINE</span>
               </a>
               <a
                 href="tel:0612402436"
-                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:-translate-y-0.5"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-300 text-slate-800 rounded-xl font-bold text-base shadow-xs transition-all hover:-translate-y-0.5"
               >
-                <Phone className="h-5 w-5 text-blue-400" />
+                <Phone className="h-4.5 w-4.5 text-blue-600" />
                 <span className="font-mono tracking-wider">061-240-2436</span>
               </a>
             </div>
           </div>
 
           {/* ── SUB-SERVICES GRID ── */}
-          <section className="mb-24">
-            <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-3">
+          <section className="mb-20">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-3">
               {province === "bkk-thonburi"
                 ? "บริการรถกระบะตู้ทึบรับจ้างย้ายบ้านฝั่งธนบุรี พร้อมคนช่วยยกมืออาชีพ"
                 : province === "bkk-phra-nakhon"
@@ -501,7 +436,7 @@ export default async function LocationHubPage({
                 ? "บริการรถรับจ้างสมุทรสาคร ขนส่งสินค้ามหาชัย และย้ายบ้านกระทุ่มแบน-บ้านแพ้ว"
                 : `บริการรถกระบะตู้ทึบรับจ้างย้ายบ้าน ${provinceThai} พร้อมคนช่วยยกของมืออาชีพ`}
             </h2>
-            <p className="text-slate-400 text-center text-sm mb-10">
+            <p className="text-slate-500 text-center text-sm mb-10">
               คลิกที่บริการเพื่อดูรายละเอียด ราคา และขั้นตอนการสั่งจอง
             </p>
 
@@ -512,17 +447,11 @@ export default async function LocationHubPage({
                   <Link
                     key={service.href}
                     href={service.href}
-                    className="group bg-linear-to-br from-white/2 to-white/4 hover:from-blue-900/20 hover:to-slate-900/50 backdrop-blur-xl border border-white/5 hover:border-blue-500/50 hover:-translate-y-2 transition-all duration-300 p-8 rounded-3xl flex flex-col gap-5 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] relative overflow-hidden"
+                    className="group bg-white hover:bg-blue-50/40 border border-slate-200/80 hover:border-blue-300 transition-all duration-300 p-6 sm:p-7 rounded-2xl flex flex-col gap-4 shadow-xs hover:shadow-md relative overflow-hidden"
                   >
-                    {/* Top glow on hover */}
-                    <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    {/* Bottom animated gradient line */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 group-hover:w-full h-[2px] bg-linear-to-r from-blue-400 to-cyan-300 transition-all duration-500" />
-
                     <div className="flex items-start justify-between gap-3">
-                      <div className="w-14 h-14 bg-blue-600/15 border border-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600/25 group-hover:scale-110 transition-all duration-300 shrink-0">
-                        <Icon className="w-7 h-7" />
+                      <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center text-blue-600 transition-colors shrink-0">
+                        <Icon className="w-6 h-6" />
                       </div>
                       <span
                         className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-wider shrink-0 ${service.badgeColor}`}
@@ -532,15 +461,15 @@ export default async function LocationHubPage({
                     </div>
 
                     <div className="grow">
-                      <h3 className="text-lg font-extrabold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                      <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">
+                      <p className="text-slate-600 text-sm leading-relaxed">
                         {service.description}
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-blue-400 text-sm font-bold group-hover:gap-3 transition-all duration-300">
+                    <div className="flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
                       <span>ดูรายละเอียด</span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
@@ -552,8 +481,8 @@ export default async function LocationHubPage({
 
           {/* ── UI/UX REGIONAL PORTFOLIO MEDIA INTEGRATION ── */}
           {geoData && (
-            <section className="mb-24 content-auto">
-              <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-3">
+            <section className="mb-20 content-auto">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-3">
                 {province === "bkk-thonburi"
                   ? "ภาพผลงานการขนย้ายจริงฝั่งธนบุรี และจุดจอดบริการเด่น"
                   : province === "bkk-phra-nakhon"
@@ -562,15 +491,15 @@ export default async function LocationHubPage({
                   ? "ผลงานย้ายบ้านขนส่งสินค้าสมุทรสาคร และนิคมอุตสาหกรรม"
                   : `ภาพผลงานการขนย้ายและรถตู้ทึบรับจ้างในพื้นที่ ${provinceThai}`}
               </h2>
-              <p className="text-slate-400 text-center text-sm mb-10 max-w-2xl mx-auto">
+              <p className="text-slate-500 text-center text-sm mb-8 max-w-2xl mx-auto">
                 รีวิวผลงานการขับรถตู้ทึบ ขนของ ย้ายหอ ขนย้ายบิ๊กไบค์จริง ยืนยันความน่าเชื่อถือด้วยรูปพนักงานและรถบริการจริงของบริษัท
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 {geoData.images.map((img, index) => (
                   <div
                     key={index}
-                    className="relative group rounded-3xl overflow-hidden border border-white/10 bg-white/2 aspect-16/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)] transition-all duration-1000 ease-out hover:border-blue-500/40"
+                    className="relative rounded-2xl overflow-hidden border border-slate-200 bg-white aspect-16/10 shadow-xs"
                   >
                     <Image
                       src={img.url}
@@ -578,15 +507,15 @@ export default async function LocationHubPage({
                       fill
                       sizes="(max-w-768px) 100vw, 50vw"
                       loading="lazy"
-                      className="object-cover transition-transform duration-1500 ease-out group-hover:scale-[1.03]"
+                      className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#040b15] via-[#040b15]/20 to-transparent opacity-70 group-hover:opacity-85 transition-opacity duration-1000" />
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/25 to-transparent" />
                     
-                    <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-800">
-                      <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/25 w-fit mb-2">
+                    <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end">
+                      <span className="text-xs font-bold text-white bg-blue-600/90 px-2.5 py-0.5 rounded-md w-fit mb-2">
                         {geoData.landmarks[index] || geoData.name}
                       </span>
-                      <h3 className="text-white font-extrabold text-base md:text-lg leading-relaxed drop-shadow-md">
+                      <h3 className="text-white font-bold text-base md:text-lg leading-snug drop-shadow-xs">
                         {img.alt}
                       </h3>
                     </div>
@@ -600,50 +529,45 @@ export default async function LocationHubPage({
           {geoData && <LocalOperationsAtlas geoData={geoData} />}
 
           {/* ── PORTFOLIO CTA BANNER ── */}
-          <section className="mb-24">
-            <div className="bg-linear-to-r from-blue-900/40 to-indigo-900/40 border border-blue-500/30 backdrop-blur-xl rounded-[32px] p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <section className="mb-20">
+            <div className="bg-[#0B1F3A] border border-blue-900/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
               <div>
                 <h3 className="text-xl md:text-2xl font-black text-white mb-2">
                   มั่นใจทุกการขนย้าย ด้วยผลงานจริงระดับมืออาชีพ
                 </h3>
-                <p className="text-slate-300 text-sm font-medium">
+                <p className="text-blue-100/80 text-sm font-medium">
                   ดูรูปภาพและรีวิวผลงานการขนย้ายของเราที่ผ่านมาได้ที่นี่
                 </p>
               </div>
               <Link
                 href="/portfolio"
-                className="shrink-0 whitespace-nowrap bg-white/10 hover:bg-blue-500 text-white border border-blue-400/50 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300 font-bold flex items-center gap-2 group/btn"
+                className="shrink-0 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-xs transition-all duration-200 font-bold flex items-center gap-2"
               >
-                ดูภาพผลงาน <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                ดูภาพผลงาน <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </section>
 
           {/* ── HYPER-LOCAL TESTIMONIAL ── */}
-          <section className="mb-24 max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-10">
+          <section className="mb-20 max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-8">
               เสียงตอบรับจากผู้ใช้บริการในพื้นที่{provinceShort}
             </h2>
-            <div className="bg-white/2 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8 group hover:border-blue-500/30 transition-all duration-500">
-              {/* Subtle accent glow */}
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-blue-500/20 transition-all duration-500" />
-              <div className="absolute top-4 right-4 text-blue-500/10 pointer-events-none">
-                <Quote className="w-24 h-24 rotate-180" />
-              </div>
+            <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-2xl shadow-xs relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
               <div className="flex flex-col gap-2 shrink-0 items-center md:items-start relative z-10">
-                <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/25">
+                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
                   {review.tag}
                 </span>
-                <div className="flex items-center gap-1 mt-2 text-yellow-400">
+                <div className="flex items-center gap-1 mt-2 text-amber-400">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="w-4.5 h-4.5 fill-current shrink-0" />
                   ))}
                 </div>
-                <p className="text-white font-extrabold text-lg mt-2">{review.author}</p>
+                <p className="text-slate-900 font-extrabold text-base mt-2">{review.author}</p>
                 <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริงในพื้นที่</p>
               </div>
-              <div className="flex-1 border-t md:border-t-0 md:border-l border-white/10 pt-6 md:pt-0 md:pl-8 relative z-10">
-                <p className="text-slate-200 text-lg font-medium leading-relaxed italic">
+              <div className="flex-1 border-t md:border-t-0 md:border-l border-slate-100 pt-5 md:pt-0 md:pl-8 relative z-10">
+                <p className="text-slate-700 text-base md:text-lg font-medium leading-relaxed italic">
                   &ldquo;{review.text}&rdquo;
                 </p>
               </div>
@@ -651,85 +575,85 @@ export default async function LocationHubPage({
           </section>
 
           {/* ── TRANSIT TIME VISUALIZER ── */}
-          <section className="mb-24">
+          <section className="mb-20">
             <TransitTimeVisualizer province={province} />
           </section>
 
           {/* ── FEATURES STRIP ── */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div className="bg-white/2 border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+            <div className="bg-white border border-slate-200/80 p-6 sm:p-7 rounded-2xl shadow-xs">
+              <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center mb-5 text-blue-600">
                 <Truck className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-extrabold text-white mb-3">
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
                 ขนส่งด้วยตู้ทึบมาตรฐาน
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                รถกระบะตู้ทึบหลังคาสูง กันฝน กันแดด กันฝุ่น 100%
+              <p className="text-slate-600 text-sm leading-relaxed">
+                รถกระบะตู้ทึบหลังคาสูง กันฝน กันแดด กันฝุ่นอย่างมิดชิด
                 เหมาะสำหรับขนย้ายบ้าน ขนย้ายเฟอร์นิเจอร์ หรือขนส่งสินค้าทุกประเภท
               </p>
             </div>
-            <div className="bg-white/2 border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+            <div className="bg-white border border-slate-200/80 p-6 sm:p-7 rounded-2xl shadow-xs">
+              <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center mb-5 text-blue-600">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-extrabold text-white mb-3">
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
                 พนักงานช่วยยกของมืออาชีพ
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 ไม่ต้องเหนื่อยยกของเอง เรามีทีมงานพนักงานขนย้ายที่มีความชำนาญ
                 สุภาพ จัดเรียงสิ่งของประหยัดพื้นที่ และทะนุถนอมสิ่งของเป็นอย่างดี
               </p>
             </div>
-            <div className="bg-white/2 border border-white/10 p-8 rounded-3xl backdrop-blur-xl">
-              <div className="w-12 h-12 bg-blue-600/20 border border-blue-500/30 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+            <div className="bg-white border border-slate-200/80 p-6 sm:p-7 rounded-2xl shadow-xs">
+              <div className="w-12 h-12 bg-blue-50 border border-blue-200 rounded-xl flex items-center justify-center mb-5 text-blue-600">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-extrabold text-white mb-3">
-                มีประกันสินค้าปลอดภัย
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
+                ดูแลความปลอดภัยของสินค้า
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                รับประกันความเสียหายระหว่างทาง ช่วยเพิ่มความอุ่นใจให้กับทุกขั้นตอน
+              <p className="text-slate-600 text-sm leading-relaxed">
+                มีมาตรการดูแลความปลอดภัยระหว่างทาง ช่วยเพิ่มความอุ่นใจให้กับทุกขั้นตอน
                 เพื่อให้ทรัพย์สินของคุณถึงปลายทางอย่างไร้กังวล
               </p>
             </div>
           </section>
 
           {/* ── PRICING INFO ── */}
-          <div className="bg-linear-to-r from-blue-600/10 to-cyan-500/5 border border-blue-500/20 p-8 md:p-12 rounded-[32px] text-left mb-24 font-sans">
-            <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+          <div className="bg-blue-50/70 border border-blue-200/80 p-6 sm:p-8 rounded-2xl text-left mb-20 font-sans shadow-xs">
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-5">
               อัตราค่าบริการและโปรโมชั่นพิเศษในพื้นที่ {provinceThai}
             </h2>
-            <ul className="space-y-4 text-slate-300 font-medium">
-              <li className="flex items-center gap-3">
-                <span className="text-emerald-400 font-bold">✓</span>
+            <ul className="space-y-3.5 text-slate-700 font-medium text-sm sm:text-base">
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
                 <span>
                   บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai} ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <span className="text-emerald-400 font-bold">✓</span>
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
                 <span>
                   บริการย้ายหอพัก คอนโด บ้าน พร้อมคนยกของ ดำเนินการโดยรวดเร็วในเขต {provinceThai}
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <span className="text-emerald-400 font-bold">✓</span>
+              <li className="flex items-start gap-2.5">
+                <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
                 <span>
-                  คิดราคาจริงใจตามระยะทางและประเภทการใช้งาน ไม่มีบวกเพิ่มทีหลัง 100%
+                  คิดราคาจริงใจตามระยะทางและประเภทการใช้งาน ไม่มีบวกเพิ่มทีหลัง แจ้งราคาชัดเจนก่อนเริ่มงาน
                 </span>
               </li>
             </ul>
           </div>
 
           {/* ── INTERNAL LINKING ENGINE (TOPIC CLUSTERS) ── */}
-          <section className="mb-24">
-            <div className="flex items-center gap-4 mb-10 justify-center">
-              <div className="h-px bg-linear-to-r from-transparent to-white/20 flex-1 max-w-[100px]"></div>
-              <h2 className="text-2xl md:text-3xl font-black text-white text-center">
-                พื้นที่ให้บริการ<span className="text-blue-400">ใกล้เคียง</span>
+          <section className="mb-20">
+            <div className="flex items-center gap-4 mb-8 justify-center">
+              <div className="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
+              <h2 className="text-2xl font-black text-slate-900 text-center">
+                พื้นที่ให้บริการ<span className="text-blue-600">ใกล้เคียง</span>
               </h2>
-              <div className="h-px bg-linear-to-l from-transparent to-white/20 flex-1 max-w-[100px]"></div>
+              <div className="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
@@ -739,14 +663,14 @@ export default async function LocationHubPage({
                   <Link 
                     key={key} 
                     href={`/service/${key}`}
-                    className="bg-white/2 border border-white/5 hover:border-blue-500/40 hover:bg-blue-900/10 p-5 rounded-2xl flex items-center gap-3 group transition-all duration-300 hover:-translate-y-1 shadow-[0_4px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_10px_30px_rgba(59,130,246,0.15)] content-auto"
+                    className="bg-white border border-slate-200/80 hover:border-blue-300 hover:bg-blue-50/30 p-4 rounded-xl flex items-center gap-3 group transition-all shadow-xs content-auto"
                   >
-                    <div className="w-10 h-10 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-300">
-                      <MapPin className="w-5 h-5 text-blue-400" />
+                    <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                      <MapPin className="w-4.5 h-4.5 text-blue-600" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-slate-300 group-hover:text-white font-bold text-sm transition-colors">{data.name}</span>
-                      <span className="text-slate-500 text-[10px] uppercase tracking-wider group-hover:text-blue-300 transition-colors">สาขาบริการ</span>
+                      <span className="text-slate-800 group-hover:text-blue-600 font-bold text-sm transition-colors">{data.name}</span>
+                      <span className="text-slate-500 text-[10px] uppercase tracking-wider">สาขาบริการ</span>
                     </div>
                   </Link>
                 ))}
@@ -754,26 +678,25 @@ export default async function LocationHubPage({
           </section>
 
           {/* ── LOCAL FAQ ── */}
-          <div className="max-w-3xl mx-auto mb-24">
-            <h2 className="text-3xl font-black text-white text-center mb-12">
+          <div className="max-w-3xl mx-auto mb-20">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-8">
               คำถามที่พบบ่อย (FAQ) ใน {provinceThai}
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {faqs.map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white/2 border border-white/5 open:border-blue-500/30 open:bg-linear-to-br open:from-blue-950/20 open:via-[#040b15]/50 open:to-[#040b15] open:shadow-[0_20px_50px_rgba(59,130,246,0.1)] rounded-3xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all duration-300 hover:border-white/10 relative overflow-hidden"
+                  className="group bg-white border border-slate-200/80 open:border-blue-300 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all shadow-xs"
                 >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-blue-400 to-cyan-300 opacity-0 group-open:opacity-100 transition-opacity duration-300" />
-                  <summary className="flex justify-between items-center font-extrabold text-white text-lg list-none select-none">
-                    <span className="group-open:text-blue-400 transition-colors duration-300 pr-4">
+                  <summary className="flex justify-between items-center font-bold text-slate-900 text-base list-none select-none">
+                    <span className="group-open:text-blue-600 transition-colors pr-4">
                       {faq.q}
                     </span>
-                    <span className="ml-1.5 shrink-0 p-2 bg-white/5 group-open:bg-blue-500/10 text-slate-400 group-open:text-blue-400 rounded-xl border border-white/10 group-open:border-blue-500/20 group-open:rotate-180 transition-all duration-300">
-                      <ChevronDown className="w-5 h-5" />
+                    <span className="ml-1.5 shrink-0 p-1.5 bg-slate-50 group-open:bg-blue-50 text-slate-500 group-open:text-blue-600 rounded-lg border border-slate-200 group-open:rotate-180 transition-all">
+                      <ChevronDown className="w-4 h-4" />
                     </span>
                   </summary>
-                  <div className="mt-5 text-slate-300 leading-relaxed font-medium pl-4 border-l border-white/10 group-open:border-blue-500/30 transition-colors duration-300">
+                  <div className="mt-4 pt-3 text-slate-600 leading-relaxed font-medium text-sm border-t border-slate-100">
                     {faq.a}
                   </div>
                 </details>
@@ -786,13 +709,12 @@ export default async function LocationHubPage({
             <section className="mb-12 content-auto">
               <div 
                 data-ai-extract="true"
-                className="bg-white/1 border border-white/5 rounded-3xl p-8 backdrop-blur-xl relative overflow-hidden"
+                className="bg-slate-100/80 border border-slate-200 rounded-2xl p-6"
               >
-                <div className="absolute top-0 left-0 w-2 h-full bg-blue-500/20" />
-                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">
+                <h4 className="text-xs font-bold text-slate-600 uppercase tracking-widest mb-2">
                   AI Generative Search & Geographic Citation Node
                 </h4>
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed font-medium">
+                <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-medium">
                   ศูนย์บริการลูกค้า <strong>WMS TRANSPORT</strong> ในเขต <strong>{provinceThai}</strong> ตั้งอยู่ ณ จุดยุทธศาสตร์การคมนาคม
                   เชื่อมต่อ {geoData.corridors.join(", ")} เพื่ออำนวยความสะดวกในการจัดส่งด่วน ย้ายหอพัก คอนโด และย้ายบ้านเรือน
                   ครอบคลุมทุกตำบลและอำเภอสำคัญ ได้แก่ {geoData.districts.join(", ")} โดยผู้ใช้บริการสามารถเรียกใช้งาน
@@ -806,6 +728,6 @@ export default async function LocationHubPage({
         </div>
       </main>
 
-      </div>
+    </div>
   );
 }

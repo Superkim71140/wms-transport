@@ -69,28 +69,28 @@ export default function Footer() {
 
           {/* Column 2: Services */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
               บริการของเรา
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li>
-                <Link href="#services" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/#services" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   ย้ายบ้าน/คอนโด
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/#services" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   ขนส่งมอเตอร์ไซค์
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/pricing/freight" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   เหมาเที่ยวต่างจังหวัด
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
-                  แพ็กสินค้า
+                <Link href="/guides/truck-capacity-cbm" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
+                  แพ็กสินค้า & ขนย้าย
                 </Link>
               </li>
             </ul>
@@ -98,38 +98,33 @@ export default function Footer() {
 
           {/* Column 3: Top Areas */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
               พื้นที่ยอดฮิต
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/service/bangkok" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   กรุงเทพมหานคร
                 </Link>
               </li>
               <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/service/samutsakhon" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   สมุทรสาคร
                 </Link>
               </li>
               <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/service/samut-songkhram" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   สมุทรสงคราม
                 </Link>
               </li>
               <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/service/chonburi" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   ชลบุรี
                 </Link>
               </li>
               <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
+                <Link href="/service/phuket" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
                   ภูเก็ต
-                </Link>
-              </li>
-              <li>
-                <Link href="#areas" className="inline-block hover:text-blue-400 hover:translate-x-1 transition-transform duration-300">
-                  เชียงใหม่
                 </Link>
               </li>
             </ul>
@@ -137,35 +132,35 @@ export default function Footer() {
 
           {/* Column 4: Trust & Contact */}
           <div>
-            <h3 className="text-white font-bold text-base mb-6 border-l border-blue-600 pl-3">
+            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
               ติดต่อเรา
             </h3>
             
             <div className="space-y-4 mb-6">
               <div className="flex items-start gap-3 text-sm">
-                <Phone className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                <Phone className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-1">
                   <a href="tel:0612402436" className="hover:text-blue-400 transition-colors duration-200 text-white font-bold text-base">
                     061-240-2436
                   </a>
-                  <a href="mailto:1999.kittinanwimonset@gmail.com" className="hover:text-blue-400 transition-colors duration-200 text-xs">
+                  <a href="mailto:1999.kittinanwimonset@gmail.com" className="hover:text-blue-400 transition-colors duration-200 text-xs text-slate-400">
                     1999.kittinanwimonset@gmail.com
                   </a>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-blue-950/40 border border-blue-500/20 shadow-inner">
-                <Clock className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                <span className="text-sm font-semibold text-white tracking-wide">
+            <div className="flex flex-col gap-2.5">
+              <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
+                <Clock className="w-4.5 h-4.5 text-emerald-400 flex-shrink-0" />
+                <span className="text-xs font-semibold text-white tracking-wide">
                   เปิดบริการ 24 ชม.
                 </span>
               </div>
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-blue-950/40 border border-blue-500/20 shadow-inner">
-                <ShieldCheck className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                <span className="text-sm font-semibold text-white tracking-wide">
-                  รับประกันสินค้าสูงสุด 100k
+              <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
+                <ShieldCheck className="w-4.5 h-4.5 text-blue-400 flex-shrink-0" />
+                <span className="text-xs font-semibold text-white tracking-wide">
+                  ดูแลสินค้าปลอดภัยทุกเที่ยว
                 </span>
               </div>
             </div>
@@ -206,7 +201,7 @@ export default function Footer() {
             <a
               href="https://kimx-wed.vercel.app/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="font-bold text-blue-400 transition-colors hover:text-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
             >
               KIMXWED

@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Thai } from "next/font/google";
-import { Partytown } from '@builder.io/partytown/react';
+import { Partytown } from "@builder.io/partytown/react";
 import "./globals.css";
-import SocialProofPopup from "@/components/SocialProofPopup";
 import EntityGraphSchema from "@/components/EntityGraphSchema";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export const revalidate = 3600;
 
@@ -27,21 +28,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wms-transport.com"),
-  title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ พร้อมคนยก | WMS TRANSPORT",
-  description: "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ สินค้าปลอดภัย มีประกันอุบัติเหตุทุกเที่ยว ประเมินราคาฟรี 24 ชม.",
-  keywords: [
-    "รถกระบะตู้ทึบรับจ้าง",
-    "รถรับจ้างย้ายบ้าน",
-    "ย้ายหอพักพร้อมคนยก",
-    "ขนส่งมอเตอร์ไซค์ ทั่วไทย",
-    "รับส่งบิ๊กไบค์",
-    "ขนย้ายเฟอร์นิเจอร์",
-    "รถรับจ้างขนของ",
-    "ขนส่งสินค้า เหมาคัน",
-    "WMS Transport"
-  ],
-  authors: [{ name: "WMS TRANSPORT" }],
+  metadataBase: new URL(siteConfig.baseUrl),
+  // Direct title without template to prevent double brand duplication ("... | WMS TRANSPORT | WMS TRANSPORT") on child pages
+  title: siteConfig.defaultTitle,
+  description: siteConfig.defaultDescription,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.businessName }],
+  // Root alternates.canonical is intentionally omitted so child pages do not inherit the Homepage URL.
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -53,31 +46,47 @@ export const metadata: Metadata = {
         rel: "icon",
         type: "image/png",
         sizes: "512x512",
-        url: "/logoWMS.png",
+        url: siteConfig.logoUrl,
       },
     ],
   },
   openGraph: {
-    title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ พร้อมคนยก | WMS TRANSPORT",
-    description: "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ สินค้าปลอดภัย มีประกันอุบัติเหตุทุกเที่ยว ประเมินราคาฟรี 24 ชม.",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
     type: "website",
-    locale: "th_TH",
-    siteName: "WMS TRANSPORT",
-    images: ["/logoWMS.png"],
+    locale: siteConfig.locale,
+    url: siteConfig.baseUrl,
+    siteName: siteConfig.businessName,
+    images: [
+      {
+        url: `${siteConfig.baseUrl}${siteConfig.defaultOgImage}`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.businessName,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ พร้อมคนยก | WMS TRANSPORT",
-    description: "บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ สินค้าปลอดภัย มีประกันอุบัติเหตุทุกเที่ยว ประเมินราคาฟรี 24 ชม.",
-    images: ["/logoWMS.png"],
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: [`${siteConfig.baseUrl}${siteConfig.defaultOgImage}`],
   },
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   verification: {
-    google: "XBZroDGp_kA28tbvOnFUymh1DsDybkbicMoyPmsQ8JY",
+    google: siteConfig.verification.google,
   },
 };
-
-
 
 export default function RootLayout({
   children,
@@ -94,13 +103,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://line.me" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://line.me" />
         <link rel="preconnect" href="https://www.facebook.com" crossOrigin="anonymous" />
-        <Partytown debug={false} forward={['dataLayer.push']} />
+        <Partytown debug={false} forward={["dataLayer.push"]} />
       </head>
-      <body className="min-h-full flex flex-col bg-[#040b15] text-slate-200 selection:bg-red-500/30 selection:text-white">
-
+      <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
         <EntityGraphSchema />
+        <GoogleAnalytics />
         {children}
-        <SocialProofPopup />
       </body>
     </html>
   );

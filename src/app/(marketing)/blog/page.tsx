@@ -21,60 +21,53 @@ export default function BlogHubPage() {
   }));
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans">
-      <main className="grow pt-32 pb-24 md:pt-40 md:pb-36 relative">
-        {/* Glow Backgrounds */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[10%] left-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-indigo-500/5 to-transparent" />
-        </div>
-
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden font-sans text-slate-900">
+      <main className="grow pt-14 pb-20 relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-blue-400 tracking-[0.2em] uppercase font-bold text-sm bg-blue-500/10 px-4 py-1.5 rounded-full border border-blue-500/20 mb-6 inline-block animate-pulse">
+          <div className="text-center mb-12">
+            <span className="text-blue-700 tracking-wide uppercase font-bold text-xs bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200 mb-4 inline-block">
               WMS Content Hub
             </span>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
-              บล็อกรวมความรู้ <span className="text-blue-400 bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-indigo-400">เรื่องการขนย้าย</span>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0B1F3A] mb-3 tracking-tight">
+              บล็อกรวมความรู้ <span className="text-blue-600">เรื่องการขนย้าย</span>
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
               เคล็ดลับการย้ายบ้าน วิธีแพ็กสินค้า การส่งมอเตอร์ไซค์ และคู่มือขนย้ายจากผู้เชี่ยวชาญตัวจริง
             </p>
           </div>
 
           {/* Grid Layout for Articles */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articlesList.map((post) => (
               <article 
                 key={post.slug}
-                className="bg-white/1 hover:bg-white/3 border border-white/5 hover:border-blue-500/30 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] transition-all duration-300 flex flex-col group"
+                className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col group"
               >
-                <Link href={`/blog/${post.slug}`} className="relative aspect-[16/10] overflow-hidden block">
+                <Link href={`/blog/${post.slug}`} className="relative aspect-[16/10] overflow-hidden block bg-slate-100">
                   <Image 
                     src={post.image} 
                     alt={post.title} 
                     fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-500" 
+                    className="object-cover" 
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#040b15] via-[#040b15]/30 to-transparent opacity-80" />
                 </Link>
                 
-                <div className="p-8 flex flex-col grow">
-                  <span className="text-xs text-blue-400 font-bold mb-3 inline-block bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/10 w-fit">
+                <div className="p-6 flex flex-col grow">
+                  <span className="text-xs text-blue-700 font-bold mb-2.5 inline-block bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200 w-fit">
                     {post.date}
                   </span>
-                  <h2 className="text-xl font-extrabold text-white mb-4 leading-snug group-hover:text-blue-300 transition-colors">
+                  <h2 className="text-lg font-bold text-[#0B1F3A] mb-2 leading-snug group-hover:text-blue-600 transition-colors">
                     <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h2>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-6 grow line-clamp-3">
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 grow line-clamp-3 font-normal">
                     {post.description}
                   </p>
                   
                   <Link 
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-300 transition-colors mt-auto w-fit"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-blue-700 group-hover:text-blue-800 transition-colors mt-auto w-fit"
                   >
                     <span>อ่านเพิ่มเติม</span>
                     <span className="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -85,7 +78,6 @@ export default function BlogHubPage() {
           </div>
         </div>
       </main>
-
-      </div>
+    </div>
   );
 }

@@ -1,17 +1,28 @@
-import { ImageResponse } from "@vercel/og";
-import { calculateBasePrice } from "./page";
+import { ImageResponse } from "next/og";
+import { notFound } from "next/navigation";
 import { provinceMap } from "@/app/(marketing)/service/[province]/page";
+import { isApprovedRouteCorridor, approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 
-export const runtime = "edge";
 export const alt = "WMS TRANSPORT - บริการขนส่งและรถรับจ้าง";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { from: string; to: string } }) {
-  const { from, to } = params;
+export async function generateStaticParams() {
+  return approvedRouteCorridors.map(({ from, to }) => ({
+    from,
+    to,
+  }));
+}
+
+export default async function Image({ params }: { params: Promise<{ from: string; to: string }> }) {
+  const { from, to } = await params;
+
+  if (!isApprovedRouteCorridor(from, to)) {
+    notFound();
+  }
+
   const fromName = provinceMap[from]?.name || from;
   const toName = provinceMap[to]?.name || to;
-  const startPrice = calculateBasePrice(from, to);
 
   return new ImageResponse(
     (
@@ -62,19 +73,19 @@ export default async function Image({ params }: { params: { from: string; to: st
               backgroundColor: "rgba(59, 130, 246, 0.1)",
               border: "2px solid rgba(59, 130, 246, 0.3)",
               borderRadius: "24px",
-              padding: "20px 40px",
+              padding: "18px 36px",
               marginTop: 50,
             }}
           >
-            <span style={{ color: "#94a3b8", fontSize: 28, marginRight: 20, textTransform: "uppercase" }}>ราคาเริ่มต้น</span>
-            <span style={{ color: "#ffffff", fontSize: 64, fontWeight: "bold" }}>{startPrice.toLocaleString()}</span>
-            <span style={{ color: "#60a5fa", fontSize: 32, marginLeft: 15 }}>THB</span>
+            <span style={{ color: "#ffffff", fontSize: 36, fontWeight: "bold" }}>
+              ประเมินราคาฟรี 24 ชม. ตามระยะทางจริง
+            </span>
           </div>
           
-          <div style={{ display: "flex", color: "#94a3b8", fontSize: 24, marginTop: 60, alignItems: "center" }}>
-            <span>ปลอดภัย 100%</span>
+          <div style={{ display: "flex", color: "#94a3b8", fontSize: 24, marginTop: 50, alignItems: "center" }}>
+            <span>ตู้ทึบปิดมิดชิด</span>
             <span style={{ margin: "0 15px", color: "#334155" }}>•</span>
-            <span>มีประกันอุบัติเหตุ</span>
+            <span>ดูแลความปลอดภัย</span>
             <span style={{ margin: "0 15px", color: "#334155" }}>•</span>
             <span>คนช่วยยกของมืออาชีพ</span>
           </div>

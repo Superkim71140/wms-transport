@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Link from "next/link";
 import Image from "next/image";
@@ -42,7 +43,7 @@ const serviceConfig: Record<
     labelEn: "Moving Service",
     icon: Home,
     badge: "ยอดนิยม",
-    badgeColor: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+    badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
     headline: "บริการย้ายบ้าน คอนโด",
     subheadline: "และหอพัก ทั่วไทย",
     description:
@@ -61,8 +62,8 @@ const serviceConfig: Record<
         body: "บริการแรปพลาสติก แอร์บับเบิล กล่องกระดาษ เพื่อปกป้องเฟอร์นิเจอร์ชิ้นสำคัญ",
       },
       {
-        title: "มีประกันสินค้าสูงสุด 100,000 บาท",
-        body: "คุ้มครองความเสียหายระหว่างการขนย้ายทุกเที่ยวการเดินทาง อุ่นใจทุกขั้นตอน",
+        title: "ดูแลความปลอดภัยตลอดเส้นทาง",
+        body: "มีมาตรการป้องกันความเสียหายระหว่างการขนย้าย อุ่นใจทุกขั้นตอน",
       },
     ],
     faqs: [
@@ -76,7 +77,7 @@ const serviceConfig: Record<
       },
       {
         q: "ถ้าของเสียหายระหว่างขนย้ายทำอย่างไร?",
-        a: "เรามีวงเงินประกันสินค้าชำรุดหรืออุบัติเหตุระหว่างเดินทางสูงสุดถึง 100,000 บาท ตามเงื่อนไขที่กำหนด โปรดแจ้งเจ้าหน้าที่ทันทีเมื่อพบความเสียหาย",
+        a: "เรามีมาตรการดูแลความปลอดภัยสินค้าและสิ่งของตลอดการเดินทาง หากพบข้อกังวลหรือสิ่งผิดปกติ โปรดแจ้งเจ้าหน้าที่ทันที",
       },
     ],
     pricing: [
@@ -101,12 +102,12 @@ const serviceConfig: Record<
     label: "ขนส่งมอเตอร์ไซค์ / บิ๊กไบค์",
     labelEn: "Motorcycle Transport",
     icon: Bike,
-    badge: "มีประกัน",
-    badgeColor: "bg-blue-500/15 text-blue-400 border-blue-500/20",
+    badge: "ดูแลปลอดภัย",
+    badgeColor: "bg-blue-50 text-blue-700 border-blue-200",
     headline: "ขนส่งมอเตอร์ไซค์",
     subheadline: "และบิ๊กไบค์ ทุกรุ่น ทุกเส้นทาง",
     description:
-      "บริการขนส่งมอเตอร์ไซค์และบิ๊กไบค์ทุกรุ่น ด้วยรถกระบะตู้ทึบปิดมิดชิด รัดตรึงด้วยสายรัดพิเศษ ป้องกันรอยขีดข่วนและการกระแทก ส่งถึงบ้านอย่างปลอดภัย 100%",
+      "บริการขนส่งมอเตอร์ไซค์และบิ๊กไบค์ทุกรุ่น ด้วยรถกระบะตู้ทึบปิดมิดชิด รัดตรึงด้วยสายรัดพิเศษ ป้องกันรอยขีดข่วนและการกระแทก ส่งถึงบ้านอย่างปลอดภัยและได้มาตรฐาน",
     highlights: [
       {
         title: "รถกระบะตู้ทึบปิดมิดชิด",
@@ -121,8 +122,8 @@ const serviceConfig: Record<
         body: "ตั้งแต่มอเตอร์ไซค์ทั่วไป สกู๊ตเตอร์ ไปจนถึงบิ๊กไบค์ทุกยี่ห้อ ทุกขนาด",
       },
       {
-        title: "มีประกันสินค้าครบถ้วน",
-        body: "ประกันภัยคุ้มครองตลอดการเดินทาง หมดกังวลทุกกิโลเมตร",
+        title: "ดูแลความปลอดภัยครบถ้วน",
+        body: "มีมาตรการดูแลความปลอดภัยตลอดการเดินทาง หมดกังวลทุกกิโลเมตร",
       },
     ],
     faqs: [
@@ -162,7 +163,7 @@ const serviceConfig: Record<
     labelEn: "Freight Transport",
     icon: Package,
     badge: "เหมาคัน",
-    badgeColor: "bg-amber-500/15 text-amber-400 border-amber-500/20",
+    badgeColor: "bg-amber-50 text-amber-800 border-amber-200",
     headline: "ขนส่งสินค้า",
     subheadline: "เหมาคัน ตู้ทึบ รับส่งทั่วไทย",
     description:
@@ -181,7 +182,7 @@ const serviceConfig: Record<
         body: "บริการตลอด 24 ชั่วโมง ทีมงานพร้อมรับงานทุกเวลาตามที่ลูกค้าต้องการ",
       },
       {
-        title: "ประกันสินค้าคุ้มครองทุกเที่ยว",
+        title: "ดูแลความปลอดภัยทุกเที่ยว",
         body: "มั่นใจทุกขั้นตอนการขนส่ง คุ้มครองความเสียหายระหว่างทาง",
       },
     ],
@@ -196,7 +197,7 @@ const serviceConfig: Record<
       },
       {
         q: "คิดราคาอย่างไร มีค่าใช้จ่ายซ่อนเร้นไหม?",
-        a: "คิดราคาตามระยะทางจริงและขนาดของที่ต้องการขนส่ง ไม่มีค่าใช้จ่ายแอบแฝง ราคาที่ตกลงกันคือราคาที่จ่ายจริง 100%",
+        a: "คิดราคาตามระยะทางจริงและขนาดของที่ต้องการขนส่ง ไม่มีค่าใช้จ่ายแอบแฝง ราคาที่ตกลงกันคือราคาที่ยืนยันตามเนื้องานจริง",
       },
     ],
     pricing: [
@@ -232,6 +233,7 @@ export async function generateStaticParams() {
 }
 
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 // ─────────────────────────────────────────────
 // SEO Metadata
@@ -243,13 +245,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { province, serviceId } = await params;
   const loc = provinceMap[province];
-  const provinceName = loc?.name ?? province;
   const service = serviceConfig[serviceId];
-  const serviceLabel = service?.label ?? serviceId;
+
+  if (!loc || !service) {
+    return {
+      title: "ไม่พบบริการที่ต้องการ | WMS TRANSPORT",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const provinceName = loc.name;
+  const serviceLabel = service.label;
 
   return {
     title: `${serviceLabel} ${provinceName} | WMS TRANSPORT`,
-    description: `บริการ${serviceLabel}ในพื้นที่${provinceName} และทั่วไทย โดย WMS Transport — รถกระบะตู้ทึบมาตรฐาน พร้อมคนยกของ มีประกัน ติดต่อได้ 24 ชม.`,
+    description: `บริการ${serviceLabel}ในพื้นที่${provinceName} และทั่วไทย โดย WMS Transport — รถกระบะตู้ทึบมาตรฐาน พร้อมคนยกของ ดูแลความปลอดภัย ติดต่อได้ 24 ชม.`,
     alternates: {
       canonical: `/service/${province}/${serviceId}`,
     },
@@ -271,23 +281,8 @@ export default async function ServiceDetailPage({
 
   const service = serviceConfig[serviceId];
 
-  // Fallback for unknown serviceId
-  if (!service) {
-    return (
-      <div className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans">
-        <main className="flex-1 flex flex-col items-center justify-center text-center px-6 pt-40 pb-24">
-          <h1 className="text-4xl font-black text-white mb-4">ไม่พบบริการที่ต้องการ</h1>
-          <p className="text-slate-400 mb-8">กรุณากลับไปเลือกบริการที่ต้องการจากหน้าจังหวัด</p>
-          <Link
-            href={`/service/${province}`}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl transition-all"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            กลับหน้า {provinceName}
-          </Link>
-        </main>
-        </div>
-    );
+  if (!loc || !service) {
+    notFound();
   }
 
   const Icon = service.icon;
@@ -304,14 +299,7 @@ export default async function ServiceDetailPage({
     name: `${service.label} ${provinceName}`,
     description: service.description,
     provider: {
-      "@type": "LocalBusiness",
-      name: "WMS Transport",
-      telephone: "0612402436",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: provinceName,
-        addressCountry: "TH",
-      },
+      "@id": "https://wms-transport.com/#moving-company",
     },
     areaServed: [
       {
@@ -342,7 +330,7 @@ export default async function ServiceDetailPage({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#040b15] overflow-x-hidden font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 overflow-x-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
@@ -351,12 +339,11 @@ export default async function ServiceDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <main className="flex-1 relative pt-32 pb-24 md:pt-40 md:pb-36">
-        {/* Ambient background glows */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[32px_32px]" />
-          <div className="absolute top-[10%] left-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent" />
-          <div className="absolute bottom-[10%] right-[-5%] w-[1000px] h-[1000px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-indigo-500/5 to-transparent" />
+      <main className="flex-1 relative pt-28 pb-20 md:pt-36 md:pb-28">
+        {/* Ambient subtle light background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -376,49 +363,49 @@ export default async function ServiceDetailPage({
           </div>
 
           {/* ── HERO ── */}
-          <div className="mt-8 mb-20">
+          <div className="mt-8 mb-16">
             <span
-              className={`inline-flex items-center gap-2 text-[10px] font-bold px-3 py-1 rounded-full border uppercase tracking-[0.15em] mb-6 ${service.badgeColor}`}
+              className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full border uppercase tracking-wider mb-5 ${service.badgeColor}`}
             >
               <Icon className="w-3.5 h-3.5" />
               {service.labelEn} · {loc?.region ?? "ทั่วประเทศ"}
             </span>
 
-            <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-5">
               {service.headline}
               <br />
-              <span className="text-blue-400">
+              <span className="text-blue-600">
                 {service.subheadline}
               </span>
             </h1>
 
-            <p className="text-lg text-slate-300 max-w-3xl leading-relaxed mb-10 font-medium">
+            <p className="text-base sm:text-lg text-slate-600 max-w-3xl leading-relaxed mb-8 font-medium">
               {service.description} ครอบคลุมพื้นที่{" "}
-              <strong className="text-white">{provinceName}</strong> และเส้นทางข้ามจังหวัดทั่วประเทศ
+              <strong className="text-slate-900">{provinceName}</strong> และเส้นทางข้ามจังหวัดทั่วประเทศ
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3.5">
               <a
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg shadow-[0_10px_30px_rgba(6,199,85,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(6,199,85,0.4)]"
+                className="flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-base shadow-sm hover:-translate-y-0.5 active:scale-[0.98] transition-all"
               >
                 <Image
                   src="/images/LINE_icon.webp"
                   alt="LINE"
-                  width={24}
-                  height={24}
-                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0"
+                  width={20}
+                  height={20}
+                  className="h-5 w-5 object-contain shrink-0"
                 />
                 <span>ติดต่อผ่าน LINE ฟรี</span>
               </a>
               <a
                 href="tel:0612402436"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:-translate-y-0.5"
+                className="flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-300 text-slate-800 rounded-xl font-bold text-base shadow-xs transition-all hover:-translate-y-0.5"
               >
-                <Phone className="h-5 w-5 text-blue-400" />
+                <Phone className="h-4.5 w-4.5 text-blue-600" />
                 <span className="font-mono tracking-wider">061-240-2436</span>
               </a>
             </div>
@@ -426,26 +413,26 @@ export default async function ServiceDetailPage({
 
           {/* ── HIGHLIGHTS GRID ── */}
           <section className="mb-20">
-            <h2 className="text-2xl md:text-3xl font-black text-white mb-3 text-center">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 text-center">
               จุดเด่นบริการ{service.label}
             </h2>
-            <p className="text-slate-400 text-center text-sm mb-10">
+            <p className="text-slate-500 text-center text-sm mb-10">
               ครบ จบ ในที่เดียว ดูแลทุกขั้นตอนโดยทีมงานมืออาชีพ
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {service.highlights.map((h, i) => (
                 <div
                   key={i}
-                  className="group bg-linear-to-br from-white/2 to-white/4 hover:from-blue-900/20 hover:to-slate-900/50 border border-white/5 hover:border-blue-500/40 rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_0_25px_rgba(59,130,246,0.2)] transition-all duration-300 flex items-start gap-4"
+                  className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs flex items-start gap-4"
                 >
-                  <div className="mt-0.5 p-2 bg-blue-500/10 border border-blue-500/20 rounded-xl group-hover:bg-blue-500/20 transition-all shrink-0">
-                    <CheckCircle className="w-5 h-5 text-blue-400" />
+                  <div className="mt-0.5 p-2 bg-blue-50 border border-blue-200 rounded-xl shrink-0 text-blue-600">
+                    <CheckCircle className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-extrabold text-white mb-1 group-hover:text-blue-300 transition-colors">
+                    <h3 className="text-base font-bold text-slate-900 mb-1">
                       {h.title}
                     </h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{h.body}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{h.body}</p>
                   </div>
                 </div>
               ))}
@@ -454,24 +441,24 @@ export default async function ServiceDetailPage({
 
           {/* ── PRICING TABLE ── */}
           <section className="mb-20">
-            <h2 className="text-2xl md:text-3xl font-black text-white mb-10 text-center">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-8 text-center">
               อัตราค่าบริการใน{provinceShort}
             </h2>
-            <div className="overflow-x-auto bg-white/1 border border-white/5 rounded-3xl p-1 backdrop-blur-xl">
+            <div className="overflow-x-auto bg-white border border-slate-200/80 rounded-2xl p-1 shadow-xs">
               <table className="w-full text-left border-collapse text-sm min-w-[480px]">
                 <thead>
-                  <tr className="border-b border-white/10 text-slate-400 font-bold bg-white/5">
+                  <tr className="border-b border-slate-100 text-slate-600 font-bold bg-slate-50/80">
                     <th className="p-4">ประเภทงาน</th>
                     <th className="p-4">รายละเอียด</th>
                     <th className="p-4 text-right">ราคาเริ่มต้น</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5 font-semibold text-slate-200">
+                <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
                   {service.pricing.map((row, i) => (
-                    <tr key={i} className="hover:bg-white/2 transition-colors">
-                      <td className="p-4 text-white">{row.type}</td>
-                      <td className="p-4 text-slate-400">{row.detail}</td>
-                      <td className="p-4 text-right text-blue-400 font-bold">{row.price}</td>
+                    <tr key={i} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-4 text-slate-900 font-bold">{row.type}</td>
+                      <td className="p-4 text-slate-600">{row.detail}</td>
+                      <td className="p-4 text-right text-blue-600 font-bold">{row.price}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -483,19 +470,17 @@ export default async function ServiceDetailPage({
           </section>
 
           {/* ── LARGE CTA BANNER ── */}
-          <div className="relative bg-linear-to-br from-blue-600/12 via-blue-500/6 to-cyan-500/4 border border-blue-500/30 rounded-[32px] p-8 md:p-12 mb-20 overflow-hidden">
-            {/* Decorative glow */}
-            <div className="absolute -top-16 -right-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative bg-[#0B1F3A] border border-blue-900/30 rounded-2xl p-6 sm:p-10 mb-20 overflow-hidden text-white shadow-md">
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-5 h-5 text-emerald-400" />
-                  <span className="text-emerald-400 font-bold text-sm">ประเมินราคาฟรีภายใน 5 นาที</span>
+                  <Clock className="w-4 h-4 text-emerald-400" />
+                  <span className="text-emerald-300 font-bold text-xs">ประเมินราคาฟรีภายใน 5 นาที</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
                   สนใจบริการ{service.label}ใน{provinceShort}?
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed max-w-lg">
+                <p className="text-blue-100/80 text-sm leading-relaxed max-w-lg">
                   ติดต่อทีมงานผ่าน LINE หรือโทรได้เลย ประเมินราคาจากภาพถ่ายหรือวิดีโอ รวดเร็วใน 5 นาที ไม่มีค่าใช้จ่าย
                 </p>
               </div>
@@ -504,22 +489,22 @@ export default async function ServiceDetailPage({
                   href="https://line.me/ti/p/DtICkMaDet"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5 px-7 py-4 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-2xl font-black text-base shadow-[0_8px_25px_rgba(6,199,85,0.3)] transition-all duration-300 hover:-translate-y-0.5"
+                  className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-sm shadow-sm transition-all hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   <Image
                     src="/images/LINE_icon.webp"
                     alt="LINE"
-                    width={20}
-                    height={20}
-                    className="h-5 w-5 object-contain shrink-0"
+                    width={18}
+                    height={18}
+                    className="h-4.5 w-4.5 object-contain shrink-0"
                   />
                   <span>ส่ง LINE ฟรี</span>
                 </a>
                 <a
                   href="tel:0612402436"
-                  className="flex items-center justify-center gap-2.5 px-7 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/40 text-white rounded-2xl font-bold text-base transition-all duration-300"
+                  className="flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-xl font-semibold text-sm transition-all hover:-translate-y-0.5"
                 >
-                  <Phone className="h-5 w-5 text-blue-400 shrink-0" />
+                  <Phone className="h-4 w-4 text-blue-300 shrink-0" />
                   <span>โทรเลย</span>
                 </a>
               </div>
@@ -528,25 +513,24 @@ export default async function ServiceDetailPage({
 
           {/* ── FAQ ── */}
           <section className="max-w-3xl mx-auto mb-20">
-            <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-8">
               คำถามที่พบบ่อย (FAQ)
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {service.faqs.map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white/2 border border-white/5 open:border-blue-500/30 open:bg-linear-to-br open:from-blue-950/20 open:via-[#040b15]/50 open:to-[#040b15] open:shadow-[0_20px_50px_rgba(59,130,246,0.1)] rounded-3xl p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all duration-300 hover:border-white/10 relative overflow-hidden"
+                  className="group bg-white border border-slate-200/80 open:border-blue-300 rounded-xl p-5 [&_summary::-webkit-details-marker]:hidden cursor-pointer transition-all shadow-xs"
                 >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-blue-400 to-cyan-300 opacity-0 group-open:opacity-100 transition-opacity duration-300" />
-                  <summary className="flex justify-between items-center font-extrabold text-white text-base list-none select-none">
-                    <span className="group-open:text-blue-400 transition-colors duration-300 pr-4">
+                  <summary className="flex justify-between items-center font-bold text-slate-900 text-base list-none select-none">
+                    <span className="group-open:text-blue-600 transition-colors pr-4">
                       {faq.q}
                     </span>
-                    <span className="ml-1.5 shrink-0 p-2 bg-white/5 group-open:bg-blue-500/10 text-slate-400 group-open:text-blue-400 rounded-xl border border-white/10 group-open:border-blue-500/20 group-open:rotate-180 transition-all duration-300 text-lg leading-none">
-                      ﹀
+                    <span className="ml-1.5 shrink-0 p-1.5 bg-slate-50 group-open:bg-blue-50 text-slate-500 group-open:text-blue-600 rounded-lg border border-slate-200 group-open:rotate-180 transition-all text-xs font-mono">
+                      ▼
                     </span>
                   </summary>
-                  <div className="mt-5 text-slate-300 leading-relaxed font-medium pl-4 border-l border-white/10 group-open:border-blue-500/30 transition-colors duration-300">
+                  <div className="mt-4 pt-3 text-slate-600 leading-relaxed font-medium text-sm border-t border-slate-100">
                     {faq.a}
                   </div>
                 </details>
@@ -559,8 +543,8 @@ export default async function ServiceDetailPage({
             {[
               {
                 icon: ShieldCheck,
-                title: "มีประกันสินค้าสูงสุด 100k",
-                body: "คุ้มครองความเสียหายระหว่างการขนส่งทุกเที่ยว",
+                title: "ดูแลความปลอดภัยสิ่งของ",
+                body: "มีมาตรการดูแลความปลอดภัยของสิ่งของตลอดเส้นทาง",
               },
               {
                 icon: Clock,
@@ -575,46 +559,46 @@ export default async function ServiceDetailPage({
             ].map((b, i) => (
               <div
                 key={i}
-                className="bg-white/2 border border-white/10 rounded-2xl p-6 backdrop-blur-xl flex items-start gap-4"
+                className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs flex items-start gap-4"
               >
-                <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl shrink-0">
-                  <b.icon className="w-5 h-5 text-blue-400" />
+                <div className="p-2.5 bg-blue-50 border border-blue-200 rounded-xl shrink-0 text-blue-600">
+                  <b.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-extrabold text-white mb-1">{b.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{b.body}</p>
+                  <h3 className="text-base font-bold text-slate-900 mb-1">{b.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{b.body}</p>
                 </div>
               </div>
             ))}
           </section>
 
           {/* ── OTHER SERVICES IN THIS PROVINCE ── */}
-          <section className="pt-8 border-t border-white/10 mb-4">
-            <div className="bg-linear-to-br from-blue-950/20 via-white/1 to-transparent border border-white/5 rounded-3xl p-6 md:p-8 backdrop-blur-xl">
-              <h4 className="text-lg font-extrabold text-white mb-2">
+          <section className="pt-8 border-t border-slate-200 mb-4">
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 shadow-xs">
+              <h4 className="text-lg font-bold text-slate-900 mb-2">
                 บริการอื่นๆ ใน{provinceShort}
               </h4>
-              <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+              <p className="text-slate-600 text-sm mb-6 leading-relaxed">
                 WMS Transport ยังมีบริการอื่นๆ ในพื้นที่เดียวกัน ครบวงจร ดูแลทุกการขนย้าย
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 {otherServices.map((s) => {
                   const SIcon = s.icon;
                   return (
                     <Link
                       key={s.id}
                       href={`/service/${province}/${s.id}`}
-                      className="flex items-center gap-2.5 px-5 py-3 bg-white/2 border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/5 rounded-2xl text-slate-300 hover:text-white font-bold text-sm transition-all duration-300 group shadow-md"
+                      className="flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 hover:border-blue-300 hover:bg-blue-50/40 rounded-xl text-slate-700 hover:text-blue-600 font-bold text-sm transition-all group"
                     >
-                      <SIcon className="w-4 h-4 text-blue-400 shrink-0" />
+                      <SIcon className="w-4 h-4 text-blue-600 shrink-0" />
                       <span>{s.label}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   );
                 })}
                 <Link
                   href={`/service/${province}`}
-                  className="flex items-center gap-2 px-5 py-3 bg-white/2 border border-white/10 hover:border-white/20 hover:bg-white/4 rounded-2xl text-slate-400 hover:text-white font-bold text-sm transition-all duration-300"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 rounded-xl text-slate-600 hover:text-slate-900 font-bold text-sm transition-all"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   ดูบริการทั้งหมดใน{provinceShort}
@@ -626,6 +610,6 @@ export default async function ServiceDetailPage({
         </div>
       </main>
 
-      </div>
+    </div>
   );
 }

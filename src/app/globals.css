@@ -5,13 +5,21 @@
   --color-navy-dark: #061224;
   --color-navy-light: #1A365D;
   --color-navy-muted: #2C4A75;
+
+  --color-blue-primary: #2563EB;
+  --color-blue-hover: #1D4ED8;
+  --color-blue-light: #EFF6FF;
+  --color-blue-border: #BFDBFE;
+
+  /* Backward-compatible aliases for legacy color-red classes */
   --color-red: #2563EB;
   --color-red-light: #3B82F6;
   --color-red-dark: #1D4ED8;
-  --color-red-glow: rgba(37, 99, 235, 0.4);
-  --color-gray-bg: #F4F6F8;
-  --color-gray-card: #F9FAFB;
-  --color-gray-dark: #1E293B;
+  --color-red-glow: rgba(37, 99, 235, 0.2);
+
+  --color-gray-bg: #F8FAFC;
+  --color-gray-card: #FFFFFF;
+  --color-gray-dark: #0F172A;
   --color-white: #ffffff;
   --color-blue-500: #3b82f6;
   --color-blue-600: #2563eb;
@@ -20,9 +28,9 @@
   --font-sans: var(--font-noto-sans-thai), var(--font-inter), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
   
-  --shadow-premium: 0 10px 30px -10px rgba(11, 31, 58, 0.08), 0 1px 3px rgba(11, 31, 58, 0.03);
-  --shadow-premium-hover: 0 20px 40px -15px rgba(37, 99, 235, 0.15), 0 1px 10px rgba(37, 99, 235, 0.05);
-  --shadow-red-glow: 0 0 25px 2px rgba(37, 99, 235, 0.35);
+  --shadow-premium: 0 4px 20px -2px rgba(11, 31, 58, 0.06), 0 2px 6px -1px rgba(11, 31, 58, 0.04);
+  --shadow-premium-hover: 0 12px 30px -4px rgba(37, 99, 235, 0.12), 0 4px 12px -2px rgba(37, 99, 235, 0.06);
+  --shadow-blue-glow: 0 0 20px 2px rgba(37, 99, 235, 0.15);
   
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 4s ease-in-out infinite;
@@ -32,7 +40,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 
 @keyframes road {
@@ -50,13 +58,25 @@
   to   { transform: scaleX(1); }
 }
 
-/* PERMANENT DARK THEME VARIABLES */
+/* SEMANTIC DESIGN TOKENS (LIGHT THEME FIRST) */
 :root {
-  --background: #040b15;
-  --foreground: #F4F6F8;
-  --card-bg: rgba(11, 31, 58, 0.7);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --text-muted: #94A3B8;
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --surface: #FFFFFF;
+  --surface-muted: #F8FAFC;
+  --surface-subtle: #F1F5F9;
+  --primary: #2563EB;
+  --primary-hover: #1D4ED8;
+  --primary-foreground: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --border: #E2E8F0;
+  --card-bg: #FFFFFF;
+  --card-border: #E2E8F0;
+  --focus-ring: #2563EB;
+  --success: #06C755;
+  --danger: #EF4444;
 }
 
 html,
@@ -64,7 +84,7 @@ body {
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
-  background-color: #040b15;
+  background-color: #FFFFFF;
 }
 
 html {
@@ -72,9 +92,11 @@ html {
 }
 
 body {
-  color: #e2e8f0;
+  color: #0F172A;
   font-family: var(--font-sans);
   position: relative;
+  background-color: #FFFFFF;
+  line-height: 1.6;
 }
 
 * {
@@ -97,85 +119,88 @@ main {
   }
 }
 
-/* Glassmorphism utilities */
+/* Crisp Light Surface Utilities */
 .glass {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px -2px rgba(11, 31, 58, 0.05);
 }
 
 .glass-glow {
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 24px 0 rgba(11, 31, 58, 0.08);
 }
 
 .perf-card {
-  background: rgba(7, 20, 38, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 8px -1px rgba(11, 31, 58, 0.04), 0 1px 3px rgba(11, 31, 58, 0.02);
 }
 
 @media (min-width: 768px) {
   .perf-card {
-    background: rgba(7, 20, 38, 0.72);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
   }
 }
 
 .perf-glow {
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.12), transparent 60%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06), transparent 60%);
   filter: none;
 }
 
-
 /* Interactive custom components */
-.glowing-red-btn, .glowing-blue-btn {
+.glowing-red-btn, 
+.glowing-blue-btn {
   position: relative;
   background-color: #2563EB;
-  color: white;
+  color: #FFFFFF;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.glowing-red-btn:hover, .glowing-blue-btn:hover {
-  background-color: #3B82F6;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
-  transform: translateY(-2px);
+.glowing-red-btn:hover, 
+.glowing-blue-btn:hover {
+  background-color: #1D4ED8;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
 }
 
-.glowing-red-btn::after, .glowing-blue-btn::after {
+.glowing-red-btn::after, 
+.glowing-blue-btn::after {
   content: '';
   position: absolute;
   top: -50%;
   left: -60%;
   width: 20%;
   height: 200%;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   transform: rotate(30deg);
   transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   opacity: 0;
 }
 
-.glowing-red-btn:hover::after, .glowing-blue-btn:hover::after {
+.glowing-red-btn:hover::after, 
+.glowing-blue-btn:hover::after {
   left: 150%;
   opacity: 1;
 }
 
-/* Custom Scrollbar - Dark Mode Matched */
+/* Custom Scrollbar - Clean Light Mode */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #040b15;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2563EB;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3B82F6;
+  background: #94A3B8;
 }
 
 /* Hide scrollbar for horizontal swipe sections */
@@ -183,8 +208,8 @@ main {
   display: none;
 }
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Mask for custom map highlight */
@@ -200,33 +225,33 @@ main {
   }
 }
 
-/* Redesigned LINE Button with Pulse Animation and Glowing Shadow */
+/* Redesigned LINE Button with Subtle Pulse Animation */
 .line-btn-pulse {
   background-color: #06C755;
   color: white;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 15px rgba(6, 199, 85, 0.4);
-  animation: line-pulse 2s infinite;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(6, 199, 85, 0.25);
+  animation: line-pulse 2.5s infinite;
 }
 
 .line-btn-pulse:hover {
   background-color: #05B34F;
-  box-shadow: 0 0 25px rgba(6, 199, 85, 0.7);
+  box-shadow: 0 6px 18px rgba(6, 199, 85, 0.4);
 }
 
 @keyframes line-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.7);
+    box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.4);
   }
   70% {
-    box-shadow: 0 0 0 12px rgba(6, 199, 85, 0);
+    box-shadow: 0 0 0 8px rgba(6, 199, 85, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(6, 199, 85, 0);
   }
 }
 
-/* Premium Image Shine Effect */
+/* Premium Image Shine Effect (with valid transition syntax) */
 .shine-effect {
   position: relative;
   overflow: hidden;
@@ -242,11 +267,11 @@ main {
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.25) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: skewX(-25deg);
-  transition: single;
+  transition: transform 0.85s ease;
 }
 
 .shine-effect:hover::after {
@@ -259,17 +284,17 @@ main {
   }
 }
 
-/* Premium Blue Glow animation */
+/* Subtle Blue Glow */
 .blue-glow-pulse {
-  animation: blue-glow-animation 3.5s infinite alternate ease-in-out;
+  animation: blue-glow-animation 4s infinite alternate ease-in-out;
 }
 
 @keyframes blue-glow-animation {
   0% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.15), 0 10px 40px rgba(2, 8, 23, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
   }
   100% {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 10px 40px rgba(2, 8, 23, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.16);
   }
 }
 
@@ -280,7 +305,7 @@ main {
 .status-pulse-custom::after {
   content: '';
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 9999px;
   border: 2px solid #10b981;
   opacity: 0;
@@ -292,38 +317,9 @@ main {
     opacity: 0.8;
   }
   100% {
-    transform: scale(2.2);
+    transform: scale(2.0);
     opacity: 0;
   }
-}
-
-/* Shimmer Button Sweep Animation */
-.shimmer-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-20deg);
-  animation: shimmer-effect-sweep 4s infinite linear;
-}
-
-@keyframes shimmer-effect-sweep {
-  0% { left: -150%; }
-  50% { left: 150%; }
-  100% { left: 150%; }
 }
 
 .content-auto {
@@ -337,10 +333,6 @@ main {
 
 @media (max-width: 767px) {
   .line-btn-pulse {
-    animation: none !important;
-    box-shadow: none !important;
-  }
-  .shimmer-btn::after {
     animation: none !important;
   }
   .blue-glow-pulse {

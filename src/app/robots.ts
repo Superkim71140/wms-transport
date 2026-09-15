@@ -1,12 +1,16 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      disallow: [
+        "/api/",
+        "/dashboard/",
+      ],
     },
-    sitemap: "https://wms-transport.com/sitemap.xml",
+    sitemap: `${siteConfig.baseUrl}/sitemap.xml`,
   };
 }

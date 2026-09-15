@@ -1,4 +1,3 @@
-
 import React from "react";
 import { 
   Truck, 
@@ -16,36 +15,37 @@ import {
 
 import Image from "next/image";
 import HeroBackground from "@/components/HeroBackground";
+import HeroImageCarousel from "@/components/HeroImageCarousel";
+import ServiceSplitShowcase from "@/components/ServiceSplitShowcase";
 import FloatingLine from "@/components/FloatingLine";
 import dynamic from "next/dynamic";
 import TLDRVerdict from "@/components/TLDRVerdict";
-import IntentHero from "@/components/IntentHero";
 import { searchIntentMap } from "@/data/searchIntentMap";
 
 const ServiceMap = dynamic(() => import('@/components/ServiceMap'), {
-  loading: () => <div className="h-[400px] w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />
+  loading: () => <div className="h-[400px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 const ServiceSteps = dynamic(() => import('@/components/ServiceSteps'), {
-  loading: () => <div className="h-40 w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />
+  loading: () => <div className="h-40 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 const CustomerReviews = dynamic(() => import('@/components/CustomerReviews'), {
-  loading: () => <div className="h-[300px] w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />
+  loading: () => <div className="h-[300px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 const DecisionAnswerSurface = dynamic(() => import('@/components/DecisionAnswerSurface'), {
-  loading: () => <div className="h-32 w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />
+  loading: () => <div className="h-32 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), {
-  loading: () => <div className="h-[400px] w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />,
+  loading: () => <div className="h-[400px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 const TrustCounters = dynamic(() => import('@/components/TrustCounters'), {
-  loading: () => <div className="h-40 w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />,
+  loading: () => <div className="h-40 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 const FAQ = dynamic(() => import('@/components/FAQ'), {
-  loading: () => <div className="h-[300px] w-full rounded-[32px] bg-white/2 border border-white/5 animate-pulse" />,
+  loading: () => <div className="h-[300px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 
 import { Metadata } from "next";
@@ -60,22 +60,21 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-
   const services = [
     {
       title: "ย้ายหอพัก / คอนโด",
       thaiName: "ย้ายหอ / คอนโด",
       desc: "บริการย้ายห้องชุด หอพัก อพาร์ทเม้นท์ คอนโดมิเนียม แพ็กซีลกันกระแทกอย่างดี ปลอดภัยทุกขั้นตอน",
       features: ["รวมคนช่วยยกของ", "มีกล่องกระดาษบริการ", "ถอดประกอบเฟอร์นิเจอร์พื้นฐาน"],
-      icon: <Building className="h-7 w-7" />,
+      icon: <Building className="h-8 w-8 text-blue-600" />,
       price: "2,000"
     },
     {
       title: "ขนส่งสินค้า / ทั่วไทย",
       thaiName: "ขนส่งสินค้า",
       desc: "รับส่งสินค้าอุปโภคบริโภค สินค้าโรงงาน วัสดุก่อสร้าง แบบเหมาเที่ยวทั่วประเทศ 77 จังหวัด",
-      features: ["ออกใบเสร็จ/ใบกำกับภาษีได้", "พนักงานขับรถชำนาญทาง", "เช็กสถานะ GPS ตลอดทาง"],
-      icon: <Package className="h-7 w-7" />,
+      features: ["มีเอกสารใบเสร็จยืนยัน", "พนักงานขับรถชำนาญทาง", "ประสานงานติดตามสถานะได้ตลอดการขนส่ง"],
+      icon: <Package className="h-8 w-8 text-blue-600" />,
       price: "1,000"
     },
     {
@@ -87,15 +86,15 @@ export default function Home() {
         "รองรับทั้งมอเตอร์ไซค์ทั่วไปและบิ๊กไบค์",
         "ดูแลโดยทีมงานมืออาชีพตั้งแต่ต้นทางถึงปลายทาง"
       ],
-      icon: <Bike className="h-7 w-7" />,
+      icon: <Bike className="h-8 w-8 text-blue-600" />,
       price: "1,500"
     },
     {
       title: "บริการพร้อมคนช่วยยกของ",
       thaiName: "คนช่วยยกของ",
-      desc: "บริการพร้อมทีมงานช่วยยกของและจัดเรียงอย่างมืออาชีพ",
+      desc: "บริการพร้อมทีมงานช่วยยกของและจัดเรียงอย่างมืออาชีพ ประสบการณ์สูง ซื่อสัตย์ ไร้กังวล",
       features: ["ช่วยยกและจัดวางของ", "มีทีมงานมืออาชีพ", "ปลอดภัยและรวดเร็ว"],
-      icon: <Users className="h-7 w-7" />,
+      icon: <Users className="h-8 w-8 text-blue-600" />,
       price: "500"
     }
   ];
@@ -103,13 +102,13 @@ export default function Home() {
   const whyChooseUs = [
     {
       icon: <Award className="h-6 w-6" />,
-      title: "มีประกันภัยสินค้าทุกเที่ยว",
-      desc: "อุ่นใจทุกการเดินทางด้วยวงเงินประกันภัยอุบัติเหตุระหว่างการขนส่ง ครอบคลุมทรัพย์สินเสียหายสูงสุดตามตกลง"
+      title: "ดูแลความปลอดภัยทุกเที่ยว",
+      desc: "อุ่นใจทุกการเดินทางด้วยมาตรการดูแลความปลอดภัยระหว่างการขนส่ง รัดตรึงสิ่งของแน่นหนาตามมาตรฐาน"
     },
     {
       icon: <Truck className="h-6 w-6" />,
       title: "ยานพาหนะขนส่งมาตรฐานสากล",
-      desc: "เลือกใช้เฉพาะรถกระบะตู้ทึบโครงสร้างพิเศษที่แข็งแรงสูง มิดชิดหนาแน่น สามารถป้องกันลม ฝน ฝุ่นละออง และแรงกระแทกได้อย่างเด็ดขาด 100% ตลอดการเดินทาง"
+      desc: "เลือกใช้เฉพาะรถกระบะตู้ทึบโครงสร้างพิเศษที่แข็งแรงสูง มิดชิดหนาแน่น สามารถป้องกันลม ฝน ฝุ่นละออง และแรงกระแทกได้อย่างมิดชิดตลอดการเดินทาง"
     },
     {
       icon: <Users className="h-6 w-6" />,
@@ -135,217 +134,246 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-
-
-      <main className="grow relative bg-linear-to-b from-[#020817] via-[#04152D] to-[#061F45] text-slate-200 pb-28 md:pb-0">
+      <main className="grow relative bg-white text-slate-900 pb-24 md:pb-0">
         
         <HeroBackground>
-          <IntentHero
-            h1={searchIntentMap.home.h1}
-            supporting={searchIntentMap.home.heroSupportingStatement}
-            badge="WMS TRANSPORT"
-            className="pt-12 pb-6 md:pt-16 md:pb-12"
-          />
-        </HeroBackground>
-
-        {/* 2. TRUST SECTION ("Why Choose WMS") */}
-        <section className="relative overflow-hidden py-16 sm:py-20 lg:py-24 z-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
+          <HeroImageCarousel />
+          
+          {/* Two-Column Editorial Introduction & Assurance Bridge */}
+          <div className="relative z-10 mt-8 sm:mt-11 lg:mt-13 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12 xl:gap-16">
               
-              {/* Left Tile: Real Image Proof */}
-              <div className="relative overflow-hidden rounded-[2.25rem] border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] flex flex-col justify-between group">
-                {/* Soft blue glow behind the image container */}
-                <div className="absolute inset-0 bg-blue-500/10 blur-xl z-0 pointer-events-none"></div>
-                
-                <div className="relative w-full aspect-4/5 sm:aspect-[16/11] lg:aspect-auto lg:h-full min-h-[380px] lg:min-h-[560px] overflow-hidden z-10">
-                  <Image
-                    src="/images/S__5668870.webp"
-                    alt="WMS TRANSPORT ให้บริการขนส่งมอเตอร์ไซค์และรถกระบะตู้ทึบจริง"
-                    fill
-                    className="object-cover object-[center_55%] transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 560px"
-                    priority
-                    quality={82}
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#040B15]/75 via-[#040B15]/15 to-transparent pointer-events-none" />
-                  
-                  {/* Floating Pill - Top Left */}
-                  <div className="absolute top-5 left-5 md:top-6 md:left-6 z-20 flex flex-col gap-2">
-                    <div className="inline-flex rounded-full border border-white/10 bg-slate-950/70 px-4 py-2 backdrop-blur-md shadow-lg items-center gap-2.5">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-xs font-black text-slate-100 tracking-wide">
-                        งานจริงล่าสุด
-                      </span>
-                      <span className="text-[11px] text-blue-300 font-bold border-l border-white/20 pl-2.5">
-                        ขนส่งมอเตอร์ไซค์
-                      </span>
-                    </div>
-                    <div className="inline-flex rounded-full border border-white/5 bg-slate-950/60 px-3 py-1 backdrop-blur-sm ml-1 w-max">
-                      <span className="text-[10px] text-slate-300 font-medium">
-                        แพ็กกันรอย • รถตู้ทึบ WMS
-                      </span>
-                    </div>
-                  </div>
+              {/* Left Column: Heading & Description (58%) */}
+              <div className="w-full lg:w-[58%] xl:w-[60%] flex flex-col items-start text-left">
+                {/* Minimalist Route Marker Decoration (No words) */}
+                <div className="flex items-center gap-2 mb-4 sm:mb-5 pointer-events-none" aria-hidden="true">
+                  <div className="w-12 h-1 bg-blue-600 rounded-full" />
+                  <div className="w-2 h-2 bg-sky-400 rounded-full" />
+                  <div className="w-1.5 h-1.5 bg-blue-300 rounded-full" />
                 </div>
+
+                {/* Exactly ONE Semantic H1 */}
+                <h1 className="font-sans text-[1.875rem] sm:text-4xl lg:text-[2.65rem] xl:text-[2.95rem] font-extrabold text-[#0B1F3A] tracking-tight leading-[1.25] sm:leading-[1.22] text-left text-balance max-w-3xl">
+                  <span className="text-[#0B1F3A]">รถกระบะตู้ทึบรับจ้าง </span>
+                  <span className="text-blue-600">ขนส่งมอเตอร์ไซค์</span>
+                  <span className="text-[#0B1F3A]"> และย้ายบ้านคอนโด</span>
+                  <br className="hidden sm:inline" />
+                  <span className="text-[#0B1F3A]"> พร้อมทีม</span>
+                  <span className="text-[#0284C7]">คนยกของ</span>
+                </h1>
+
+                {/* Supporting Description */}
+                <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-[1.0625rem] text-[#475569] font-normal leading-[1.7] max-w-2xl text-left text-pretty">
+                  {searchIntentMap.home.heroSupportingStatement}
+                </p>
               </div>
 
-              {/* Right Tile: Value Props & Action */}
-              <div className="rounded-[2.25rem] border border-white/10 bg-[#071426]/70 p-6 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-md flex flex-col justify-center relative overflow-hidden">
-                {/* Decorative radial glow */}
-                <div className="absolute -top-40 -right-40 w-96 h-96 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent pointer-events-none"></div>
-
-                <div className="relative z-10">
-                  {/* Badge */}
-                  <div className="mb-6">
-                    <span className="inline-flex items-center px-4 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold tracking-wider shadow-[0_0_20px_rgba(59,130,246,0.1)]">
-                      บริการของเรา
-                    </span>
-                  </div>
-
-                  {/* Heading */}
-                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-black tracking-tight leading-[1.1] mb-5 text-white">
-                    บริการ<span className="text-blue-400">รถกระบะตู้ทึบรับจ้าง</span> และ<br className="hidden sm:block" />
-                    ขนย้ายระดับพรีเมียม
+              {/* Right Column: Refined Assurance Panel (42%) */}
+              <div className="w-full lg:w-[42%] xl:w-[40%]">
+                <div className="rounded-2xl sm:rounded-3xl bg-[#EFF6FF] border border-blue-200/80 p-6 sm:p-7 lg:p-8 shadow-xs text-left">
+                  {/* Panel Heading */}
+                  <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#0B1F3A] tracking-tight mb-1">
+                    มั่นใจก่อนเริ่มงาน
                   </h2>
-
-                  {/* Subtitle */}
-                  <p className="text-sm sm:text-base text-slate-300/90 leading-relaxed max-w-xl">
-                    ครอบคลุมทุกความต้องการด้านการขนส่ง ขนย้ายสิ่งของด้วยมาตรฐานระดับสากล ปลอดภัย ตรงเวลา ไร้กังวล
+                  <p className="text-xs sm:text-sm text-slate-500 font-medium mb-5 sm:mb-6">
+                    รายละเอียดชัดเจนก่อนยืนยันการจอง
                   </p>
 
-                  {/* Proof Pills 2x2 */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mt-8 sm:mt-10">
-                    {[
-                      "มีผลงานจริง",
-                      "มีทีมงานมืออาชีพ",
-                      "ให้บริการทั่วไทย",
-                      "ตอบกลับเร็ว",
-                    ].map((item, idx) => (
-                      <div 
-                        key={idx} 
-                        className="flex items-center gap-3 bg-white/3 border border-white/10 rounded-2xl px-5 py-4 transition-all duration-300 hover:bg-white/6 hover:border-blue-400/30 hover:-translate-y-0.5 group cursor-default"
-                      >
-                        <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                        <span className="text-sm sm:text-base text-white font-extrabold tracking-wide">{item}</span>
+                  {/* Three Vertically Stacked Trust Items */}
+                  <div className="space-y-3 sm:space-y-3.5">
+                    <div className="flex items-center gap-3 bg-white/90 border border-blue-100 rounded-xl px-4 py-3 shadow-2xs">
+                      <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
                       </div>
-                    ))}
+                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                        ประเมินราคาก่อนจอง
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white/90 border border-blue-100 rounded-xl px-4 py-3 shadow-2xs">
+                      <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
+                      </div>
+                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                        แจ้งราคาชัดเจน
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-3 bg-white/90 border border-blue-100 rounded-xl px-4 py-3 shadow-2xs">
+                      <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
+                      </div>
+                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                        ไม่มีบวกเพิ่มหน้างานตามเงื่อนไข
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
             </div>
+
+            {/* Subtle downward visual bridge to next section */}
+            <div className="hidden lg:flex justify-center mt-9 -mb-3 pointer-events-none" aria-hidden="true">
+              <div className="w-px h-6 bg-gradient-to-b from-blue-300 to-transparent" />
+            </div>
           </div>
-        </section>
+        </HeroBackground>
+
+        {/* 2. CONNECTED SERVICE SHOWCASE SECTION */}
+        <ServiceSplitShowcase />
 
         {/* 2.5 PREMIUM SERVICES GRID SECTION */}
-        <section id="services" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-0 z-10">
+        <section id="services-grid" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 bg-gradient-to-b from-white via-[#F7FBFF] to-white">
+          {/* Ambient radial highlight */}
+          <div 
+            className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_35%,rgba(37,99,235,0.035),transparent)] pointer-events-none" 
+            aria-hidden="true" 
+          />
 
-          {/* Premium header block has been removed */}
-
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8 justify-center min-w-0">
-            {services.map((service, i) => (
-              <div 
-                key={i}
-                className="w-full min-w-0 perf-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative transition-all duration-300 md:hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/4 hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] group/card font-sans overflow-hidden"
-              >
-                {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-blue-500/0 group-hover/card:bg-blue-500/5 transition-colors duration-500 rounded-2xl pointer-events-none"></div>
-
-                <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-5">
-                    <div className="p-3 bg-white/5 text-blue-400 border border-white/10 rounded-xl group-hover/card:bg-blue-500/20 group-hover/card:text-blue-300 group-hover/card:border-blue-400/50 transition-all duration-500 shadow-lg">
-                      {service.icon}
-                    </div>
-                    <span className="text-[10px] bg-blue-500/10 text-blue-300 border border-blue-500/20 font-bold px-3 py-1 rounded-full tracking-wider uppercase backdrop-blur-sm">
-                      มาตรฐาน WMS
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight mb-2 group-hover/card:text-blue-300 transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-xs sm:text-sm text-slate-400 font-normal leading-relaxed mb-4 line-clamp-3 md:line-clamp-none min-h-0 md:min-h-[4rem]">
-                    {service.desc}
-                  </p>
-                  
-                  <ul className="space-y-2 border-t border-white/10 pt-4">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-semibold text-slate-200">
-                        <CheckCircle className="h-4.5 w-4.5 text-blue-500 shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-auto pt-6 relative z-10">
-                  {/* Pricing highlight under description */}
-                  <div className="mb-4 flex items-center justify-between border-t border-white/10 pt-4 gap-2">
-                    <span className="text-xs font-bold text-slate-400">เริ่มต้นเพียง</span>
-                    <span className="text-sm sm:text-base font-black text-red-400 bg-red-500/10 border border-red-500/20 px-3.5 py-1 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.2)]">
-                      {service.price} บาท
-                    </span>
-                  </div>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col gap-2">
-                    <a 
-                      href="https://line.me/ti/p/DtICkMaDet"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Contact WMS Transport via LINE"
-                      className="w-full bg-[#06C755] hover:bg-[#05B34F] text-white font-sans font-black text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[44px]"
-                    >
-                      <Image
-                        src="/images/LINE_icon.webp"
-                        alt="LINE"
-                        width={20}
-                        height={20}
-                        className="h-5 w-5 object-contain shrink-0"
-                      />
-                      <span>ติดต่อผ่าน LINE</span>
-                    </a>
-                    <a 
-                      href="https://www.facebook.com/share/1DnN6iGodp/?mibextid=wwXIfr"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Contact WMS Transport via Facebook"
-                      className="w-full bg-[#1877F2] hover:bg-[#166FE5] text-white font-sans font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300 min-h-[44px]"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                      </svg>
-                      <span>สอบถามผ่าน Facebook</span>
-                    </a>
-                  </div>
-                </div>
+          <div className="w-full max-w-7xl mx-auto relative z-10">
+            {/* Heading Area */}
+            <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-blue-50/90 text-blue-700 border border-blue-200/80 rounded-full text-xs font-semibold mb-3.5 shadow-xs">
+                <Package className="w-3.5 h-3.5 text-blue-600" />
+                <span>หมวดหมู่บริการ</span>
               </div>
-            ))}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+                บริการขนส่งและขนย้าย <span className="text-blue-600">ยอดนิยม</span>
+              </h2>
+              <p className="text-sm sm:text-base text-slate-600 font-normal mt-3 max-w-xl mx-auto leading-relaxed">
+                เลือกบริการที่เหมาะกับงานของคุณ พร้อมดูราคาเริ่มต้นได้อย่างชัดเจน
+              </p>
+            </div>
+
+            {/* Services Grid with Connected Rail */}
+            <div className="relative pt-10 sm:pt-12">
+              {/* Horizontal route line connecting the service nodes on desktop (1200px+) */}
+              <div 
+                className="hidden xl:block absolute top-[48px] left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-blue-200/90 z-0 pointer-events-none" 
+                aria-hidden="true" 
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 sm:gap-8 xl:gap-6 justify-center min-w-0">
+                {services.map((service, i) => (
+                  <div 
+                    key={i}
+                    className="relative flex flex-col group/card min-w-0 transition-transform duration-200 hover:-translate-y-1.5 motion-reduce:transform-none"
+                  >
+                    {/* Floating Circular Icon Node */}
+                    <div className="relative z-20 mx-auto -mb-10 sm:-mb-11 flex items-center justify-center">
+                      <div className="relative w-20 h-20 sm:w-[84px] sm:h-[84px] rounded-full bg-white border-2 border-blue-100 shadow-md shadow-blue-500/10 flex items-center justify-center text-blue-600 transition-colors duration-200 group-hover/card:border-blue-300">
+                        {service.icon}
+                        {/* Green status accent dot */}
+                        <span 
+                          className="absolute top-1.5 right-1.5 w-3 h-3 sm:w-3.5 sm:h-3.5 bg-emerald-500 rounded-full ring-2 ring-white" 
+                          aria-hidden="true" 
+                        />
+                      </div>
+                    </div>
+
+                    {/* Elevated White Service Card Surface */}
+                    <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 pt-14 sm:pt-16 pb-6 px-5 sm:px-6 flex flex-col justify-between shadow-xs transition-all duration-200 group-hover/card:border-blue-300 group-hover/card:shadow-xl group-hover/card:shadow-blue-900/5 relative z-10 overflow-hidden flex-1">
+                      {/* Subtle top accent strip */}
+                      <div 
+                        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-500" 
+                        aria-hidden="true" 
+                      />
+
+                      {/* Content Area */}
+                      <div className="flex flex-col flex-1">
+                        {/* Service Title */}
+                        <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2 text-center">
+                          {service.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-4 text-center min-h-0 sm:min-h-[4.5rem]">
+                          {service.desc}
+                        </p>
+
+                        {/* Benefits List */}
+                        <ul className="space-y-2.5 border-t border-slate-100 pt-4 mb-6">
+                          {service.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 font-medium leading-normal">
+                              <CheckCircle className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Footer: Price Capsule & Contact Actions */}
+                      <div className="mt-auto pt-2">
+                        {/* Green Price Capsule */}
+                        <div className="bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-3 sm:p-3.5 mb-3 text-center">
+                          <div className="text-xs font-semibold text-emerald-800 mb-0.5">
+                            ราคาเริ่มต้น
+                          </div>
+                          <div className="flex items-baseline justify-center gap-1.5">
+                            <span className="text-2xl sm:text-3xl font-black text-[#047857] tracking-tight">
+                              {service.price}
+                            </span>
+                            <span className="text-sm sm:text-base font-bold text-emerald-700">
+                              บาท
+                            </span>
+                          </div>
+                          <div className="text-[11px] text-slate-500 mt-1">
+                            ราคาจริงขึ้นอยู่กับรายละเอียดงาน
+                          </div>
+                        </div>
+
+                        {/* Contact Actions */}
+                        <div className="flex flex-col gap-2">
+                          <a 
+                            href="https://line.me/ti/p/DtICkMaDet"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="ติดต่อผ่าน LINE เพื่อสอบถามราคา"
+                            className="w-full bg-[#06C755] hover:bg-[#05B34F] active:bg-[#049B44] text-white font-sans font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors min-h-[44px] focus-visible:ring-2 focus-visible:ring-emerald-500 focus:outline-none"
+                          >
+                            <Image
+                              src="/images/LINE_icon.webp"
+                              alt="LINE"
+                              width={18}
+                              height={18}
+                              className="h-4.5 w-4.5 object-contain shrink-0"
+                            />
+                            <span>สอบถามผ่าน LINE</span>
+                          </a>
+                          <a 
+                            href="https://www.facebook.com/share/1DnN6iGodp/?mibextid=wwXIfr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="สอบถามผ่าน Facebook"
+                            className="w-full bg-blue-50/70 hover:bg-blue-100/80 text-blue-700 font-sans font-semibold text-xs sm:text-sm py-2 px-4 rounded-xl flex items-center justify-center gap-2 border border-blue-200/80 transition-colors min-h-[44px] focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
+                              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            <span>สอบถามผ่าน Facebook</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* 3. MOTORCYCLE PRICING SECTION */}
-        <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10">
-          {/* Section ambient glow */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-blue-600/5 to-transparent" />
-          </div>
-
+        <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 bg-slate-50/60 border-y border-slate-200/80">
           <div className="w-full max-w-7xl mx-auto relative z-10 min-w-0">
-            {/* Section header */}
-            <div className="text-center mb-16">
-              <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+            <div className="text-center mb-12">
+              <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide">
                 ราคาขนส่ง
               </span>
-              <h2 className="font-sans text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 mt-8">
-                ราคาขนส่ง<span className="text-blue-400">มอเตอร์ไซค์และบิ๊กไบค์</span>
+              <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mb-3 mt-4">
+                ราคาขนส่ง<span className="text-blue-600">มอเตอร์ไซค์และบิ๊กไบค์</span>
               </h2>
-              <p className="text-lg text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
                 บริการขนส่งรถมอเตอร์ไซค์และบิ๊กไบค์ระดับพรีเมียม ครอบคลุมทุกเส้นทางทั่วประเทศ ดูแลรถทุกคันด้วยมาตรฐานสูงสุดเสมือนรถของเราเอง ปลอดภัย ไร้รอยขีดข่วนตลอดการเดินทาง
               </p>
             </div>
@@ -353,31 +381,28 @@ export default function Home() {
             {/* Pricing Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 w-full max-w-7xl mx-auto min-w-0">
               {/* Card 1: 100-125cc */}
-              <div
-                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/5 group overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
-                <div className="mb-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full">มอเตอร์ไซค์ทั่วไป</span>
+              <div className="w-full min-w-0 relative bg-white border border-slate-200/90 rounded-2xl p-7 shadow-xs hover:border-blue-300 hover:shadow-md flex flex-col transition-all duration-200 overflow-hidden">
+                <div className="mb-5">
+                  <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">มอเตอร์ไซค์ทั่วไป</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-2">100cc – 125cc</h3>
+                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">100cc – 125cc</h3>
 
                 <div className="mt-auto">
-                  <div className="text-4xl font-black text-white mb-1">2,500 <span className="text-xl font-bold text-slate-400">บาท</span></div>
-                  <p className="text-xs text-slate-500 mb-6">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
+                  <div className="text-3xl sm:text-4xl font-black text-[#0B1F3A] mb-1">2,500 <span className="text-base font-bold text-slate-500">บาท</span></div>
+                  <p className="text-xs text-slate-500 mb-5">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact WMS Transport via LINE"
-                    className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+                    className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
                       src="/images/LINE_icon.webp"
                       alt="LINE"
-                      width={20}
-                      height={20}
-                      className="h-5 w-5 object-contain shrink-0"
+                      width={18}
+                      height={18}
+                      className="h-4.5 w-4.5 object-contain shrink-0"
                     />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
@@ -385,31 +410,28 @@ export default function Home() {
               </div>
 
               {/* Card 2: 150-300cc */}
-              <div
-                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/5 group overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
-                <div className="mb-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1.5 rounded-full">มอเตอร์ไซค์ขนาดกลาง</span>
+              <div className="w-full min-w-0 relative bg-white border border-slate-200/90 rounded-2xl p-7 shadow-xs hover:border-blue-300 hover:shadow-md flex flex-col transition-all duration-200 overflow-hidden">
+                <div className="mb-5">
+                  <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">มอเตอร์ไซค์ขนาดกลาง</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-2">150cc – 300cc</h3>
+                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">150cc – 300cc</h3>
 
                 <div className="mt-auto">
-                  <div className="text-4xl font-black text-white mb-1">3,000 <span className="text-xl font-bold text-slate-400">บาท</span></div>
-                  <p className="text-xs text-slate-500 mb-6">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
+                  <div className="text-3xl sm:text-4xl font-black text-[#0B1F3A] mb-1">3,000 <span className="text-base font-bold text-slate-500">บาท</span></div>
+                  <p className="text-xs text-slate-500 mb-5">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact WMS Transport via LINE"
-                    className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+                    className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
                       src="/images/LINE_icon.webp"
                       alt="LINE"
-                      width={20}
-                      height={20}
-                      className="h-5 w-5 object-contain shrink-0"
+                      width={18}
+                      height={18}
+                      className="h-4.5 w-4.5 object-contain shrink-0"
                     />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
@@ -417,37 +439,31 @@ export default function Home() {
               </div>
 
               {/* Card 3: BigBike 400cc — PREMIUM HIGHLIGHT */}
-              <div
-                className="w-full min-w-0 relative bg-linear-to-b from-blue-600/12 to-blue-900/8 backdrop-blur-sm md:backdrop-blur-xl rounded-3xl p-8 border border-blue-500/40 shadow-[0_15px_60px_rgba(59,130,246,0.2)] flex flex-col transition-all duration-300 md:hover:-translate-y-2 group overflow-hidden"
-              >
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-blue-500/6 group-hover:bg-blue-500/10 transition-colors duration-500 rounded-3xl pointer-events-none" />
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-[80px] bg-blue-400/20 rounded-full blur-2xl pointer-events-none" />
-                {/* Premium badge */}
+              <div className="w-full min-w-0 relative bg-blue-50/40 rounded-2xl p-7 border-2 border-blue-500 shadow-sm flex flex-col transition-all duration-200 overflow-hidden">
                 <div className="absolute top-4 right-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-white bg-linear-to-r from-blue-600 to-indigo-600 px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]">⭐ พรีเมียม</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wide text-white bg-blue-600 px-2.5 py-1 rounded-md shadow-xs">⭐ ยอดนิยม</span>
                 </div>
-                <div className="mb-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-blue-300 bg-blue-500/20 border border-blue-400/30 px-3 py-1.5 rounded-full">บิ๊กไบค์</span>
+                <div className="mb-5">
+                  <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-100 border border-blue-300 px-3 py-1 rounded-full">บิ๊กไบค์</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-2">400cc BigBike</h3>
+                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">400cc BigBike</h3>
 
                 <div className="mt-auto">
-                  <div className="text-4xl font-black text-blue-300 mb-1">4,500 <span className="text-xl font-bold text-blue-400">บาท</span></div>
-                  <p className="text-xs text-blue-400/70 mb-6">แพ็กกันรอย รัดยึดพิเศษ ดูแลบิ๊กไบค์โดยเฉพาะ</p>
+                  <div className="text-3xl sm:text-4xl font-black text-blue-700 mb-1">4,500 <span className="text-base font-bold text-blue-600">บาท</span></div>
+                  <p className="text-xs text-blue-900/70 mb-5 font-medium">แพ็กกันรอย รัดยึดพิเศษ ดูแลบิ๊กไบค์โดยเฉพาะ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact WMS Transport via LINE"
-                    className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+                    className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
                       src="/images/LINE_icon.webp"
                       alt="LINE"
-                      width={20}
-                      height={20}
-                      className="h-5 w-5 object-contain shrink-0"
+                      width={18}
+                      height={18}
+                      className="h-4.5 w-4.5 object-contain shrink-0"
                     />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
@@ -455,31 +471,28 @@ export default function Home() {
               </div>
 
               {/* Card 4: เหมาขนส่ง */}
-              <div
-                className="w-full min-w-0 relative perf-card rounded-3xl p-8 hover:border-blue-400/40 flex flex-col transition-all duration-300 md:hover:-translate-y-2 hover:bg-white/5 group overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/5 transition-colors duration-500 rounded-3xl pointer-events-none" />
-                <div className="mb-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">เหมาระยะไกล</span>
+              <div className="w-full min-w-0 relative bg-white border border-slate-200/90 rounded-2xl p-7 shadow-xs hover:border-blue-300 hover:shadow-md flex flex-col transition-all duration-200 overflow-hidden">
+                <div className="mb-5">
+                  <span className="text-xs font-bold uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">เหมาระยะไกล</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-2">บริการเหมาขนส่ง</h3>
-                <p className="text-sm text-slate-400 mb-6">สำหรับระยะทาง 300 กม. ขึ้นไป</p>
+                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">บริการเหมาขนส่ง</h3>
+                <p className="text-xs text-slate-500 mb-4">สำหรับระยะทาง 300 กม. ขึ้นไป</p>
                 <div className="mt-auto">
-                  <div className="text-3xl font-black text-emerald-400 mb-1">16 บาท<span className="text-lg font-bold text-slate-400">/กม.</span></div>
-                  <p className="text-xs text-slate-500 mb-6">ราคาเริ่มต้น ขึ้นอยู่กับเส้นทางและประเภทรถ</p>
+                  <div className="text-3xl sm:text-4xl font-black text-emerald-700 mb-1">16 บาท<span className="text-base font-bold text-slate-500">/กม.</span></div>
+                  <p className="text-xs text-slate-500 mb-5">ราคาเริ่มต้น ขึ้นอยู่กับเส้นทางและประเภทรถ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact WMS Transport via LINE"
-                    className="w-full line-btn-pulse text-white font-black text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all duration-300"
+                    className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
                       src="/images/LINE_icon.webp"
                       alt="LINE"
-                      width={20}
-                      height={20}
-                      className="h-5 w-5 object-contain shrink-0"
+                      width={18}
+                      height={18}
+                      className="h-4.5 w-4.5 object-contain shrink-0"
                     />
                     <span>สอบถามราคาผ่าน LINE</span>
                   </a>
@@ -494,18 +507,18 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact WMS Transport via LINE for pricing"
-                className="inline-flex items-center gap-3 px-10 py-5 text-white font-black text-lg rounded-2xl shadow-[0_0_25px_rgba(225,29,72,0.5)] transform transition-all duration-300 hover:scale-105 animate-[pulse_2s_ease-in-out_infinite] border border-red-400/50 bg-linear-to-r from-red-600 to-rose-500 hover:from-red-500 hover:to-rose-400 relative overflow-hidden shimmer-btn mb-6"
+                className="inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-base sm:text-lg rounded-xl shadow-xs bg-[#06C755] hover:bg-[#05b34c] transition-colors mb-4"
               >
                 <Image
                   src="/images/LINE_icon.webp"
                   alt="LINE"
-                  width={24}
-                  height={24}
-                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0 relative z-10"
+                  width={22}
+                  height={22}
+                  className="h-5 w-5 sm:h-5.5 sm:w-5.5 object-contain shrink-0"
                 />
-                <span className="relative z-10">🔥 ล็อกคิวราคานี้ (ทัก LINE)</span>
+                <span>ล็อกคิวราคานี้ (ทัก LINE ฟรี)</span>
               </a>
-              <p className="text-sm text-slate-500 max-w-2xl mx-auto">
+              <p className="text-xs sm:text-sm text-slate-500 max-w-2xl mx-auto">
                 หมายเหตุ: ราคาขึ้นอยู่กับจุดรับ-ส่งจริง ประเภทรถ และเงื่อนไขการขนส่ง กรุณาติดต่อแอดมินเพื่อประเมินราคาที่แม่นยำ
               </p>
             </div>
@@ -513,57 +526,53 @@ export default function Home() {
         </section>
 
         {/* 4. REAL JOB PORTFOLIO SECTION */}
-        <section id="gallery" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 content-auto section-contain">
+        <section id="gallery" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10 content-auto section-contain bg-white">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <GalleryMasonry />
           </div>
         </section>
 
         {/* 4. TRUST COUNTER SECTION */}
-        <div className="relative z-10 w-full">
-          <TrustCounters />
-        </div>
+        <TrustCounters />
 
         {/* 5. CUSTOMER REVIEW SECTION */}
-        <section id="reviews" className="relative z-10 w-full py-12 content-auto section-contain">
-          <CustomerReviews />
-        </section>
+        <CustomerReviews />
 
         {/* 6. SERVICE COVERAGE MAP */}
-        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 content-auto section-contain">
+        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10 content-auto section-contain bg-slate-50/50 border-y border-slate-200/70">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <ServiceMap />
           </div>
         </section>
 
         {/* WHY CHOOSE US */}
-        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 section-contain">
-          <div className="w-full max-w-7xl mx-auto text-center mb-20 min-w-0">
-            <span className="px-5 py-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-bold uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 section-contain bg-white">
+          <div className="w-full max-w-7xl mx-auto text-center mb-14 min-w-0">
+            <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide">
               ทำไมต้องเลือกเรา
             </span>
-            <h2 className="font-sans text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 mt-8">
-              เหตุผลที่ลูกค้าไว้วางใจ <span className="text-blue-400">WMS</span>
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mb-3 mt-4">
+              เหตุผลที่ลูกค้าไว้วางใจ <span className="text-blue-600">WMS</span>
             </h2>
-            <p className="text-lg text-slate-400 font-medium max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
               เรายกระดับงานบริการขนของด้วยความซื่อสัตย์ ปลอดภัย และราคาที่ยุติธรรมสูงสุด ระดับองค์กร
             </p>
           </div>
 
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-w-0">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
             {whyChooseUs.map((item, i) => (
               <div 
                 key={i} 
-                className="perf-card rounded-3xl p-8 flex flex-col sm:flex-row items-start gap-6 transition-all duration-300 md:hover:bg-white/5 hover:border-blue-500/30 md:hover:-translate-y-2 group font-sans"
+                className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-start gap-5 transition-all duration-200 hover:border-blue-300 hover:shadow-md shadow-xs group font-sans"
               >
-                <div className="p-5 bg-linear-to-br from-blue-600 to-indigo-800 border border-blue-500/40 text-white rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.3)] shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]">
+                <div className="p-3.5 bg-blue-600 text-white rounded-xl shadow-xs shrink-0">
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-extrabold text-white mb-3 tracking-tight group-hover:text-blue-200 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] mb-2 tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-[15px] text-slate-400 font-normal leading-relaxed">
+                  <p className="text-sm text-slate-600 font-normal leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -573,17 +582,17 @@ export default function Home() {
         </section>
 
         {/* PROCESS TIMELINE */}
-        <div className="relative z-10 w-full py-12">
+        <div className="relative z-10 w-full py-10 bg-slate-50/50 border-y border-slate-200/70">
           <ServiceSteps />
         </div>
 
         {/* AI EXTRACTION / SUMMARY BLOCK */}
-        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-8 bg-white">
           <DecisionAnswerSurface data={{
             directAnswer: "WMS Transport บริการรถรับจ้างขนของ ขนส่งมอเตอร์ไซค์ และย้ายบ้านทั่วประเทศ พร้อมทีมงานมืออาชีพและราคามาตรฐานโปร่งใส",
             bestFitCustomer: "ลูกค้าทั่วไปที่ต้องการย้ายที่อยู่อาศัย หรือธุรกิจที่ต้องการขนส่งสินค้าเป็นประจำ",
             serviceCoverage: "ครอบคลุมทุกจังหวัดทั่วประเทศไทย พร้อมเส้นทางหลักกรุงเทพฯ-ต่างจังหวัด",
-            vehicleSuitability: "กระบะตู้ทึบกันฝน 100% รับน้ำหนักสูงสุด 2 ตัน และรถกระบะคอกสำหรับมอเตอร์ไซค์",
+            vehicleSuitability: "กระบะตู้ทึบกันฝนปิดมิดชิด รองรับการบรรทุกสินค้าหลากหลายขนาด และรถกระบะสำหรับมอเตอร์ไซค์",
             priceFactors: ["ระยะทางรวม", "ประเภทรถที่ใช้", "ความต้องการเด็กยกของ", "ข้อจำกัดจุดรับ-ส่ง"],
             timingExpectations: "บริการตลอด 24 ชั่วโมง เรียกรถด่วนได้ภายใน 2 ชั่วโมงในเขตกรุงเทพฯ",
             preparationRequirements: ["เตรียมประเมินขนาดและน้ำหนักของโดยประมาณ", "แจ้งเงื่อนไขพื้นที่ล่วงหน้าเพื่อเตรียมอุปกรณ์"],
@@ -595,77 +604,72 @@ export default function Home() {
         </div>
 
         {/* 7. FAQ SECTION */}
-        <div className="relative z-10 w-full py-12">
+        <div className="relative z-10 w-full py-8 bg-slate-50/50 border-y border-slate-200/70">
           <FAQ />
         </div>
 
         {/* 8. FINAL CTA SECTION */}
-        <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-24 z-10 section-contain">
+        <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 bg-white">
           <div className="w-full max-w-7xl mx-auto min-w-0">
-            <div className="relative rounded-[32px] overflow-hidden bg-linear-to-r from-[#04152D] via-[#061F45] to-[#04152D] border border-blue-500/20 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-              {/* Decorative elements */}
-              <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[20px_20px]"></div>
-              <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-blue-500/5 to-transparent -translate-y-1/2 hidden md:block"></div>
-              <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-indigo-500/5 to-transparent hidden md:block"></div>
-              
-              <div className="relative z-10 py-20 px-8 text-center flex flex-col items-center">
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-6 drop-shadow-md">
-                  พร้อมสัมผัสประสบการณ์<span className="text-blue-400">พรีเมียม?</span>
+            <div className="relative rounded-2xl overflow-hidden bg-[#0B1F3A] border border-blue-950 p-8 sm:p-14 text-center shadow-md">
+              <div className="relative z-10 flex flex-col items-center">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+                  พร้อมสัมผัสประสบการณ์<span className="text-blue-400">ระดับมืออาชีพ?</span>
                 </h2>
-                <p className="text-slate-300 text-lg sm:text-xl max-w-2xl mx-auto font-medium mb-12">
+                <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal mb-10">
                   จองคิวเช่ารถล่วงหน้า หรือโทรปรึกษาประเมินราคาด่วนได้ทันที ตลอด 24 ชั่วโมง ดำเนินการโดยมืออาชีพ
                 </p>
 
-                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-6">
+                <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 sm:gap-5">
                   <a
                     href="tel:0612402436"
-                    className="flex items-center justify-center gap-3 px-8 py-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.2)] group"
+                    className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-xl font-bold text-base transition-colors shadow-xs"
                   >
-                    <Phone className="h-6 w-6 text-blue-400 group-hover:animate-pulse" />
-                    <span className="font-mono tracking-wider text-xl">061-240-2436</span>
+                    <Phone className="h-5 w-5 text-blue-400" />
+                    <span className="font-mono tracking-wide text-lg">061-240-2436</span>
                   </a>
                   <a
                     href="tel:0981796946"
-                    className="flex items-center justify-center gap-3 px-8 py-5 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-blue-400/50 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_10px_40px_rgba(59,130,246,0.2)] group"
+                    className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-xl font-bold text-sm transition-colors shadow-xs"
                   >
-                    <Phone className="h-5 w-5 text-blue-400 group-hover:animate-pulse" />
-                    <span className="font-mono tracking-wider text-sm">098-179-6946 (คุณดาว - สำรอง)</span>
+                    <Phone className="h-4.5 w-4.5 text-blue-400" />
+                    <span className="font-mono tracking-wide">098-179-6946 (คุณดาว - สำรอง)</span>
                   </a>
                   
-                  <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <a
                       href="https://line.me/ti/p/DtICkMaDet"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Contact WMS Transport via LINE"
-                      className="flex items-center justify-center gap-3 px-8 py-5 line-btn-pulse hover:bg-[#05B34F] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(6,199,85,0.3)] hover:shadow-[0_20px_50px_rgba(6,199,85,0.5)] border border-[#06C755]/30 transform hover:-translate-y-1"
+                      className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-base transition-colors shadow-xs"
                     >
                       <Image
                         src="/images/LINE_icon.webp"
                         alt="LINE"
-                        width={24}
-                        height={24}
-                        className="h-5 w-5 sm:h-6 sm:w-6 object-contain shrink-0"
+                        width={20}
+                        height={20}
+                        className="h-5 w-5 object-contain shrink-0"
                       />
-                      <span className="tracking-wide">ติดต่อผ่าน LINE</span>
+                      <span>ติดต่อผ่าน LINE</span>
                     </a>
                     
                     <a
                       href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-3 px-8 py-5 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-2xl font-black text-lg transition-all duration-300 hover:scale-[1.02] shadow-[0_15px_40px_rgba(24,119,242,0.3)] hover:shadow-[0_20px_50px_rgba(24,119,242,0.5)] border border-[#1877F2]/30 transform hover:-translate-y-1"
+                      className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-xl font-bold text-base transition-colors shadow-xs"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                       </svg>
-                      <span className="tracking-wide">สอบถามขนส่งผ่าน Facebook</span>
+                      <span>สอบถามผ่าน Facebook</span>
                     </a>
                   </div>
                 </div>
                 
-                <p className="text-sm text-slate-400 mt-10 font-medium">
-                  * รับประกันสินค้าทุกเที่ยวสูงสุด 100,000 บาท ตามเงื่อนไขของบริษัท
+                <p className="text-xs text-slate-400 mt-8 font-medium">
+                  * มีมาตรการดูแลความปลอดภัยสินค้าตลอดเที่ยวการขนส่งตามเงื่อนไขที่ตกลง
                 </p>
               </div>
             </div>
@@ -673,7 +677,6 @@ export default function Home() {
         </section>
 
       </main>
-
 
       <FloatingLine />
     </div>
