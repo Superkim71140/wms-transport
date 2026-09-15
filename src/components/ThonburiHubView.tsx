@@ -18,6 +18,8 @@ import {
   getThonburiDistrictsByZone,
   isDistrictPageIndexable,
 } from "@/data/districtLandingPages";
+import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
+import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
 
 export default function ThonburiHubView() {
   const northernDistricts = getThonburiDistrictsByZone("northern");
@@ -128,6 +130,27 @@ export default function ThonburiHubView() {
               </a>
             </div>
           </section>
+
+          {/* Promotional Showcase Banner */}
+          <ServiceAreaPromoBanner />
+
+          {/* Compact Local Service Summary */}
+          <CompactServiceSummary
+            locationName="กรุงเทพฯ ฝั่งธนบุรี (15 เขต)"
+            serviceAreas={[
+              "กลุ่มเขตกรุงธนเหนือ",
+              "กลุ่มเขตกรุงธนใต้",
+              "ถนนเพชรเกษม",
+              "ถนนบรมราชชนนี",
+              "ถนนราชพฤกษ์",
+            ]}
+            services={[
+              "ย้ายคอนโดแนว BTS/MRT",
+              "ย้ายบ้านและทาวน์โฮม",
+              "ขนส่งมอเตอร์ไซค์ บิ๊กไบค์",
+              "ขนส่งสินค้าโรงงาน",
+            ]}
+          />
 
           {/* Sub-Services Triad */}
           <section className="mb-20">

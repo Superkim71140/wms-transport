@@ -21,6 +21,8 @@ import { buildDistrictMetadata } from "@/lib/seo/metadata";
 import { getDistrictBreadcrumbs } from "@/lib/seo/breadcrumbs";
 import { escapeJsonLd } from "@/lib/seo/schema";
 import { siteConfig } from "@/lib/seo/site-config";
+import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
+import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
 import { provinceMap } from "../../../service/[province]/page";
 import {
   districtLandingPages,
@@ -201,6 +203,23 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
               </p>
             </div>
           </section>
+
+          {/* Promotional Showcase Banner */}
+          <ServiceAreaPromoBanner areaName={`เขต${name}`} />
+
+          {/* Compact Local Service Summary */}
+          <CompactServiceSummary
+            locationName={`เขต${name}`}
+            serviceAreas={[
+              ...(record.subdistricts || []).slice(0, 2).map((s) => `แขวง${s}`),
+              ...(record.travelCorridors || []).slice(0, 3),
+            ]}
+            services={[
+              `ย้ายบ้าน คอนโด ${name}`,
+              `ขนส่งมอเตอร์ไซค์ ${name}`,
+              "รถกระบะขนส่งสินค้า",
+            ]}
+          />
 
           {/* Sub-Services in this district */}
           <section className="mb-14">

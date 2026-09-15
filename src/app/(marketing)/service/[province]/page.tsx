@@ -21,12 +21,12 @@ import {
 } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TransitTimeVisualizer from "@/components/TransitTimeVisualizer";
-import DecisionAnswerSurface from "@/components/DecisionAnswerSurface";
-import TLDRVerdict from "@/components/TLDRVerdict";
 import LocalOperationsAtlas from "@/components/LocalOperationsAtlas";
 import { geoMatrix } from "@/app/data/geoMatrix";
 import IntentHero from "@/components/IntentHero";
 import { getProvinceIntent } from "@/data/searchIntentMap";
+import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
+import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
 
 // ─────────────────────────────────────────────
 // Location data — add new regions here only
@@ -460,7 +460,7 @@ export default async function LocationHubPage({
           </div>
 
           {/* ── HERO SECTION ── */}
-          <div className="text-center mt-6 mb-16">
+          <div className="text-center mt-6 mb-12">
             <IntentHero
               h1={provinceIntent.h1}
               supporting={provinceIntent.heroSupportingStatement}
@@ -468,22 +468,8 @@ export default async function LocationHubPage({
               className="pt-6 pb-2"
             />
 
-            <DecisionAnswerSurface data={{
-              directAnswer: `บริการรถรับจ้างขนของและย้ายบ้านในพื้นที่${provinceThai} พร้อมคนช่วยยกของ ประเมินราคาตามจริงชัดเจนก่อนเริ่มงาน`,
-              bestFitCustomer: "ผู้ที่ต้องการย้ายบ้าน หอพัก คอนโด หรือขนส่งสินค้า",
-              serviceCoverage: `ครอบคลุมพื้นที่${provinceThai} และจังหวัดใกล้เคียงทั่วประเทศ`,
-              vehicleSuitability: "รถกระบะตู้ทึบหลังคาสูง 2.1 เมตร ป้องกันแดดและฝนอย่างมิดชิด",
-              priceFactors: ["ระยะทางขนส่ง", "จำนวนคนยกของ", "จุดโหลดสินค้า (ลิฟต์/บันได)"],
-              timingExpectations: "จองคิวด่วนได้ภายใน 2-4 ชั่วโมง หรือจองล่วงหน้า",
-              preparationRequirements: ["แพ็คของใส่กล่องให้เรียบร้อย", "แจ้งขอนุญาตนิติบุคคลล่วงหน้า (คอนโด/หมู่บ้าน)"],
-              exclusions: ["ไม่รับขนส่งสิ่งของผิดกฎหมาย", "ไม่รับขนส่งสัตว์เลี้ยงหรือสิ่งมีชีวิต"],
-              evidenceLinks: [{ label: "ดูผลงานการขนย้าย", url: "/portfolio" }],
-              lastReviewedDate: "2026-06-25"
-            }} />
-            <TLDRVerdict location={provinceThai} />
-
             {/* Quick CTA */}
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-6">
               <a
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
@@ -508,6 +494,27 @@ export default async function LocationHubPage({
               </a>
             </div>
           </div>
+
+          {/* ── PROMOTIONAL SHOWCASE BANNER ── */}
+          <ServiceAreaPromoBanner />
+
+          {/* ── COMPACT LOCAL SERVICE SUMMARY ── */}
+          <CompactServiceSummary
+            locationName={provinceThai}
+            serviceAreas={
+              geoData
+                ? [
+                    ...(geoData.districts || []).slice(0, 3),
+                    ...(geoData.corridors || []).slice(0, 2),
+                  ]
+                : [provinceThai, "ตัวเมือง", "อำเภอใกล้เคียง"]
+            }
+            services={[
+              `ย้ายบ้าน หอพัก คอนโด ${provinceShort}`,
+              `ขนส่งมอเตอร์ไซค์ ${provinceShort}`,
+              `รถกระบะตู้ทึบขนส่งสินค้า`,
+            ]}
+          />
 
           {/* ── SUB-SERVICES GRID ── */}
           <section className="mb-20">
