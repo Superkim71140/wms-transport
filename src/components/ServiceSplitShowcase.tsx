@@ -31,7 +31,7 @@ export default function ServiceSplitShowcase() {
           fill
           sizes="100vw"
           className="object-cover object-[center_60%] sm:object-[center_50%] lg:object-center opacity-30 sm:opacity-35 lg:opacity-40"
-          quality={85}
+          quality={90}
           priority={false}
         />
       </div>
@@ -49,7 +49,7 @@ export default function ServiceSplitShowcase() {
                 fill
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 420px, 510px"
                 className="object-contain object-bottom"
-                quality={92}
+                quality={90}
                 priority={false}
               />
             </div>

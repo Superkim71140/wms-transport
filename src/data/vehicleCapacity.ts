@@ -44,7 +44,7 @@ export const vehicleCapacityData: Record<string, VehicleCapacityRecord> = {
       { itemName: "พัดลมตั้งพื้น/เครื่องดูดฝุ่น/ของจิปาถะ", qty: 5, volumeCbm: 0.5 }
     ],
     limitations: [
-      { text: "ความสูงทางเข้าอาคาร/ที่จอดรถต้องไม่ต่ำกว่า 2.15 เมตร", isApproved: true },
+      { text: "การเข้าจอดเทียบขนย้ายต้องคำนึงถึงความสูงรวมภายนอกของตัวรถ แนะนำจุดโหลดสินค้าชั้นล่าง (Loading Bay) หรือพื้นที่จอดที่ไม่มีสิ่งกีดขวางความสูง", isApproved: true },
       { text: "น้ำหนักบรรทุกรวมห้ามเกิน 2,200 กิโลกรัม (ตามข้อกำหนดความปลอดภัยของ WMS)", isApproved: true },
       { text: "ไม่สามารถบรรทุกตู้เสื้อผ้าขนาดใหญ่กว้างเกิน 1.6 เมตรแบบชิ้นเดียวโดยไม่ถอดประกอบ", isApproved: true }
     ].map(l => l.text)
