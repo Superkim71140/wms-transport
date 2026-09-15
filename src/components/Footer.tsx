@@ -193,20 +193,9 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Copyright & Developer Credit */}
+        {/* Copyright */}
         <div className="mt-6 border-t border-white/10 pt-5 flex flex-col items-center justify-center gap-2 text-center">
           <p className="text-xs text-slate-500">© {new Date().getFullYear()} WMS TRANSPORT. All rights reserved.</p>
-          <p className="text-sm text-slate-400">
-            Developed by{" "}
-            <a
-              href="https://kimx-wed.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              className="font-bold text-blue-400 transition-colors hover:text-blue-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
-            >
-              KIMXWED
-            </a>
-          </p>
         </div>
 
       </div>
