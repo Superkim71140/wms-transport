@@ -1,3 +1,5 @@
+import ThonburiHubView from "@/components/ThonburiHubView";
+import InternalLinks from "@/components/InternalLinks";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/seo/site-config";
@@ -173,6 +175,16 @@ export async function generateMetadata({
   
   let description = `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name}และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`;
   
+  if (province === "bkk-thonburi") {
+    return {
+      title: "รถรับจ้างฝั่งธนบุรี ย้ายบ้าน คอนโด ขนของ พร้อมคนยก | WMS TRANSPORT",
+      description: "บริการรถรับจ้างและขนย้ายฝั่งธนบุรี ครอบคลุม 15 เขต ทั้งกรุงธนเหนือและกรุงธนใต้ รถกระบะตู้ทึบความสูง 2.1 ม. เข้าจอดใต้อาคารคอนโดได้สะดวก พร้อมทีมงานช่วยยกของมืออาชีพ",
+      alternates: {
+        canonical: "/service/bkk-thonburi",
+      },
+    };
+  }
+
   if (province === "bkk-phra-nakhon") {
     description = "บริการรถกระบะรับจ้าง กทม ฝั่งพระนคร ขนส่งมอเตอร์ไซค์ พระนคร ย้ายหอพัก ย้ายบ้าน ย้ายคอนโด บริการตู้ทึบรับจ้างพร้อมคนช่วยยกของอย่างมืออาชีพ ราคาถูก ปลอดภัย";
   }
@@ -200,6 +212,78 @@ export default async function LocationHubPage({
   const provinceShort = loc?.shortName ?? province;
   const lat = loc?.lat ?? "13.7563";
   const lng = loc?.lng ?? "100.5018";
+
+  if (province === "bkk-thonburi") {
+    const thonburiServiceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${siteConfig.baseUrl}/service/bkk-thonburi#service`,
+      name: "WMS TRANSPORT บริการรถรับจ้างและขนย้ายฝั่งธนบุรี",
+      description: "บริการรถรับจ้างตู้ทึบ ย้ายบ้าน คอนโด และขนส่งสินค้า ครอบคลุม 15 เขตฝั่งธนบุรี",
+      provider: {
+        "@id": `${siteConfig.baseUrl}/#moving-company`,
+      },
+      serviceType: "Moving and Transportation Service",
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: "กรุงเทพฯ ฝั่งธนบุรี",
+      },
+    };
+
+    const thonburiFaqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "รถรับจ้างตู้ทึบ WMS สามารถเข้าลานจอดใต้อาคารคอนโดมิเนียมฝั่งธนบุรีได้หรือไม่?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "รถกระบะตู้ทึบของ WMS TRANSPORT ได้รับการออกแบบให้มีความสูงรวมไม่เกิน 2.1 เมตร ซึ่งเป็นมาตรฐานความสูงของทางเข้าอาคารและลานจอดรถใต้อาคารคอนโดมิเนียมส่วนใหญ่ตามแนวรถไฟฟ้า BTS สายสีลมและ MRT สายสีน้ำเงิน ทำให้สามารถถอยเข้าเทียบจุดโหลดของหน้าลิฟต์บริการได้อย่างสะดวก"
+          }
+        },
+        {
+          "@type": "Question",
+          name: "ตรอกซอยแคบในชุมชนเก่าฝั่งธนบุรี เช่น ย่านตลาดพลู บางยี่เรือ หรือซอยเพชรเกษม รถเข้าได้ไหม?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "รถกระบะตอนเดียวตู้ทึบของเรามีความคล่องตัวสูง สามารถเลี้ยวเข้าตรอกซอยแคบ ข้ามสะพานคลอง และหลบหลีกสายไฟต่ำได้ดีกว่ารถบรรทุก 6 ล้อ ทำให้เข้าถึงหน้าบ้านในซอยลึกของฝั่งธนบุรีได้อย่างปลอดภัย"
+          }
+        },
+        {
+          "@type": "Question",
+          name: "การขนย้ายข้ามฝั่งแม่น้ำเจ้าพระยา หรือข้ามจังหวัดจากฝั่งธนบุรีคิดราคาอย่างไร?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "เราคำนวณราคาเริ่มต้นตามระยะทางวิ่งจริงจากพิกัดรับของในฝั่งธนบุรีไปยังจุดหมายปลายทาง ไม่ว่าจะเป็นการข้ามสะพานเข้าฝั่งพระนคร หรือการวิ่งออกต่างจังหวัด โดยแจ้งราคาและเงื่อนไขชัดเจนก่อนเริ่มงาน ไม่มีค่าใช้จ่ายแอบแฝง"
+          }
+        },
+        {
+          "@type": "Question",
+          name: "มีบริการพนักงานช่วยยกของด้วยหรือไม่ และต้องจองคิวล่วงหน้านานแค่ไหน?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "มีพนักงานช่วยยกของมืออาชีพ 1-4 คนคอยดูแลความปลอดภัยของสิ่งของ จัดเรียง และแรปฟิล์มกันรอยเฟอร์นิเจอร์ แนะนำให้จองคิวล่วงหน้า 1-2 วัน โดยเฉพาะช่วงวันหยุดสุดสัปดาห์หรือช่วงสิ้นเดือนเพื่อให้ตรงกับคิวจองลิฟต์ของนิติบุคคล"
+          }
+        }
+      ]
+    };
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: escapeJsonLd(JSON.stringify(thonburiServiceSchema)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: escapeJsonLd(JSON.stringify(thonburiFaqSchema)) }}
+        />
+        <ThonburiHubView />
+        <InternalLinks currentCategory="service" currentSlug="bkk-thonburi" />
+      </>
+    );
+  }
 
   const geoData = geoMatrix[province];
   const provinceIntent = getProvinceIntent(province, provinceThai);
