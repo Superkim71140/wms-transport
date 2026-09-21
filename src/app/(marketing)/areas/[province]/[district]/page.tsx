@@ -23,6 +23,7 @@ import { escapeJsonLd } from "@/lib/seo/schema";
 import { siteConfig } from "@/lib/seo/site-config";
 import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
 import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
+import QuotationPreparationGuide from "@/components/QuotationPreparationGuide";
 import { provinceMap } from "../../../service/[province]/page";
 import {
   districtLandingPages,
@@ -135,13 +136,14 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
     })),
   };
 
-  const imageSchema = record.images?.[0]
+  const verifiedEvidence = record.evidenceItems?.filter((e) => e.verificationStatus === "verified") || [];
+
+  const imageSchema = verifiedEvidence[0]?.realImagePath
     ? {
         "@context": "https://schema.org",
         "@type": "ImageObject",
-        contentUrl: `${siteConfig.baseUrl}${record.images[0].path}`,
-        description: record.images[0].alt,
-        caption: record.images[0].caption,
+        contentUrl: `${siteConfig.baseUrl}${verifiedEvidence[0].realImagePath}`,
+        description: verifiedEvidence[0].shortJobDescription || `ภาพงานจริงเขต${name}`,
       }
     : null;
 
@@ -247,7 +249,7 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
                   ขนส่งมอเตอร์ไซค์ บิ๊กไบค์
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  ขนส่งในตู้ทึบมิดชิด รัดตรึงด้วยสายรัด Ratchet Strap ป้องกันการล้มและริ้วรอยตลอดเส้นทาง
+                  ขนส่งในตู้ทึบมิดชิด รัดตรึงด้วยอุปกรณ์ยึดตรึงสิ่งของและล็อกล้อ ป้องกันการล้มและริ้วรอยตลอดเส้นทาง
                 </p>
               </div>
 
@@ -296,22 +298,64 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
                     </div>
                   )}
 
-                  {/* Travel Corridors */}
-                  <div>
-                    <h3 className="text-slate-900 font-bold text-base mb-2">
-                      เส้นทางคมนาคมหลักที่ทีมงานใช้สัญจร:
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {record.travelCorridors.map((c, i) => (
-                        <span
-                          key={i}
-                          className="text-xs bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 rounded-full font-bold"
-                        >
-                          {c}
-                        </span>
-                      ))}
+                  {/* Travel Corridors / Service Corridors */}
+                  {record.serviceCorridors && record.serviceCorridors.length > 0 ? (
+                    <div>
+                      <h3 className="text-slate-900 font-black text-lg mb-3">
+                        พื้นที่และเส้นทางที่ให้บริการในย่าน{name}:
+                      </h3>
+                      <div className="space-y-4">
+                        {record.serviceCorridors.map((corridor, idx) => (
+                          <div key={idx} className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 sm:p-5">
+                            <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-2 text-blue-600">
+                              {corridor.title}
+                            </h4>
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {corridor.coverageAreas.map((area, aIdx) => (
+                                <span key={aIdx} className="text-[11px] bg-white border border-slate-200 text-slate-700 px-2 py-0.5 rounded-md font-medium">
+                                  {area}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="space-y-2 text-xs text-slate-600 leading-relaxed">
+                              <div>
+                                <strong className="text-slate-800">ความเหมาะสมของบริการ: </strong>
+                                {corridor.suitability}
+                              </div>
+                              <div>
+                                <strong className="text-slate-800">การเชื่อมต่อเส้นทาง: </strong>
+                                {corridor.routeConnections}
+                              </div>
+                              <div>
+                                <strong className="text-slate-800">ปัจจัยราคา: </strong>
+                                {corridor.pricingFactors}
+                              </div>
+                              <div>
+                                <strong className="text-slate-800">การเตรียมตัวของลูกค้า: </strong>
+                                {corridor.customerPrep}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div>
+                      <h3 className="text-slate-900 font-bold text-base mb-2">
+                        เส้นทางคมนาคมหลักที่ทีมงานใช้สัญจร:
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {record.travelCorridors.map((c, i) => (
+                          <span
+                            key={i}
+                            className="text-xs bg-blue-50 border border-blue-200 text-blue-700 px-3 py-1 rounded-full font-bold"
+                          >
+                            {c}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {/* Operational Notes */}
                   <div>
@@ -379,56 +423,73 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
                 </div>
               </div>
 
-              {/* Real Evidence Photos */}
-              {record.images && record.images.length > 0 && (
+              {/* Verified Real Evidence Photos (Only shown when verified) */}
+              {verifiedEvidence.length > 0 && (
                 <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs p-6 sm:p-8">
                   <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-6">
                     หลักฐานผลงานจริงในพื้นที่เขต{name}
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {record.images.map((img, i) => (
+                    {verifiedEvidence.map((ev, i) => (
                       <div
                         key={i}
                         className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs"
                       >
-                        <div className="relative w-full aspect-video">
-                          <Image
-                            src={img.path}
-                            alt={img.alt}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 400px"
-                          />
-                        </div>
+                        {ev.realImagePath && (
+                          <div className="relative w-full aspect-video">
+                            <Image
+                              src={ev.realImagePath}
+                              alt={ev.shortJobDescription || `งานขนย้ายในพื้นที่เขต${name}`}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 400px"
+                            />
+                          </div>
+                        )}
                         <div className="p-4 bg-white border-t border-slate-100">
                           <p className="text-xs text-blue-600 font-bold mb-1">
-                            งานขนย้ายในเขต{name}
+                            งานจริง: {ev.verifiedJobLocation || `เขต${name}`}
                           </p>
                           <h3 className="text-slate-900 font-bold text-sm mb-1.5">
-                            {img.caption}
+                            {ev.shortJobDescription}
                           </h3>
-                          <p className="text-xs text-slate-500">
-                            ตรวจสอบความถูกต้องและอนุมัติความปลอดภัยเรียบร้อย
-                          </p>
+                          {ev.verifiedJobDate && (
+                            <p className="text-xs text-slate-500">
+                              วันที่ปฏิบัติงาน: {ev.verifiedJobDate}
+                            </p>
+                          )}
                         </div>
                       </div>
                     ))}
 
-                    <div className="border border-slate-200 rounded-xl p-6 flex flex-col justify-center items-center text-center bg-emerald-50/60">
-                      <ShieldCheck className="h-10 w-10 text-emerald-600 mb-3" />
-                      <h3 className="text-emerald-950 font-bold text-sm mb-1">
-                        คะแนนความพร้อมและหลักฐานงาน
-                      </h3>
-                      <span className="text-3xl font-black text-emerald-700">
-                        {record.proofScore}/100
-                      </span>
-                      <p className="text-xs text-slate-600 mt-2 max-w-[200px]">
-                        ผ่านเกณฑ์การตรวจสอบหลักฐานผลงานและการปฏิบัติงานจริง
-                      </p>
+                    <div className="border border-slate-200 rounded-xl p-6 flex flex-col justify-center bg-slate-50">
+                      <div className="flex items-center gap-2.5 mb-3">
+                        <ShieldCheck className="h-6 w-6 text-emerald-600 shrink-0" />
+                        <h3 className="text-slate-900 font-bold text-sm">
+                          มาตรฐานการดูแลความปลอดภัย
+                        </h3>
+                      </div>
+                      <ul className="space-y-2 text-xs text-slate-600">
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>รถกระบะตู้ทึบปิดมิดชิด โครงสร้างแข็งแรง ป้องกันแดดและฝน</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>อุปกรณ์ยึดตรึงสิ่งของและล็อกล้อมอเตอร์ไซค์แน่นหนา</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>ทีมงานช่วยยกของและจัดเรียงอย่างระมัดระวังตลอดเส้นทาง</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               )}
+
+              {/* Quotation Preparation Guide */}
+              <QuotationPreparationGuide pageContext={`เขต${name}`} />
 
               {/* Local FAQs */}
               <div className="bg-white border border-slate-200/80 rounded-2xl shadow-xs p-6 sm:p-8">
@@ -493,18 +554,36 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
               <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs">
                 <h3 className="text-slate-900 font-bold text-sm mb-3 border-b border-slate-100 pb-2 flex items-center gap-2">
                   <Compass className="w-4 h-4 text-blue-600" />
-                  <span>ศูนย์รวมข้อมูลฝั่งธนบุรี</span>
+                  <span>{province === "samutsakhon" ? "ศูนย์รวมข้อมูลสมุทรสาคร" : "ศูนย์รวมข้อมูลฝั่งธนบุรี"}</span>
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                  สำรวจภาพรวมการขนย้ายทั้ง 15 เขต และข้อกำหนดความสูงรถของฝั่งธนบุรี
+                  {province === "samutsakhon"
+                    ? "สำรวจภาพรวมการขนส่งและรถรับจ้างในจังหวัดสมุทรสาคร มหาชัย กระทุ่มแบน"
+                    : "สำรวจภาพรวมการขนย้ายทั้ง 15 เขต และข้อกำหนดความสูงรถของฝั่งธนบุรี"}
                 </p>
-                <Link
-                  href="/service/bkk-thonburi"
-                  className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1"
-                >
-                  <span>กลับไปยังหน้าหลักฝั่งธนบุรี</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <div className="space-y-2">
+                  <Link
+                    href={`/service/${province}`}
+                    className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    <span>{province === "samutsakhon" ? "กลับไปยังหน้าหลักสมุทรสาคร" : "กลับไปยังหน้าหลักฝั่งธนบุรี"}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="text-xs font-semibold text-slate-700 hover:text-blue-600 flex items-center gap-1"
+                  >
+                    <span>ตรวจสอบตารางราคาและค่าคนยกของ</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className="text-xs font-semibold text-slate-700 hover:text-blue-600 flex items-center gap-1"
+                  >
+                    <span>ชมภาพผลงานจริงและเคสขนย้ายในพื้นที่</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                  </Link>
+                </div>
               </div>
 
               {/* Neighboring District Links */}
@@ -551,21 +630,21 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
                     href={`/service/${province}/moving`}
                     className="text-xs font-semibold text-slate-700 hover:text-blue-600 p-2 hover:bg-blue-50/50 rounded-lg transition-colors flex items-center justify-between"
                   >
-                    <span>ย้ายบ้าน คอนโด หอพัก {name}</span>
+                    <span>ดูข้อมูลบริการย้ายบ้าน คอนโด {name}</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                   </Link>
                   <Link
                     href={`/service/${province}/motorcycle`}
                     className="text-xs font-semibold text-slate-700 hover:text-blue-600 p-2 hover:bg-blue-50/50 rounded-lg transition-colors flex items-center justify-between"
                   >
-                    <span>ขนส่งมอเตอร์ไซค์ บิ๊กไบค์ {name}</span>
+                    <span>ดูข้อมูลขนส่งมอเตอร์ไซค์ บิ๊กไบค์ {name}</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                   </Link>
                   <Link
                     href={`/service/${province}/freight`}
                     className="text-xs font-semibold text-slate-700 hover:text-blue-600 p-2 hover:bg-blue-50/50 rounded-lg transition-colors flex items-center justify-between"
                   >
-                    <span>รถกระบะรับจ้างขนส่งสินค้า {name}</span>
+                    <span>ดูข้อมูลรถกระบะรับจ้างขนส่งสินค้า {name}</span>
                     <ArrowRight className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                   </Link>
                 </div>

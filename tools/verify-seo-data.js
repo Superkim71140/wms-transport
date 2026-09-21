@@ -317,6 +317,187 @@ if (violationsCount === 0) {
 }
 
 // ==========================================
+// CHECK 6: LOCAL SEO BEST PRACTICES & LIGHTWEIGHT WARNINGS
+// ==========================================
+console.log('6️⃣ Checking local SEO best practices, titles, keywords & internal links...');
+
+// 6.1 Title length & duplicate titles
+const registeredTitles = new Map();
+
+function checkTitle(title, pageContext) {
+  if (!title) return;
+  // Lightweight warning for overly long title (> 65 chars recommended SERP display limit)
+  warn(title.length <= 65, `[TITLE LENGTH] Title in "${pageContext}" exceeds 65 characters (${title.length} chars): "${title}"`);
+  
+  // Warning for duplicate titles
+  if (registeredTitles.has(title)) {
+    warn(false, `[DUPLICATE TITLE] Duplicate title detected between "${pageContext}" and "${registeredTitles.get(title)}": "${title}"`);
+  } else {
+    registeredTitles.set(title, pageContext);
+  }
+}
+
+// Check searchIntentMap titles
+Object.entries(searchIntentMap).forEach(([key, item]) => {
+  checkTitle(item.title, `Intent: ${key}`);
+});
+
+// Check district titles & identical H1/title patterns
+Object.entries(districtLandingPages).forEach(([slug, record]) => {
+  const pageTitle = record.seoTitle || `${record.primaryIntent} | ${siteConfig.businessName}`;
+  checkTitle(pageTitle, `District: ${slug}`);
+
+  // 6.2 Identical H1/title patterns across local pages
+  warn(pageTitle !== record.h1, `[IDENTICAL H1/TITLE] District "${slug}" has identical title and H1: "${pageTitle}"`);
+});
+
+// 6.3 Location keywords assigned to multiple primary landing pages
+const locationKeywordMap = new Map();
+Object.entries(districtLandingPages).forEach(([slug, record]) => {
+  const locKey = record.districtThaiName;
+  if (locKey) {
+    if (locationKeywordMap.has(locKey)) {
+      warn(false, `[KEYWORD CANNIBALIZATION] Primary location keyword "${locKey}" is assigned to multiple landing pages: "${slug}" and "${locationKeywordMap.get(locKey)}"`);
+    } else {
+      locationKeywordMap.set(locKey, slug);
+    }
+  }
+});
+
+// 6.4 Unsupported claims audit (response times, vehicle height, equipment, pricing, 24-hr)
+const unverifiedClaimPatterns = [
+  { pattern: /(?:ตอบไว|ตอบกลับ|ประเมินราคา(?:ฟรี)?(?:ภายใน|ใน))\s*\d+\s*นาที/i, name: "Unsupported exact response time claim (X minutes)" },
+  { pattern: /รับประกัน\s*\d+%/i, name: "Unverified guarantee percentage" },
+  { pattern: /เจ้าเดียวใน/i, name: "Unverified exclusivity claim (เจ้าเดียวใน...)" },
+  { pattern: /อันดับ\s*1\s*ใน/i, name: "Unverified ranking claim (อันดับ 1 ใน...)" },
+  { pattern: /ความสูงภายใน(?:\s*ตู้)?\s*2\.1\s*(?:เมตร|ม\.)/i, name: "Unsupported exact vehicle height claim (2.1 เมตร)" },
+  { pattern: /สายรัด\s*Ratchet\s*Strap/i, name: "Unsupported specific equipment claim (Ratchet Strap)" },
+  { pattern: /ราคาเริ่มต้น\s*1,500\s*บาท/i, name: "Unsupported exact starting price claim (1,500 บาท)" },
+];
+
+srcFiles.forEach(file => {
+  const relPath = path.relative(ROOT, file).replace(/\\/g, '/');
+  if (
+    relPath === 'src/components/ThonburiHubView.tsx' ||
+    relPath === 'src/app/(marketing)/service/[province]/page.tsx' ||
+    relPath === 'src/app/(marketing)/areas/[province]/[district]/page.tsx'
+  ) {
+    const content = fs.readFileSync(file, 'utf8');
+    unverifiedClaimPatterns.forEach(({ pattern, name }) => {
+      if (pattern.test(content)) {
+        warn(false, `[UNVERIFIED LOCAL CLAIM] Found "${name}" in ${relPath}`);
+      }
+    });
+  }
+});
+
+// 6.5 Multiple LocalBusiness entities representing service areas
+srcFiles.forEach(file => {
+  const relPath = path.relative(ROOT, file).replace(/\\/g, '/');
+  if (relPath.startsWith('src/app/(marketing)/areas') || relPath.startsWith('src/app/(marketing)/service')) {
+    const content = fs.readFileSync(file, 'utf8');
+    if (content.includes('"@type": "LocalBusiness"') || content.includes('"@type":"LocalBusiness"')) {
+      assert(false, `[PROHIBITED LOCALBUSINESS ENTITY] Found LocalBusiness entity in service-area route ${relPath}. Service area pages must only use Service schema referencing root business entity.`);
+    }
+  }
+});
+
+// 6.6 Location-specific image claims without verified evidence
+Object.entries(districtLandingPages).forEach(([slug, record]) => {
+  const hasVerifiedEvidence = record.evidenceItems?.some(e => e.verificationStatus === 'verified');
+  if (!hasVerifiedEvidence && record.images) {
+    record.images.forEach((img, idx) => {
+      const landmarkKeywords = ['MRT', 'BTS', 'ตลาดทะเลไทย', 'เดอะมอลล์', 'สถานี'];
+      const mentionsLandmark = landmarkKeywords.some(kw => (img.alt && img.alt.includes(kw)) || (img.caption && img.caption.includes(kw)));
+      warn(!mentionsLandmark, `[UNVERIFIED LANDMARK CLAIM IN IMAGE] District "${slug}" image #${idx + 1} makes location-specific landmark claim without verified evidence: "${img.caption || img.alt}"`);
+    });
+  }
+});
+
+// 6.7 Target pages incoming internal links (Homepage and contextual pricing pages)
+const targetLocalPages = [
+  { url: '/service/bkk-thonburi', name: 'Thonburi Hub' },
+  { url: '/areas/bkk-thonburi/bang-khae', name: 'Bang Khae District' },
+  { url: '/service/samutsakhon', name: 'Samut Sakhon Hub' },
+  { url: '/areas/samutsakhon/maha-chai', name: 'Maha Chai District' },
+];
+
+const serviceMapFile = path.join(ROOT, 'src/components/ServiceMap.tsx');
+if (fs.existsSync(serviceMapFile)) {
+  const serviceMapContent = fs.readFileSync(serviceMapFile, 'utf8');
+  targetLocalPages.forEach(target => {
+    assert(serviceMapContent.includes(target.url), `[HOMEPAGE MISSING LINK] Homepage (ServiceMap.tsx) is missing a crawlable link to target page "${target.url}" (${target.name})`);
+  });
+}
+
+const movingPricingFile = path.join(ROOT, 'src/app/(marketing)/pricing/moving/page.tsx');
+if (fs.existsSync(movingPricingFile)) {
+  const movingContent = fs.readFileSync(movingPricingFile, 'utf8');
+  assert(movingContent.includes('/service/bkk-thonburi'), `[CONTEXTUAL LINK MISSING] /pricing/moving is missing link to /service/bkk-thonburi`);
+  assert(movingContent.includes('/areas/bkk-thonburi/bang-khae'), `[CONTEXTUAL LINK MISSING] /pricing/moving is missing link to /areas/bkk-thonburi/bang-khae`);
+}
+
+const freightPricingFile = path.join(ROOT, 'src/app/(marketing)/pricing/freight/page.tsx');
+if (fs.existsSync(freightPricingFile)) {
+  const freightContent = fs.readFileSync(freightPricingFile, 'utf8');
+  assert(freightContent.includes('/service/samutsakhon'), `[CONTEXTUAL LINK MISSING] /pricing/freight is missing link to /service/samutsakhon`);
+  assert(freightContent.includes('/areas/samutsakhon/maha-chai'), `[CONTEXTUAL LINK MISSING] /pricing/freight is missing link to /areas/samutsakhon/maha-chai`);
+}
+
+// 6.8 Duplicate exact-match anchors repeated sitewide
+const genericOrRepetitiveAnchors = ['คลิกที่นี่', 'ดูรายละเอียด', 'อ่านต่อ', 'คลิกเลย', 'click here'];
+srcFiles.forEach(file => {
+  const relPath = path.relative(ROOT, file).replace(/\\/g, '/');
+  if (relPath.startsWith('src/app/(marketing)') || relPath.startsWith('src/components')) {
+    const content = fs.readFileSync(file, 'utf8');
+    genericOrRepetitiveAnchors.forEach(anchor => {
+      const regex = new RegExp(`>\\s*${anchor}\\s*<`, 'i');
+      if (regex.test(content)) {
+        warn(false, `[GENERIC ANCHOR TEXT] Found low-quality anchor "${anchor}" in ${relPath}. Use descriptive destination anchors.`);
+      }
+    });
+  }
+});
+
+// 6.9 Metadata that does not match the page's assigned primary intent
+Object.entries(districtLandingPages)
+  .filter(([, record]) => record.isIndexable && record.status === 'published')
+  .forEach(([slug, record]) => {
+    const intentKey = record.districtThaiName;
+    const titleMatches = record.seoTitle ? record.seoTitle.includes(intentKey) : false;
+    const h1Matches = record.h1.includes(intentKey);
+    const descMatches = record.metaDescription ? record.metaDescription.includes(intentKey) : false;
+    warn(titleMatches, `[METADATA INTENT MISMATCH] District "${slug}" title does not reflect primary intent key "${intentKey}"`);
+    warn(h1Matches, `[METADATA INTENT MISMATCH] District "${slug}" H1 does not reflect primary intent key "${intentKey}"`);
+    warn(descMatches, `[METADATA INTENT MISMATCH] District "${slug}" meta description does not reflect primary intent key "${intentKey}"`);
+  });
+
+// 6.10 District pages missing an incoming contextual internal link from parent hub
+const hubFiles = [
+  { province: 'bkk-thonburi', file: 'src/components/ThonburiHubView.tsx' },
+  { province: 'samutsakhon', file: 'src/app/(marketing)/service/[province]/page.tsx' },
+];
+
+const hubContents = {};
+hubFiles.forEach(({ province, file }) => {
+  const fullPath = path.join(ROOT, file);
+  if (fs.existsSync(fullPath)) {
+    hubContents[province] = fs.readFileSync(fullPath, 'utf8');
+  }
+});
+
+Object.values(districtLandingPages)
+  .filter(record => record.isIndexable && record.status === 'published')
+  .forEach(record => {
+    const parentHubContent = hubContents[record.province];
+    if (parentHubContent) {
+      const linkPattern = `/areas/${record.province}/${record.districtSlug}`;
+      const hasLink = parentHubContent.includes(linkPattern);
+      warn(hasLink, `[DISTRICT MISSING INCOMING LINK] Published district page "${linkPattern}" is missing an incoming contextual internal link from its parent hub (${record.province})`);
+    }
+  });
+
+// ==========================================
 // SUMMARY
 // ==========================================
 console.log('\n==========================================');

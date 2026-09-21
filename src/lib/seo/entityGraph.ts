@@ -8,6 +8,7 @@ const DOMAIN = (process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com")
 
 export const entityGraph = {
   organization: `${DOMAIN}/#organization`,
+  movingCompany: `${DOMAIN}/#moving-company`,
   website: `${DOMAIN}/#website`,
   webpage: (path: string) => `${DOMAIN}${path}#webpage`,
   service: (serviceId: string) => `${DOMAIN}/service/${serviceId}#service`,

@@ -126,6 +126,40 @@ export default function PricingFreightPage() {
                 ))}
               </ul>
             </div>
+
+            {/* Contextual Local Links */}
+            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
+              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+                พื้นที่ให้บริการขนส่งสินค้ายอดนิยม
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600">
+                หากท่านต้องการตรวจสอบจุดรับส่ง โกดัง นิคมอุตสาหกรรม และเส้นทางขนส่งสินค้าเฉพาะพื้นที่:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <Link
+                  href="/service/samutsakhon"
+                  className="p-3.5 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block transition-all group"
+                >
+                  <div className="font-bold text-sm text-slate-900 group-hover:text-blue-600 mb-1">
+                    บริการขนส่งสินค้าโรงงานสมุทรสาคร
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    แกนถนนพระราม 2 เชื่อมต่อกรุงเทพฯ ปริมณฑล และภาคใต้
+                  </div>
+                </Link>
+                <Link
+                  href="/areas/samutsakhon/maha-chai"
+                  className="p-3.5 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block transition-all group"
+                >
+                  <div className="font-bold text-sm text-slate-900 group-hover:text-blue-600 mb-1">
+                    รถรับจ้างขนส่งสินค้ามหาชัย–พระราม 2
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    เจาะลึกนิคมอุตสาหกรรมสมุทรสาคร สินสาคร ตลาดมหาชัย และกระทุ่มแบน
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* CTA */}

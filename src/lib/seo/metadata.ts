@@ -36,8 +36,8 @@ export function buildPageMetadata(options: PageMetadataOptions): Metadata {
   const cleanPath = canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`;
   const absoluteCanonicalUrl = `${siteConfig.baseUrl}${cleanPath === "/" ? "" : cleanPath}`;
 
-  // Prevent duplicate brand name if the title already contains WMS TRANSPORT
-  const resolvedTitle = title.includes(siteConfig.businessName)
+  // Prevent duplicate brand name if the title already contains WMS or businessName
+  const resolvedTitle = title.includes("WMS") || title.includes(siteConfig.businessName)
     ? { absolute: title }
     : title;
 
@@ -49,7 +49,7 @@ export function buildPageMetadata(options: PageMetadataOptions): Metadata {
     metadataBase: new URL(siteConfig.baseUrl),
     title: resolvedTitle,
     description,
-    keywords: keywords.length > 0 ? keywords : siteConfig.keywords,
+    ...(keywords && keywords.length > 0 ? { keywords } : {}),
     alternates: {
       canonical: absoluteCanonicalUrl,
     },
@@ -110,8 +110,8 @@ export function buildDistrictMetadata(
   provinceThaiName: string
 ): Metadata {
   const canonicalPath = `/areas/${record.province}/${record.districtSlug}`;
-  const title = `${record.primaryIntent} | ${siteConfig.businessName}`;
-  const description = `บริการรถรับจ้างตู้ทึบ ขนส่งมอเตอร์ไซค์ ย้ายบ้านคอนโด ย่าน${record.districtThaiName} ${provinceThaiName} ${record.actualServiceCapability}. ${record.localOperationalNotes.substring(0, 100)}...`;
+  const title = record.seoTitle || `${record.primaryIntent} | ${siteConfig.businessName}`;
+  const description = record.metaDescription || `บริการรถรับจ้างตู้ทึบ ขนส่งมอเตอร์ไซค์ ย้ายบ้านคอนโด ย่าน${record.districtThaiName} ${provinceThaiName} ${record.actualServiceCapability}. ${record.localOperationalNotes.substring(0, 100)}...`;
 
   const ogImage = record.images?.[0]?.path || siteConfig.defaultOgImage;
 

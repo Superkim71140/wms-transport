@@ -1,11 +1,19 @@
-import { buildOrganizationSchema, buildWebSiteSchema, escapeJsonLd } from "@/lib/seo/schema";
+import {
+  buildMovingCompanySchema,
+  buildOrganizationSchema,
+  buildWebSiteSchema,
+  escapeJsonLd,
+} from "@/lib/seo/schema";
 
 export default function EntityGraphSchema() {
   const orgSchema = buildOrganizationSchema();
+  const movingCompanySchema = buildMovingCompanySchema();
   const websiteSchema = buildWebSiteSchema();
 
-  // Safe serialization mitigating XSS
-  const safeJsonLd = escapeJsonLd(JSON.stringify([orgSchema, websiteSchema]));
+  // Safe serialization mitigating XSS with canonical root entity graph
+  const safeJsonLd = escapeJsonLd(
+    JSON.stringify([orgSchema, movingCompanySchema, websiteSchema])
+  );
 
   return (
     <script

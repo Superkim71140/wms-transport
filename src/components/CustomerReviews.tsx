@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Star, ShieldCheck, Quote } from "lucide-react";
 import { reviewEvidenceData } from "@/data/reviewEvidence";
 
@@ -54,7 +55,7 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
             return (
               <div 
                 key={test.id}
-                className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-5 shadow-xs transition-all duration-200 hover:shadow-xl hover:shadow-blue-900/5 hover:border-blue-300 hover:-translate-y-1 motion-reduce:transform-none text-left relative overflow-hidden group min-w-0"
+                className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-5 shadow-md shadow-slate-200/40 transition-all duration-200 hover:shadow-xl hover:shadow-blue-900/5 hover:border-blue-300 hover:-translate-y-1 motion-reduce:transform-none text-left relative overflow-hidden group min-w-0"
               >
                 {/* Subtle top accent */}
                 <div 
@@ -90,10 +91,23 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
                 {/* Reviewer Identity Row */}
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100 gap-2">
                   <div className="flex items-center gap-3 min-w-0">
-                    {/* Initial Avatar */}
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs shrink-0 select-none">
-                      {initial}
-                    </div>
+                    {/* Customer Avatar Area */}
+                    {test.avatarUrl ? (
+                      <div className="w-11 h-11 rounded-full overflow-hidden border border-slate-200/80 shrink-0 bg-slate-100 shadow-2xs relative">
+                        <Image
+                          src={test.avatarUrl}
+                          alt={test.avatarAlt || test.displayName}
+                          width={44}
+                          height={44}
+                          className="w-full h-full object-cover object-[center_20%]"
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs shrink-0 select-none">
+                        {initial}
+                      </div>
+                    )}
                     <div className="min-w-0">
                       <h4 className="text-xs sm:text-sm font-bold text-[#0B1F3A] truncate">
                         {test.displayName}
@@ -104,12 +118,31 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
                     </div>
                   </div>
                   
-                  {/* Source Badge (Non-simulated) */}
-                  <span 
-                    className="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium tracking-tight shrink-0" 
-                  >
-                    {test.source}
-                  </span>
+                  {/* Vibrant Official Brand Source Badge */}
+                  {test.source === "LINE" ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#06C755]/10 text-[#06C755] border border-[#06C755]/30 shadow-sm shrink-0">
+                      <Image
+                        src="/images/LINE_icon.webp"
+                        alt=""
+                        width={14}
+                        height={14}
+                        className="w-3.5 h-3.5 object-contain shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span>LINE</span>
+                    </span>
+                  ) : test.source === "Facebook" ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#1877F2]/10 text-[#1877F2] border border-[#1877F2]/30 shadow-sm shrink-0">
+                      <svg className="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                      <span>Facebook</span>
+                    </span>
+                  ) : (
+                    <span className="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-medium tracking-tight shrink-0">
+                      {test.source}
+                    </span>
+                  )}
                 </div>
               </div>
             );

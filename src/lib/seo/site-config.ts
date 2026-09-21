@@ -20,15 +20,19 @@ export const siteConfig = {
   priceRange: undefined,
   openingHours: "24 Hours every day",
   openingHoursTh: "เปิดบริการทุกวัน ตลอด 24 ชั่วโมง",
+  googleMapsUrl: "https://maps.app.goo.gl/gw8LCFmdXuejr5N99",
   address: {
-    addressLocality: "กระทุ่มแบน / เมืองสมุทรสาคร",
+    streetAddress: "75 535 ซ.13",
+    subDistrict: "บ้านเกาะ",
+    district: "เมืองสมุทรสาคร",
+    addressLocality: "ตำบลบ้านเกาะ อำเภอเมืองสมุทรสาคร",
     addressRegion: "สมุทรสาคร",
-    postalCode: "74110",
+    postalCode: "74000",
     addressCountry: "TH",
   },
   geo: {
-    latitude: 13.6558,
-    longitude: 100.2783,
+    latitude: 13.6018827,
+    longitude: 100.2463594,
   },
   serviceAreas: [
     "สมุทรสาคร",

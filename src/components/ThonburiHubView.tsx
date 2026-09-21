@@ -20,6 +20,7 @@ import {
 } from "@/data/districtLandingPages";
 import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
 import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
+import QuotationPreparationGuide from "@/components/QuotationPreparationGuide";
 
 export default function ThonburiHubView() {
   const northernDistricts = getThonburiDistrictsByZone("northern");
@@ -28,7 +29,7 @@ export default function ThonburiHubView() {
   const faqs = [
     {
       q: "รถรับจ้างตู้ทึบ WMS สามารถเข้าลานจอดใต้อาคารคอนโดมิเนียมฝั่งธนบุรีได้หรือไม่?",
-      a: "รถกระบะตู้ทึบของ WMS TRANSPORT มีความสูงภายในตู้ 2.1 เมตร สำหรับรองรับสิ่งของชิ้นใหญ่ การเข้าจอดเทียบขนย้ายแนะนำให้ประสานงานจุดโหลดของชั้นล่าง (Loading Bay) หรือลานจอดที่ไม่มีสิ่งกีดขวางความสูงกับนิติบุคคลของอาคาร"
+      a: "รถกระบะตู้ทึบของ WMS TRANSPORT เป็นรถกระบะตู้ทึบหลังคาสูงปิดมิดชิด (โปรดแจ้งรายละเอียดหน้างานเพื่อให้เจ้าหน้าที่ตรวจสอบรถและอุปกรณ์ที่เหมาะสม) สำหรับรองรับสิ่งของชิ้นใหญ่ การเข้าจอดเทียบขนย้ายแนะนำให้ประสานงานจุดโหลดของชั้นล่าง (Loading Bay) หรือลานจอดที่ไม่มีสิ่งกีดขวางความสูงกับนิติบุคคลของอาคาร"
     },
     {
       q: "ตรอกซอยแคบในชุมชนเก่าฝั่งธนบุรี เช่น ย่านตลาดพลู บางยี่เรือ หรือซอยเพชรเกษม รถเข้าได้ไหม?",
@@ -97,11 +98,11 @@ export default function ThonburiHubView() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-5">
-              รถรับจ้างและบริการขนย้ายฝั่งธนบุรี
+              รถรับจ้างฝั่งธนบุรี ขนย้ายบ้าน คอนโด และส่งของทั่วไป
             </h1>
 
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-medium mb-8">
-              WMS TRANSPORT ให้บริการรถกระบะตู้ทึบรับจ้างขนย้ายครอบคลุม 15 เขตทั่วฝั่งธนบุรี ทั้งกลุ่มเขตกรุงธนเหนือและกรุงธนใต้ รองรับงานย้ายคอนโดมิเนียมตามแนวรถไฟฟ้า BTS สายสีลมและ MRT สายสีน้ำเงิน ย้ายทาวน์โฮม บ้านเดี่ยว ขนส่งมอเตอร์ไซค์ และขนส่งสินค้าโรงงาน ด้วยรถกระบะตู้ทึบความสูงภายใน 2.1 เมตร ขนย้ายสิ่งของมิดชิดปลอดภัย พร้อมทีมงานช่วยยกของ
+              WMS TRANSPORT ให้บริการรถกระบะตู้ทึบรับจ้างขนย้ายครอบคลุม 15 เขตทั่วฝั่งธนบุรี ทั้งกลุ่มเขตกรุงธนเหนือและกรุงธนใต้ รองรับงานย้ายคอนโดมิเนียมตามแนวรถไฟฟ้า BTS สายสีลมและ MRT สายสีน้ำเงิน ย้ายทาวน์โฮม บ้านเดี่ยว ขนส่งมอเตอร์ไซค์ และขนส่งสินค้าโรงงาน ด้วยรถกระบะตู้ทึบหลังคาสูงปิดมิดชิด (โปรดแจ้งรายละเอียดหน้างานเพื่อให้เจ้าหน้าที่ตรวจสอบรถและอุปกรณ์ที่เหมาะสม) ขนย้ายสิ่งของมิดชิดปลอดภัย พร้อมทีมงานช่วยยกของ
             </p>
 
             {/* Quick Contact CTAs */}
@@ -185,7 +186,7 @@ export default function ThonburiHubView() {
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
-                  <span>ดูรายละเอียด</span>
+                  <span>ดูข้อมูลบริการย้ายบ้าน คอนโด ฝั่งธนบุรี</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
@@ -207,11 +208,11 @@ export default function ThonburiHubView() {
                     ขนส่งมอเตอร์ไซค์ บิ๊กไบค์
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    ขนส่งในตู้ทึบมิดชิด รัดตรึงด้วยสายรัด Ratchet Strap และล็อกล้อ ปลอดภัยจากแดด ฝน และริ้วรอย
+                    ขนส่งในตู้ทึบมิดชิด รัดตรึงด้วยอุปกรณ์ยึดตรึงสิ่งของและล็อกล้อ ปลอดภัยจากแดด ฝน และริ้วรอย
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
-                  <span>ดูรายละเอียด</span>
+                  <span>ดูข้อมูลขนส่งมอเตอร์ไซค์ บิ๊กไบค์</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
@@ -237,10 +238,162 @@ export default function ThonburiHubView() {
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
-                  <span>ดูรายละเอียด</span>
+                  <span>ดูข้อมูลเหมารถกระบะขนส่งสินค้าฝั่งธนบุรี</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>
+            </div>
+          </section>
+
+          {/* ── THONBURI CORRIDORS & BIDIRECTIONAL INTERNAL LINKS ── */}
+          <section className="mb-20">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-3">
+                พื้นที่และเส้นทางที่ให้บริการในฝั่งธนบุรี
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                เส้นทางคมนาคมหลักที่ทีมงาน WMS TRANSPORT สัญจรให้บริการเป็นประจำ วางแผนการเดินทางอย่างคล่องตัวเพื่อเข้าถึงทุกตรอกซอย
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {/* Corridor 1 */}
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  แนวเพชรเกษม – ท่าพระ – วงเวียนใหญ่
+                </h3>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {["ถนนเพชรเกษม", "ท่าพระ", "วงเวียนใหญ่", "บางยี่เรือ", "ตลาดพลู"].map((tag, i) => (
+                    <span key={i} className="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                    เหมาะสำหรับย้ายคอนโดมิเนียมแนวรถไฟฟ้า MRT/BTS หอพัก และอาคารพาณิชย์ รถกระบะตู้ทึบเข้าตรอกซอยแคบได้ดีกว่ารถ 6 ล้อ
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                    จุดตัดศูนย์กลางคมนาคมฝั่งธนบุรี เชื่อมสะพานตากสิน สะพานพุทธ และสะพานพระปกเกล้า ข้ามสู่ฝั่งพระนครได้อย่างรวดเร็ว
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                    คำนวณตามระยะทางจริงและชั้นอาคาร แจ้งราคาสุทธิก่อนเริ่มงาน ไม่มีบวกเพิ่มทีหลัง
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                    ประสานงานนิติบุคคลเพื่อนัดหมายเวลาใช้ลิฟต์ขนของและสำรองจุดจอดเทียบรถชั้นล่าง
+                  </div>
+                </div>
+              </div>
+
+              {/* Corridor 2 */}
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  แนวกาญจนาภิเษก – กัลปพฤกษ์ – บางบอน – เคหะธนบุรี
+                </h3>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {["กาญจนาภิเษก", "กัลปพฤกษ์", "แยกบางบอน", "เคหะธนบุรี", "พระราม 2"].map((tag, i) => (
+                    <span key={i} className="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                    เหมาะสำหรับงานย้ายบ้านเดี่ยว ทาวน์โฮมโครงการจัดสรร ขนส่งสินค้าโรงงาน/ค้าส่ง และขนส่งมอเตอร์ไซค์บิ๊กไบค์
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                    ถนนวงแหวนกาญจนาภิเษก เชื่อมต่อโซนบางแค บางบอน มุ่งหน้าพระราม 2 ออกสู่สมุทรสาคร นครปฐม และนนทบุรี
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                    ประเมินราคาตามจุดรับ-ส่งและอุปกรณ์ป้องกันสัมภาระอย่างโปร่งใส
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                    เตรียมรายการสิ่งของชิ้นใหญ่และแจ้งความต้องการพนักงานช่วยยกของล่วงหน้า
+                  </div>
+                </div>
+              </div>
+
+              {/* Corridor 3 */}
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  แนวราชพฤกษ์ – บรมราชชนนี – ปิ่นเกล้า
+                </h3>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {["ราชพฤกษ์", "บรมราชชนนี", "ปิ่นเกล้า", "ตลิ่งชัน", "บางขุนนนท์"].map((tag, i) => (
+                    <span key={i} className="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-md font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                    เหมาะสำหรับงานย้ายบ้าน คอนโดมิเนียม และขนย้ายออฟฟิศ พร้อมอุปกรณ์สายรัดนิรภัยและแรปฟิล์มป้องกันรอยขีดข่วน
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                    ทางด่วนศรีรัช-วงแหวนรอบนอก และถนนบรมราชชนนี มุ่งหน้าสู่พุทธมณฑล ศาลายา และนครปฐม
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                    คิดค่าบริการตามระยะทางจริงและจำนวนรอบที่วิ่ง ไม่มีบวกเพิ่มตามสภาพการจราจร
+                  </div>
+                  <div>
+                    <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                    จัดเก็บของใช้ส่วนตัวและเอกสารสำคัญแยกไว้ก่อนเริ่มการขนย้าย
+                  </div>
+                  <div className="pt-2 border-t border-slate-100">
+                    <Link
+                      href="/areas/bkk-thonburi/pinklao"
+                      className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                    >
+                      <span>ดูข้อมูลรถรับจ้างปิ่นเกล้า–บรมราชชนนี</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contextual Links Card */}
+            <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-1">
+                  สำรวจข้อมูลเจาะลึกเฉพาะเขตเพชรเกษม–บางแค และอัตราค่าบริการ
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-600">
+                  ดูรายละเอียดงานขนย้ายในเขตบางแค ตรวจสอบตารางราคา และชมผลงานจริง
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/areas/bkk-thonburi/bang-khae"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-colors"
+                >
+                  <span>ดูข้อมูลรถรับจ้างเพชรเกษม–บางแค พร้อมคนยก</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold transition-colors"
+                >
+                  <span>ตรวจสอบอัตราค่าบริการ</span>
+                </Link>
+                <Link
+                  href="/portfolio"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold transition-colors"
+                >
+                  <span>ชมภาพผลงานจริง</span>
+                </Link>
+              </div>
             </div>
           </section>
 
@@ -270,51 +423,56 @@ export default function ThonburiHubView() {
                   return (
                     <div
                       key={d.districtSlug}
-                      className={`bg-white border rounded-2xl p-5 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
+                      className={`bg-white border rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
                         isPublished
-                          ? "border-blue-200 hover:border-blue-400 hover:shadow-sm"
-                          : "border-slate-200/80 bg-slate-50/50"
+                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-gradient-to-b from-white to-blue-50/20"
+                          : "border-slate-200/90 hover:border-slate-300"
                       }`}
                     >
                       <div>
-                        <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center justify-between gap-2 mb-3">
                           <h4 className="font-bold text-base text-slate-900">
-                            เขต{d.districtThaiName} ({d.districtSlug})
+                            เขต{d.districtThaiName}
                           </h4>
                           {isPublished ? (
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                              เปิดหน้าพื้นที่แล้ว
+                            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-600 text-white shadow-2xs">
+                              เปิดหน้าบริการแล้ว
                             </span>
                           ) : (
-                            <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200">
-                              ครอบคลุมบริการ
+                            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                              พื้นที่พร้อมรับงาน
                             </span>
                           )}
                         </div>
 
-                        <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3 font-normal">
                           {d.directAnswer}
                         </p>
 
-                        <div className="text-[11px] text-slate-500 mb-4">
-                          <span className="font-semibold text-slate-700">ถนนสำคัญ: </span>
-                          <span>{d.travelCorridors.slice(0, 3).join(", ")}</span>
+                        <div className="text-xs text-slate-600 mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200/70">
+                          <span className="font-bold text-slate-800">ถนนและเส้นทางสำคัญ: </span>
+                          <span className="text-slate-700">{d.travelCorridors.slice(0, 3).join(", ")}</span>
                         </div>
                       </div>
 
                       {isPublished ? (
                         <Link
                           href={`/areas/bkk-thonburi/${d.districtSlug}`}
-                          className="mt-2 inline-flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50/60 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors"
+                          className="mt-2 inline-flex items-center justify-between text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-xl transition-all shadow-xs group/btn"
                         >
                           <span>ดูข้อมูลและผลงานเขต{d.districtThaiName}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
                         </Link>
                       ) : (
-                        <div className="mt-2 text-[11px] text-slate-500 bg-slate-100/70 px-3 py-2 rounded-lg flex items-center justify-between">
-                          <span>พร้อมให้บริการ (สอบถามคิวงาน)</span>
-                          <Phone className="w-3 h-3 text-slate-400" />
-                        </div>
+                        <a
+                          href="https://line.me/ti/p/DtICkMaDet"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-[40px]"
+                        >
+                          <span>สอบถามคิวงานเขต{d.districtThaiName}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                        </a>
                       )}
                     </div>
                   );
@@ -331,57 +489,62 @@ export default function ThonburiHubView() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {northernDistricts.map((d) => {
                   const isPublished = isDistrictPageIndexable(d);
                   return (
                     <div
                       key={d.districtSlug}
-                      className={`bg-white border rounded-2xl p-5 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
+                      className={`bg-white border rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
                         isPublished
-                          ? "border-blue-200 hover:border-blue-400 hover:shadow-sm"
-                          : "border-slate-200/80 bg-slate-50/50"
+                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-gradient-to-b from-white to-blue-50/20"
+                          : "border-slate-200/90 hover:border-slate-300"
                       }`}
                     >
                       <div>
-                        <div className="flex items-center justify-between gap-2 mb-2">
-                          <h4 className="font-bold text-sm text-slate-900">
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <h4 className="font-bold text-base text-slate-900">
                             เขต{d.districtThaiName}
                           </h4>
                           {isPublished ? (
-                            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                              เปิดหน้าแล้ว
+                            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-600 text-white shadow-2xs">
+                              เปิดหน้าบริการแล้ว
                             </span>
                           ) : (
-                            <span className="text-[9px] font-medium px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                              ครอบคลุมบริการ
+                            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                              พื้นที่พร้อมรับงาน
                             </span>
                           )}
                         </div>
 
-                        <p className="text-xs text-slate-600 leading-relaxed mb-3 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3 font-normal">
                           {d.directAnswer}
                         </p>
 
-                        <div className="text-[11px] text-slate-500 mb-3">
-                          <span className="font-semibold text-slate-700">เส้นทาง: </span>
-                          <span>{d.travelCorridors.slice(0, 2).join(", ")}</span>
+                        <div className="text-xs text-slate-600 mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200/70">
+                          <span className="font-bold text-slate-800">ถนนและเส้นทางสำคัญ: </span>
+                          <span className="text-slate-700">{d.travelCorridors.slice(0, 3).join(", ")}</span>
                         </div>
                       </div>
 
                       {isPublished ? (
                         <Link
                           href={`/areas/bkk-thonburi/${d.districtSlug}`}
-                          className="mt-2 inline-flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50/60 hover:bg-blue-50 px-3 py-2 rounded-lg transition-colors"
+                          className="mt-2 inline-flex items-center justify-between text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-xl transition-all shadow-xs group/btn"
                         >
                           <span>ดูข้อมูลเขต{d.districtThaiName}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
                         </Link>
                       ) : (
-                        <div className="mt-2 text-[11px] text-slate-500 bg-slate-100/70 px-2.5 py-1.5 rounded-lg flex items-center justify-between">
-                          <span>พร้อมให้บริการ</span>
-                          <Phone className="w-3 h-3 text-slate-400" />
-                        </div>
+                        <a
+                          href="https://line.me/ti/p/DtICkMaDet"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-[40px]"
+                        >
+                          <span>สอบถามคิวงานเขต{d.districtThaiName}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                        </a>
                       )}
                     </div>
                   );
@@ -404,13 +567,13 @@ export default function ThonburiHubView() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-6">
                 <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-4">
-                  2.1M
+                  <Truck className="w-5 h-5" />
                 </div>
                 <h3 className="font-bold text-base text-slate-900 mb-2">
-                  ความสูงภายในตู้ 2.1 เมตร
+                  ตู้ทึบหลังคาสูงปิดมิดชิด
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  ความจุภายในตู้สูง 2.1 เมตร รองรับการวางตู้เสื้อผ้าและที่นอน 6 ฟุตในแนวตั้ง ขนย้ายสิ่งของชิ้นใหญ่ได้เต็มพื้นที่
+                  โครงสร้างตู้ทึบหลังคาสูงปิดมิดชิด รองรับการจัดเรียงสัมภาระทรงสูงและสิ่งของชิ้นใหญ่ได้เต็มพื้นที่ (โปรดแจ้งรายละเอียดหน้างานเพื่อให้เจ้าหน้าที่ตรวจสอบรถและอุปกรณ์ที่เหมาะสม)
                 </p>
               </div>
 
@@ -537,7 +700,7 @@ export default function ThonburiHubView() {
                 <div className="relative w-full aspect-16/10">
                   <Image
                     src="/images/WM10.webp"
-                    alt="ทีมงาน WMS ขนย้ายคอนโด High-rise เขตบางแค ฝั่งธนบุรี"
+                    alt="ภาพตัวอย่างการขนย้ายสิ่งของด้วยรถกระบะตู้ทึบ WMS TRANSPORT"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 500px"
@@ -545,13 +708,13 @@ export default function ThonburiHubView() {
                 </div>
                 <div className="p-5">
                   <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md mb-2 inline-block">
-                    เขตบางแค · MRT หลักสอง
+                    ภาพประกอบการขนย้ายคอนโด
                   </span>
                   <h3 className="font-bold text-base text-slate-900 mb-1">
-                    เคสขนย้ายคอนโด 1 ห้องนอน ชั้น 18
+                    การขนย้ายห้องพักและจัดเรียงสิ่งของ
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    แรปฟิล์มป้องกันเฟอร์นิเจอร์หลัก ขนของลงลิฟต์บริการ และนำขึ้นรถตู้ทึบความสูงภายในตู้ 2.1 ม. ที่จุดจอดโหลดสินค้าได้อย่างราบรื่น
+                    แรปฟิล์มป้องกันเฟอร์นิเจอร์หลัก ขนของลงลิฟต์บริการ และนำขึ้นรถตู้ทึบที่จุดจอดเทียบโหลดสินค้าอย่างเป็นระบบ
                   </p>
                 </div>
               </div>
@@ -560,7 +723,7 @@ export default function ThonburiHubView() {
                 <div className="relative w-full aspect-16/10">
                   <Image
                     src="/images/WM11.webp"
-                    alt="การจัดส่งรถมอเตอร์ไซค์บิ๊กไบค์ย่านปิ่นเกล้า เขตบางพลัด/บางกอกน้อย"
+                    alt="ภาพตัวอย่างการล็อกยึดรถมอเตอร์ไซค์ในตู้ทึบ WMS TRANSPORT"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 500px"
@@ -568,18 +731,23 @@ export default function ThonburiHubView() {
                 </div>
                 <div className="p-5">
                   <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md mb-2 inline-block">
-                    ย่านปิ่นเกล้า · บรมราชชนนี
+                    ภาพประกอบการขนส่งมอเตอร์ไซค์
                   </span>
                   <h3 className="font-bold text-base text-slate-900 mb-1">
                     การล็อกยึดรถมอเตอร์ไซค์ในตู้ทึบ
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    ใช้สายรัด Ratchet Strap รัดตรึงตัวถังและล็อกล้อหน้าอย่างแน่นหนา ปลอดภัยไร้ริ้วรอยขูดขีดตลอดเส้นทาง
+                    ใช้อุปกรณ์ยึดตรึงสิ่งของและล็อกล้อหน้าอย่างแน่นหนา ปลอดภัยไร้ริ้วรอยขูดขีดตลอดเส้นทาง
                   </p>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* Quotation Preparation Guide */}
+          <div className="mb-20 max-w-5xl mx-auto">
+            <QuotationPreparationGuide pageContext="พื้นที่ฝั่งธนบุรี" />
+          </div>
 
           {/* Visible FAQ Section */}
           <section className="mb-20 max-w-4xl mx-auto">

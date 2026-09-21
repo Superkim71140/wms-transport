@@ -148,6 +148,38 @@ export const searchIntentMap: Record<string, IntentRecord> = {
 
 // Generates dynamic search intents for provinces to avoid duplicate patterns
 export function getProvinceIntent(provinceSlug: string, name: string): IntentRecord {
+  if (provinceSlug === "bkk-thonburi") {
+    return {
+      pageType: "province",
+      primarySearchIntent: "รถรับจ้างฝั่งธนบุรี",
+      primaryKeyword: "รถรับจ้างฝั่งธนบุรี",
+      secondaryKeywords: ["รถรับจ้างเพชรเกษม", "รถรับจ้างพุทธมณฑล", "รถกระบะตู้ทึบฝั่งธนบุรี"],
+      h1: "รถรับจ้างฝั่งธนบุรี ขนย้ายบ้าน คอนโด และส่งของทั่วไป",
+      heroSupportingStatement: "บริการรถกระบะตู้ทึบรับจ้างครอบคลุม 15 เขตฝั่งธนบุรี ย้ายคอนโดมิเนียม ทาวน์โฮม บ้านเดี่ยว และขนส่งสินค้า ด้วยรถตู้ทึบสูง 2.1 ม. พร้อมคนช่วยยกของ",
+      title: "รถรับจ้างฝั่งธนบุรี เพชรเกษม–พุทธมณฑล | WMS",
+      metaDescription: "บริการรถรับจ้างฝั่งธนบุรี รถกระบะตู้ทึบย้ายบ้าน คอนโด หอพัก และส่งของ ครอบคลุมกาญจนาภิเษก กัลปพฤกษ์ ราชพฤกษ์ แยกบางบอน ท่าพระ วงเวียนใหญ่ เคหะธนบุรี พร้อมคนยก",
+      canonicalPath: "/service/bkk-thonburi",
+      isIndexable: true,
+      proofRequirements: ["หลักฐานงานจริงในพื้นที่ฝั่งธนบุรี", "ข้อกำหนดความสูงรถตู้ทึบ 2.1 ม.", "การประสานงานจองลิฟต์คอนโด"],
+    };
+  }
+
+  if (provinceSlug === "samutsakhon") {
+    return {
+      pageType: "province",
+      primarySearchIntent: "รถรับจ้างสมุทรสาคร",
+      primaryKeyword: "รถรับจ้างสมุทรสาคร",
+      secondaryKeywords: ["รถรับจ้างมหาชัย", "รถรับจ้างพระราม 2", "รถกระบะตู้ทึบสมุทรสาคร"],
+      h1: "รถรับจ้างสมุทรสาคร ขนส่งสินค้าโรงงานและย้ายบ้านพร้อมคนยก",
+      heroSupportingStatement: "บริการรถกระบะตู้ทึบรับจ้างสมุทรสาคร ครอบคลุมมหาชัย กระทุ่มแบน อ้อมน้อย พุทธมณฑลสาย 4 สาย 5 พระราม 2 พร้อมทีมงานช่วยยกของและดูแลความปลอดภัย",
+      title: "รถรับจ้างสมุทรสาคร มหาชัย–พระราม 2 | WMS",
+      metaDescription: "บริการรถรับจ้างสมุทรสาคร รถกระบะตู้ทึบขนส่งสินค้าโรงงาน ย้ายบ้านและหอพัก ครอบคลุมมหาชัย กระทุ่มแบน อ้อมน้อย พุทธมณฑลสาย 4 สาย 5 และอ้อมใหญ่ พร้อมคนยก",
+      canonicalPath: "/service/samutsakhon",
+      isIndexable: true,
+      proofRequirements: ["หลักฐานงานขนส่งสินค้าโรงงานจริง", "เส้นทางสัญจรมหาชัย-พระราม 2", "อุปกรณ์รัดตรึงสินค้ามาตรฐาน"],
+    };
+  }
+
   return {
     pageType: "province",
     primarySearchIntent: `จ้างรถขนของ ย้ายหอพัก หรือส่งมอเตอร์ไซค์ในพื้นที่จังหวัด${name}`,

@@ -8,19 +8,30 @@ import { guidesData } from "@/data/guidesData";
 import { portfolioCasesData } from "@/data/mediaEvidence";
 import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 
+// Fixed release date for this technical SEO deployment (Phase 4)
+const SEO_RELEASE_DATE = new Date("2026-09-21");
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const domain = siteConfig.baseUrl;
 
-  // Helper to parse dates into standard Date objects safely
-  const parseLastmodDate = (dateStr: string): Date => {
+  // Helper to parse dates into standard Date objects safely, respecting truthful release and review dates
+  const parseTruthfulLastmod = (dateStr?: string): Date => {
+    if (!dateStr) return SEO_RELEASE_DATE;
     try {
-      if (!dateStr) return new Date("2026-06-25");
+      let parsed: Date;
       if (dateStr.includes("มิถุนายน")) {
-        return new Date("2026-06-25");
+        parsed = new Date("2026-06-25");
+      } else {
+        parsed = new Date(dateStr);
       }
-      return new Date(dateStr);
+      if (isNaN(parsed.getTime())) return SEO_RELEASE_DATE;
+      // Do not assign a date later than the actual release date
+      if (parsed > SEO_RELEASE_DATE) return SEO_RELEASE_DATE;
+      // Because root Entity Graph rendered output changed across all public routes in this release,
+      // use the later truthful date when both a content review date and release date apply.
+      return SEO_RELEASE_DATE > parsed ? SEO_RELEASE_DATE : parsed;
     } catch {
-      return new Date("2026-06-25");
+      return SEO_RELEASE_DATE;
     }
   };
 
@@ -28,67 +39,67 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const coreRoutes: MetadataRoute.Sitemap = [
     {
       url: domain,
-      lastModified: parseLastmodDate(searchIntentMap.home?.lastReviewedDate || "2026-06-25"),
+      lastModified: SEO_RELEASE_DATE,
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
       url: `${domain}/portfolio`,
-      lastModified: parseLastmodDate(searchIntentMap.portfolio?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap.portfolio?.lastReviewedDate),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${domain}/blog`,
-      lastModified: new Date("2026-06-25"),
+      lastModified: SEO_RELEASE_DATE,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${domain}/pricing`,
-      lastModified: parseLastmodDate(searchIntentMap.pricing?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap.pricing?.lastReviewedDate),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${domain}/pricing/moving`,
-      lastModified: parseLastmodDate(searchIntentMap["pricing-moving"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-moving"]?.lastReviewedDate),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${domain}/pricing/motorcycle-transport`,
-      lastModified: parseLastmodDate(searchIntentMap["pricing-motorcycle"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-motorcycle"]?.lastReviewedDate),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${domain}/pricing/motorcycle-2026`,
-      lastModified: new Date("2026-06-25"),
+      lastModified: SEO_RELEASE_DATE,
       changeFrequency: "monthly",
       priority: 0.75,
     },
     {
       url: `${domain}/pricing/freight`,
-      lastModified: parseLastmodDate(searchIntentMap["pricing-freight"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-freight"]?.lastReviewedDate),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: `${domain}/compare/pickup-vs-box-truck`,
-      lastModified: parseLastmodDate(searchIntentMap["compare-pickup-vs-box"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["compare-pickup-vs-box"]?.lastReviewedDate),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${domain}/compare/moving-alone-vs-helpers`,
-      lastModified: parseLastmodDate(searchIntentMap["compare-alone-vs-helpers"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["compare-alone-vs-helpers"]?.lastReviewedDate),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${domain}/compare/one-vehicle-vs-multiple-trips`,
-      lastModified: parseLastmodDate(searchIntentMap["compare-one-vs-multiple"]?.lastReviewedDate || "2026-06-25"),
+      lastModified: parseTruthfulLastmod(searchIntentMap["compare-one-vs-multiple"]?.lastReviewedDate),
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -100,7 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Dynamic provinces service hubs
     const provinceUrls: MetadataRoute.Sitemap = provinces.map((province) => ({
       url: `${domain}/service/${province}`,
-      lastModified: new Date("2026-06-25"),
+      lastModified: SEO_RELEASE_DATE,
       changeFrequency: "weekly",
       priority: 0.8,
     }));
@@ -109,7 +120,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const blogSlugs = Object.keys(posts || {});
     const blogUrls: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
       url: `${domain}/blog/${slug}`,
-      lastModified: new Date("2026-06-25"),
+      lastModified: parseTruthfulLastmod(posts[slug]?.dateISO),
       changeFrequency: "monthly",
       priority: 0.6,
     }));
@@ -119,7 +130,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const provinceServiceUrls: MetadataRoute.Sitemap = provinces.flatMap((province) =>
       serviceIds.map((serviceId) => ({
         url: `${domain}/service/${province}/${serviceId}`,
-        lastModified: new Date("2026-06-25"),
+        lastModified: SEO_RELEASE_DATE,
         changeFrequency: "weekly",
         priority: 0.8,
       }))
@@ -130,7 +141,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter(({ from, to }) => provinceMap[from] && provinceMap[to] && from !== to)
       .map(({ from, to }) => ({
         url: `${domain}/route/${from}/${to}`,
-        lastModified: new Date("2026-06-25"),
+        lastModified: SEO_RELEASE_DATE,
         changeFrequency: "monthly",
         priority: 0.7,
       }));
@@ -140,7 +151,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter(isDistrictPageIndexable)
       .map((district) => ({
         url: `${domain}/areas/${district.province}/${district.districtSlug}`,
-        lastModified: parseLastmodDate(district.lastReviewedDate),
+        lastModified: parseTruthfulLastmod(district.lastReviewedDate),
         changeFrequency: "weekly",
         priority: 0.85,
       }));
@@ -148,7 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Approved Portfolio Case Studies
     const approvedPortfolioUrls: MetadataRoute.Sitemap = Object.values(portfolioCasesData).map((caseStudy) => ({
       url: `${domain}/portfolio/${caseStudy.slug}`,
-      lastModified: new Date("2026-06-25"),
+      lastModified: SEO_RELEASE_DATE,
       changeFrequency: "monthly",
       priority: 0.7,
     }));
@@ -158,7 +169,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((g) => g.isIndexable)
       .map((guide) => ({
         url: `${domain}/guides/${guide.slug}`,
-        lastModified: parseLastmodDate(guide.lastUpdated),
+        lastModified: parseTruthfulLastmod(guide.lastUpdated),
         changeFrequency: "monthly",
         priority: 0.75,
       }));

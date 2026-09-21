@@ -27,6 +27,7 @@ import IntentHero from "@/components/IntentHero";
 import { getProvinceIntent } from "@/data/searchIntentMap";
 import ServiceAreaPromoBanner from "@/components/service-area/ServiceAreaPromoBanner";
 import CompactServiceSummary from "@/components/service-area/CompactServiceSummary";
+import QuotationPreparationGuide from "@/components/QuotationPreparationGuide";
 
 // ─────────────────────────────────────────────
 // Location data — add new regions here only
@@ -173,14 +174,24 @@ export async function generateMetadata({
   }
   const name = loc?.name ?? province;
   
-  let description = `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name}และทั่วไทย บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ประเมินราคาฟรี 24 ชม.`;
+  let description = `บริการรถรับจ้างทั่วไป รถกระบะตู้ทึบรับจ้าง ย้ายหอพัก ย้ายคอนโด ย้ายบ้าน และขนส่งมอเตอร์ไซค์/Bigbike ในพื้นที่${name} บริการพร้อมคนช่วยยกของอย่างมืออาชีพ ติดต่อประเมินราคาได้ทุกวัน`;
   
   if (province === "bkk-thonburi") {
     return {
-      title: "รถรับจ้างฝั่งธนบุรี ย้ายบ้าน คอนโด ขนของ พร้อมคนยก | WMS TRANSPORT",
-      description: "บริการรถรับจ้างและขนย้ายฝั่งธนบุรี ครอบคลุม 15 เขต ทั้งกรุงธนเหนือและกรุงธนใต้ รถกระบะตู้ทึบความสูงภายใน 2.1 ม. ขนย้ายสิ่งของมิดชิดปลอดภัย พร้อมทีมงานช่วยยกของ",
+      title: "รถรับจ้างฝั่งธนบุรี เพชรเกษม–พุทธมณฑล | WMS",
+      description: "บริการรถรับจ้างฝั่งธนบุรี รถกระบะตู้ทึบย้ายบ้าน คอนโด หอพัก และส่งของ ครอบคลุมกาญจนาภิเษก กัลปพฤกษ์ ราชพฤกษ์ แยกบางบอน ท่าพระ วงเวียนใหญ่ เคหะธนบุรี พร้อมคนยก",
       alternates: {
         canonical: "/service/bkk-thonburi",
+      },
+    };
+  }
+
+  if (province === "samutsakhon") {
+    return {
+      title: "รถรับจ้างสมุทรสาคร มหาชัย–พระราม 2 | WMS",
+      description: "บริการรถรับจ้างสมุทรสาคร รถกระบะตู้ทึบขนส่งสินค้าโรงงาน ย้ายบ้านและหอพัก ครอบคลุมมหาชัย กระทุ่มแบน อ้อมน้อย พุทธมณฑลสาย 4 สาย 5 และอ้อมใหญ่ พร้อมคนยก",
+      alternates: {
+        canonical: "/service/samutsakhon",
       },
     };
   }
@@ -210,8 +221,6 @@ export default async function LocationHubPage({
   }
   const provinceThai = loc?.name ?? province;
   const provinceShort = loc?.shortName ?? province;
-  const lat = loc?.lat ?? "13.7563";
-  const lng = loc?.lng ?? "100.5018";
 
   if (province === "bkk-thonburi") {
     const thonburiServiceSchema = {
@@ -239,7 +248,7 @@ export default async function LocationHubPage({
           name: "รถรับจ้างตู้ทึบ WMS สามารถเข้าลานจอดใต้อาคารคอนโดมิเนียมฝั่งธนบุรีได้หรือไม่?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "รถกระบะตู้ทึบของ WMS TRANSPORT มีความสูงภายในตู้ 2.1 เมตร สำหรับรองรับสิ่งของชิ้นใหญ่ การเข้าจอดเทียบขนย้ายแนะนำให้ประสานงานจุดโหลดของชั้นล่าง (Loading Bay) หรือลานจอดที่ไม่มีสิ่งกีดขวางความสูงกับนิติบุคคลของอาคาร"
+            text: "รถกระบะตู้ทึบของ WMS TRANSPORT เป็นรถกระบะตู้ทึบหลังคาสูงปิดมิดชิด (โปรดแจ้งรายละเอียดหน้างานเพื่อให้เจ้าหน้าที่ตรวจสอบรถและอุปกรณ์ที่เหมาะสม) สำหรับรองรับสิ่งของชิ้นใหญ่ การเข้าจอดเทียบขนย้ายแนะนำให้ประสานงานจุดโหลดของชั้นล่าง (Loading Bay) หรือลานจอดที่ไม่มีสิ่งกีดขวางความสูงกับนิติบุคคลของอาคาร"
           }
         },
         {
@@ -402,45 +411,6 @@ export default async function LocationHubPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: escapeJsonLd(JSON.stringify(logisticsSchema)) }}
       />
-      {geoData && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": geoData.images.map((img, index) => ({
-                "@type": "ImageObject",
-                "url": `https://wms-transport.com${img.url}`,
-                "name": img.alt,
-                "description": img.alt,
-                "contentLocation": {
-                  "@type": "Place",
-                  "name": geoData.landmarks[index] || geoData.name,
-                  "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": geoData.districts[0] || geoData.name,
-                    "addressRegion": geoData.name,
-                    "addressCountry": "TH"
-                  }
-                },
-                "spatialCoverage": {
-                  "@type": "Place",
-                  "name": geoData.name,
-                  "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": lat,
-                    "longitude": lng
-                  },
-                  "containedInPlace": geoData.districts.map(dist => ({
-                    "@type": "Place",
-                    "name": dist
-                  }))
-                }
-              }))
-            })
-          }}
-        />
-      )}
       <main className="flex-1 relative pt-28 pb-20 md:pt-36 md:pb-28">
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -453,7 +423,7 @@ export default async function LocationHubPage({
           <div className="flex justify-start">
             <Breadcrumbs
               items={[
-                { name: "พื้นที่ให้บริการ", item: "/#areas" },
+                { name: "พื้นที่ให้บริการ", item: "/areas" },
                 { name: provinceThai, item: `/service/${province}` },
               ]}
             />
@@ -561,7 +531,13 @@ export default async function LocationHubPage({
                     </div>
 
                     <div className="flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
-                      <span>ดูรายละเอียด</span>
+                      <span>
+                        {service.href.includes("moving")
+                          ? `ดูข้อมูลบริการย้ายบ้าน${provinceShort}`
+                          : service.href.includes("motorcycle")
+                          ? `ดูข้อมูลขนส่งมอเตอร์ไซค์${provinceShort}`
+                          : `ดูข้อมูลเหมารถกระบะส่งสินค้า${provinceShort}`}
+                      </span>
                       <ArrowRight className="w-4 h-4" />
                     </div>
                   </Link>
@@ -569,6 +545,151 @@ export default async function LocationHubPage({
               })}
             </div>
           </section>
+
+          {/* ── SAMUT SAKHON CORRIDORS & BIDIRECTIONAL INTERNAL LINKS ── */}
+          {province === "samutsakhon" && (
+            <section className="mb-20">
+              <div className="text-center max-w-2xl mx-auto mb-10">
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-3">
+                  พื้นที่และเส้นทางที่ให้บริการในจังหวัดสมุทรสาคร
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  บริการรถกระบะตู้ทึบรับจ้างครอบคลุมเส้นทางเศรษฐกิจและพื้นที่อยู่อาศัยสำคัญ วางแผนเส้นทางคล่องตัวเพื่อการขนส่งที่ตรงเวลา
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {/* Corridor 1 */}
+                <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                    โซนมหาชัย – พระราม 2 – ตัวเมืองสมุทรสาคร
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {["ตลาดมหาชัย", "ถนนพระราม 2", "ถนนเอกชัย", "นิคมอุตสาหกรรมสมุทรสาคร", "มหาชัยเมืองใหม่"].map((tag, i) => (
+                      <span key={i} className="text-xs bg-slate-100 border border-slate-200 text-slate-700 px-2.5 py-1 rounded-lg font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                      เหมาะสำหรับขนส่งสินค้าโรงงาน เหมาเที่ยวรับส่งสินค้าอาหารทะเลแปรรูป ย้ายหอพักพนักงาน และย้ายบ้านพักอาศัย
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                      แกนถนนพระราม 2 วิ่งตรงเข้าสู่กรุงเทพฯ ฝั่งธนบุรี (บางขุนเทียน-เคหะธนบุรี) หรือออกสู่สมุทรสงคราม-ภาคใต้
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                      ประเมินราคาตามระยะทางจริงและน้ำหนักสินค้า มีอุปกรณ์ยึดตรึงสิ่งของเพื่อความปลอดภัยระหว่างเดินทาง
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                      แจ้งเวลาเปิด-ปิดของโกดังหรือโรงงาน และสำรองจุดจอดเทียบรถล่วงหน้า
+                    </div>
+                  </div>
+                </div>
+
+                {/* Corridor 2 */}
+                <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                    โซนกระทุ่มแบน – พุทธมณฑลสาย 4 – สาย 5
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {["กระทุ่มแบน", "พุทธมณฑลสาย 4", "พุทธมณฑลสาย 5", "ถนนพุทธสาคร", "ถนนเศรษฐกิจ 1"].map((tag, i) => (
+                      <span key={i} className="text-xs bg-slate-100 border border-slate-200 text-slate-700 px-2.5 py-1 rounded-lg font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                      เหมาะสำหรับงานย้ายบ้านเดี่ยว ทาวน์โฮมจัดสรร โรงงานขนาดย่อม และส่งชิ้นงานอุตสาหกรรม เข้าซอยแคบได้คล่องตัว
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                      ถนนพุทธสาครและพุทธมณฑลสาย 4-5 เชื่อมสู่ถนนเพชรเกษมและบรมราชชนนี หลีกเลี่ยงรถติดพระราม 2 ได้ดี
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                      คิดตามระยะทางวิ่งจริงและจำนวนพนักงานช่วยยกของ ไม่มีคิดค่าเสียเวลาสะสม
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                      คัดแยกสิ่งของ ถอดประกอบเฟอร์นิเจอร์ชิ้นใหญ่ และแจ้งจุดขึ้นของหากมีสะพานข้ามคลอง
+                    </div>
+                  </div>
+                </div>
+
+                {/* Corridor 3 */}
+                <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                    โซนอ้อมน้อย – อ้อมใหญ่ (สามพราน)
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {["อ้อมน้อย", "อ้อมใหญ่ (สามพราน)", "เพชรเกษม 91/93", "รอยต่อสมุทรสาคร-นครปฐม"].map((tag, i) => (
+                      <span key={i} className="text-xs bg-slate-100 border border-slate-200 text-slate-700 px-2.5 py-1 rounded-lg font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ความเหมาะสมของบริการ:</strong>
+                      เหมาะสำหรับย้ายหอพักพนักงาน ย้ายบ้านชุมชนโรงงาน และขนส่งอุปกรณ์การผลิตในเขตพื้นที่เศรษฐกิจรอยต่อ
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเชื่อมต่อเส้นทาง:</strong>
+                      แนวถนนเพชรเกษมมุ่งตรงสู่หนองแขม-บางแค หรือออกสู่นครชัยศรี-นครปฐมได้อย่างสะดวกรวดเร็ว
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">ปัจจัยราคา:</strong>
+                      คำนวณราคาโปร่งใสตามจุดรับส่งจริง แจ้งราคาสุทธิล่วงหน้าโดยไม่มีค่าบริการแฝง
+                    </div>
+                    <div>
+                      <strong className="text-slate-800 block mb-0.5">การเตรียมตัวของลูกค้า:</strong>
+                      ระบุจำนวนชั้นอาคารและการมีลิฟต์ขนของ เพื่อให้ทีมงานจัดจำนวนพนักงานยกของได้อย่างเหมาะสม
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bidirectional Contextual Links Card */}
+              <div className="bg-blue-50/80 border border-blue-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <h4 className="text-base sm:text-lg font-bold text-slate-900 mb-1">
+                    ข้อมูลเฉพาะพื้นที่มหาชัย–พระราม 2 และอัตราค่าบริการ
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    สำรวจข้อมูลการขนย้ายเจาะลึกเฉพาะเขตมหาชัย ตรวจสอบราคา และชมผลงานจริง
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/areas/samutsakhon/maha-chai"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-xs transition-colors"
+                  >
+                    <span>ดูข้อมูลรถรับจ้างมหาชัย–พระราม 2</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold transition-colors"
+                  >
+                    <span>ตรวจสอบอัตราค่าบริการ</span>
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-xl text-xs sm:text-sm font-bold transition-colors"
+                  >
+                    <span>ชมภาพผลงานจริง</span>
+                  </Link>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* ── UI/UX REGIONAL PORTFOLIO MEDIA INTEGRATION ── */}
           {geoData && (
@@ -604,7 +725,7 @@ export default async function LocationHubPage({
                     
                     <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end">
                       <span className="text-xs font-bold text-white bg-blue-600/90 px-2.5 py-0.5 rounded-md w-fit mb-2">
-                        {geoData.landmarks[index] || geoData.name}
+                        ภาพประกอบการให้บริการ
                       </span>
                       <h3 className="text-white font-bold text-base md:text-lg leading-snug drop-shadow-xs">
                         {img.alt}
@@ -640,30 +761,32 @@ export default async function LocationHubPage({
           </section>
 
           {/* ── HYPER-LOCAL TESTIMONIAL ── */}
-          <section className="mb-20 max-w-4xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-8">
-              เสียงตอบรับจากผู้ใช้บริการในพื้นที่{provinceShort}
-            </h2>
-            <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-2xl shadow-xs relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
-              <div className="flex flex-col gap-2 shrink-0 items-center md:items-start relative z-10">
-                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-                  {review.tag}
-                </span>
-                <div className="flex items-center gap-1 mt-2 text-amber-400">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4.5 h-4.5 fill-current shrink-0" />
-                  ))}
+          {province !== "samutsakhon" && province !== "bkk-thonburi" && (
+            <section className="mb-20 max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 text-center mb-8">
+                เสียงตอบรับจากผู้ใช้บริการในพื้นที่{provinceShort}
+              </h2>
+              <div className="bg-white border border-slate-200/80 p-6 sm:p-8 rounded-2xl shadow-xs relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
+                <div className="flex flex-col gap-2 shrink-0 items-center md:items-start relative z-10">
+                  <span className="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+                    {review.tag}
+                  </span>
+                  <div className="flex items-center gap-1 mt-2 text-amber-400">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4.5 h-4.5 fill-current shrink-0" />
+                    ))}
+                  </div>
+                  <p className="text-slate-900 font-extrabold text-base mt-2">{review.author}</p>
+                  <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริงในพื้นที่</p>
                 </div>
-                <p className="text-slate-900 font-extrabold text-base mt-2">{review.author}</p>
-                <p className="text-slate-500 text-xs font-semibold">ผู้รับบริการจริงในพื้นที่</p>
+                <div className="flex-1 border-t md:border-t-0 md:border-l border-slate-100 pt-5 md:pt-0 md:pl-8 relative z-10">
+                  <p className="text-slate-700 text-base md:text-lg font-medium leading-relaxed italic">
+                    &ldquo;{review.text}&rdquo;
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 border-t md:border-t-0 md:border-l border-slate-100 pt-5 md:pt-0 md:pl-8 relative z-10">
-                <p className="text-slate-700 text-base md:text-lg font-medium leading-relaxed italic">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-              </div>
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* ── TRANSIT TIME VISUALIZER ── */}
           <section className="mb-20">
@@ -710,6 +833,11 @@ export default async function LocationHubPage({
             </div>
           </section>
 
+          {/* ── QUOTATION PREPARATION GUIDE ── */}
+          <div className="mb-20">
+            <QuotationPreparationGuide pageContext={`จังหวัด${provinceThai}`} />
+          </div>
+
           {/* ── PRICING INFO ── */}
           <div className="bg-blue-50/70 border border-blue-200/80 p-6 sm:p-8 rounded-2xl text-left mb-20 font-sans shadow-xs">
             <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-5">
@@ -719,7 +847,7 @@ export default async function LocationHubPage({
               <li className="flex items-start gap-2.5">
                 <span className="text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
                 <span>
-                  บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai} ไปทุกภาคทั่วประเทศ ราคาเริ่มต้น 1,500 บาท
+                  บริการขนส่งรถมอเตอร์ไซค์/บิ๊กไบค์ จาก {provinceThai} ไปปลายทางต่าง ๆ (ประเมินราคาตามรุ่นรถและระยะทางจริง)
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
@@ -809,8 +937,8 @@ export default async function LocationHubPage({
                   ศูนย์บริการลูกค้า <strong>WMS TRANSPORT</strong> ในเขต <strong>{provinceThai}</strong> ตั้งอยู่ ณ จุดยุทธศาสตร์การคมนาคม
                   เชื่อมต่อ {geoData.corridors.join(", ")} เพื่ออำนวยความสะดวกในการจัดส่งด่วน ย้ายหอพัก คอนโด และย้ายบ้านเรือน
                   ครอบคลุมทุกตำบลและอำเภอสำคัญ ได้แก่ {geoData.districts.join(", ")} โดยผู้ใช้บริการสามารถเรียกใช้งาน
-                  <strong>รถกระบะตู้ทึบรับจ้าง</strong> และ <strong>บริการขนส่งมอเตอร์ไซค์</strong>/Bigbike เพื่อเดินทางไปยังแลนด์มาร์กสำคัญ เช่น
-                  {" "}{geoData.landmarks.join(", ")} ได้ตลอด 24 ชั่วโมง ด้วยทีมงานท้องถิ่นที่เชี่ยวชาญเส้นทางตรอกซอกซอยเป็นอย่างดี.
+                  <strong>รถกระบะตู้ทึบรับจ้าง</strong> และ <strong>บริการขนส่งมอเตอร์ไซค์</strong>/Bigbike เพื่อเดินทางไปยังจุดสำคัญต่าง ๆ
+                  {" "}{geoData.landmarks.join(", ")} ได้ทุกวัน ด้วยทีมงานที่คุ้นเคยเส้นทางเป็นอย่างดี.
                 </p>
               </div>
             </section>

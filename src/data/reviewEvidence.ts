@@ -11,6 +11,8 @@ export interface ReviewRecord {
   rating: number;
   moderationStatus: 'approved' | 'pending' | 'rejected';
   isVerified: boolean;
+  avatarUrl?: string;
+  avatarAlt?: string;
 }
 
 export const reviewEvidenceData: ReviewRecord[] = [
@@ -26,7 +28,9 @@ export const reviewEvidenceData: ReviewRecord[] = [
     reviewText: "ย้ายคอนโดชั้น 18 จากบางแค เพชรเกษม ไปนนทบุรี พนักงานช่วยยกของทำงานเรียบร้อยมาก ช่วยแรปหุ้มฟิล์มตู้เสื้อผ้าและเตียงนอนอย่างระมัดระวัง รถตู้ทึบความสูงภายใน 2.1 ม. จุของทรงสูงได้มิดชิดปลอดภัยตรงใจครับ",
     rating: 5,
     moderationStatus: "approved",
-    isVerified: true
+    isVerified: true,
+    avatarUrl: "/Wmsone1.jpg",
+    avatarAlt: "ลูกค้าผู้ใช้บริการ WMS Transport บางแค"
   },
   {
     id: "rev-pk-01",
@@ -40,7 +44,9 @@ export const reviewEvidenceData: ReviewRecord[] = [
     reviewText: "ส่งรถบิ๊กไบค์ Kawasaki Ninja ไปแถวอรุณอมรินทร์ ปิ่นเกล้า การรัดยึดล้อ Wheel Chock แน่นหนามากในตู้ทึบ ไม่มีริ้วรอยขูดขีดเลย ขนส่งรวดเร็วตรงเวลา แอดมินคุยง่ายครับ",
     rating: 5,
     moderationStatus: "approved",
-    isVerified: true
+    isVerified: true,
+    avatarUrl: "/Wmsone.jpg",
+    avatarAlt: "ลูกค้าผู้ใช้บริการ WMS Transport ปิ่นเกล้า"
   },
   {
     id: "rev-mc-01",
@@ -54,7 +60,9 @@ export const reviewEvidenceData: ReviewRecord[] = [
     reviewText: "เหมาตู้ทึบส่งกล่องสินค้าจากโรงงานอุตสาหกรรมในมหาชัยไปส่งต่างจังหวัด วิ่งงานปลอดภัย มีการประสานงานอัปเดตสถานะตลอดเส้นทาง ได้เอกสารบิลครบถ้วน รวดเร็วมากครับ",
     rating: 5,
     moderationStatus: "approved",
-    isVerified: true
+    isVerified: true,
+    avatarUrl: "/Wmsone2.jpg",
+    avatarAlt: "ลูกค้าผู้ใช้บริการ WMS Transport มหาชัย"
   },
   {
     id: "rev-pk-02",

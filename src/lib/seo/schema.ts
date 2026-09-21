@@ -57,6 +57,7 @@ export function buildMovingCompanySchema(areaServed: string[] = siteConfig.servi
     image: `${siteConfig.baseUrl}${siteConfig.defaultOgImage}`,
     url: siteConfig.baseUrl,
     telephone: siteConfig.phoneFormatted,
+    hasMap: siteConfig.googleMapsUrl,
     ...(siteConfig.priceRange ? { priceRange: siteConfig.priceRange } : {}),
     address: addressObj,
     geo: {
@@ -89,8 +90,9 @@ export function buildWebSiteSchema() {
     "@context": "https://schema.org" as const,
     "@type": "WebSite" as const,
     "@id": `${siteConfig.baseUrl}/#website`,
-    url: siteConfig.baseUrl,
+    url: `${siteConfig.baseUrl}/`,
     name: siteConfig.businessName,
+    alternateName: ["WMS Transport", "wms-transport.com"],
     publisher: {
       "@id": `${siteConfig.baseUrl}/#organization`,
     },

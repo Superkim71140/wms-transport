@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { ShieldCheck, Clock3, Award, Map, CheckCircle2 } from "lucide-react";
 
 interface StatItem {
+  image: string;
+  alt: string;
   value: number | string;
   suffix?: string;
   label: string;
@@ -73,6 +76,21 @@ export default function TrustCounters() {
 
   const stats: StatItem[] = [
     {
+      image: "/WMSA1.webp",
+      alt: "บริการขนส่งทั่วไทยครอบคลุมทุกภูมิภาค WMS Transport",
+      value: "ทั่วไทย",
+      label: "ครอบคลุมทุกภูมิภาค",
+      desc: "ขนส่งขนย้ายสินค้าได้ทุกเส้นทางทั่วประเทศ",
+      badge: "บริการทั่วไทย",
+      accentGradient: "from-sky-500 via-blue-500 to-emerald-400",
+      iconBg: "bg-sky-50",
+      iconBorder: "border-sky-200",
+      icon: <Map className="h-6 w-6 text-sky-600" />,
+      type: "text"
+    },
+    {
+      image: "/WMSA2.webp",
+      alt: "บริการขนย้ายครบทุกประเภท WMS Transport",
       value: "ครบวงจร",
       label: "บริการขนย้ายครอบคลุม",
       desc: "ย้ายบ้าน คอนโด ส่งมอเตอร์ไซค์ และสินค้าทั่วไป",
@@ -84,6 +102,8 @@ export default function TrustCounters() {
       type: "text"
     },
     {
+      image: "/WMSA3.webp",
+      alt: "บริการประสานงานตลอด 24 ชั่วโมง WMS Transport",
       value: 24,
       suffix: "/7",
       label: "พร้อมประสานงาน",
@@ -96,6 +116,8 @@ export default function TrustCounters() {
       type: "number"
     },
     {
+      image: "/WMSA4.webp",
+      alt: "ทีมงานขนย้ายมืออาชีพใส่ใจทุกขั้นตอน WMS Transport",
       value: "มืออาชีพ",
       label: "ใส่ใจทุกขั้นตอน",
       desc: "ทีมงานยกของระมัดระวัง พร้อมอุปกรณ์ป้องกันรอย",
@@ -104,17 +126,6 @@ export default function TrustCounters() {
       iconBg: "bg-blue-50",
       iconBorder: "border-blue-200",
       icon: <Award className="h-6 w-6 text-blue-600" />,
-      type: "text"
-    },
-    {
-      value: "ทั่วไทย",
-      label: "ครอบคลุมทุกภูมิภาค",
-      desc: "ขนส่งขนย้ายสินค้าได้ทุกเส้นทางทั่วประเทศ",
-      badge: "บริการทั่วไทย",
-      accentGradient: "from-sky-500 via-blue-500 to-emerald-400",
-      iconBg: "bg-sky-50",
-      iconBorder: "border-sky-200",
-      icon: <Map className="h-6 w-6 text-sky-600" />,
       type: "text"
     }
   ];
@@ -143,40 +154,28 @@ export default function TrustCounters() {
           </p>
         </div>
 
-        {/* Statistics Cards Grid with Connected Route Line */}
-        <div className="relative">
-          {/* Decorative horizontal route line connecting cards on desktop */}
-          <div 
-            className="hidden lg:block absolute top-[44%] left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-blue-400/25 z-0 pointer-events-none" 
-            aria-hidden="true" 
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center min-w-0 relative z-10">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl sm:rounded-3xl border border-white/20 p-6 sm:p-7 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/15 transition-all duration-200 hover:-translate-y-1.5 motion-reduce:transform-none flex flex-col items-center text-center group min-w-0 relative overflow-hidden"
-              >
-                {/* Subtle top accent strip */}
-                <div 
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.accentGradient}`} 
-                  aria-hidden="true" 
+        {/* Statistics Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center min-w-0 relative z-10">
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-2xl sm:rounded-3xl border border-white/20 shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-blue-500/15 transition-all duration-200 hover:-translate-y-1.5 motion-reduce:transform-none flex flex-col group min-w-0 relative overflow-hidden text-left"
+            >
+              {/* Main Visual: Clipped square image at top */}
+              <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+                <Image
+                  src={stat.image}
+                  alt={stat.alt}
+                  width={400}
+                  height={400}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
                 />
+              </div>
 
-                {/* Card Icon Node */}
-                <div className={`w-14 h-14 rounded-2xl ${stat.iconBg} border ${stat.iconBorder} flex items-center justify-center mb-5 shadow-xs group-hover:scale-105 transition-transform duration-200 motion-reduce:transform-none`}>
-                  {stat.icon}
-                </div>
-                
-                {/* Metric / Value */}
-                <div className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#0B1F3A] font-mono tracking-tight mb-2 select-none">
-                  <StatNumber 
-                    value={stat.value} 
-                    suffix={stat.suffix} 
-                    type={stat.type} 
-                  />
-                </div>
-                
+              {/* Compact Content Area */}
+              <div className="p-5 sm:p-6 flex flex-col flex-1 items-center text-center">
                 {/* Label */}
                 <h3 className="text-base sm:text-lg font-bold text-blue-700 mb-1.5 tracking-tight">
                   {stat.label}
@@ -195,8 +194,8 @@ export default function TrustCounters() {
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

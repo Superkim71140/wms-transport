@@ -123,6 +123,40 @@ export default function PricingMovingPage() {
                 ))}
               </ul>
             </div>
+
+            {/* Contextual Local Links */}
+            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
+              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+                พื้นที่ให้บริการขนย้ายยอดนิยม
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600">
+                หากท่านต้องการตรวจสอบจุดจอดเทียบรถ ระเบียบนิติบุคคลคอนโด และเส้นทางขนย้ายเฉพาะเขต:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <Link
+                  href="/service/bkk-thonburi"
+                  className="p-3.5 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block transition-all group"
+                >
+                  <div className="font-bold text-sm text-slate-900 group-hover:text-blue-600 mb-1">
+                    บริการขนย้ายบ้านและคอนโดฝั่งธนบุรี
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    ครอบคลุม 15 เขต คอนโดแนวรถไฟฟ้า และการประสานงานนิติบุคคล
+                  </div>
+                </Link>
+                <Link
+                  href="/areas/bkk-thonburi/bang-khae"
+                  className="p-3.5 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block transition-all group"
+                >
+                  <div className="font-bold text-sm text-slate-900 group-hover:text-blue-600 mb-1">
+                    รถรับจ้างย้ายบ้านเพชรเกษม–บางแค
+                  </div>
+                  <div className="text-xs text-slate-500">
+                    เจาะลึกจุดโหลดของ MRT หลักสอง พุทธมณฑลสาย 1–3 และตรอกซอยแคบ
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* CTA */}

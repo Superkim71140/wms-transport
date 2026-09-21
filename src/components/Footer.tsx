@@ -127,6 +127,11 @@ export default function Footer() {
                   ภูเก็ต
                 </Link>
               </li>
+              <li className="pt-1.5">
+                <Link href="/areas" className="inline-block text-sky-400 hover:text-sky-300 font-medium hover:translate-x-1 transition-transform duration-200">
+                  พื้นที่บริการทั้งหมด &rarr;
+                </Link>
+              </li>
             </ul>
           </div>
 

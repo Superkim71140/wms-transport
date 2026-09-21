@@ -1,25 +1,24 @@
 import React from "react";
-import { 
-  Truck, 
-  Clock, 
-  CheckCircle, 
-  Phone, 
-  Users, 
-  Award,
-  DollarSign, 
-  Zap,
+import {
+  Truck,
+  CheckCircle,
+  CheckCircle2,
+  Phone,
+  Users,
   Building,
   Package,
   Bike,
+  BadgeDollarSign,
+  ShieldCheck,
+  CalendarCheck,
 } from "lucide-react";
 
 import Image from "next/image";
 import HeroBackground from "@/components/HeroBackground";
 import HeroImageCarousel from "@/components/HeroImageCarousel";
 import ServiceSplitShowcase from "@/components/ServiceSplitShowcase";
-import FloatingLine from "@/components/FloatingLine";
+import FloatingContact from "@/components/FloatingContact";
 import dynamic from "next/dynamic";
-import TLDRVerdict from "@/components/TLDRVerdict";
 import { searchIntentMap } from "@/data/searchIntentMap";
 
 const ServiceMap = dynamic(() => import('@/components/ServiceMap'), {
@@ -34,9 +33,6 @@ const CustomerReviews = dynamic(() => import('@/components/CustomerReviews'), {
   loading: () => <div className="h-[300px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
-const DecisionAnswerSurface = dynamic(() => import('@/components/DecisionAnswerSurface'), {
-  loading: () => <div className="h-32 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
-});
 
 const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), {
   loading: () => <div className="h-[400px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
@@ -49,15 +45,16 @@ const FAQ = dynamic(() => import('@/components/FAQ'), {
 });
 
 import { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "รถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ส่งมอเตอร์ไซค์ | WMS TRANSPORT",
+  description: "WMS TRANSPORT บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ย้ายคอนโด และขนส่งมอเตอร์ไซค์ จากสมุทรสาคร กรุงเทพฯ และทั่วไทย โทร 061-240-2436",
+  canonicalPath: "/",
+});
 
 export default function Home() {
   const services = [
@@ -96,39 +93,6 @@ export default function Home() {
       features: ["ช่วยยกและจัดวางของ", "มีทีมงานมืออาชีพ", "ปลอดภัยและรวดเร็ว"],
       icon: <Users className="h-8 w-8 text-blue-600" />,
       price: "500"
-    }
-  ];
-
-  const whyChooseUs = [
-    {
-      icon: <Award className="h-6 w-6" />,
-      title: "ดูแลความปลอดภัยทุกเที่ยว",
-      desc: "อุ่นใจทุกการเดินทางด้วยมาตรการดูแลความปลอดภัยระหว่างการขนส่ง รัดตรึงสิ่งของแน่นหนาตามมาตรฐาน"
-    },
-    {
-      icon: <Truck className="h-6 w-6" />,
-      title: "ยานพาหนะขนส่งมาตรฐานสากล",
-      desc: "เลือกใช้เฉพาะรถกระบะตู้ทึบโครงสร้างพิเศษที่แข็งแรงสูง มิดชิดหนาแน่น สามารถป้องกันลม ฝน ฝุ่นละออง และแรงกระแทกได้อย่างมิดชิดตลอดการเดินทาง"
-    },
-    {
-      icon: <Users className="h-6 w-6" />,
-      title: "ทีมงานมืออาชีพ สุภาพ",
-      desc: "คนขับรถและพนักงานยกของมีความชำนาญ ผ่านการตรวจประวัติอาชญากรรม แต่งกายสะอาด สุภาพ ซื่อสัตย์"
-    },
-    {
-      icon: <Clock className="h-6 w-6" />,
-      title: "ตรงเวลา นัดหมายแม่นยำ",
-      desc: "เราให้ความสำคัญกับเวลาของท่านอย่างสูงสุด รถเข้าตรงเวลา ดำเนินงานไว ไม่ล่าช้าให้เสียแผนงาน"
-    },
-    {
-      icon: <DollarSign className="h-6 w-6" />,
-      title: "ราคาโปร่งใส ไม่มีบวกเพิ่ม",
-      desc: "เสนอราคาจริงใจตามระยะทางและประเภทรถ ไม่มีค่าใช้จ่ายลึกลับบวกเพิ่มหน้างานให้ปวดหัว"
-    },
-    {
-      icon: <Zap className="h-6 w-6" />,
-      title: "ดูแลช่วยเหลือตลอด 24 ชั่วโมง",
-      desc: "มีแอดมินคอยตอบคำถาม ประเมินราคาด่วน และประสานงานดูแลตลอด 24 ชั่วโมง ไม่มีวันหยุด"
     }
   ];
 
@@ -538,46 +502,160 @@ export default function Home() {
         {/* 5. CUSTOMER REVIEW SECTION */}
         <CustomerReviews />
 
-        {/* 6. SERVICE COVERAGE MAP */}
-        <section id="areas" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10 content-auto section-contain bg-slate-50/50 border-y border-slate-200/70">
+        {/* 6. SERVICE COVERAGE & OPERATIONS BASE MAP */}
+        <section id="areas" className="scroll-mt-20 md:scroll-mt-24 relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 content-auto section-contain bg-slate-50/70 border-y border-slate-200/80">
           <div className="w-full max-w-7xl mx-auto min-w-0">
             <ServiceMap />
           </div>
         </section>
 
-        {/* WHY CHOOSE US */}
-        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 section-contain bg-white">
-          <div className="w-full max-w-7xl mx-auto text-center mb-14 min-w-0">
-            <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide">
-              ทำไมต้องเลือกเรา
-            </span>
-            <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mb-3 mt-4">
-              เหตุผลที่ลูกค้าไว้วางใจ <span className="text-blue-600">WMS</span>
-            </h2>
-            <p className="text-base text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-              เรายกระดับงานบริการขนของด้วยความซื่อสัตย์ ปลอดภัย และราคาที่ยุติธรรมสูงสุด ระดับองค์กร
-            </p>
-          </div>
-
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0">
-            {whyChooseUs.map((item, i) => (
+        {/* WHY CHOOSE US / TRUST SECTION */}
+        <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10 bg-white">
+          <div className="w-full max-w-7xl mx-auto min-w-0">
+            <div className="relative rounded-2xl sm:rounded-3xl bg-[#0B1F3A] border border-blue-900/80 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xl">
+              {/* Subtle CSS road/dot pattern in background */}
               <div 
-                key={i} 
-                className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 flex flex-col sm:flex-row items-start gap-5 transition-all duration-200 hover:border-blue-300 hover:shadow-md shadow-xs group font-sans"
-              >
-                <div className="p-3.5 bg-blue-600 text-white rounded-xl shadow-xs shrink-0">
-                  {item.icon}
+                className="absolute inset-0 opacity-[0.06] pointer-events-none select-none"
+                style={{
+                  backgroundImage: "radial-gradient(circle at 1px 1px, #60A5FA 1px, transparent 0)",
+                  backgroundSize: "24px 24px"
+                }}
+                aria-hidden="true"
+              />
+              <div 
+                className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"
+                aria-hidden="true"
+              />
+              <div 
+                className="absolute -bottom-24 -left-24 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"
+                aria-hidden="true"
+              />
+
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+                
+                {/* Left side on desktop: Employee Image (order-2 on mobile, order-1 on lg) */}
+                <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col items-center justify-end relative pt-4 lg:pt-0">
+                  {/* Employee Image Container anchored to bottom without awkward cropping */}
+                  <div className="relative w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px] xl:max-w-[420px] aspect-[1197/1314] filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.4)]">
+                    <Image
+                      src="/wms-transport-employee.png"
+                      alt="พนักงาน WMS Transport ดูแลทุกขั้นตอนการขนย้าย"
+                      fill
+                      sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 420px"
+                      className="object-contain object-bottom"
+                      priority={false}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] mb-2 tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-slate-600 font-normal leading-relaxed">
-                    {item.desc}
-                  </p>
+
+                {/* Right side on desktop: Content (order-1 on mobile, order-2 on lg) */}
+                <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-between">
+                  {/* Header */}
+                  <div>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                      มั่นใจตั้งแต่รับของ<span className="text-sky-400">ถึงปลายทาง</span>
+                    </h2>
+
+                    <p className="mt-3 text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+                      ทุกงานขนย้ายได้รับการวางแผนตามลักษณะสิ่งของและเส้นทางจริง พร้อมแจ้งรายละเอียดก่อนเริ่มงาน เพื่อให้ลูกค้าตัดสินใจได้อย่างมั่นใจ
+                    </p>
+                  </div>
+
+                  {/* 2x2 Feature Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 my-6 sm:my-8">
+                    {/* Point 1 */}
+                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
+                          <BadgeDollarSign className="w-4 h-4" />
+                        </div>
+                        <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                          แจ้งราคาก่อนเริ่มงาน
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+                        ประเมินจากเส้นทาง ประเภทสิ่งของ และบริการช่วยยก พร้อมแจ้งรายละเอียดให้ทราบก่อนยืนยันคิว
+                      </p>
+                    </div>
+
+                    {/* Point 2 */}
+                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
+                          <ShieldCheck className="w-4 h-4" />
+                        </div>
+                        <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                          ดูแลสิ่งของอย่างเหมาะสม
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+                        จัดวางและรัดตรึงสิ่งของตามลักษณะงาน เพื่อลดการเคลื่อนตัวระหว่างการขนส่ง
+                      </p>
+                    </div>
+
+                    {/* Point 3 */}
+                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
+                          <CalendarCheck className="w-4 h-4" />
+                        </div>
+                        <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                          นัดหมายและประสานงานชัดเจน
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+                        ยืนยันวัน เวลา จุดรับ และจุดส่ง พร้อมติดต่อประสานงานระหว่างดำเนินงาน
+                      </p>
+                    </div>
+
+                    {/* Point 4 */}
+                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
+                          <Truck className="w-4 h-4" />
+                        </div>
+                        <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                          เลือกบริการให้เหมาะกับงาน
+                        </h3>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+                        รองรับงานย้ายบ้าน ขนส่งมอเตอร์ไซค์ และขนส่งสินค้า พร้อมทีมช่วยยกตามความต้องการ
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                    <a
+                      href="https://line.me/ti/p/DtICkMaDet"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="สอบถามและประเมินราคาทาง LINE"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-colors min-h-[44px]"
+                    >
+                      <Image
+                        src="/images/LINE_icon.webp"
+                        alt="LINE"
+                        width={18}
+                        height={18}
+                        className="w-4.5 h-4.5 object-contain shrink-0"
+                      />
+                      <span>สอบถามและประเมินราคาทาง LINE</span>
+                    </a>
+
+                    <a
+                      href="tel:0612402436"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm rounded-xl transition-colors min-h-[44px]"
+                    >
+                      <Phone className="w-4 h-4 text-sky-400 shrink-0" />
+                      <span>โทร 061-240-2436</span>
+                    </a>
+                  </div>
+
                 </div>
+
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
@@ -586,22 +664,131 @@ export default function Home() {
           <ServiceSteps />
         </div>
 
-        {/* AI EXTRACTION / SUMMARY BLOCK */}
-        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-8 bg-white">
-          <DecisionAnswerSurface data={{
-            directAnswer: "WMS Transport บริการรถรับจ้างขนของ ขนส่งมอเตอร์ไซค์ และย้ายบ้านทั่วประเทศ พร้อมทีมงานมืออาชีพและราคามาตรฐานโปร่งใส",
-            bestFitCustomer: "ลูกค้าทั่วไปที่ต้องการย้ายที่อยู่อาศัย หรือธุรกิจที่ต้องการขนส่งสินค้าเป็นประจำ",
-            serviceCoverage: "ครอบคลุมทุกจังหวัดทั่วประเทศไทย พร้อมเส้นทางหลักกรุงเทพฯ-ต่างจังหวัด",
-            vehicleSuitability: "กระบะตู้ทึบกันฝนปิดมิดชิด รองรับการบรรทุกสินค้าหลากหลายขนาด และรถกระบะสำหรับมอเตอร์ไซค์",
-            priceFactors: ["ระยะทางรวม", "ประเภทรถที่ใช้", "ความต้องการเด็กยกของ", "ข้อจำกัดจุดรับ-ส่ง"],
-            timingExpectations: "บริการตลอด 24 ชั่วโมง เรียกรถด่วนได้ภายใน 2 ชั่วโมงในเขตกรุงเทพฯ",
-            preparationRequirements: ["เตรียมประเมินขนาดและน้ำหนักของโดยประมาณ", "แจ้งเงื่อนไขพื้นที่ล่วงหน้าเพื่อเตรียมอุปกรณ์"],
-            exclusions: ["ของเหลวอันตราย", "สินค้าผิดกฎหมายทุกชนิด"],
-            evidenceLinks: [{ label: "ดูพอร์ตโฟลิโอผลงาน", url: "/portfolio" }],
-            lastReviewedDate: "2026-06-25"
-          }} />
-          <TLDRVerdict />
-        </div>
+        {/* SERVICE MATCHING & PREPARATION */}
+        <section className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16 bg-white border-t border-slate-100">
+          <div className="w-full max-w-7xl mx-auto">
+            {/* Heading Area */}
+            <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+              <span className="inline-block px-3.5 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold tracking-wide mb-3">
+                บริการที่เหมาะกับงานของคุณ
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+                เลือกบริการขนส่งให้ตรงกับสิ่งที่ต้องการย้าย
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+                WMS Transport ให้บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ และขนส่งสินค้าทั่วประเทศ เลือกประเภทงานและเตรียมรายละเอียดเบื้องต้น เพื่อให้ทีมงานประเมินราคาได้รวดเร็วและชัดเจน
+              </p>
+            </div>
+
+            {/* 3 Responsive Service Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {/* Card 1: ย้ายบ้าน หอพัก และคอนโด */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
+                  <Building className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                  ย้ายบ้าน หอพัก และคอนโด
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
+                  ขนย้ายเฟอร์นิเจอร์ เครื่องใช้ไฟฟ้า กล่องเสื้อผ้า และของใช้ส่วนตัว พร้อมทีมช่วยยกตามความต้องการ
+                </p>
+                <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
+                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งจำนวนสิ่งของ ชั้นอาคาร ลิฟต์ และจุดจอดรถ
+                </div>
+              </div>
+
+              {/* Card 2: ขนส่งมอเตอร์ไซค์และบิ๊กไบค์ */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
+                  <Bike className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                  ขนส่งมอเตอร์ไซค์และบิ๊กไบค์
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
+                  ขนส่งรถจักรยานยนต์ทั้งระยะใกล้และต่างจังหวัด พร้อมอุปกรณ์ยึดรถและการดูแลระหว่างเดินทาง
+                </p>
+                <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
+                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งรุ่นรถ จุดรับ จุดส่ง และวันที่ต้องการขนส่ง
+                </div>
+              </div>
+
+              {/* Card 3: ขนส่งสินค้าและของทั่วไป */}
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
+                  <Package className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                  ขนส่งสินค้าและของทั่วไป
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
+                  เหมาะสำหรับร้านค้า ธุรกิจ และลูกค้าทั่วไปที่ต้องการขนส่งกล่องสินค้า อุปกรณ์ หรือสิ่งของหลายชิ้น
+                </p>
+                <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
+                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งประเภทสินค้า ขนาด จำนวนชิ้น และน้ำหนักโดยประมาณ
+                </div>
+              </div>
+            </div>
+
+            {/* Compact Preparation & CTA Panel */}
+            <div className="bg-slate-50/80 border border-slate-200 rounded-2xl p-6 sm:p-8">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div>
+                  <h4 className="text-base sm:text-lg font-bold text-[#0B1F3A] mb-3">
+                    เตรียม 4 ข้อมูลก่อนประเมินราคา
+                  </h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-700">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>สถานที่รับและสถานที่ส่ง</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>รายการและจำนวนสิ่งของ</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>วันที่และเวลาที่ต้องการใช้บริการ</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>ต้องการทีมช่วยยกหรือไม่</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                  <a
+                    href="https://line.me/ti/p/DtICkMaDet"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="ส่งรายละเอียดทาง LINE"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm rounded-xl shadow-xs transition-colors min-h-[44px]"
+                  >
+                    <Image
+                      src="/images/LINE_icon.webp"
+                      alt="LINE"
+                      width={18}
+                      height={18}
+                      className="w-4.5 h-4.5 object-contain shrink-0"
+                    />
+                    <span>ส่งรายละเอียดทาง LINE</span>
+                  </a>
+
+                  <a
+                    href="tel:0612402436"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white hover:bg-slate-50 border border-slate-300 text-[#0B1F3A] font-bold text-sm rounded-xl transition-colors min-h-[44px]"
+                  >
+                    <Phone className="w-4 h-4 text-blue-600 shrink-0" />
+                    <span>โทรประเมินงาน 061-240-2436</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* 7. FAQ SECTION */}
         <div className="relative z-10 w-full py-8 bg-slate-50/50 border-y border-slate-200/70">
@@ -678,7 +865,7 @@ export default function Home() {
 
       </main>
 
-      <FloatingLine />
+      <FloatingContact />
     </div>
   );
 }
