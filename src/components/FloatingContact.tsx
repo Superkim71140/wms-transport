@@ -110,7 +110,7 @@ export default function FloatingContact() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 16 }}
           transition={{ duration: 0.2 }}
-          className="fixed z-[100] right-4 sm:right-6 bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-6 flex flex-col items-end gap-3 select-none"
+          className="fixed z-100 right-4 sm:right-6 bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-6 flex flex-col items-end gap-3 select-none"
         >
           {/* Contact Actions Stack */}
           <AnimatePresence>
@@ -133,11 +133,11 @@ export default function FloatingContact() {
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
                     aria-label="ติดต่อ WMS Transport ทาง Facebook Messenger"
-                    className="group relative flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-full bg-[#0084FF] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0084FF]"
+                    className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#0084FF] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#0084FF]"
                   >
                     <span
                       aria-hidden="true"
-                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-[#0B1F3A] text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
+                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-navy text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
                     >
                       Messenger
                     </span>
@@ -157,11 +157,11 @@ export default function FloatingContact() {
                     href="tel:0612402436"
                     onClick={() => setIsOpen(false)}
                     aria-label="โทรหา WMS Transport ที่เบอร์ 061-240-2436"
-                    className="group relative flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-full bg-[#EF4444] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#EF4444]"
+                    className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#EF4444] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#EF4444]"
                   >
                     <span
                       aria-hidden="true"
-                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-[#0B1F3A] text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 font-sans"
+                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-navy text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 font-sans"
                     >
                       โทร 061-240-2436
                     </span>
@@ -177,11 +177,11 @@ export default function FloatingContact() {
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
                     aria-label="ติดต่อ WMS Transport ผ่าน LINE"
-                    className="group relative flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-full bg-[#06C755] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06C755]"
+                    className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#06C755] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#06C755]"
                   >
                     <span
                       aria-hidden="true"
-                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-[#0B1F3A] text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
+                      className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-navy text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150"
                     >
                       LINE
                     </span>
@@ -211,7 +211,7 @@ export default function FloatingContact() {
                 ? "ปิดช่องทางติดต่อ WMS Transport"
                 : "เปิดช่องทางติดต่อ WMS Transport"
             }
-            className="relative flex items-center justify-center w-14 h-14 sm:w-[60px] sm:h-[60px] rounded-full bg-gradient-to-br from-blue-600 to-[#0B1F3A] text-white shadow-xl shadow-blue-950/25 border border-white/20 hover:scale-105 active:scale-95 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 cursor-pointer"
+            className="relative flex items-center justify-center w-14 h-14 sm:w-15 sm:h-15 rounded-full bg-linear-to-br from-blue-600 to-navy text-white shadow-xl shadow-blue-950/25 border border-white/20 hover:scale-105 active:scale-95 transition-transform duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 cursor-pointer"
           >
             <motion.div
               animate={{ rotate: isOpen ? 90 : 0, scale: isOpen ? 1.05 : 1 }}

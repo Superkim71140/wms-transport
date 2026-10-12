@@ -44,7 +44,7 @@ export default function PortfolioGallery() {
           <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide mb-3 inline-block">
             แกลเลอรีผลงาน
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-navy tracking-tight mb-3">
             ภาพผลงานจริง <span className="text-blue-600">จากสถานที่</span>
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
@@ -58,7 +58,7 @@ export default function PortfolioGallery() {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[40px] flex items-center justify-center cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-10 flex items-center justify-center cursor-pointer ${
                 activeFilter === filter
                   ? "bg-blue-600 text-white shadow-xs"
                   : "bg-slate-100 text-slate-600 border border-slate-200/80 hover:bg-white hover:text-slate-900"
@@ -93,7 +93,7 @@ export default function PortfolioGallery() {
                   />
                   
                   {/* Subtle bottom gradient for readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-70 group-hover:opacity-90 transition-opacity" />
 
                   {/* Content Overlay */}
                   <div className="absolute inset-x-0 bottom-0 p-4 flex flex-col justify-end text-left">

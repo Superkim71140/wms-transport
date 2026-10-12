@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { ShieldCheck, Clock3, Award, Map, CheckCircle2 } from "lucide-react";
 
 interface StatItem {
@@ -17,58 +17,6 @@ interface StatItem {
   iconBorder: string;
   icon: React.ReactNode;
   type: "number" | "text";
-}
-
-function StatNumber({ value, suffix = "", type }: { value: number | string; suffix?: string; type: "number" | "text" }) {
-  const [displayValue, setDisplayValue] = useState<number | string>(value);
-  const containerRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (type !== "number" || typeof value !== "number") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let startTime: number | null = null;
-    const duration = 1400; // ms
-    let animationFrameId: number;
-
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry?.isIntersecting) {
-        observer.disconnect();
-
-        const step = (timestamp: number) => {
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
-          // Ease-out cubic
-          const ease = 1 - Math.pow(1 - progress, 3);
-          setDisplayValue(Math.floor(ease * value));
-
-          if (progress < 1) {
-            animationFrameId = requestAnimationFrame(step);
-          } else {
-            setDisplayValue(value);
-          }
-        };
-
-        animationFrameId = requestAnimationFrame(step);
-      }
-    }, { threshold: 0.2 });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-    };
-  }, [value, type]);
-
-  return (
-    <span ref={containerRef} className="tabular-nums">
-      {typeof displayValue === "number" ? displayValue.toLocaleString() + suffix : displayValue}
-    </span>
-  );
 }
 
 export default function TrustCounters() {
@@ -134,7 +82,7 @@ export default function TrustCounters() {
     <section 
       id="trust" 
       ref={sectionRef} 
-      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-gradient-to-br from-[#071A33] via-[#0B2A50] to-[#0F3B6D] text-white"
+      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-linear-to-br from-[#071A33] via-[#0B2A50] to-[#0F3B6D] text-white"
     >
       {/* Subtle ambient radial blue glow */}
       <div 
@@ -182,7 +130,7 @@ export default function TrustCounters() {
                 </h3>
                 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-0 sm:min-h-[2.5rem]">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-0 sm:min-h-10">
                   {stat.desc}
                 </p>
 

@@ -153,7 +153,7 @@ export default function CompactServiceSummary({
       {/* Accessible Progressive-Disclosure for Conditions */}
       <div className="mt-5 pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
         <details className="group">
-          <summary className="font-bold text-slate-700 hover:text-blue-600 flex items-center gap-2 py-1.5 px-3 rounded-xl bg-white border border-slate-200/80 hover:border-blue-300 transition-all select-none min-h-[40px] cursor-pointer w-fit shadow-2xs">
+          <summary className="font-bold text-slate-700 hover:text-blue-600 flex items-center gap-2 py-1.5 px-3 rounded-xl bg-white border border-slate-200/80 hover:border-blue-300 transition-all select-none min-h-10 cursor-pointer w-fit shadow-2xs">
             <Info className="w-4 h-4 text-blue-600 shrink-0" />
             <span>ดูเงื่อนไขและข้อจำกัดการให้บริการ</span>
             <ChevronDown className="w-4 h-4 text-slate-500 transition-transform group-open:rotate-180" aria-hidden="true" />

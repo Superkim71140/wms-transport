@@ -14,7 +14,7 @@ export default function ServiceSplitShowcase() {
   return (
     <section
       id="services"
-      className="relative isolate w-full overflow-hidden py-14 sm:py-18 lg:py-24 bg-gradient-to-b from-white via-[#F3F8FF] to-white"
+      className="relative isolate w-full overflow-hidden py-14 sm:py-18 lg:py-24 bg-linear-to-b from-white via-[#F3F8FF] to-white"
     >
       {/* Full-viewport Decorative Background Layer */}
       <div
@@ -22,8 +22,8 @@ export default function ServiceSplitShowcase() {
         aria-hidden="true"
       >
         {/* Subtle radial ambient tints */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[140px]" />
-        <div className="absolute top-1/2 right-10 -translate-y-1/2 w-[500px] h-[500px] bg-sky-100/35 rounded-full blur-[130px]" />
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 w-150 h-150 bg-blue-100/40 rounded-full blur-[140px]" />
+        <div className="absolute top-1/2 right-10 -translate-y-1/2 w-125 h-125 bg-sky-100/35 rounded-full blur-[130px]" />
 
         <Image
           src="/wms-transport-route-background.png"
@@ -41,8 +41,8 @@ export default function ServiceSplitShowcase() {
         <div className="relative flex flex-col lg:flex-row items-center lg:items-end justify-center">
           
           {/* Left Column: WMS Employee Image with depth overlap */}
-          <div className="w-full max-w-[340px] sm:max-w-[420px] lg:max-w-none lg:w-[45%] xl:w-[44%] shrink-0 z-20 flex justify-center lg:justify-end -mb-8 sm:-mb-12 lg:mb-0 lg:-mr-16 xl:-mr-20">
-            <div className="relative w-[280px] sm:w-[360px] md:w-[420px] lg:w-[480px] xl:w-[510px] aspect-[1197/1314] select-none filter drop-shadow-[0_12px_24px_rgba(11,31,58,0.14)]">
+          <div className="w-full max-w-85 sm:max-w-105 lg:max-w-none lg:w-[45%] xl:w-[44%] shrink-0 z-20 flex justify-center lg:justify-end -mb-8 sm:-mb-12 lg:mb-0 lg:-mr-16 xl:-mr-20">
+            <div className="relative w-70 sm:w-90 md:w-105 lg:w-120 xl:w-127.5 aspect-1197/1314 select-none filter drop-shadow-[0_12px_24px_rgba(11,31,58,0.14)]">
               <Image
                 src="/wms-transport-employee.png"
                 alt="พนักงาน WMS TRANSPORT พร้อมกล่องสำหรับบริการขนย้าย"
@@ -56,7 +56,7 @@ export default function ServiceSplitShowcase() {
           </div>
 
           {/* Right Column: Deep Navy Information Panel */}
-          <div className="w-full lg:w-[62%] xl:w-[63%] z-10 rounded-[28px] sm:rounded-[32px] bg-[#0B1F3A] bg-gradient-to-br from-[#0B1F3A] via-[#0D2545] to-[#102A4C] border border-blue-900/40 shadow-xl pt-7 pb-7 sm:pt-10 sm:pb-10 lg:pt-13 lg:pb-12 px-6 sm:px-10 lg:px-12 lg:pl-22 xl:pl-26 text-white relative overflow-hidden">
+          <div className="w-full lg:w-[62%] xl:w-[63%] z-10 rounded-[28px] sm:rounded-4xl bg-navy bg-linear-to-br from-navy via-[#0D2545] to-[#102A4C] border border-blue-900/40 shadow-xl pt-7 pb-7 sm:pt-10 sm:pb-10 lg:pt-13 lg:pb-12 px-6 sm:px-10 lg:px-12 lg:pl-22 xl:pl-26 text-white relative overflow-hidden">
             {/* Subtle decorative background ring */}
             <div
               className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-blue-500/10 pointer-events-none"
@@ -65,7 +65,7 @@ export default function ServiceSplitShowcase() {
 
             <div className="relative z-10">
               {/* Main Heading */}
-              <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-black text-white tracking-tight leading-[1.25] sm:leading-[1.2] mb-3 text-balance">
+              <h2 className="font-sans text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] font-black text-white tracking-tight leading-tight sm:leading-[1.2] mb-3 text-balance">
                 ขนย้ายทุกงาน{" "}
                 <span className="text-blue-400">มั่นใจได้ทุกเส้นทาง</span>
               </h2>
@@ -97,14 +97,14 @@ export default function ServiceSplitShowcase() {
                   href="https://line.me/ti/p/~@wmstransport"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-base shadow-md hover:shadow-blue-500/25 transition-all active:scale-[0.98] -translate-y-0 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-[48px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-base shadow-md hover:shadow-blue-500/25 transition-all active:scale-[0.98] translate-y-0 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-12"
                 >
                   <span>ขอประเมินราคา</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
                 <a
                   href="#services-grid"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-[48px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-12"
                 >
                   <span>ดูบริการทั้งหมด</span>
                   <ChevronDown className="w-4 h-4 text-blue-300" aria-hidden="true" />

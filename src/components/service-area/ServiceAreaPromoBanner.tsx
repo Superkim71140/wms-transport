@@ -38,7 +38,7 @@ export default function ServiceAreaPromoBanner({
           quality={90}
           priority={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A]/95 via-[#0D2545]/90 to-[#102A4C]/85" />
+        <div className="absolute inset-0 bg-linear-to-r from-navy/95 via-[#0D2545]/90 to-[#102A4C]/85" />
         {/* Soft decorative glow */}
         <div
           className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"
@@ -55,8 +55,8 @@ export default function ServiceAreaPromoBanner({
         <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-8 lg:gap-6">
           
           {/* Left Column: WMS Employee Image */}
-          <div className="w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px] xl:max-w-[420px] shrink-0 flex justify-center lg:justify-start -mb-2 sm:-mb-4 lg:mb-0">
-            <div className="relative w-[240px] sm:w-[300px] md:w-[340px] lg:w-[380px] aspect-[1197/1314] select-none filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]">
+          <div className="w-full max-w-70 sm:max-w-85 lg:max-w-95 xl:max-w-105 shrink-0 flex justify-center lg:justify-start -mb-2 sm:-mb-4 lg:mb-0">
+            <div className="relative w-60 sm:w-75 md:w-85 lg:w-95 aspect-1197/1314 select-none filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]">
               <Image
                 src="/wms-transport-employee.png"
                 alt="พนักงาน WMS TRANSPORT พร้อมกล่องสำหรับงานขนย้าย"
@@ -107,7 +107,7 @@ export default function ServiceAreaPromoBanner({
                 href={lineHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-base shadow-md hover:shadow-[#06C755]/20 transition-all active:scale-[0.98] -translate-y-0 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-base shadow-md hover:shadow-[#06C755]/20 transition-all active:scale-[0.98] translate-y-0 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 min-h-12"
               >
                 <Image
                   src="/images/LINE_icon.webp"
@@ -122,7 +122,7 @@ export default function ServiceAreaPromoBanner({
               {phoneHref && (
                 <a
                   href={phoneHref}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-[48px]"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-12"
                 >
                   <Phone className="w-4 h-4 text-blue-300" aria-hidden="true" />
                   <span className="font-mono">061-240-2436</span>
@@ -131,7 +131,7 @@ export default function ServiceAreaPromoBanner({
 
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white font-semibold text-sm sm:text-base border border-white/10 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white font-semibold text-sm sm:text-base border border-white/10 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-h-12"
               >
                 <span>ดูบริการทั้งหมด</span>
                 <ArrowRight className="w-4 h-4 text-blue-300" aria-hidden="true" />

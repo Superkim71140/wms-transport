@@ -157,13 +157,13 @@ export default function Footer() {
 
             <div className="flex flex-col gap-2.5">
               <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
-                <Clock className="w-4.5 h-4.5 text-emerald-400 flex-shrink-0" />
+                <Clock className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
                 <span className="text-xs font-semibold text-white tracking-wide">
                   เปิดบริการ 24 ชม.
                 </span>
               </div>
               <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
-                <ShieldCheck className="w-4.5 h-4.5 text-blue-400 flex-shrink-0" />
+                <ShieldCheck className="w-4.5 h-4.5 text-blue-400 shrink-0" />
                 <span className="text-xs font-semibold text-white tracking-wide">
                   ดูแลสินค้าปลอดภัยทุกเที่ยว
                 </span>

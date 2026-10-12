@@ -31,7 +31,7 @@ export default function CompareTrucksPage() {
               Expert Comparison Guide
             </span>
             
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0B1F3A] leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-navy leading-tight mb-6">
               เปรียบเทียบรถกระบะคอก VS รถกระบะตู้ทึบ <br />
               <span className="text-blue-600">
                 ย้ายบ้านแบบไหนตอบโจทย์ที่สุด?
@@ -45,7 +45,7 @@ export default function CompareTrucksPage() {
                 
                 {/* 1. Overview Section */}
                 <section className="space-y-4">
-                  <h2 id="overview" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="overview" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     บทนำ: การเลือกประเภทรถรับจ้างขนของ
                   </h2>
                   <p className="text-slate-700 leading-relaxed font-normal">
@@ -58,7 +58,7 @@ export default function CompareTrucksPage() {
 
                 {/* 2. Pickup Bed Guide Section */}
                 <section className="space-y-4">
-                  <h2 id="pickup-bed" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="pickup-bed" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     รถกระบะคอก (Pickup Truck with High Rack)
                   </h2>
                   <p className="text-slate-700 leading-relaxed font-normal">
@@ -92,7 +92,7 @@ export default function CompareTrucksPage() {
 
                 {/* 3. Box Truck Guide Section */}
                 <section className="space-y-4">
-                  <h2 id="box-truck" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="box-truck" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     รถกระบะตู้ทึบ (Box Truck / Closed Cabinet)
                   </h2>
                   <p className="text-slate-700 leading-relaxed font-normal">
@@ -125,7 +125,7 @@ export default function CompareTrucksPage() {
 
                 {/* 4. Comparison Table Section */}
                 <section className="space-y-4">
-                  <h2 id="comparison-table" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="comparison-table" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     ตารางเปรียบเทียบคุณสมบัติหลัก
                   </h2>
                   
@@ -140,27 +140,27 @@ export default function CompareTrucksPage() {
                       </thead>
                       <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
                         <tr>
-                          <td className="p-3.5 text-[#0B1F3A] font-bold">การกันแดดและฝุ่นละออง</td>
+                          <td className="p-3.5 text-navy font-bold">การกันแดดและฝุ่นละออง</td>
                           <td className="p-3.5 text-rose-700">ปานกลาง (อาจมีลมพัดฝุ่นเข้าตามรอยพับ)</td>
                           <td className="p-3.5 text-emerald-700 font-bold">ดีเยี่ยม (ปิดมิดชิด)</td>
                         </tr>
                         <tr>
-                          <td className="p-3.5 text-[#0B1F3A] font-bold">การกันพายุและฝนตกหนัก</td>
+                          <td className="p-3.5 text-navy font-bold">การกันพายุและฝนตกหนัก</td>
                           <td className="p-3.5 text-rose-700">ต่ำ-ปานกลาง (เสี่ยงน้ำไหลซึมจากด้านล่างผ้าใบ)</td>
                           <td className="p-3.5 text-emerald-700 font-bold">ดีเยี่ยม (ป้องกันฝน)</td>
                         </tr>
                         <tr>
-                          <td className="p-3.5 text-[#0B1F3A] font-bold">ความปลอดภัยจากการโจรกรรม</td>
+                          <td className="p-3.5 text-navy font-bold">ความปลอดภัยจากการโจรกรรม</td>
                           <td className="p-3.5 text-rose-700">ต่ำ (ใช้มีดกรีดผ้าใบเข้าถึงของได้ง่าย)</td>
                           <td className="p-3.5 text-emerald-700 font-bold">สูงมาก (ประตูปิดแข็งแรง ใส่แม่กุญแจล็อกได้)</td>
                         </tr>
                         <tr>
-                          <td className="p-3.5 text-[#0B1F3A] font-bold">การบรรทุกของสูงเกินมาตรฐาน</td>
+                          <td className="p-3.5 text-navy font-bold">การบรรทุกของสูงเกินมาตรฐาน</td>
                           <td className="p-3.5 text-emerald-700 font-bold">ทำได้ยืดหยุ่น (เปิดท้ายหรือคอกสูงได้)</td>
                           <td className="p-3.5 text-slate-500">ไม่ได้ (จำกัดความสูงที่ 2.1 เมตร)</td>
                         </tr>
                         <tr>
-                          <td className="p-3.5 text-[#0B1F3A] font-bold">ความสะดวกในการย้ายบ้านทั่วไป</td>
+                          <td className="p-3.5 text-navy font-bold">ความสะดวกในการย้ายบ้านทั่วไป</td>
                           <td className="p-3.5 text-slate-600">เหมาะกับสิ่งของสวน เครื่องจักรก่อสร้าง</td>
                           <td className="p-3.5 text-blue-700 font-bold">เหมาะที่สุดสำหรับย้ายบ้าน คอนโด หอพัก รถมอเตอร์ไซค์</td>
                         </tr>
@@ -171,7 +171,7 @@ export default function CompareTrucksPage() {
 
                 {/* 5. Summary Verdict Section */}
                 <section className="space-y-4">
-                  <h2 id="verdict" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="verdict" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     บทสรุป: ควรเลือกคันไหนย้ายบ้าน?
                   </h2>
                   <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 text-slate-800 text-sm sm:text-base leading-relaxed font-normal shadow-xs">
@@ -184,7 +184,7 @@ export default function CompareTrucksPage() {
                 </section>
 
                 {/* Inline CTA block */}
-                <div className="bg-[#0B1F3A] border border-blue-950 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-5 text-white shadow-md">
+                <div className="bg-navy border border-blue-950 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-5 text-white shadow-md">
                   <div>
                     <h3 className="text-lg sm:text-xl font-extrabold text-white mb-1">สนใจจองคิวรถกระบะตู้ทึบรับจ้างขนของ</h3>
                     <p className="text-slate-300 text-xs sm:text-sm">บริการจริงใจ ประเมินราคาโปร่งใส ตลอด 24 ชั่วโมง</p>

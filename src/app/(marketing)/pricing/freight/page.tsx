@@ -55,7 +55,7 @@ export default function PricingFreightPage() {
             {/* Price Highlight Card */}
             <div className="bg-blue-50/70 border border-blue-200 rounded-2xl p-6 sm:p-8 text-center shadow-xs">
               <span className="text-xs text-blue-700 font-bold tracking-wide uppercase block mb-1">อัตราค่าบริการเหมารายเที่ยวเริ่มต้น</span>
-              <span className="text-4xl sm:text-5xl font-black text-[#0B1F3A] block my-2">
+              <span className="text-4xl sm:text-5xl font-black text-navy block my-2">
                 {policy.startingPrice.toLocaleString()} <span className="text-xl sm:text-2xl font-bold text-blue-600">บาท</span>
               </span>
               <p className="text-xs text-slate-500 font-medium italic mt-2">
@@ -100,7 +100,7 @@ export default function PricingFreightPage() {
 
             {/* Variable Factors */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A] flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-bold text-navy flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-blue-600 shrink-0" />
                 <span>ปัจจัยหน้างานขนส่งเชิงอุตสาหกรรม</span>
               </h3>
@@ -115,7 +115,7 @@ export default function PricingFreightPage() {
 
             {/* Quote Assumptions */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+              <h3 className="text-base sm:text-lg font-bold text-navy">
                 ข้อตกลงการรับสินค้าเชิงพาณิชย์ WMS (Assumptions)
               </h3>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-600 font-medium list-disc list-inside leading-relaxed">
@@ -129,7 +129,7 @@ export default function PricingFreightPage() {
 
             {/* Contextual Local Links */}
             <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+              <h3 className="text-base sm:text-lg font-bold text-navy">
                 พื้นที่ให้บริการขนส่งสินค้ายอดนิยม
               </h3>
               <p className="text-xs sm:text-sm text-slate-600">
@@ -163,7 +163,7 @@ export default function PricingFreightPage() {
           </div>
 
           {/* CTA */}
-          <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
+          <div className="mt-10 bg-navy border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
             <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">ขอใบเสนอราคาขนส่งสินค้าอุตสาหกรรม</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6 font-medium">
               แจ้งรายการกล่องสินค้า น้ำหนักรวม จุดแวะพัก และวันเวลาโหลดงาน เพื่อรับเอกสารเสนอราคาเชิงพาณิชย์ในรูปแบบบริษัท

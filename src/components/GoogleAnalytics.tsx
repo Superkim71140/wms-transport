@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Script from "next/script";
 
 interface GoogleAnalyticsProps {
@@ -13,16 +14,37 @@ type GtagFunction = (...args: unknown[]) => void;
  * Dedicated WMS GA4 Analytics Integration & Interaction Listener
  * 
  * Note: GA4 is measurement and observability infrastructure, NOT a direct search ranking factor.
+ * Loads via standard next/script afterInteractive for reliable main-thread measurement.
  * Only initializes external scripts if a valid NEXT_PUBLIC_GA_MEASUREMENT_ID is configured in environment.
  * If absent, all helper methods safely no-op without client errors.
  */
 export default function GoogleAnalytics({ gaMeasurementId }: GoogleAnalyticsProps) {
   const measurementId = gaMeasurementId || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const pathname = usePathname();
+  const isFirstRender = useRef(true);
+
   const isConfigured = Boolean(
     measurementId && 
     measurementId.trim() !== "" && 
     !measurementId.startsWith("G-XXXXX")
   );
+
+  // Client-side SPA navigation tracking (skips initial mount to avoid duplicate pageview)
+  useEffect(() => {
+    if (!isConfigured) return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: GtagFunction }).gtag === "function") {
+      (window as unknown as { gtag: GtagFunction }).gtag("event", "page_view", {
+        page_path: pathname,
+        page_location: window.location.href,
+        page_title: document.title,
+      });
+    }
+  }, [pathname, isConfigured]);
 
   useEffect(() => {
     if (typeof window === "undefined" || !isConfigured) return;

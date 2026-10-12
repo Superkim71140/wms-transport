@@ -34,8 +34,8 @@ export default function PhuketMotorcyclePage() {
       <main className="flex-1 relative pt-28 pb-20 md:pt-36 md:pb-28">
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -139,7 +139,7 @@ export default function PhuketMotorcyclePage() {
 
                 <InContentCTA
                   heading="ส่งมอเตอร์ไซค์หรือบิ๊กไบค์ไปภูเก็ต? ประเมินราคาฟรีทันที!"
-                  subtext="แค่ส่งรูปรุ่นรถและระบุจุดรับ-ส่ง ทีมงาน WMS Transport จะเสนอราคาที่ดีที่สุดให้ภายใน 5 นาที"
+                  subtext="เพียงส่งรูปรุ่นรถและระบุจุดรับ-ส่ง ทีมงาน WMS Transport จะคำนวณและเสนอราคาตามจริงอย่างละเอียด"
                 />
 
                 {/* 3. Pricing Section */}
@@ -249,7 +249,7 @@ export default function PhuketMotorcyclePage() {
                 </section>
 
                 {/* Inline CTA block */}
-                <div className="bg-[#0B1F3A] border border-blue-900/30 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
+                <div className="bg-navy border border-blue-900/30 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">สอบถามราคาขนส่งรถมอเตอร์ไซค์ไปภูเก็ต</h3>
                     <p className="text-blue-100/80 text-sm">บริการประเมินราคาฟรี ยินดีให้คำแนะนำตลอด 24 ชั่วโมง</p>

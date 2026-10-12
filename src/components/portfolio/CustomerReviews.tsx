@@ -68,7 +68,7 @@ export default function CustomerReviews() {
           <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide mb-3 inline-block">
             รีวิวจากลูกค้า
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mt-2 mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-navy tracking-tight mt-2 mb-3">
             ความประทับใจ <span className="text-blue-600">จากลูกค้า</span>
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto text-base leading-relaxed">
@@ -84,7 +84,7 @@ export default function CustomerReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/90 hover:border-blue-300 hover:shadow-md transition-all duration-200 relative flex flex-col justify-between shadow-xs min-h-[280px]"
+              className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/90 hover:border-blue-300 hover:shadow-md transition-all duration-200 relative flex flex-col justify-between shadow-xs min-h-70"
             >
               {/* Top Row: Stars & Quote Watermark */}
               <div className="flex items-center justify-between mb-4">
@@ -109,7 +109,7 @@ export default function CustomerReviews() {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                    <h4 className="font-bold text-[#0B1F3A] text-sm truncate">{review.name}</h4>
+                    <h4 className="font-bold text-navy text-sm truncate">{review.name}</h4>
                     <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 select-none">
                       <BadgeCheck className="h-3 w-3 shrink-0 text-slate-500" />
                       <span className="text-[10px] font-medium whitespace-nowrap">ผู้ใช้บริการ</span>

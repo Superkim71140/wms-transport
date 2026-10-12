@@ -34,7 +34,8 @@ export function buildPageMetadata(options: PageMetadataOptions): Metadata {
 
   // Normalize canonical paths to ensure clean canonical routing
   const cleanPath = canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`;
-  const absoluteCanonicalUrl = `${siteConfig.baseUrl}${cleanPath === "/" ? "" : cleanPath}`;
+  // Always enforce productionUrl for canonical URLs to prevent preview environments from replacing production canonicals
+  const absoluteCanonicalUrl = `${siteConfig.productionUrl}${cleanPath === "/" ? "" : cleanPath}`;
 
   // Prevent duplicate brand name if the title already contains WMS or businessName
   const resolvedTitle = title.includes("WMS") || title.includes(siteConfig.businessName)

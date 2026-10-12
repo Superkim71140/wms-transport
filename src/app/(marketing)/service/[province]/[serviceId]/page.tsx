@@ -14,10 +14,69 @@ import {
   Home,
   Bike,
   Package,
+  MapPin,
+  Truck,
+  AlertCircle,
 } from "lucide-react";
 import { provinceMap } from "../page";
 import { geoMatrix } from "@/app/data/geoMatrix";
+import { siteConfig } from "@/lib/seo/site-config";
+import { portfolioCasesData } from "@/data/mediaEvidence";
+import QuotationPreparationGuide from "@/components/QuotationPreparationGuide";
 
+// ─────────────────────────────────────────────
+// Authentic local operational details & case studies
+// ─────────────────────────────────────────────
+const localOperationalDetails: Record<
+  string,
+  {
+    hubName: string;
+    dispatchZone: string;
+    routeFocus: string;
+    vehicleNotice: string;
+    serviceGuidelines: string[];
+    pricingConditions: { label: string; desc: string }[];
+  }
+> = {
+  samutsakhon: {
+    hubName: "ศูนย์ปฏิบัติการหลักสมุทรสาคร (ต.บ้านเกาะ)",
+    dispatchZone: "ตำบลบ้านเกาะ อำเภอเมืองสมุทรสาคร (พิกัดเชื่อมต่อ ถ.เศรษฐกิจ 1 และ ถ.พระราม 2)",
+    routeFocus: "ครอบคลุมมหาชัย, กระทุ่มแบน, บ้านแพ้ว, ถนนเอกชัย, ท่าฉลอม, โกรกกราก และนิคมอุตสาหกรรมสมุทรสาคร",
+    vehicleNotice: "รถกระบะตอนเดียวตู้ทึบสเปกโรงงาน ความสูงภายในตู้ 2.1 เมตร ความจุ 7.62 คิว (CBM) เข้าเทียบแท่นโหลดสินค้าและโรงงานอุตสาหกรรมได้สะดวก",
+    serviceGuidelines: [
+      "รองรับงานขนส่งสินค้าโรงงาน พัสดุอุตสาหกรรม กล่องบรรจุภัณฑ์ และงานย้ายหอพักคนทำงาน",
+      "ตู้ทึบอลูมิเนียมปิดล็อกมิดชิด ป้องกันละอองฝนและฝุ่นละอองจากถนนพระราม 2 ร้อยเปอร์เซ็นต์",
+      "พร้อมออกเอกสารใบเสร็จรับเงิน/ใบส่งมอบงานสำหรับฝ่ายจัดซื้อและฝ่ายบัญชีโรงงาน",
+    ],
+    pricingConditions: [
+      { label: "เงื่อนไขการโหลดสินค้า", desc: "กรณีมีแท่นโหลด Dock Leveler รถสามารถเทียบท้ายได้พอดี ไม่คิดค่าบริการเพิ่มเติม" },
+      { label: "ระยะเวลารอโหลด", desc: "ฟรีเวลารอโหลดและลงสินค้า 1 ชั่วโมงแรก เกินกว่านั้นคิดค่าเสียเวลาตามตกลง" },
+      { label: "จุดรับ-ส่งสินค้าหลายจุด", desc: "กรณีมีจุดแวะส่งสินค้าเพิ่มเติม คิดค่าบริการตามระยะทางจริงจุดละ 200-400 บาท" },
+    ],
+  },
+  "bkk-thonburi": {
+    hubName: "ศูนย์ปฏิบัติการโซนฝั่งธนบุรี (ครอบคลุม 15 เขต)",
+    dispatchZone: "สแตนด์บายครอบคลุมเขตบางแค, ปิ่นเกล้า, จรัญสนิทวงศ์, เพชรเกษม, ท่าพระ, ภาษีเจริญ, ธนบุรี, คลองสาน, ตลิ่งชัน, ทวีวัฒนา, หนองแขม, บางบอน, บางขุนเทียน, ราษฎร์บูรณะ, ทุ่งครุ",
+    routeFocus: "เชี่ยวชาญตรอกซอกซอยฝั่งธนฯ ซอยแคบ และสะพานข้ามแม่น้ำเจ้าพระยา (สะพานสมเด็จพระปิ่นเกล้า, สะพานพระราม 8, สะพานตากสิน, สะพานกรุงเทพ)",
+    vehicleNotice: "ความสูงตัวรถรวมตู้ทึบมาตรฐาน 2.7-2.8 ม. (ความสูงในตู้ 2.1 ม.) สำหรับคอนโดที่มีความสูงเพดานลานจอดจำกัด รถจะเทียบจอดจุด Drop-off หน้าอาคารและใช้รถเข็นลำเลียงอย่างระมัดระวัง",
+    serviceGuidelines: [
+      "งานย้ายคอนโดและหอพัก: มีบริการแรปพลาสติกยืดและแอร์บับเบิล ป้องกันการขูดขีดผนังห้อง ลิฟต์โดยสาร และทางเดินส่วนกลาง",
+      "งานส่งมอเตอร์ไซค์/บิ๊กไบค์: ใช้อุปกรณ์ Wheel Chock ล็อกล้อหน้า และสายรัด Ratchet Strap 4 จุด แฟริ่งไม่ช้ำ ไม่เอียงล้ม",
+      "วางแผนเลี่ยงเวลาห้ามรถบรรทุกวิ่ง (ติดเวลา) และการจราจรหนาแน่นช่วงชั่วโมงเร่งด่วน",
+    ],
+    pricingConditions: [
+      { label: "การใช้ลิฟต์ขนของ", desc: "ฟรีไม่มีค่าใช้จ่ายเพิ่มเติมหากมีลิฟต์บริการ (Service Lift) หรือลิฟต์โดยสารถึงชั้นที่พัก" },
+      { label: "กรณีต้องยกขึ้นบันได", desc: "ชั้น 1-2 ฟรี / ชั้น 3 ขึ้นไปที่ไม่มีลิฟต์ มีค่าบริการคนยกเพิ่มชั้นละ 150-200 บาท" },
+      { label: "ระยะทางเข็นของ", desc: "ระยะทางเข็นจากจุดจอดรถถึงประตูห้องไม่เกิน 30 เมตร ไม่มีค่าใช้จ่ายเพิ่มเติม" },
+    ],
+  },
+};
+
+const localCaseStudyMap: Record<string, string> = {
+  "samutsakhon/freight": "freight-delivery-maha-chai",
+  "bkk-thonburi/moving": "moving-condo-bang-khae",
+  "bkk-thonburi/motorcycle": "motorcycle-delivery-pinklao",
+};
 
 // ─────────────────────────────────────────────
 // Service metadata by slug
@@ -261,7 +320,7 @@ export async function generateMetadata({
     title: `${serviceLabel} ${provinceName} | WMS TRANSPORT`,
     description: `บริการ${serviceLabel}ในพื้นที่${provinceName} และทั่วไทย โดย WMS Transport — รถกระบะตู้ทึบมาตรฐาน พร้อมคนยกของ ดูแลความปลอดภัย ติดต่อได้ 24 ชม.`,
     alternates: {
-      canonical: `/service/${province}/${serviceId}`,
+      canonical: `${siteConfig.productionUrl}/service/${province}/${serviceId}`,
     },
   };
 }
@@ -292,6 +351,8 @@ export default async function ServiceDetailPage({
     .map((s) => ({ id: s, ...serviceConfig[s] }));
 
   const geoData = geoMatrix[province];
+  const activeCaseStudyKey = localCaseStudyMap[`${province}/${serviceId}`];
+  const activeCaseStudy = activeCaseStudyKey ? portfolioCasesData[activeCaseStudyKey] : undefined;
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -299,7 +360,7 @@ export default async function ServiceDetailPage({
     name: `${service.label} ${provinceName}`,
     description: service.description,
     provider: {
-      "@id": "https://wms-transport.com/#moving-company",
+      "@id": `${siteConfig.productionUrl}/#moving-company`,
     },
     areaServed: [
       {
@@ -343,7 +404,7 @@ export default async function ServiceDetailPage({
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -387,7 +448,7 @@ export default async function ServiceDetailPage({
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3.5">
               <a
-                href="https://line.me/ti/p/DtICkMaDet"
+                href={siteConfig.lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2.5 px-8 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-base shadow-sm hover:-translate-y-0.5 active:scale-[0.98] transition-all"
@@ -402,11 +463,11 @@ export default async function ServiceDetailPage({
                 <span>ติดต่อผ่าน LINE ฟรี</span>
               </a>
               <a
-                href="tel:0612402436"
+                href={siteConfig.phoneHref}
                 className="flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 hover:border-blue-300 text-slate-800 rounded-xl font-bold text-base shadow-xs transition-all hover:-translate-y-0.5"
               >
                 <Phone className="h-4.5 w-4.5 text-blue-600" />
-                <span className="font-mono tracking-wider">061-240-2436</span>
+                <span className="font-mono tracking-wider">{siteConfig.phone}</span>
               </a>
             </div>
           </div>
@@ -445,7 +506,7 @@ export default async function ServiceDetailPage({
               อัตราค่าบริการใน{provinceShort}
             </h2>
             <div className="overflow-x-auto bg-white border border-slate-200/80 rounded-2xl p-1 shadow-xs">
-              <table className="w-full text-left border-collapse text-sm min-w-[480px]">
+              <table className="w-full text-left border-collapse text-sm min-w-120">
                 <thead>
                   <tr className="border-b border-slate-100 text-slate-600 font-bold bg-slate-50/80">
                     <th className="p-4">ประเภทงาน</th>
@@ -469,24 +530,155 @@ export default async function ServiceDetailPage({
             </p>
           </section>
 
+          {/* ── AUTHENTIC LOCAL OPERATIONS & VERIFIED GUIDELINES ── */}
+          {localOperationalDetails[province] && (
+            <section className="mb-20">
+              <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
+                <div className="flex items-center gap-2.5 mb-3 text-blue-600">
+                  <MapPin className="w-5 h-5 shrink-0" />
+                  <span className="text-xs font-bold uppercase tracking-wider bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
+                    ข้อมูลศูนย์ปฏิบัติการประจำพื้นที่
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                  {localOperationalDetails[province].hubName}
+                </h3>
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                  {localOperationalDetails[province].dispatchZone}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-4.5">
+                    <div className="flex items-center gap-2 mb-2 text-slate-900 font-bold text-sm">
+                      <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+                      <span>สเปกรถและข้อกำหนดทางกายภาพ</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {localOperationalDetails[province].vehicleNotice}
+                    </p>
+                  </div>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-4.5">
+                    <div className="flex items-center gap-2 mb-2 text-slate-900 font-bold text-sm">
+                      <AlertCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>โครงข่ายเส้นทางให้บริการ</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {localOperationalDetails[province].routeFocus}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-bold text-slate-900 mb-3">
+                    แนวทางปฏิบัติงานจริงในพื้นที่ {provinceName}
+                  </h4>
+                  <ul className="space-y-2">
+                    {localOperationalDetails[province].serviceGuidelines.map((g, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                        <CheckCircle className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <span>{g}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Specific Pricing Conditions */}
+                <div className="pt-6 border-t border-slate-100">
+                  <h4 className="text-sm font-bold text-slate-900 mb-3">
+                    เงื่อนไขและข้อกำหนดความโปร่งใสของราคา ({provinceShort})
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                    {localOperationalDetails[province].pricingConditions.map((cond, idx) => (
+                      <div key={idx} className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 text-xs">
+                        <span className="font-bold text-slate-900 block mb-1">{cond.label}</span>
+                        <span className="text-slate-600 leading-relaxed">{cond.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ── VERIFIED FIELD WORK & CASE STUDY ── */}
+          {activeCaseStudy && (
+            <section className="mb-20">
+              <div className="bg-linear-to-br from-blue-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="flex items-center gap-2 mb-3 text-blue-300">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                  <span className="text-xs font-bold tracking-wider uppercase bg-blue-800/60 px-2.5 py-0.5 rounded border border-blue-700">
+                    หลักฐานผลงานการปฏิบัติงานจริง
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-3">
+                  {activeCaseStudy.title}
+                </h3>
+                <p className="text-sm text-blue-100/80 mb-6 leading-relaxed max-w-2xl">
+                  {activeCaseStudy.jobChallenge}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                  {activeCaseStudy.approvedPhotos[0] && (
+                    <div className="relative aspect-4/3 rounded-xl overflow-hidden border border-white/10 shadow-inner">
+                      <Image
+                        src={activeCaseStudy.approvedPhotos[0].path}
+                        alt={activeCaseStudy.approvedPhotos[0].alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-xs font-bold text-blue-300 uppercase tracking-wider mb-2">
+                        ขั้นตอนการปฏิบัติงานของทีมงาน WMS:
+                      </h4>
+                      <ul className="space-y-2">
+                        {activeCaseStudy.process.slice(0, 3).map((step, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-200">
+                            <span className="font-mono text-emerald-400 font-bold shrink-0">{idx + 1}.</span>
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-2">
+                      <Link
+                        href={`/portfolio/${activeCaseStudy.slug}`}
+                        className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2.5 rounded-xl transition-all shadow-xs"
+                      >
+                        <span>ดูภาพและบันทึกผลงานฉบับเต็ม</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* ── QUOTATION PREPARATION GUIDE ── */}
+          <QuotationPreparationGuide pageContext={`${service.label}ใน${provinceShort}`} className="mb-20" />
+
           {/* ── LARGE CTA BANNER ── */}
-          <div className="relative bg-[#0B1F3A] border border-blue-900/30 rounded-2xl p-6 sm:p-10 mb-20 overflow-hidden text-white shadow-md">
+          <div className="relative bg-navy border border-blue-900/30 rounded-2xl p-6 sm:p-10 mb-20 overflow-hidden text-white shadow-md">
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Clock className="w-4 h-4 text-emerald-400" />
-                  <span className="text-emerald-300 font-bold text-xs">ประเมินราคาฟรีภายใน 5 นาที</span>
+                  <span className="text-emerald-300 font-bold text-xs">ประเมินราคาตามจริง ไม่มีข้อผูกมัด</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-2">
                   สนใจบริการ{service.label}ใน{provinceShort}?
                 </h3>
                 <p className="text-blue-100/80 text-sm leading-relaxed max-w-lg">
-                  ติดต่อทีมงานผ่าน LINE หรือโทรได้เลย ประเมินราคาจากภาพถ่ายหรือวิดีโอ รวดเร็วใน 5 นาที ไม่มีค่าใช้จ่าย
+                  ติดต่อทีมงานผ่าน LINE หรือโทรได้โดยตรง ประเมินราคาจากภาพถ่ายหรือวิดีโอสิ่งของ แจ้งข้อมูลครบถ้วนพร้อมเสนอราคาตามจริง ไม่มีค่าใช้จ่าย
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                 <a
-                  href="https://line.me/ti/p/DtICkMaDet"
+                  href={siteConfig.lineUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-sm shadow-sm transition-all hover:-translate-y-0.5 active:scale-[0.98]"
@@ -501,11 +693,11 @@ export default async function ServiceDetailPage({
                   <span>ส่ง LINE ฟรี</span>
                 </a>
                 <a
-                  href="tel:0612402436"
+                  href={siteConfig.phoneHref}
                   className="flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-xl font-semibold text-sm transition-all hover:-translate-y-0.5"
                 >
                   <Phone className="h-4 w-4 text-blue-300 shrink-0" />
-                  <span>โทรเลย</span>
+                  <span>โทร {siteConfig.phone}</span>
                 </a>
               </div>
             </div>

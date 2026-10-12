@@ -19,7 +19,7 @@ export default function PortfolioProcess() {
           <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide mb-3 inline-block">
             ขั้นตอนการทำงาน
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0B1F3A] tracking-tight font-sans mt-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-navy tracking-tight font-sans mt-2">
             ขั้นตอนการทำงาน <span className="text-blue-600">ของเรา</span>
           </h2>
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto text-base">
@@ -47,7 +47,7 @@ export default function PortfolioProcess() {
                     {step.id}
                   </div>
                 </div>
-                <h3 className="text-base font-bold text-[#0B1F3A] mb-2 font-sans group-hover:text-blue-600 transition-colors">
+                <h3 className="text-base font-bold text-navy mb-2 font-sans group-hover:text-blue-600 transition-colors">
                   {step.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed px-1 font-medium">

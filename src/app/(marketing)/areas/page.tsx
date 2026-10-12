@@ -197,7 +197,7 @@ export default function AreasPage() {
       />
 
       {/* 1. HERO SECTION: WMS OPERATIONAL BASE */}
-      <section className="relative w-full pt-24 pb-28 sm:pt-28 lg:pt-32 lg:pb-36 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700">
+      <section className="relative w-full pt-24 pb-28 sm:pt-28 lg:pt-32 lg:pb-36 bg-linear-to-r from-blue-900 via-blue-800 to-blue-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Breadcrumbs */}
           <nav aria-label="Breadcrumb" className="mb-6">
@@ -244,7 +244,7 @@ export default function AreasPage() {
               <h2 className="text-lg font-bold text-slate-900">แชทประเมินราคา</h2>
               <p className="text-xs font-semibold text-emerald-600 mt-0.5">ส่งรูปของ & พิกัดประเมินราคา</p>
             </div>
-            <p className="text-sm text-slate-600 mb-5 flex-grow">
+            <p className="text-sm text-slate-600 mb-5 grow">
               แจ้งพิกัดรับ-ส่งและรายการสิ่งของเบื้องต้นทาง LINE เจ้าหน้าที่จะตรวจสอบรถและสรุปราคาให้โดยไม่มีค่าใช้จ่ายแอบแฝง
             </p>
             <a
@@ -268,7 +268,7 @@ export default function AreasPage() {
               <h2 className="text-lg font-bold text-slate-900">โทรสายด่วน</h2>
               <p className="text-xs font-semibold text-blue-600 mt-0.5">โทรจองคิว & เช็คพื้นที่ด่วน</p>
             </div>
-            <p className="text-sm text-slate-600 mb-5 flex-grow">
+            <p className="text-sm text-slate-600 mb-5 grow">
               คุยตรงกับคนขับเพื่อเช็คความพร้อมของรถและนัดหมายวันเวลาเดินทาง ปรึกษาเรื่องคนช่วยยกของได้ทันที
             </p>
             <a
@@ -290,7 +290,7 @@ export default function AreasPage() {
               <span className="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200/80 mb-2">หมุดที่ตั้งจริงบน Google Maps</span>
               <h2 className="text-lg font-bold text-slate-900">เปิดนำทาง GPS / หมุดที่ตั้งจริง</h2>
             </div>
-            <p className="text-sm text-slate-600 mb-5 flex-grow">
+            <p className="text-sm text-slate-600 mb-5 grow">
               เช็คพื้นที่บริการและเดินทางมายังจุดจอดหลัก สมุทรสาคร พร้อมพิกัด GPS ที่แม่นยำ
             </p>
             <a
@@ -308,7 +308,7 @@ export default function AreasPage() {
       </section>
 
       {/* 2.5 SERVICE INTRO & LOCATION DETAILS (Modern Luxury Logistics Bento Grid) */}
-      <section className="relative py-10 md:py-16 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden w-full">
+      <section className="relative py-10 md:py-16 bg-linear-to-b from-slate-50 via-white to-slate-50 overflow-hidden w-full">
         {/* Section Header */}
         <div className="relative max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight text-center">
@@ -338,7 +338,7 @@ export default function AreasPage() {
             </div>
 
             {/* Bento Detail Tiles */}
-            <address className="not-italic space-y-4 my-6 flex-grow">
+            <address className="not-italic space-y-4 my-6 grow">
               {/* Row 1 (Location) */}
               <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-slate-50/70 border border-slate-100">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100/60">
@@ -391,7 +391,7 @@ export default function AreasPage() {
               <a
                 href={siteConfig.phoneHref}
                 aria-label="โทรสอบถาม 061-240-2436"
-                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-blue-700 via-blue-800 to-slate-900 text-white font-bold text-sm md:text-base shadow-lg shadow-blue-700/25 hover:shadow-blue-700/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 px-6 rounded-2xl bg-linear-to-r from-blue-700 via-blue-800 to-slate-900 text-white font-bold text-sm md:text-base shadow-lg shadow-blue-700/25 hover:shadow-blue-700/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2"
               >
                 <Phone className="w-4 h-4" />
                 <span>โทรสอบถาม</span>
@@ -437,7 +437,7 @@ export default function AreasPage() {
             </div>
 
             {/* Map Frame Area */}
-            <div className="relative w-full h-[440px] md:h-full min-h-[440px] border-0 bg-slate-100 flex-grow">
+            <div className="relative w-full h-110 md:h-full min-h-110 border-0 bg-slate-100 grow">
               <iframe
                 title="แผนที่แสดงที่ตั้งสำนักงานและจุดจอดรถ WMS Transport ต.บ้านเกาะ อ.เมืองสมุทรสาคร"
                 src={gmapsEmbedUrl}
@@ -554,7 +554,7 @@ export default function AreasPage() {
 
       {/* 4. CUSTOMER GUIDANCE: HOW TO CHOOSE SERVICE AREA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 w-full">
-        <div className="bg-gradient-to-br from-blue-50/60 via-white to-slate-50 border border-blue-100 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs">
+        <div className="bg-linear-to-br from-blue-50/60 via-white to-slate-50 border border-blue-100 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs">
           <div className="max-w-3xl mb-8">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100/80 text-blue-800 rounded-full text-xs font-bold mb-3">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
@@ -623,9 +623,9 @@ export default function AreasPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ส่งรายละเอียดทาง LINE"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#06c755] hover:bg-[#05b34c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#06c755] hover:bg-[#05b34c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.02] min-h-11"
               >
-                <svg className="w-5 h-5 fill-current flex-shrink-0" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
                   <path d="M19.365 9.864c0-4.043-4.197-7.33-9.365-7.33-5.167 0-9.364 3.287-9.364 7.33 0 3.619 3.208 6.647 7.545 7.218.294.064.694.195.795.447.091.229.06.586.03.816-.06.456-.277 1.777-.308 1.97-.046.287-.215 1.123.987.612 1.202-.511 6.48-3.818 8.847-6.536 1.488-1.745 1.833-3.085 1.833-4.527z"/>
                 </svg>
                 <span>ส่งรายละเอียดทาง LINE</span>
@@ -633,7 +633,7 @@ export default function AreasPage() {
 
               <a
                 href={siteConfig.phoneHref}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-[1.02] min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm rounded-xl transition-all duration-300 hover:scale-[1.02] min-h-11"
               >
                 <Phone className="w-4 h-4 text-sky-400 shrink-0" />
                 <span>โทรสอบถามพื้นที่บริการ</span>

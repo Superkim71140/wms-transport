@@ -1,13 +1,15 @@
 import { Metadata } from "next";
-import { Flame } from "lucide-react";
+import Link from "next/link";
+import { Flame, Info } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/TableOfContents";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = {
   title: "อัปเดตราคาขนส่งมอเตอร์ไซค์และบิ๊กไบค์ ทั่วไทย ปี 2569 | WMS TRANSPORT",
   description: "เช็กอัตราค่าบริการส่งมอเตอร์ไซค์ ขนส่งบิ๊กไบค์ ทั่วไทย ปี 2569 รายละเอียดราคาตามระยะทางจริงและรุ่นรถ ขนส่งด้วยรถกระบะตู้ทึบมาตรฐาน พร้อมอุปกรณ์รัดยึดปลอดภัย",
   alternates: {
-    canonical: "/pricing/motorcycle-2026",
+    canonical: `${siteConfig.productionUrl}/pricing/motorcycle-2026`,
   },
 };
 
@@ -39,7 +41,7 @@ export default function MotorcyclePricing2026Page() {
               2026 Pricing Matrix
             </span>
             
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0B1F3A] leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-navy leading-tight mb-6">
               อัปเดตราคาขนส่งมอเตอร์ไซค์ <br />
               <span className="text-blue-600">
                 และบิ๊กไบค์ ทั่วไทย ปี 2569
@@ -53,7 +55,7 @@ export default function MotorcyclePricing2026Page() {
                 
                 {/* 1. Overview Section */}
                 <section className="space-y-4">
-                  <h2 id="overview" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="overview" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     ภาพรวมค่าบริการส่งมอเตอร์ไซค์ข้ามจังหวัด
                   </h2>
                   <p className="text-slate-700 leading-relaxed font-normal">
@@ -63,11 +65,27 @@ export default function MotorcyclePricing2026Page() {
                     พร้อมคนขับและพนักงาน <strong>พร้อมคนช่วยยก</strong> ที่มีความเชี่ยวชาญในการขนย้ายและจัดยึดตามหลักมาตรฐานสากล 
                     ดูแลส่งมอบรถของท่านถึงปลายทางทั่วประเทศอย่างรวดเร็วและคุ้มค่าที่สุด
                   </p>
+
+                  {/* Contextual Intent Disambiguation */}
+                  <div className="bg-blue-50/80 border border-blue-200 rounded-xl p-4 flex gap-3 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="text-slate-900 font-bold block mb-1">คำแนะนำสำหรับผู้ค้นหาบริการ:</strong>
+                      หน้านี้เป็นตารางประมาณการราคาอัปเดตประจำปี 2569 (Seasonal Rate Matrix) หากต้องการดูข้อมูลศูนย์บริการขนส่งมอเตอร์ไซค์หลัก สเปกรถ และวิธีการล็อกล้อ สามารถเข้าชมได้ที่{" "}
+                      <Link href="/pricing/motorcycle-transport" className="text-blue-700 font-bold underline hover:text-blue-900">
+                        ศูนย์บริการขนส่งมอเตอร์ไซค์ทั่วไทย (หน้าหลัก)
+                      </Link>{" "}
+                      หรือหากต้องการส่งรถมอเตอร์ไซค์ไปภาคใต้ สามารถดูข้อมูลเฉพาะเส้นทางได้ที่{" "}
+                      <Link href="/service/phuket/motorcycle" className="text-blue-700 font-bold underline hover:text-blue-900">
+                        บริการส่งมอเตอร์ไซค์ไปภูเก็ต
+                      </Link>
+                    </div>
+                  </div>
                 </section>
 
                 {/* 2. Key Pricing Features Section */}
                 <section className="space-y-4">
-                  <h2 id="pricing-features" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="pricing-features" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     เกณฑ์การประเมินราคาขนส่งรถจักรยานยนต์
                   </h2>
                   <p className="text-slate-700 leading-relaxed font-normal">
@@ -77,7 +95,7 @@ export default function MotorcyclePricing2026Page() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-xs">
                       <span className="text-blue-700 text-xs font-bold uppercase tracking-wider block mb-1">เกณฑ์ที่ 1</span>
-                      <h4 className="font-bold text-[#0B1F3A] mb-1.5 text-sm sm:text-base">ระยะทางจริง</h4>
+                      <h4 className="font-bold text-navy mb-1.5 text-sm sm:text-base">ระยะทางจริง</h4>
                       <p className="text-xs text-slate-600 leading-relaxed font-medium">
                         คิดค่าบริการตามต้นทาง-ปลายทางจริง คำนวณระยะทางตามเส้นทางสัญจรจริง โปร่งใสชัดเจน
                       </p>
@@ -85,7 +103,7 @@ export default function MotorcyclePricing2026Page() {
 
                     <div className="bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-xs">
                       <span className="text-blue-700 text-xs font-bold uppercase tracking-wider block mb-1">เกณฑ์ที่ 2</span>
-                      <h4 className="font-bold text-[#0B1F3A] mb-1.5 text-sm sm:text-base">ขนาดเครื่องยนต์ (cc)</h4>
+                      <h4 className="font-bold text-navy mb-1.5 text-sm sm:text-base">ขนาดเครื่องยนต์ (cc)</h4>
                       <p className="text-xs text-slate-600 leading-relaxed font-medium">
                         แบ่งขนาดรุ่นรถเนื่องจากน้ำหนักและมิติตัวถังที่แตกต่างกัน (รถเล็ก, รถครอบครัว, บิ๊กไบค์)
                       </p>
@@ -93,7 +111,7 @@ export default function MotorcyclePricing2026Page() {
 
                     <div className="bg-slate-50 border border-slate-200 p-5 rounded-xl shadow-xs">
                       <span className="text-blue-700 text-xs font-bold uppercase tracking-wider block mb-1">เกณฑ์ที่ 3</span>
-                      <h4 className="font-bold text-[#0B1F3A] mb-1.5 text-sm sm:text-base">บริการเสริมยกของ</h4>
+                      <h4 className="font-bold text-navy mb-1.5 text-sm sm:text-base">บริการเสริมยกของ</h4>
                       <p className="text-xs text-slate-600 leading-relaxed font-medium">
                         บริการจัดส่งแบบ Door-to-Door มีคนช่วยยกลงและประคองรถเข้าจอดในพื้นที่อย่างเรียบร้อย
                       </p>
@@ -103,7 +121,7 @@ export default function MotorcyclePricing2026Page() {
 
                 {/* 3. Pricing Grid Table Section */}
                 <section className="space-y-4">
-                  <h2 id="pricing-grid" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="pricing-grid" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     ตารางราคาอัปเดต ปี 2569 (ทั่วประเทศ)
                   </h2>
                   
@@ -120,7 +138,7 @@ export default function MotorcyclePricing2026Page() {
                       <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
                         {routesData.map((route, idx) => (
                           <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
-                            <td className="p-3.5 text-[#0B1F3A] font-bold">{route.region}</td>
+                            <td className="p-3.5 text-navy font-bold">{route.region}</td>
                             <td className="p-3.5 text-center text-blue-700 font-bold">฿{route.price1}</td>
                             <td className="p-3.5 text-center text-blue-700 font-bold">฿{route.price2}</td>
                             <td className="p-3.5 text-center text-emerald-700 font-bold">฿{route.price3}</td>
@@ -136,7 +154,7 @@ export default function MotorcyclePricing2026Page() {
 
                 {/* 4. Safety Guarantee Section */}
                 <section className="space-y-4">
-                  <h2 id="safety-guarantee" className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2.5">
+                  <h2 id="safety-guarantee" className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2.5">
                     มาตรฐานความปลอดภัยระหว่างขนย้าย
                   </h2>
                   <ul className="space-y-2.5 text-slate-700 font-medium">
@@ -153,7 +171,7 @@ export default function MotorcyclePricing2026Page() {
                 </section>
 
                 {/* Pulsing CTA Block */}
-                <div className="bg-[#0B1F3A] border border-blue-950 p-8 rounded-2xl text-center space-y-4 mt-8 text-white shadow-md">
+                <div className="bg-navy border border-blue-950 p-8 rounded-2xl text-center space-y-4 mt-8 text-white shadow-md">
                   <h3 className="text-xl sm:text-2xl font-extrabold text-white">จองคิวจัดส่งมอเตอร์ไซค์วันนี้ เพื่อรับสิทธิ์ล็อกเรตราคานี้!</h3>
                   <p className="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
                     โปรโมชั่นราคาพิเศษนี้จำกัดเฉพาะผู้ที่ติดต่อจองคิวรถล่วงหน้าผ่านช่องทางออนไลน์เท่านั้น ล็อกราคาด่วนก่อนคิวเต็ม

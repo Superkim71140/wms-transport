@@ -92,7 +92,7 @@ export default function DeliveryMap() {
             <span className="px-4 py-1.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide mb-3 inline-block">
               พื้นที่ให้บริการทั่วประเทศ
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight mt-1">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight leading-tight mt-1">
               พื้นที่ให้บริการ<br />
               <span className="text-blue-600">ครอบคลุมทั่วไทย</span>
             </h2>
@@ -110,7 +110,7 @@ export default function DeliveryMap() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl font-black text-[#0B1F3A] font-mono tracking-tight">77 จังหวัด</p>
+                <p className="text-xl font-black text-navy font-mono tracking-tight">77 จังหวัด</p>
                 <p className="text-xs font-semibold text-slate-500 mt-0.5">ให้บริการครอบคลุมทุกอำเภอทั่วไทย</p>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default function DeliveryMap() {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl font-black text-[#0B1F3A] font-mono tracking-tight">24/7</p>
+                <p className="text-xl font-black text-navy font-mono tracking-tight">24/7</p>
                 <p className="text-xs font-semibold text-slate-500 mt-0.5">สแตนด์บายรับงานขนย้ายตลอดวัน</p>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function DeliveryMap() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl font-black text-[#0B1F3A] font-mono tracking-tight">ดูแลความปลอดภัย</p>
+                <p className="text-xl font-black text-navy font-mono tracking-tight">ดูแลความปลอดภัย</p>
                 <p className="text-xs font-semibold text-slate-500 mt-0.5">มีมาตรการดูแลสิ่งของตลอดการเดินทาง</p>
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function DeliveryMap() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 min-w-[95px] py-2.5 text-xs sm:text-sm font-bold text-center rounded-xl transition-all relative select-none cursor-pointer min-h-[40px] flex items-center justify-center ${
+                  className={`flex-1 min-w-23.75 py-2.5 text-xs sm:text-sm font-bold text-center rounded-xl transition-all relative select-none cursor-pointer min-h-10 flex items-center justify-center ${
                     isActive 
                       ? "bg-blue-600 text-white shadow-xs" 
                       : "text-slate-600 hover:text-slate-900 hover:bg-white"
@@ -164,7 +164,7 @@ export default function DeliveryMap() {
           </div>
 
           {/* Animated Tab Content Panel */}
-          <div className="relative min-h-[380px] w-full">
+          <div className="relative min-h-95 w-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeRegion.id}
@@ -177,7 +177,7 @@ export default function DeliveryMap() {
                 <div className="space-y-5 text-left">
                   
                   {/* Region Title */}
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B1F3A] flex items-center gap-2 pb-1">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-navy flex items-center gap-2 pb-1">
                     {activeRegion.name}
                   </h3>
 
@@ -191,7 +191,7 @@ export default function DeliveryMap() {
                     <span className="text-[10px] text-blue-700 font-bold uppercase tracking-wider block mb-1">
                       ระยะเวลาจัดส่งสินค้าโดยประมาณ
                     </span>
-                    <p className="text-[#0B1F3A] text-xs sm:text-sm font-bold flex items-center gap-2 mt-0.5">
+                    <p className="text-navy text-xs sm:text-sm font-bold flex items-center gap-2 mt-0.5">
                       <Clock className="w-4 h-4 text-blue-600 shrink-0" />
                       {activeRegion.speed}
                     </p>

@@ -6,14 +6,16 @@ import { Phone, ArrowLeft, CheckCircle2, AlertCircle, HelpCircle } from "lucide-
 import Breadcrumbs from "@/components/Breadcrumbs";
 import IntentHero from "@/components/IntentHero";
 import InternalLinks from "@/components/InternalLinks";
+import QuotationPreparationGuide from "@/components/QuotationPreparationGuide";
 import { getPricingBreadcrumbs } from "@/lib/seo/breadcrumbs";
 import { pricingPolicyData } from "@/data/pricingPolicy";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = {
   title: "ราคาบริการย้ายบ้าน ย้ายคอนโด หอพัก และค่าจ้างคนช่วยยกของ | WMS TRANSPORT",
   description: "ค่าบริการขนย้ายบ้าน คอนโด อพาร์ทเม้นท์ และหอพักแบบละเอียด ประเมินราคาจริงตามปริมาณสิ่งของและชั้นอาคาร มีมาตรการดูแลความปลอดภัยทุกเที่ยว",
   alternates: {
-    canonical: "/pricing/moving",
+    canonical: `${siteConfig.productionUrl}/pricing/moving`,
   },
 };
 
@@ -52,7 +54,7 @@ export default function PricingMovingPage() {
             {/* Price Highlight Card */}
             <div className="bg-blue-50/70 border border-blue-200 rounded-2xl p-6 sm:p-8 text-center shadow-xs">
               <span className="text-xs text-blue-700 font-bold tracking-wide uppercase block mb-1">ราคาประเมินเบื้องต้นเริ่มต้น</span>
-              <span className="text-4xl sm:text-5xl font-black text-[#0B1F3A] block my-2">
+              <span className="text-4xl sm:text-5xl font-black text-navy block my-2">
                 {policy.startingPrice.toLocaleString()} <span className="text-xl sm:text-2xl font-bold text-blue-600">บาท</span>
               </span>
               <p className="text-xs text-slate-500 font-medium italic mt-2">
@@ -97,7 +99,7 @@ export default function PricingMovingPage() {
 
             {/* Variable Factors */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A] flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-bold text-navy flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-blue-600 shrink-0" />
                 <span>ปัจจัยที่อาจส่งผลกระทบต่อราคาประเมินสุดท้าย</span>
               </h3>
@@ -112,7 +114,7 @@ export default function PricingMovingPage() {
 
             {/* Quote Assumptions */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+              <h3 className="text-base sm:text-lg font-bold text-navy">
                 ข้อตกลงและข้อจำกัดก่อนเข้าดำเนินการ (Assumptions)
               </h3>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-600 font-medium list-disc list-inside leading-relaxed">
@@ -126,7 +128,7 @@ export default function PricingMovingPage() {
 
             {/* Contextual Local Links */}
             <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+              <h3 className="text-base sm:text-lg font-bold text-navy">
                 พื้นที่ให้บริการขนย้ายยอดนิยม
               </h3>
               <p className="text-xs sm:text-sm text-slate-600">
@@ -159,15 +161,18 @@ export default function PricingMovingPage() {
             </div>
           </div>
 
+          {/* Quotation Preparation Checklist */}
+          <QuotationPreparationGuide pageContext="บริการย้ายบ้านและคอนโด" className="mt-8 mb-10" />
+
           {/* CTA */}
-          <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
+          <div className="mt-10 bg-navy border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
             <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">ขอใบเสนอราคาย้ายคอนโด/ย้ายหอพัก</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6 font-medium">
-              แชร์รายละเอียดห้องพัก สิ่งของชิ้นใหญ่ และพิกัดรับส่งเพื่อให้แอดมินประเมินราคาที่สมเหตุสมผลที่สุดให้ทันที
+              แชร์รายละเอียดห้องพัก สิ่งของชิ้นใหญ่ และพิกัดรับส่งเพื่อให้เจ้าหน้าที่ประเมินราคาตามจริงได้อย่างถูกต้อง
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3.5">
               <a
-                href="https://line.me/ti/p/DtICkMaDet"
+                href={siteConfig.lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-[#06C755] hover:bg-[#05B34F] text-white py-3.5 px-7 rounded-xl flex items-center justify-center gap-2 transition-colors text-sm font-bold shadow-xs"
@@ -176,11 +181,11 @@ export default function PricingMovingPage() {
                 <span>ทักแชท LINE เพื่อประเมินราคา</span>
               </a>
               <a
-                href="tel:0612402436"
+                href={siteConfig.phoneHref}
                 className="w-full sm:w-auto bg-white/10 hover:bg-white/15 border border-white/20 text-white py-3.5 px-7 rounded-xl flex items-center justify-center gap-2 transition-colors text-sm font-bold"
               >
                 <Phone className="h-4 w-4 text-blue-400" />
-                <span className="font-mono">061-240-2436</span>
+                <span className="font-mono">{siteConfig.phone}</span>
               </a>
             </div>
           </div>

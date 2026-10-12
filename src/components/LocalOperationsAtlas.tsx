@@ -10,7 +10,7 @@ export default function LocalOperationsAtlas({ geoData }: { geoData: GeoZone }) 
     <section className="my-12 bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs">
       <div className="flex items-center gap-3 mb-6">
         <MapPin className="w-7 h-7 text-blue-600 shrink-0" />
-        <h2 className="text-xl sm:text-2xl font-extrabold text-[#0B1F3A]">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-navy">
           ข้อมูลปฏิบัติการในพื้นที่ {geoData.name}
         </h2>
       </div>
@@ -19,7 +19,7 @@ export default function LocalOperationsAtlas({ geoData }: { geoData: GeoZone }) 
         <div className="space-y-6">
           {geoData.commonPropertyTypes && geoData.commonPropertyTypes.length > 0 && (
             <div>
-              <h3 className="text-base font-bold text-[#0B1F3A] mb-2 flex items-center gap-2">
+              <h3 className="text-base font-bold text-navy mb-2 flex items-center gap-2">
                 <Truck className="w-5 h-5 text-blue-600" /> ลักษณะหน้างานที่พบบ่อย
               </h3>
               <ul className="list-disc pl-5 text-slate-700 space-y-1.5 text-sm sm:text-base">
@@ -32,7 +32,7 @@ export default function LocalOperationsAtlas({ geoData }: { geoData: GeoZone }) 
 
           {geoData.demandPatterns && (
             <div>
-              <h3 className="text-base font-bold text-[#0B1F3A] mb-2 flex items-center gap-2">
+              <h3 className="text-base font-bold text-navy mb-2 flex items-center gap-2">
                 <Clock className="w-5 h-5 text-blue-600" /> รูปแบบความต้องการรถรับจ้าง
               </h3>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base">{geoData.demandPatterns}</p>
@@ -43,7 +43,7 @@ export default function LocalOperationsAtlas({ geoData }: { geoData: GeoZone }) 
         <div className="space-y-6">
           {geoData.accessConstraints && geoData.accessConstraints.length > 0 && (
             <div className="bg-blue-50/70 border border-blue-200 p-5 rounded-xl">
-              <h3 className="text-base font-bold text-[#0B1F3A] mb-2 flex items-center gap-2">
+              <h3 className="text-base font-bold text-navy mb-2 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5 text-blue-600" /> สิ่งที่ลูกค้าควรเตรียมตัว
               </h3>
               <ul className="list-disc pl-5 text-slate-700 space-y-1.5 text-sm sm:text-base">

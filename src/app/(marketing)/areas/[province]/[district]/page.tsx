@@ -172,8 +172,8 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
       <main className="grow relative pt-24 pb-20 md:pt-28 md:pb-28">
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -307,7 +307,7 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
                       <div className="space-y-4">
                         {record.serviceCorridors.map((corridor, idx) => (
                           <div key={idx} className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 sm:p-5">
-                            <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-2 text-blue-600">
+                            <h4 className="text-sm sm:text-base font-bold text-blue-600 mb-2">
                               {corridor.title}
                             </h4>
                             <div className="flex flex-wrap gap-1.5 mb-3">
@@ -518,7 +518,7 @@ export default async function AreaLandingPage({ params }: AreaPageProps) {
             {/* Right Column: CTA & Contextual Links */}
             <div className="space-y-6 lg:sticky lg:top-28">
               {/* Booking CTA Card */}
-              <div className="bg-[#0B1F3A] border border-blue-900/30 rounded-2xl p-6 sm:p-8 shadow-md text-white">
+              <div className="bg-navy border border-blue-900/30 rounded-2xl p-6 sm:p-8 shadow-md text-white">
                 <h2 className="text-xl font-black text-white mb-2">จองรถขนย้ายเขต{name}</h2>
                 <p className="text-xs text-blue-100/80 leading-relaxed mb-6 font-medium">
                   ประเมินราคาตามจริง รวดเร็ว คุยง่าย พนักงานขับรถชำนาญเส้นทาง{name} พร้อมทีมงานช่วยยกของ

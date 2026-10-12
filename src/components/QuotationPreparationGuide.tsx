@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   FileText,
 } from "lucide-react";
+import { siteConfig } from "@/lib/seo/site-config";
 
 interface QuotationPreparationGuideProps {
   pageContext?: string;
@@ -107,7 +108,7 @@ export default function QuotationPreparationGuide({
         </div>
         <h2
           id="quotation-guide-title"
-          className="text-xl sm:text-2xl lg:text-3xl font-black text-[#0B1F3A] tracking-tight mb-3"
+          className="text-xl sm:text-2xl lg:text-3xl font-black text-navy tracking-tight mb-3"
         >
           ข้อมูลที่ควรเตรียมสำหรับขอใบเสนอราคา {pageContext ? `(${pageContext})` : ""}
         </h2>
@@ -130,7 +131,7 @@ export default function QuotationPreparationGuide({
                   <span className="w-7 h-7 rounded-lg bg-blue-600 text-white font-mono font-bold text-xs flex items-center justify-center shrink-0 shadow-2xs">
                     {phase.phaseNumber}
                   </span>
-                  <h3 className="font-bold text-sm sm:text-base text-[#0B1F3A]">
+                  <h3 className="font-bold text-sm sm:text-base text-navy">
                     {phase.phaseTitle}
                   </h3>
                 </div>
@@ -164,21 +165,21 @@ export default function QuotationPreparationGuide({
       </div>
 
       {/* Bottom Action Card */}
-      <div className="bg-gradient-to-r from-blue-50/80 via-slate-50 to-emerald-50/50 border border-blue-100 rounded-2xl p-5 sm:p-6 flex flex-col lg:flex-row items-center justify-between gap-5">
+      <div className="bg-linear-to-r from-blue-50/80 via-slate-50 to-emerald-50/50 border border-blue-100 rounded-2xl p-5 sm:p-6 flex flex-col lg:flex-row items-center justify-between gap-5">
         <div className="text-center lg:text-left">
           <p className="font-bold text-sm sm:text-base text-slate-900 mb-1">
-            พร้อมส่งข้อมูลให้เจ้าหน้าที่ตรวจสอบและประเมินราคาทันที
+            พร้อมส่งข้อมูลให้เจ้าหน้าที่ประเมินราคาตามจริง
           </p>
           <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            แจ้งรายละเอียดข้างต้นทาง LINE หรือโทรสอบถาม เพื่อตรวจสอบขนาดรถและทีมงานช่วยยกของ
+            แจ้งรายละเอียด 5 ข้อข้างต้นทาง LINE หรือโทรสอบถาม เพื่อตรวจสอบขนาดรถและทีมงานช่วยยกของล่วงหน้า
           </p>
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto shrink-0">
           <a
-            href="https://line.me/ti/p/DtICkMaDet"
+            href={siteConfig.lineUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm transition-all shadow-xs hover:shadow-emerald-600/20 active:scale-[0.98] min-h-[44px]"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm transition-all shadow-xs hover:shadow-emerald-600/20 active:scale-[0.98] min-h-11"
           >
             <Image
               src="/images/LINE_icon.webp"
@@ -190,11 +191,11 @@ export default function QuotationPreparationGuide({
             <span>ส่งข้อมูลทาง LINE เพื่อประเมินราคา</span>
           </a>
           <a
-            href="tel:0612402436"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-[#0B1F3A] border border-slate-300 font-bold text-sm transition-all shadow-2xs active:scale-[0.98] min-h-[44px]"
+            href={siteConfig.phoneHref}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-navy border border-slate-300 font-bold text-sm transition-all shadow-2xs active:scale-[0.98] min-h-11"
           >
             <Phone className="w-4 h-4 text-blue-600 shrink-0" />
-            <span>โทร 061-240-2436</span>
+            <span>โทร {siteConfig.phone}</span>
           </a>
         </div>
       </div>

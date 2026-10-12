@@ -89,7 +89,7 @@ export default async function BlogPostPage({
               <span className="text-xs text-blue-700 font-bold mb-2.5 inline-block bg-blue-50 px-3 py-1 rounded-md border border-blue-200">
                 เผยแพร่เมื่อ {post.date}
               </span>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] leading-tight mb-4 tracking-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-navy leading-tight mb-4 tracking-tight">
                 {post.title}
               </h1>
               <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed">
@@ -97,7 +97,7 @@ export default async function BlogPostPage({
               </p>
             </header>
 
-            <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden mb-8 border border-slate-200/90 shadow-xs bg-slate-100">
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-8 border border-slate-200/90 shadow-xs bg-slate-100">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -113,7 +113,7 @@ export default async function BlogPostPage({
             </div>
 
             {/* Inline Conversion CTA */}
-            <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-white shadow-md">
+            <div className="mt-10 bg-navy border border-blue-950 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-white shadow-md">
               <div>
                 <p className="text-white font-extrabold text-lg sm:text-xl mb-1">ต้องการย้ายบ้านด่วน? ทัก LINE เลย</p>
                 <p className="text-slate-300 text-xs sm:text-sm">ทีมงาน WMS พร้อมช่วยคุณตลอด 24 ชั่วโมง ประเมินราคาฟรี ไม่มีค่าใช้จ่าย</p>

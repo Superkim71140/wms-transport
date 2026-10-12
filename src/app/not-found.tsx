@@ -22,7 +22,7 @@ export default function NotFound() {
           Error 404
         </span>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0B1F3A] mb-4 tracking-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-navy mb-4 tracking-tight">
           ไม่พบหน้าที่คุณต้องการ
         </h1>
 

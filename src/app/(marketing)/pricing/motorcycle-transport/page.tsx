@@ -52,7 +52,7 @@ export default function PricingMotorcyclePage() {
             {/* Price Highlight Card */}
             <div className="bg-blue-50/70 border border-blue-200 rounded-2xl p-6 sm:p-8 text-center shadow-xs">
               <span className="text-xs text-blue-700 font-bold tracking-wide uppercase block mb-1">ราคาประเมินเริ่มต้นสำหรับรถทั่วไป (100cc-125cc)</span>
-              <span className="text-4xl sm:text-5xl font-black text-[#0B1F3A] block my-2">
+              <span className="text-4xl sm:text-5xl font-black text-navy block my-2">
                 {policy.startingPrice.toLocaleString()} <span className="text-xl sm:text-2xl font-bold text-blue-600">บาท</span>
               </span>
               <p className="text-xs text-slate-500 font-medium italic mt-2">
@@ -97,7 +97,7 @@ export default function PricingMotorcyclePage() {
 
             {/* Variable Factors */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A] flex items-center gap-2">
+              <h3 className="text-base sm:text-lg font-bold text-navy flex items-center gap-2">
                 <HelpCircle className="h-5 w-5 text-blue-600 shrink-0" />
                 <span>ปัจจัยเรื่องพิกัดรุ่นรถและพิกัดความจุ (cc)</span>
               </h3>
@@ -112,7 +112,7 @@ export default function PricingMotorcyclePage() {
 
             {/* Quote Assumptions */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3.5 shadow-xs">
-              <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+              <h3 className="text-base sm:text-lg font-bold text-navy">
                 เงื่อนไขการส่งรถมอเตอร์ไซค์ WMS (Assumptions)
               </h3>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-600 font-medium list-disc list-inside leading-relaxed">
@@ -126,7 +126,7 @@ export default function PricingMotorcyclePage() {
           </div>
 
           {/* CTA */}
-          <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
+          <div className="mt-10 bg-navy border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
             <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-2">ขอราคาค่าจัดส่งรถมอเตอร์ไซค์ข้ามจังหวัด</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6 font-medium">
               แจ้งพิกัดยี่ห้อรุ่น ขนาดเครื่องยนต์ และจังหวัดต้นทาง-ปลายทาง เพื่อรับราคาที่ดีและแม่นยำที่สุดจากแอดมิน

@@ -200,11 +200,13 @@ export default function Navbar() {
     setIsMobileAreaOpen(false);
   }, []);
 
-  // Close mobile menu and area submenu on pathname change
-  useEffect(() => {
+  // Close mobile menu and area submenu on pathname change without effect cascading render
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setIsMobileMenuOpen(false);
     setIsMobileAreaOpen(false);
-  }, [pathname]);
+  }
 
   // Close mobile menu on Escape key
   useEffect(() => {
@@ -239,12 +241,12 @@ export default function Navbar() {
           tabIndex={-1}
           aria-label="ปิดเมนู"
           onClick={closeMobileMenu}
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[190] xl:hidden transition-opacity duration-300 animate-in fade-in cursor-pointer"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-190 xl:hidden transition-opacity duration-300 animate-in fade-in cursor-pointer"
         />
       )}
 
       <nav
-        className={`fixed z-[200] transition-all duration-300 ease-in-out
+        className={`fixed z-200 transition-all duration-300 ease-in-out
           /* Mobile Layout */
           top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3.5 py-2.5 border
           ${isMobileMenuOpen ? "bg-white border-slate-200 shadow-xl" : "bg-white/95 backdrop-blur-md border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(11,31,58,0.08)]"}
@@ -256,8 +258,8 @@ export default function Navbar() {
       >
         <div 
           aria-hidden="true" 
-          className={`absolute top-0 h-[2px] rounded-full bg-linear-to-r from-transparent via-blue-600 to-transparent ${
-            isIndicatorReady ? "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" : ""
+          className={`absolute top-0 h-0.5 rounded-full bg-linear-to-r from-transparent via-blue-600 to-transparent ${
+            isIndicatorReady ? "transition-all duration-500 ease-in-out" : ""
           }`}
           style={{
             left: `${indicatorStyle.left}px`,
@@ -268,7 +270,7 @@ export default function Navbar() {
         {/* Brand Logo Lockup */}
         <div className="shrink-0 flex items-center">
           <Link href="/" className="relative group flex items-center gap-3" onClick={closeMobileMenu}>
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-[#0B1F3A] flex items-center justify-center border border-slate-200/80 shadow-xs shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-navy flex items-center justify-center border border-slate-200/80 shadow-xs shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/images/logoWMS.webp"
                 alt="WMS Transport Logo"
@@ -279,7 +281,7 @@ export default function Navbar() {
               />
             </div>
             <div className="hidden sm:flex flex-col justify-center">
-              <span className="text-[#0B1F3A] font-black text-lg leading-none tracking-wide whitespace-nowrap">WMS</span>
+              <span className="text-navy font-black text-lg leading-none tracking-wide whitespace-nowrap">WMS</span>
               <span className="text-blue-600 font-bold text-[10px] tracking-widest uppercase whitespace-nowrap">Transport</span>
             </div>
           </Link>
@@ -333,12 +335,12 @@ export default function Navbar() {
 
             {/* Dropdown Panel */}
             {isAreaDropdownOpen && (
-              <div className="absolute top-[calc(100%+0.75rem)] right-0 w-[380px] max-w-[calc(100vw-2rem)] bg-white border border-slate-200 rounded-2xl shadow-[0_15px_40px_-5px_rgba(11,31,58,0.15)] overflow-hidden z-50 p-3 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-[calc(100%+0.75rem)] right-0 w-95 max-w-[calc(100vw-2rem)] bg-white border border-slate-200 rounded-2xl shadow-[0_15px_40px_-5px_rgba(11,31,58,0.15)] overflow-hidden z-50 p-3 animate-in fade-in slide-in-from-top-2 duration-200">
                 {/* Top Featured Hub Link */}
                 <Link
                   href="/areas"
                   onClick={() => setIsAreaDropdownOpen(false)}
-                  className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-[#0B1F3A] to-[#163761] text-white hover:opacity-95 transition-all shadow-xs mb-2.5 group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-linear-to-r from-navy to-[#163761] text-white hover:opacity-95 transition-all shadow-xs mb-2.5 group"
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-sky-300 shrink-0">
@@ -466,7 +468,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="text-slate-800 min-w-[44px] min-h-[44px] flex items-center justify-center p-2 focus:outline-none hover:text-blue-600 transition-colors cursor-pointer rounded-xl hover:bg-slate-100"
+            className="text-slate-800 min-w-11 min-h-11 flex items-center justify-center p-2 focus:outline-none hover:text-blue-600 transition-colors cursor-pointer rounded-xl hover:bg-slate-100"
             aria-label={isMobileMenuOpen ? "ปิดเมนู" : "เปิดเมนู"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation-menu"
@@ -609,7 +611,7 @@ export default function Navbar() {
               href="tel:0612402436"
               onClick={closeMobileMenu}
               aria-label="โทรหา WMS Transport ที่เบอร์ 061-240-2436"
-              className="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-[#0B1F3A] hover:bg-[#163761] text-white font-bold text-sm shadow-xs min-h-[44px] transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-navy hover:bg-[#163761] text-white font-bold text-sm shadow-xs min-h-11 transition-colors"
             >
               <Phone className="w-4 h-4 text-blue-400 shrink-0" />
               <span className="font-mono tracking-wide">061-240-2436</span>
@@ -620,7 +622,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               onClick={closeMobileMenu}
               aria-label="ติดต่อ WMS Transport ผ่าน LINE"
-              className="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm shadow-xs min-h-[44px] transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm shadow-xs min-h-11 transition-colors"
             >
               <Image
                 src="/images/LINE_icon.webp"

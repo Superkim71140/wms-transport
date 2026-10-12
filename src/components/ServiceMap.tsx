@@ -84,7 +84,7 @@ export default function ServiceMap() {
   ];
 
   return (
-    <section className="py-12 md:py-18 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden text-slate-800 font-sans">
+    <section className="py-12 md:py-18 bg-linear-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden text-slate-800 font-sans">
       
       {/* ------------------------------------------------------------- */}
       {/* 1. SECTION HEADER                                             */}
@@ -108,11 +108,13 @@ export default function ServiceMap() {
       <div className="max-w-6xl mx-auto px-4 mt-8 md:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch mb-10">
         
         {/* LEFT COLUMN (lg:col-span-5) - Solid Image Card */}
-        <div className="lg:col-span-5 relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-200/40 h-full min-h-[460px] lg:min-h-full bg-slate-100">
-          <img
+        <div className="lg:col-span-5 relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-lg shadow-slate-200/40 h-full min-h-115 lg:min-h-full bg-slate-100">
+          <Image
             src="/wms1.webp"
             alt="รถกระบะตู้ทึบรับจ้าง WMS Transport ทีมงานขนย้ายบ้าน ขนส่งมอเตอร์ไซค์ จุดจอดสมุทรสาคร"
-            className="w-full h-full object-cover object-center block"
+            fill
+            sizes="(max-width: 1024px) 100vw, 40vw"
+            className="object-cover object-center"
           />
         </div>
 
@@ -149,7 +151,7 @@ export default function ServiceMap() {
             </address>
 
             {/* Interactive Google Map */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200/70 my-3.5 min-h-[220px] md:min-h-[240px] w-full shadow-inner relative bg-slate-100">
+            <div className="rounded-2xl overflow-hidden border border-slate-200/70 my-3.5 min-h-55 md:min-h-60 w-full shadow-inner relative bg-slate-100">
               <iframe
                 title="แผนที่แสดงที่ตั้งสำนักงานและจุดจอดรถ WMS Transport ต.บ้านเกาะ อ.เมืองสมุทรสาคร"
                 src={gmapsEmbedUrl}
@@ -215,7 +217,7 @@ export default function ServiceMap() {
                 <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
                   <Route className="w-4 h-4" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight">
                   เส้นทางที่ลูกค้าใช้บริการบ่อย
                 </h3>
               </div>
@@ -233,7 +235,7 @@ export default function ServiceMap() {
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="bg-white px-2.5 py-0.5 rounded-md border border-slate-200 text-xs font-bold text-[#0B1F3A]">
+                      <span className="bg-white px-2.5 py-0.5 rounded-md border border-slate-200 text-xs font-bold text-navy">
                         {route.from}
                       </span>
                       <div className="flex items-center text-blue-600 px-0.5">
@@ -269,7 +271,7 @@ export default function ServiceMap() {
                 <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight">
                   เช็กเส้นทางและคิวรถได้เร็วขึ้น
                 </h3>
               </div>
@@ -284,7 +286,7 @@ export default function ServiceMap() {
                 <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
                   1
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-[#0B1F3A]">
+                <span className="text-xs sm:text-sm font-bold text-navy">
                   แจ้งจุดรับและจุดส่งจริง (ซอย/ถนน/ชื่ออาคาร)
                 </span>
               </li>
@@ -292,7 +294,7 @@ export default function ServiceMap() {
                 <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
                   2
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-[#0B1F3A]">
+                <span className="text-xs sm:text-sm font-bold text-navy">
                   แจ้งประเภทและจำนวนสิ่งของ (หรือส่งรูปถ่าย)
                 </span>
               </li>
@@ -300,7 +302,7 @@ export default function ServiceMap() {
                 <span className="w-6 h-6 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0">
                   3
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-[#0B1F3A]">
+                <span className="text-xs sm:text-sm font-bold text-navy">
                   แจ้งวันที่และช่วงเวลาที่ต้องการใช้บริการ
                 </span>
               </li>
@@ -330,7 +332,7 @@ export default function ServiceMap() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="ส่งจุดรับ–ส่งทาง LINE"
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-xs min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] shadow-xs min-h-11"
             >
               <Image
                 src="/images/LINE_icon.webp"
@@ -343,7 +345,7 @@ export default function ServiceMap() {
             </a>
             <a
               href={siteConfig.phoneHref}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-slate-50 text-[#0B1F3A] border border-slate-300 font-bold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] min-h-[44px]"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white hover:bg-slate-50 text-navy border border-slate-300 font-bold text-xs sm:text-sm transition-all duration-200 active:scale-[0.98] min-h-11"
             >
               <Phone className="w-4 h-4 text-blue-600 shrink-0" />
               <span>โทร {siteConfig.phone}</span>
@@ -358,7 +360,7 @@ export default function ServiceMap() {
       <div className="max-w-6xl mx-auto px-4 pt-6 border-t border-slate-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">
+            <h3 className="text-base sm:text-lg font-bold text-navy">
               พื้นที่และเส้นทางให้บริการเฉพาะจุด
             </h3>
             <span className="text-xs sm:text-sm text-slate-500">

@@ -71,7 +71,7 @@ export default function TransitTimeVisualizer({ province }: { province: string }
             <span className="text-blue-700 tracking-wide uppercase font-bold text-xs bg-blue-50 px-3 py-1 rounded-full border border-blue-200 mb-2 inline-block">
               ระยะเวลาขนส่งโดยประมาณ
             </span>
-            <h3 className="text-xl md:text-2xl font-extrabold text-[#0B1F3A]">
+            <h3 className="text-xl md:text-2xl font-extrabold text-navy">
               เส้นทางและการจัดส่งสินค้า
             </h3>
           </div>
@@ -91,19 +91,19 @@ export default function TransitTimeVisualizer({ province }: { province: string }
             </div>
             <div>
               <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">ต้นทาง</p>
-              <p className="text-sm font-extrabold text-[#0B1F3A]">กรุงเทพฯ / ปริมณฑล</p>
+              <p className="text-sm font-extrabold text-navy">กรุงเทพฯ / ปริมณฑล</p>
             </div>
           </div>
 
           {/* Connection Line & Icon */}
           <div className="flex flex-col items-center justify-center flex-1 w-full md:w-auto py-2 md:py-0">
             <div className="w-full flex items-center justify-center gap-2 relative">
-              <div className="hidden md:block flex-1 h-[2px] bg-blue-200" />
+              <div className="hidden md:block flex-1 h-0.5 bg-blue-200" />
               <div className="px-3.5 py-1 rounded-full bg-white border border-blue-200 flex items-center gap-1.5 text-blue-700 text-xs font-bold shadow-xs">
                 <Truck className="w-3.5 h-3.5" />
                 <span>กำลังขนส่ง</span>
               </div>
-              <div className="hidden md:block flex-1 h-[2px] bg-blue-200" />
+              <div className="hidden md:block flex-1 h-0.5 bg-blue-200" />
             </div>
             <p className="text-[11px] text-slate-500 mt-1 text-center font-semibold">
               {info.distance}

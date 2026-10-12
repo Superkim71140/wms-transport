@@ -22,7 +22,7 @@ import dynamic from "next/dynamic";
 import { searchIntentMap } from "@/data/searchIntentMap";
 
 const ServiceMap = dynamic(() => import('@/components/ServiceMap'), {
-  loading: () => <div className="h-[400px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
+  loading: () => <div className="h-100 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 const ServiceSteps = dynamic(() => import('@/components/ServiceSteps'), {
@@ -30,18 +30,18 @@ const ServiceSteps = dynamic(() => import('@/components/ServiceSteps'), {
 });
 
 const CustomerReviews = dynamic(() => import('@/components/CustomerReviews'), {
-  loading: () => <div className="h-[300px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
+  loading: () => <div className="h-75 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />
 });
 
 
 const GalleryMasonry = dynamic(() => import('@/components/GalleryMasonry'), {
-  loading: () => <div className="h-[400px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
+  loading: () => <div className="h-100 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 const TrustCounters = dynamic(() => import('@/components/TrustCounters'), {
   loading: () => <div className="h-40 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 const FAQ = dynamic(() => import('@/components/FAQ'), {
-  loading: () => <div className="h-[300px] w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
+  loading: () => <div className="h-75 w-full rounded-2xl bg-slate-100 border border-slate-200 animate-pulse" />,
 });
 
 import { Metadata } from "next";
@@ -117,12 +117,12 @@ export default function Home() {
                 </div>
 
                 {/* Exactly ONE Semantic H1 */}
-                <h1 className="font-sans text-[1.875rem] sm:text-4xl lg:text-[2.65rem] xl:text-[2.95rem] font-extrabold text-[#0B1F3A] tracking-tight leading-[1.25] sm:leading-[1.22] text-left text-balance max-w-3xl">
-                  <span className="text-[#0B1F3A]">รถกระบะตู้ทึบรับจ้าง </span>
+                <h1 className="font-sans text-[1.875rem] sm:text-4xl lg:text-[2.65rem] xl:text-[2.95rem] font-extrabold text-navy tracking-tight leading-tight sm:leading-[1.22] text-left text-balance max-w-3xl">
+                  <span className="text-navy">รถกระบะตู้ทึบรับจ้าง </span>
                   <span className="text-blue-600">ขนส่งมอเตอร์ไซค์</span>
-                  <span className="text-[#0B1F3A]"> และย้ายบ้านคอนโด</span>
+                  <span className="text-navy"> และย้ายบ้านคอนโด</span>
                   <br className="hidden sm:inline" />
-                  <span className="text-[#0B1F3A]"> พร้อมทีม</span>
+                  <span className="text-navy"> พร้อมทีม</span>
                   <span className="text-[#0284C7]">คนยกของ</span>
                 </h1>
 
@@ -134,9 +134,9 @@ export default function Home() {
 
               {/* Right Column: Refined Assurance Panel (42%) */}
               <div className="w-full lg:w-[42%] xl:w-[40%]">
-                <div className="rounded-2xl sm:rounded-3xl bg-[#EFF6FF] border border-blue-200/80 p-6 sm:p-7 lg:p-8 shadow-xs text-left">
+                <div className="rounded-2xl sm:rounded-3xl bg-blue-light border border-blue-200/80 p-6 sm:p-7 lg:p-8 shadow-xs text-left">
                   {/* Panel Heading */}
-                  <h2 className="font-sans text-xl sm:text-2xl font-bold text-[#0B1F3A] tracking-tight mb-1">
+                  <h2 className="font-sans text-xl sm:text-2xl font-bold text-navy tracking-tight mb-1">
                     มั่นใจก่อนเริ่มงาน
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-500 font-medium mb-5 sm:mb-6">
@@ -149,7 +149,7 @@ export default function Home() {
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
                         <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
                       </div>
-                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                      <span className="text-sm sm:text-base font-bold text-navy">
                         ประเมินราคาก่อนจอง
                       </span>
                     </div>
@@ -158,7 +158,7 @@ export default function Home() {
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
                         <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
                       </div>
-                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                      <span className="text-sm sm:text-base font-bold text-navy">
                         แจ้งราคาชัดเจน
                       </span>
                     </div>
@@ -167,7 +167,7 @@ export default function Home() {
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
                         <CheckCircle className="w-4 h-4 text-blue-600" aria-hidden="true" />
                       </div>
-                      <span className="text-sm sm:text-base font-bold text-[#0B1F3A]">
+                      <span className="text-sm sm:text-base font-bold text-navy">
                         ไม่มีบวกเพิ่มหน้างานตามเงื่อนไข
                       </span>
                     </div>
@@ -179,7 +179,7 @@ export default function Home() {
 
             {/* Subtle downward visual bridge to next section */}
             <div className="hidden lg:flex justify-center mt-9 -mb-3 pointer-events-none" aria-hidden="true">
-              <div className="w-px h-6 bg-gradient-to-b from-blue-300 to-transparent" />
+              <div className="w-px h-6 bg-linear-to-b from-blue-300 to-transparent" />
             </div>
           </div>
         </HeroBackground>
@@ -188,7 +188,7 @@ export default function Home() {
         <ServiceSplitShowcase />
 
         {/* 2.5 PREMIUM SERVICES GRID SECTION */}
-        <section id="services-grid" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 bg-gradient-to-b from-white via-[#F7FBFF] to-white">
+        <section id="services-grid" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 bg-linear-to-b from-white via-[#F7FBFF] to-white">
           {/* Ambient radial highlight */}
           <div 
             className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_35%,rgba(37,99,235,0.035),transparent)] pointer-events-none" 
@@ -202,7 +202,7 @@ export default function Home() {
                 <Package className="w-3.5 h-3.5 text-blue-600" />
                 <span>หมวดหมู่บริการ</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy tracking-tight leading-tight">
                 บริการขนส่งและขนย้าย <span className="text-blue-600">ยอดนิยม</span>
               </h2>
               <p className="text-sm sm:text-base text-slate-600 font-normal mt-3 max-w-xl mx-auto leading-relaxed">
@@ -214,7 +214,7 @@ export default function Home() {
             <div className="relative pt-10 sm:pt-12">
               {/* Horizontal route line connecting the service nodes on desktop (1200px+) */}
               <div 
-                className="hidden xl:block absolute top-[48px] left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-blue-200/90 z-0 pointer-events-none" 
+                className="hidden xl:block absolute top-12 left-[12.5%] right-[12.5%] h-0.5 border-t-2 border-dashed border-blue-200/90 z-0 pointer-events-none" 
                 aria-hidden="true" 
               />
 
@@ -226,7 +226,7 @@ export default function Home() {
                   >
                     {/* Floating Circular Icon Node */}
                     <div className="relative z-20 mx-auto -mb-10 sm:-mb-11 flex items-center justify-center">
-                      <div className="relative w-20 h-20 sm:w-[84px] sm:h-[84px] rounded-full bg-white border-2 border-blue-100 shadow-md shadow-blue-500/10 flex items-center justify-center text-blue-600 transition-colors duration-200 group-hover/card:border-blue-300">
+                      <div className="relative w-20 h-20 sm:w-21 sm:h-21 rounded-full bg-white border-2 border-blue-100 shadow-md shadow-blue-500/10 flex items-center justify-center text-blue-600 transition-colors duration-200 group-hover/card:border-blue-300">
                         {service.icon}
                         {/* Green status accent dot */}
                         <span 
@@ -240,19 +240,19 @@ export default function Home() {
                     <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 pt-14 sm:pt-16 pb-6 px-5 sm:px-6 flex flex-col justify-between shadow-xs transition-all duration-200 group-hover/card:border-blue-300 group-hover/card:shadow-xl group-hover/card:shadow-blue-900/5 relative z-10 overflow-hidden flex-1">
                       {/* Subtle top accent strip */}
                       <div 
-                        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-500" 
+                        className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-600 via-sky-500 to-emerald-500" 
                         aria-hidden="true" 
                       />
 
                       {/* Content Area */}
                       <div className="flex flex-col flex-1">
                         {/* Service Title */}
-                        <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2 text-center">
+                        <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight mb-2 text-center">
                           {service.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-4 text-center min-h-0 sm:min-h-[4.5rem]">
+                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-4 text-center min-h-0 sm:min-h-18">
                           {service.desc}
                         </p>
 
@@ -294,7 +294,7 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="ติดต่อผ่าน LINE เพื่อสอบถามราคา"
-                            className="w-full bg-[#06C755] hover:bg-[#05B34F] active:bg-[#049B44] text-white font-sans font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors min-h-[44px] focus-visible:ring-2 focus-visible:ring-emerald-500 focus:outline-none"
+                            className="w-full bg-[#06C755] hover:bg-[#05B34F] active:bg-[#049B44] text-white font-sans font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors min-h-11 focus-visible:ring-2 focus-visible:ring-emerald-500 focus:outline-none"
                           >
                             <Image
                               src="/images/LINE_icon.webp"
@@ -310,7 +310,7 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="สอบถามผ่าน Facebook"
-                            className="w-full bg-blue-50/70 hover:bg-blue-100/80 text-blue-700 font-sans font-semibold text-xs sm:text-sm py-2 px-4 rounded-xl flex items-center justify-center gap-2 border border-blue-200/80 transition-colors min-h-[44px] focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none"
+                            className="w-full bg-blue-50/70 hover:bg-blue-100/80 text-blue-700 font-sans font-semibold text-xs sm:text-sm py-2 px-4 rounded-xl flex items-center justify-center gap-2 border border-blue-200/80 transition-colors min-h-11 focus-visible:ring-2 focus-visible:ring-blue-500 focus:outline-none"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-4 h-4 fill-current shrink-0">
                               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -334,7 +334,7 @@ export default function Home() {
               <span className="px-4 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wide">
                 ราคาขนส่ง
               </span>
-              <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] tracking-tight mb-3 mt-4">
+              <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight mb-3 mt-4">
                 ราคาขนส่ง<span className="text-blue-600">มอเตอร์ไซค์และบิ๊กไบค์</span>
               </h2>
               <p className="text-base text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
@@ -349,10 +349,10 @@ export default function Home() {
                 <div className="mb-5">
                   <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">มอเตอร์ไซค์ทั่วไป</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">100cc – 125cc</h3>
+                <h3 className="text-xl font-extrabold text-navy mb-2">100cc – 125cc</h3>
 
                 <div className="mt-auto">
-                  <div className="text-3xl sm:text-4xl font-black text-[#0B1F3A] mb-1">2,500 <span className="text-base font-bold text-slate-500">บาท</span></div>
+                  <div className="text-3xl sm:text-4xl font-black text-navy mb-1">2,500 <span className="text-base font-bold text-slate-500">บาท</span></div>
                   <p className="text-xs text-slate-500 mb-5">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
@@ -378,10 +378,10 @@ export default function Home() {
                 <div className="mb-5">
                   <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">มอเตอร์ไซค์ขนาดกลาง</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">150cc – 300cc</h3>
+                <h3 className="text-xl font-extrabold text-navy mb-2">150cc – 300cc</h3>
 
                 <div className="mt-auto">
-                  <div className="text-3xl sm:text-4xl font-black text-[#0B1F3A] mb-1">3,000 <span className="text-base font-bold text-slate-500">บาท</span></div>
+                  <div className="text-3xl sm:text-4xl font-black text-navy mb-1">3,000 <span className="text-base font-bold text-slate-500">บาท</span></div>
                   <p className="text-xs text-slate-500 mb-5">แพ็กกันรอย รัดยึดปลอดภัย ดูแลโดยมืออาชีพ</p>
                   <a
                     href="https://line.me/ti/p/DtICkMaDet"
@@ -410,7 +410,7 @@ export default function Home() {
                 <div className="mb-5">
                   <span className="text-xs font-bold uppercase tracking-wide text-blue-700 bg-blue-100 border border-blue-300 px-3 py-1 rounded-full">บิ๊กไบค์</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">400cc BigBike</h3>
+                <h3 className="text-xl font-extrabold text-navy mb-2">400cc BigBike</h3>
 
                 <div className="mt-auto">
                   <div className="text-3xl sm:text-4xl font-black text-blue-700 mb-1">4,500 <span className="text-base font-bold text-blue-600">บาท</span></div>
@@ -439,7 +439,7 @@ export default function Home() {
                 <div className="mb-5">
                   <span className="text-xs font-bold uppercase tracking-wide text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">เหมาระยะไกล</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-[#0B1F3A] mb-2">บริการเหมาขนส่ง</h3>
+                <h3 className="text-xl font-extrabold text-navy mb-2">บริการเหมาขนส่ง</h3>
                 <p className="text-xs text-slate-500 mb-4">สำหรับระยะทาง 300 กม. ขึ้นไป</p>
                 <div className="mt-auto">
                   <div className="text-3xl sm:text-4xl font-black text-emerald-700 mb-1">16 บาท<span className="text-base font-bold text-slate-500">/กม.</span></div>
@@ -512,7 +512,7 @@ export default function Home() {
         {/* WHY CHOOSE US / TRUST SECTION */}
         <section id="why-choose-us" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-12 md:py-20 z-10 bg-white">
           <div className="w-full max-w-7xl mx-auto min-w-0">
-            <div className="relative rounded-2xl sm:rounded-3xl bg-[#0B1F3A] border border-blue-900/80 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xl">
+            <div className="relative rounded-2xl sm:rounded-3xl bg-navy border border-blue-900/80 p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xl">
               {/* Subtle CSS road/dot pattern in background */}
               <div 
                 className="absolute inset-0 opacity-[0.06] pointer-events-none select-none"
@@ -536,7 +536,7 @@ export default function Home() {
                 {/* Left side on desktop: Employee Image (order-2 on mobile, order-1 on lg) */}
                 <div className="lg:col-span-5 order-2 lg:order-1 flex flex-col items-center justify-end relative pt-4 lg:pt-0">
                   {/* Employee Image Container anchored to bottom without awkward cropping */}
-                  <div className="relative w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[380px] xl:max-w-[420px] aspect-[1197/1314] filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.4)]">
+                  <div className="relative w-full max-w-70 sm:max-w-85 lg:max-w-95 xl:max-w-105 aspect-1197/1314 filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.4)]">
                     <Image
                       src="/wms-transport-employee.png"
                       alt="พนักงาน WMS Transport ดูแลทุกขั้นตอนการขนย้าย"
@@ -564,7 +564,7 @@ export default function Home() {
                   {/* 2x2 Feature Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 my-6 sm:my-8">
                     {/* Point 1 */}
-                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                    <div className="bg-white/6 hover:bg-white/9 border border-white/10 rounded-xl p-4 transition-colors">
                       <div className="flex items-center gap-2.5 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
                           <BadgeDollarSign className="w-4 h-4" />
@@ -579,7 +579,7 @@ export default function Home() {
                     </div>
 
                     {/* Point 2 */}
-                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                    <div className="bg-white/6 hover:bg-white/9 border border-white/10 rounded-xl p-4 transition-colors">
                       <div className="flex items-center gap-2.5 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
                           <ShieldCheck className="w-4 h-4" />
@@ -594,7 +594,7 @@ export default function Home() {
                     </div>
 
                     {/* Point 3 */}
-                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                    <div className="bg-white/6 hover:bg-white/9 border border-white/10 rounded-xl p-4 transition-colors">
                       <div className="flex items-center gap-2.5 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
                           <CalendarCheck className="w-4 h-4" />
@@ -609,7 +609,7 @@ export default function Home() {
                     </div>
 
                     {/* Point 4 */}
-                    <div className="bg-white/[0.06] hover:bg-white/[0.09] border border-white/10 rounded-xl p-4 transition-colors">
+                    <div className="bg-white/6 hover:bg-white/9 border border-white/10 rounded-xl p-4 transition-colors">
                       <div className="flex items-center gap-2.5 mb-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
                           <Truck className="w-4 h-4" />
@@ -631,7 +631,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="สอบถามและประเมินราคาทาง LINE"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-colors min-h-[44px]"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-colors min-h-11"
                     >
                       <Image
                         src="/images/LINE_icon.webp"
@@ -645,7 +645,7 @@ export default function Home() {
 
                     <a
                       href="tel:0612402436"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm rounded-xl transition-colors min-h-[44px]"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs sm:text-sm rounded-xl transition-colors min-h-11"
                     >
                       <Phone className="w-4 h-4 text-sky-400 shrink-0" />
                       <span>โทร 061-240-2436</span>
@@ -672,7 +672,7 @@ export default function Home() {
               <span className="inline-block px-3.5 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold tracking-wide mb-3">
                 บริการที่เหมาะกับงานของคุณ
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy tracking-tight leading-tight">
                 เลือกบริการขนส่งให้ตรงกับสิ่งที่ต้องการย้าย
               </h2>
               <p className="mt-3 text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
@@ -687,14 +687,14 @@ export default function Home() {
                 <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
                   <Building className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight mb-2">
                   ย้ายบ้าน หอพัก และคอนโด
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
                   ขนย้ายเฟอร์นิเจอร์ เครื่องใช้ไฟฟ้า กล่องเสื้อผ้า และของใช้ส่วนตัว พร้อมทีมช่วยยกตามความต้องการ
                 </p>
                 <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
-                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งจำนวนสิ่งของ ชั้นอาคาร ลิฟต์ และจุดจอดรถ
+                  <span className="font-semibold text-navy">ข้อมูลที่ควรเตรียม:</span> แจ้งจำนวนสิ่งของ ชั้นอาคาร ลิฟต์ และจุดจอดรถ
                 </div>
               </div>
 
@@ -703,14 +703,14 @@ export default function Home() {
                 <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
                   <Bike className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight mb-2">
                   ขนส่งมอเตอร์ไซค์และบิ๊กไบค์
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
                   ขนส่งรถจักรยานยนต์ทั้งระยะใกล้และต่างจังหวัด พร้อมอุปกรณ์ยึดรถและการดูแลระหว่างเดินทาง
                 </p>
                 <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
-                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งรุ่นรถ จุดรับ จุดส่ง และวันที่ต้องการขนส่ง
+                  <span className="font-semibold text-navy">ข้อมูลที่ควรเตรียม:</span> แจ้งรุ่นรถ จุดรับ จุดส่ง และวันที่ต้องการขนส่ง
                 </div>
               </div>
 
@@ -719,14 +719,14 @@ export default function Home() {
                 <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-5">
                   <Package className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A] tracking-tight mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-navy tracking-tight mb-2">
                   ขนส่งสินค้าและของทั่วไป
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed mb-4 flex-1">
                   เหมาะสำหรับร้านค้า ธุรกิจ และลูกค้าทั่วไปที่ต้องการขนส่งกล่องสินค้า อุปกรณ์ หรือสิ่งของหลายชิ้น
                 </p>
                 <div className="bg-slate-50 border border-slate-200/70 rounded-xl p-3 text-xs text-slate-600">
-                  <span className="font-semibold text-[#0B1F3A]">ข้อมูลที่ควรเตรียม:</span> แจ้งประเภทสินค้า ขนาด จำนวนชิ้น และน้ำหนักโดยประมาณ
+                  <span className="font-semibold text-navy">ข้อมูลที่ควรเตรียม:</span> แจ้งประเภทสินค้า ขนาด จำนวนชิ้น และน้ำหนักโดยประมาณ
                 </div>
               </div>
             </div>
@@ -735,7 +735,7 @@ export default function Home() {
             <div className="bg-slate-50/80 border border-slate-200 rounded-2xl p-6 sm:p-8">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-[#0B1F3A] mb-3">
+                  <h4 className="text-base sm:text-lg font-bold text-navy mb-3">
                     เตรียม 4 ข้อมูลก่อนประเมินราคา
                   </h4>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-slate-700">
@@ -765,7 +765,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="ส่งรายละเอียดทาง LINE"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm rounded-xl shadow-xs transition-colors min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-sm rounded-xl shadow-xs transition-colors min-h-11"
                   >
                     <Image
                       src="/images/LINE_icon.webp"
@@ -779,7 +779,7 @@ export default function Home() {
 
                   <a
                     href="tel:0612402436"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white hover:bg-slate-50 border border-slate-300 text-[#0B1F3A] font-bold text-sm rounded-xl transition-colors min-h-[44px]"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white hover:bg-slate-50 border border-slate-300 text-navy font-bold text-sm rounded-xl transition-colors min-h-11"
                   >
                     <Phone className="w-4 h-4 text-blue-600 shrink-0" />
                     <span>โทรประเมินงาน 061-240-2436</span>
@@ -798,7 +798,7 @@ export default function Home() {
         {/* 8. FINAL CTA SECTION */}
         <section className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 bg-white">
           <div className="w-full max-w-7xl mx-auto min-w-0">
-            <div className="relative rounded-2xl overflow-hidden bg-[#0B1F3A] border border-blue-950 p-8 sm:p-14 text-center shadow-md">
+            <div className="relative rounded-2xl overflow-hidden bg-navy border border-blue-950 p-8 sm:p-14 text-center shadow-md">
               <div className="relative z-10 flex flex-col items-center">
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
                   พร้อมสัมผัสประสบการณ์<span className="text-blue-400">ระดับมืออาชีพ?</span>

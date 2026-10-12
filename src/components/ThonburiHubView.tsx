@@ -73,9 +73,9 @@ export default function ThonburiHubView() {
       <main className="grow relative pt-24 pb-20 md:pt-28 md:pb-28">
         {/* Background ambience */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
-          <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 left-0 w-125 h-125 bg-indigo-100/30 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -146,10 +146,15 @@ export default function ThonburiHubView() {
               "ถนนราชพฤกษ์",
             ]}
             services={[
-              "ย้ายคอนโดแนว BTS/MRT",
+              "ย้ายคอนโดแนว BTS/MRT (ตู้ทึบสูง 2.1 ม.)",
               "ย้ายบ้านและทาวน์โฮม",
               "ขนส่งมอเตอร์ไซค์ บิ๊กไบค์",
               "ขนส่งสินค้าโรงงาน",
+            ]}
+            conditions={[
+              "รถกระบะตอนเดียวตู้ทึบ ความสูงภายในตู้ 2.1 เมตร จุของทรงสูงและที่นอน 6 ฟุตได้ปลอดภัย",
+              "ประเมินราคาตามระยะทางจริง ปริมาณสัมภาระ และจำนวนคนยกของ",
+              "กรณีคอนโดมิเนียมหรืออาคารสูง แนะนำประสานงานจองลิฟต์และจุดจอดเทียบล่วงหน้า",
             ]}
           />
 
@@ -182,7 +187,7 @@ export default function ThonburiHubView() {
                     ย้ายหอพัก คอนโด บ้าน ฝั่งธนบุรี
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    บริการย้ายที่อยู่อาศัยพร้อมทีมงานช่วยยกของ แรปฟิล์มกันกระแทก ป้องกันรอยขีดข่วนตลอดการเดินทาง
+                    บริการย้ายที่อยู่อาศัยพร้อมทีมงานช่วยยกของ รถกระบะตู้ทึบความสูงภายในตู้ 2.1 เมตร จุเตียง 6 ฟุตและเครื่องใช้ไฟฟ้าทรงสูง แรปฟิล์มกันกระแทก ป้องกันรอยขีดข่วนตลอดการเดินทาง
                   </p>
                 </div>
                 <div className="mt-auto flex items-center gap-1.5 text-blue-600 text-sm font-bold group-hover:gap-2.5 transition-all">
@@ -259,7 +264,7 @@ export default function ThonburiHubView() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {/* Corridor 1 */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                <h3 className="text-lg font-bold text-blue-600 mb-3">
                   แนวเพชรเกษม – ท่าพระ – วงเวียนใหญ่
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -291,7 +296,7 @@ export default function ThonburiHubView() {
 
               {/* Corridor 2 */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                <h3 className="text-lg font-bold text-blue-600 mb-3">
                   แนวกาญจนาภิเษก – กัลปพฤกษ์ – บางบอน – เคหะธนบุรี
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -323,7 +328,7 @@ export default function ThonburiHubView() {
 
               {/* Corridor 3 */}
               <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                <h3 className="text-lg font-bold text-blue-600 mb-3">
                   แนวราชพฤกษ์ – บรมราชชนนี – ปิ่นเกล้า
                 </h3>
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -425,7 +430,7 @@ export default function ThonburiHubView() {
                       key={d.districtSlug}
                       className={`bg-white border rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
                         isPublished
-                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-gradient-to-b from-white to-blue-50/20"
+                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-linear-to-b from-white to-blue-50/20"
                           : "border-slate-200/90 hover:border-slate-300"
                       }`}
                     >
@@ -468,7 +473,7 @@ export default function ThonburiHubView() {
                           href="https://line.me/ti/p/DtICkMaDet"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-[40px]"
+                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-10"
                         >
                           <span>สอบถามคิวงานเขต{d.districtThaiName}</span>
                           <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
@@ -497,7 +502,7 @@ export default function ThonburiHubView() {
                       key={d.districtSlug}
                       className={`bg-white border rounded-2xl p-5 sm:p-6 shadow-2xs flex flex-col justify-between transition-all duration-200 ${
                         isPublished
-                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-gradient-to-b from-white to-blue-50/20"
+                          ? "border-blue-300 ring-2 ring-blue-500/20 shadow-md bg-linear-to-b from-white to-blue-50/20"
                           : "border-slate-200/90 hover:border-slate-300"
                       }`}
                     >
@@ -540,7 +545,7 @@ export default function ThonburiHubView() {
                           href="https://line.me/ti/p/DtICkMaDet"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-[40px]"
+                          className="mt-2 text-xs font-bold text-slate-700 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 px-3 py-2.5 rounded-xl flex items-center justify-between transition-colors min-h-10"
                         >
                           <span>สอบถามคิวงานเขต{d.districtThaiName}</span>
                           <ArrowRight className="w-3.5 h-3.5 text-slate-400" />

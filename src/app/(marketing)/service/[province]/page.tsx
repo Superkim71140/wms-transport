@@ -415,7 +415,7 @@ export default async function LocationHubPage({
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -561,7 +561,7 @@ export default async function LocationHubPage({
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {/* Corridor 1 */}
                 <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  <h3 className="text-lg font-bold text-blue-600 mb-3">
                     โซนมหาชัย – พระราม 2 – ตัวเมืองสมุทรสาคร
                   </h3>
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -593,7 +593,7 @@ export default async function LocationHubPage({
 
                 {/* Corridor 2 */}
                 <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  <h3 className="text-lg font-bold text-blue-600 mb-3">
                     โซนกระทุ่มแบน – พุทธมณฑลสาย 4 – สาย 5
                   </h3>
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -625,7 +625,7 @@ export default async function LocationHubPage({
 
                 {/* Corridor 3 */}
                 <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-7 shadow-xs hover:border-blue-300 transition-all">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3 text-blue-600">
+                  <h3 className="text-lg font-bold text-blue-600 mb-3">
                     โซนอ้อมน้อย – อ้อมใหญ่ (สามพราน)
                   </h3>
                   <div className="flex flex-wrap gap-1.5 mb-4">
@@ -742,7 +742,7 @@ export default async function LocationHubPage({
 
           {/* ── PORTFOLIO CTA BANNER ── */}
           <section className="mb-20">
-            <div className="bg-[#0B1F3A] border border-blue-900/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
+            <div className="bg-navy border border-blue-900/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
               <div>
                 <h3 className="text-xl md:text-2xl font-black text-white mb-2">
                   มั่นใจทุกการขนย้าย ด้วยผลงานจริงระดับมืออาชีพ
@@ -868,11 +868,11 @@ export default async function LocationHubPage({
           {/* ── INTERNAL LINKING ENGINE (TOPIC CLUSTERS) ── */}
           <section className="mb-20">
             <div className="flex items-center gap-4 mb-8 justify-center">
-              <div className="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
+              <div className="h-px bg-slate-200 flex-1 max-w-25"></div>
               <h2 className="text-2xl font-black text-slate-900 text-center">
                 พื้นที่ให้บริการ<span className="text-blue-600">ใกล้เคียง</span>
               </h2>
-              <div className="h-px bg-slate-200 flex-1 max-w-[100px]"></div>
+              <div className="h-px bg-slate-200 flex-1 max-w-25"></div>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">

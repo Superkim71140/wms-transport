@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ShieldCheck, Phone } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Phone, CheckCircle } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import IntentHero from "@/components/IntentHero";
 import { portfolioCasesData } from "@/data/mediaEvidence";
+import { siteConfig } from "@/lib/seo/site-config";
 
 interface CaseDetailPageProps {
   params: Promise<{
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: CaseDetailPageProps): Promise
     title: `${item.title} | ผลงานขนย้ายจริง WMS TRANSPORT`,
     description: `รายงานบันทึกการขนย้ายจริงย่าน${item.broadArea} บริการ${serviceName} โดยทีมงาน WMS TRANSPORT`,
     alternates: {
-      canonical: `/portfolio/${slug}`,
+      canonical: `${siteConfig.productionUrl}/portfolio/${slug}`,
     },
   };
 }
@@ -56,26 +57,49 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
     item.serviceType === "motorcycle" ? "ส่งมอเตอร์ไซค์" : 
     item.serviceType === "freight" ? "ขนส่งสินค้าโรงงาน" : "บริการช่วยยก";
 
-  // Schema for image
-  const imageObjectSchema = {
+  // Schema for case study & image
+  const caseStudySchema = {
     "@context": "https://schema.org",
-    "@type": "ImageObject",
-    "url": `https://wms-transport.com${item.approvedPhotos[0]?.path}`,
-    "name": item.approvedPhotos[0]?.alt,
-    "description": item.title,
-    "contentLocation": {
-      "@type": "Place",
-      "name": item.broadArea
+    "@type": "Article",
+    "headline": item.title,
+    "description": `รายงานบันทึกการขนย้ายจริงย่าน${item.broadArea} บริการ${serviceName} โดยทีมงาน WMS TRANSPORT`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteConfig.productionUrl}/portfolio/${slug}`
     },
-    "acquireLicensePage": "https://wms-transport.com/portfolio"
+    "author": {
+      "@type": "Organization",
+      "name": "WMS TRANSPORT",
+      "@id": `${siteConfig.productionUrl}/#organization`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WMS TRANSPORT",
+      "@id": `${siteConfig.productionUrl}/#organization`,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteConfig.productionUrl}/images/logoWMS.webp`
+      }
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": `${siteConfig.productionUrl}${item.approvedPhotos[0]?.path}`,
+      "name": item.approvedPhotos[0]?.alt,
+      "description": item.title,
+      "contentLocation": {
+        "@type": "Place",
+        "name": item.broadArea
+      },
+      "acquireLicensePage": `${siteConfig.productionUrl}/portfolio`
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden font-sans text-slate-900">
-      {/* JSON-LD Image Schema Injection */}
+      {/* JSON-LD Schema Injection */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageObjectSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema) }}
       />
 
       <main className="grow relative pt-12 pb-20">
@@ -145,7 +169,7 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
 
               {/* Challenge block */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3 shadow-xs">
-                <h2 className="text-lg sm:text-xl font-extrabold text-[#0B1F3A] border-b border-slate-100 pb-2.5">
+                <h2 className="text-lg sm:text-xl font-extrabold text-navy border-b border-slate-100 pb-2.5">
                   โจทย์และความท้าทายของงาน (The Challenge)
                 </h2>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
@@ -155,7 +179,7 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
 
               {/* Process steps */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-4 shadow-xs">
-                <h2 className="text-lg sm:text-xl font-extrabold text-[#0B1F3A] border-b border-slate-100 pb-2.5">
+                <h2 className="text-lg sm:text-xl font-extrabold text-navy border-b border-slate-100 pb-2.5">
                   ขั้นตอนการปฏิบัติงานของทีม WMS (The Process)
                 </h2>
                 <div className="space-y-3">
@@ -174,7 +198,7 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
 
               {/* Outcome block */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 space-y-3 shadow-xs">
-                <h2 className="text-lg sm:text-xl font-extrabold text-[#0B1F3A] border-b border-slate-100 pb-2.5">
+                <h2 className="text-lg sm:text-xl font-extrabold text-navy border-b border-slate-100 pb-2.5">
                   ผลลัพธ์และความพึงพอใจ (The Outcome)
                 </h2>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
@@ -192,14 +216,31 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
                 <ShieldCheck className="h-10 w-10 text-emerald-600 mb-1.5" />
                 <span className="text-[10px] text-slate-500 tracking-wider font-bold uppercase">PROVENANCE SCORE</span>
                 <span className="text-3xl font-black text-emerald-600 my-1.5">{item.proofScore}/100</span>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium max-w-[220px]">
+                <p className="text-xs text-slate-500 leading-relaxed font-medium max-w-55">
                   หลักฐานงานขนย้ายชิ้นนี้ได้รับการตรวจสอบความถูกต้องทางตำแหน่งและภาพถ่าย ไม่มีเจตนาบิดเบือนข้อมูลใดๆ
+                </p>
+              </div>
+
+              {/* Authenticated Reviewer Card */}
+              <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-5 shadow-xs space-y-2.5">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-emerald-600" />
+                  <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">การตรวจสอบและยืนยันข้อมูล</span>
+                </div>
+                <p className="text-xs text-slate-800 font-bold leading-snug">
+                  ผู้บันทึกและตรวจสอบข้อมูลหน้างาน: <span className="text-blue-900">ทีมงานปฏิบัติการ WMS TRANSPORT</span>
+                </p>
+                <p className="text-[11px] text-slate-500 leading-normal">
+                  ตำแหน่ง: ฝ่ายควบคุมงานขนย้ายหน้างาน · ตรวจสอบเมื่อ: มิถุนายน 2569
+                </p>
+                <p className="text-[11px] text-slate-500 border-t border-slate-200/60 pt-2 leading-normal">
+                  ภาพถ่ายของแท้ (<span className="font-mono">owned_by_wms</span>) บันทึกจากงานจริง ไม่ผ่านการตัดต่อ AI
                 </p>
               </div>
 
               {/* Geo Entity Matrix connections */}
               <div className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs">
-                <h3 className="text-[#0B1F3A] font-bold text-sm border-b border-slate-100 pb-2">การเชื่อมโยงพื้นที่และบริการ</h3>
+                <h3 className="text-navy font-bold text-sm border-b border-slate-100 pb-2">การเชื่อมโยงพื้นที่และบริการ</h3>
                 
                 <div className="space-y-2.5 text-xs font-medium text-slate-600">
                   <div className="flex justify-between items-center">
@@ -228,14 +269,14 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
               </div>
 
               {/* Quote booking CTA */}
-              <div className="bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 text-center text-white space-y-4 shadow-md">
+              <div className="bg-navy border border-blue-950 rounded-2xl p-6 text-center text-white space-y-4 shadow-md">
                 <h4 className="text-white font-extrabold text-sm">ต้องการขนย้ายของลักษณะใกล้เคียงกัน?</h4>
                 <p className="text-xs text-slate-300 leading-relaxed font-medium">
                   ให้ทีมงานมืออาชีพของ WMS วางแผนจัดรถและคนช่วยยกที่พอดีกับของ เพื่อความประหยัดและความปลอดภัย
                 </p>
                 <div className="space-y-2.5">
                   <a
-                    href="https://line.me/ti/p/DtICkMaDet"
+                    href={siteConfig.lineUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full bg-[#06C755] hover:bg-[#05B34F] text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-1.5 transition-colors text-xs font-bold shadow-xs"
@@ -244,11 +285,11 @@ export default async function PortfolioCaseDetailPage({ params }: CaseDetailPage
                     <span>แชร์ภาพประเมินราคา (LINE)</span>
                   </a>
                   <a
-                    href="tel:0612402436"
+                    href={siteConfig.phoneHref}
                     className="w-full bg-white/10 hover:bg-white/15 border border-white/20 text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold transition-colors"
                   >
                     <Phone className="h-3.5 w-3.5 text-blue-400" />
-                    <span className="font-mono">061-240-2436</span>
+                    <span className="font-mono">{siteConfig.phone}</span>
                   </a>
                 </div>
               </div>
