@@ -15,7 +15,7 @@ export const pricingPolicyData: PricingRecord[] = [
   {
     id: "pr-move-01",
     serviceType: "moving",
-    scenario: "ย้ายหอพัก / อพาร์ทเม้นท์ (ห้องสตูดิโอขนาดเล็ก หรือห้องน้ำหนักรวมไม่เกิน 4 คิว)",
+    scenario: "ย้ายหอพัก / อพาร์ทเม้นท์ (ห้องสตูดิโอขนาดเล็ก ปริมาตรสิ่งของไม่เกิน 4 ลูกบาศก์เมตร)",
     startingPrice: 1500,
     includedItems: [
       "รถกระบะตู้ทึบขนาด 2.1 เมตร ความยาวตู้ 2.2 เมตร 1 คัน",
@@ -46,8 +46,8 @@ export const pricingPolicyData: PricingRecord[] = [
   {
     id: "pr-motorcycle-01",
     serviceType: "motorcycle",
-    scenario: "ส่งมอเตอร์ไซค์ทั่วไป (100cc - 125cc) เช่น Honda Wave, Scoopy i ข้ามจังหวัด",
-    startingPrice: 2500,
+    scenario: "ส่งมอเตอร์ไซค์ทั่วไป (100cc - 125cc) เช่น Honda Wave, Scoopy i (ราคาขึ้นอยู่กับรุ่นรถ ระยะทาง และจุดรับ–ส่ง กรุณาสอบถามราคาก่อนจอง)",
+    startingPrice: 1000,
     includedItems: [
       "รถตู้ทึบป้องกันฝุ่น หินกระแทก และฝน ปิดมิดชิดตลอดเส้นทาง",
       "อุปกรณ์รัดตรึงล้อหน้า Wheel Chock และสายรัดแท่นล็อก Ratchet 4 จุด",
