@@ -179,9 +179,12 @@ assert.strictEqual(noLabel, null, "When conversion label is empty, direct conver
 const withLabel = getConversionSendTo("AW-123456789", "AbCdEfGh");
 assert.strictEqual(withLabel, "AW-123456789/AbCdEfGh", "Full send_to string formatted correctly for direct path");
 
-const withFullLabel = getConversionSendTo("AW-123456789", "AW-123456789/AbCdEfGh");
-assert.strictEqual(withFullLabel, "AW-123456789/AbCdEfGh", "Pre-formatted send_to string preserved");
-console.log("  ✔ Dual conversion path correctly avoids duplicate conversion firing.");
+const phoneSendTo = getConversionSendTo("AW-18500288022", "U5xQCNCH_ZsdEJb8z_VE");
+assert.strictEqual(phoneSendTo, "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE", "Expected phone conversion send_to must match exactly");
+
+const withFullLabel = getConversionSendTo("AW-18500288022", "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE");
+assert.strictEqual(withFullLabel, "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE", "Pre-formatted send_to string preserved");
+console.log("  ✔ Phone conversion direct send_to matches AW-18500288022/U5xQCNCH_ZsdEJb8z_VE.");
 
 console.log("\n==================================================================");
 console.log("  ALL TRACKING INTEGRATION UNIT CHECKS PASSED (5/5)               ");

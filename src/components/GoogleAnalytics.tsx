@@ -12,6 +12,7 @@ interface GoogleAnalyticsProps {
 type GtagFunction = (...args: unknown[]) => void;
 
 const DEFAULT_GOOGLE_ADS_ID = "AW-18500288022";
+const DEFAULT_PHONE_CONVERSION_LABEL = "U5xQCNCH_ZsdEJb8z_VE";
 
 /**
  * Validates and sanitizes a Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX)
@@ -233,7 +234,8 @@ export function trackPhoneClick(_deprecatedLabel?: string) {
 
     const adsId = getValidAdsId(process.env.NEXT_PUBLIC_GOOGLE_ADS_ID) || DEFAULT_GOOGLE_ADS_ID;
     if (adsId) {
-      const directSendTo = getConversionSendTo(adsId, process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL);
+      const phoneLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL || DEFAULT_PHONE_CONVERSION_LABEL;
+      const directSendTo = getConversionSendTo(adsId, phoneLabel);
       if (directSendTo) {
         gtag("event", "conversion", {
           send_to: directSendTo,
