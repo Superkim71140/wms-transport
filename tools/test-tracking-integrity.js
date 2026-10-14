@@ -182,9 +182,14 @@ assert.strictEqual(withLabel, "AW-123456789/AbCdEfGh", "Full send_to string form
 const phoneSendTo = getConversionSendTo("AW-18500288022", "U5xQCNCH_ZsdEJb8z_VE");
 assert.strictEqual(phoneSendTo, "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE", "Expected phone conversion send_to must match exactly");
 
+const lineSendTo = getConversionSendTo("AW-18500288022", "lZF3CK-6i5wdEJb8z_VE");
+assert.strictEqual(lineSendTo, "AW-18500288022/lZF3CK-6i5wdEJb8z_VE", "Expected LINE conversion send_to must match exactly");
+
 const withFullLabel = getConversionSendTo("AW-18500288022", "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE");
 assert.strictEqual(withFullLabel, "AW-18500288022/U5xQCNCH_ZsdEJb8z_VE", "Pre-formatted send_to string preserved");
-console.log("  ✔ Phone conversion direct send_to matches AW-18500288022/U5xQCNCH_ZsdEJb8z_VE.");
+console.log("  ✔ Phone & LINE conversion send_to destinations verified:");
+console.log("     - Phone: AW-18500288022/U5xQCNCH_ZsdEJb8z_VE");
+console.log("     - LINE:  AW-18500288022/lZF3CK-6i5wdEJb8z_VE");
 
 console.log("\n==================================================================");
 console.log("  ALL TRACKING INTEGRATION UNIT CHECKS PASSED (5/5)               ");
