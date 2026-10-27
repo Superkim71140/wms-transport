@@ -46,6 +46,8 @@ const FAQ = dynamic(() => import('@/components/FAQ'), {
 
 import { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo/metadata";
+import HomeArticleSection from "@/components/home/HomeArticleSection";
+import ServiceContactBanner from "@/components/ServiceContactBanner";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600;
@@ -188,6 +190,7 @@ export default function Home() {
         <ServiceSplitShowcase />
 
         {/* 2.5 PREMIUM SERVICES GRID SECTION */}
+        <div id="services" className="scroll-mt-24 pointer-events-none" />
         <section id="services-grid" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 bg-linear-to-b from-white via-[#F7FBFF] to-white">
           {/* Ambient radial highlight */}
           <div 
@@ -326,6 +329,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 2.5 COMPACT NAVY CONTACT BANNER (Immediately after main service overview) */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-4 sm:my-6 relative z-10">
+          <ServiceContactBanner />
+        </div>
 
         {/* 3. MOTORCYCLE PRICING SECTION */}
         <section id="pricing" className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-14 md:py-20 z-10 bg-slate-50/60 border-y border-slate-200/80">
@@ -789,6 +797,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* RECOMMENDED ARTICLES BEFORE MOVING */}
+        <HomeArticleSection />
 
         {/* 7. FAQ SECTION */}
         <div className="relative z-10 w-full py-8 bg-slate-50/50 border-y border-slate-200/70">

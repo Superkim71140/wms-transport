@@ -88,7 +88,8 @@ export default function ServiceAreaWorkGallery({
 
   return (
     <section
-      className="w-full py-12 md:py-16 bg-slate-50 border-t border-slate-200/80"
+      id="evidence"
+      className="w-full py-12 md:py-16 bg-slate-50 border-t border-slate-200/80 scroll-mt-20"
       aria-label={`ภาพรถและตัวอย่างผลงานจริงที่ให้บริการในเขต ${thaiName}`}
     >
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">

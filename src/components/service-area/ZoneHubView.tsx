@@ -18,6 +18,7 @@ import {
 import { siteConfig } from "@/lib/seo/site-config";
 import { escapeJsonLd } from "@/lib/seo/schema";
 import ServiceAreaQuoteBanner from "./ServiceAreaQuoteBanner";
+import ServiceContactBanner from "./ServiceContactBanner";
 import ServiceAreaFAQ from "./ServiceAreaFAQ";
 import TwoToneHeading from "./TwoToneHeading";
 import type { ZoneHubItem, LocalPointItem } from "@/data/areaZonesData";
@@ -326,6 +327,9 @@ export default function ZoneHubView({ zone, localPoints }: ZoneHubViewProps) {
             </div>
           </section>
 
+          {/* ── Contact Banner matching Screenshot 1 ── */}
+          <ServiceContactBanner areaName={`โซน${zone.thaiName}`} className="my-8" />
+
           {/* ── 2. Local Points Grid (10 Local Pages) ── */}
           <section>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-2">
@@ -461,7 +465,12 @@ export default function ZoneHubView({ zone, localPoints }: ZoneHubViewProps) {
           </section>
 
           {/* ── Approved Service-Confidence Banner (Positioned immediately above work gallery) ── */}
-          <ServiceAreaQuoteBanner areaName={`โซน${zone.thaiName}`} className="my-8" />
+          <ServiceAreaQuoteBanner
+            areaName={`โซน${zone.thaiName}`}
+            className="my-8"
+            quoteHref="/pricing"
+            servicesHref="/#services"
+          />
 
           {/* ── 6. Authentic Evidence Showcase (ภาพรถและตัวอย่างผลงาน WMS TRANSPORT) ── */}
           <section id="evidence" className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">

@@ -410,15 +410,17 @@ function ServiceAreaQuoteFormInner({
   };
 
   return (
-    <div
-      id="quotation-calculator"
-      className={`p-4 sm:p-6 md:p-8 my-8 bg-white shadow-xl ${className}`}
-      style={{
-        border: "1px solid rgba(226, 232, 240, 0.9)",
-        borderRadius: "1.75rem",
-        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.04)",
-      }}
-    >
+    <>
+      <div id="quote-prep" className="scroll-mt-28 pointer-events-none" />
+      <div
+        id="quotation-calculator"
+        className={`p-4 sm:p-6 md:p-8 my-8 bg-white shadow-xl ${className}`}
+        style={{
+          border: "1px solid rgba(226, 232, 240, 0.9)",
+          borderRadius: "1.75rem",
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.04)",
+        }}
+      >
       {/* 1. Header & Trust Banner */}
       <div className="text-center mb-6">
         <span
@@ -1150,7 +1152,8 @@ function ServiceAreaQuoteFormInner({
           </div>
         </form>
       )}
-    </div>
+      </div>
+    </>
   );
 }
 

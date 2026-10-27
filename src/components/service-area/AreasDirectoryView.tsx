@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/lib/seo/site-config";
 import ServiceAreaPromoBanner from "./ServiceAreaPromoBanner";
+import ServiceContactBanner from "./ServiceContactBanner";
 import TwoToneHeading from "./TwoToneHeading";
 import {
   MapPin,
@@ -1075,8 +1076,11 @@ export default function AreasDirectoryView({ initialPoints = [] }: AreasDirector
             ))}
           </div>
 
-          {/* Promotional Banner */}
-          <ServiceAreaPromoBanner areaName="ทั่วประเทศ" className="mb-12" />
+          {/* Contact Banner matching Screenshot 1 */}
+          <ServiceContactBanner
+            areaName="ทั่วประเทศ"
+            className="mb-12"
+          />
 
           {/* 5. LOCAL BUSINESS ADDRESS & MAP PANEL */}
           <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-slate-50/50 mb-12">

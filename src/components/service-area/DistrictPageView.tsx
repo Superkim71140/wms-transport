@@ -19,10 +19,12 @@ import ServiceAreaRouteTable from "@/components/service-area/ServiceAreaRouteTab
 import ServiceAreaCoverage from "@/components/service-area/ServiceAreaCoverage";
 import ServiceAreaRelatedServices from "@/components/service-area/ServiceAreaRelatedServices";
 import ServiceAreaQuoteForm from "@/components/service-area/ServiceAreaQuoteForm";
+import { GalleryItem } from "@/components/service-area/ServiceAreaWorkGallery";
 import TwoToneHeading from "@/components/service-area/TwoToneHeading";
 import LocalPageJumpNav from "@/components/service-area/LocalPageJumpNav";
 import JobTypeSelector from "@/components/service-area/JobTypeSelector";
 import QuotationPlanner from "@/components/service-area/QuotationPlanner";
+import ServiceContactBanner from "@/components/service-area/ServiceContactBanner";
 import { provinceMap } from "../../app/(marketing)/service/[province]/page";
 import {
   districtLandingPages,
@@ -118,6 +120,22 @@ export default function DistrictPageView({
         description: verifiedEvidence[0].shortJobDescription || `ภาพงานจริงเขต${name}`,
       }
     : null;
+
+  const customGalleryItems: GalleryItem[] | undefined =
+    verifiedEvidence.length > 0
+      ? verifiedEvidence
+          .filter((ev): ev is typeof ev & { realImagePath: string } => Boolean(ev.realImagePath))
+          .map((ev, i) => ({
+            id: `district-ev-${i}`,
+            image: ev.realImagePath,
+            alt: ev.shortJobDescription || `งานขนย้ายจริงโดย WMS TRANSPORT เขต${name}`,
+            title: ev.shortJobDescription || `ผลงานจริงเขต${name}`,
+            location: ev.verifiedJobLocation || `เขต${name}`,
+            category: "moving" as const,
+            tag: "งานจริง WMS",
+            date: ev.verifiedJobDate,
+          }))
+      : undefined;
 
   const routeRates = [
     {
@@ -222,6 +240,7 @@ export default function DistrictPageView({
           description: nb.directAnswer,
           href: `/areas/${nb.province}/${nb.districtSlug}`,
         }))}
+        galleryItems={customGalleryItems}
         faqProps={{
           thaiName: `เขต${name}`,
           faqs: record.localFaq,
@@ -319,6 +338,9 @@ export default function DistrictPageView({
             </Link>
           </div>
         </section>
+
+        {/* ── Contact Banner matching Screenshot 1 ── */}
+        <ServiceContactBanner areaName={`เขต${name}`} className="mb-8" />
 
         {/* ── UX B: Job-Type Selector & Tailored Checklist ── */}
         <JobTypeSelector areaName={`เขต${name}`} provinceSlug={province} />
@@ -495,21 +517,19 @@ export default function DistrictPageView({
           />
         </div>
 
-        {/* ── UX D: Relevant Genuine-Job Cards & Standards ── */}
+        {/* ── UX D: Service Standards & Case Study Link ── */}
         <section
-          id="evidence"
-          aria-labelledby="evidence-heading"
+          id="standards"
+          aria-labelledby="standards-heading"
           className="mb-10 bg-white border border-slate-200/80 rounded-2xl shadow-xs p-5 sm:p-7 scroll-mt-24"
         >
           <div className="flex items-center justify-between flex-wrap gap-2 mb-4 pb-2 border-b border-slate-100">
             <div>
               <span className="text-xs font-bold text-blue-600 uppercase tracking-widest block mb-1">
-                ผลงานและมาตรฐานการปฏิบัติงานจริง
+                มาตรฐานการดูแลความปลอดภัย WMS
               </span>
-              <h3 id="evidence-heading" className="text-lg sm:text-xl font-black text-slate-900">
-                {verifiedEvidence.length > 0
-                  ? `หลักฐานผลงานจริงในพื้นที่เขต${name} และแนวเชื่อมต่อ`
-                  : `มาตรฐานฟลีตรถกระบะตู้ทึบ WMS TRANSPORT พร้อมให้บริการเขต${name}`}
+              <h3 id="standards-heading" className="text-lg sm:text-xl font-black text-slate-900">
+                มาตรฐานฟลีตรถกระบะตู้ทึบ WMS TRANSPORT พร้อมให้บริการเขต{name}
               </h3>
             </div>
 
@@ -524,97 +544,31 @@ export default function DistrictPageView({
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            {verifiedEvidence.length > 0 ? (
-              verifiedEvidence.map((ev, i) => (
-                <div
-                  key={i}
-                  className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs flex flex-col justify-between"
-                >
-                  {ev.realImagePath && (
-                    <div className="relative w-full aspect-video bg-slate-900/5">
-                      <Image
-                        src={ev.realImagePath}
-                        alt={ev.shortJobDescription || `งานขนย้ายจริงโดย WMS TRANSPORT เขต${name}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 400px"
-                      />
-                    </div>
-                  )}
-                  <div className="p-3.5 bg-white border-t border-slate-100">
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">
-                        งานจริง WMS TRANSPORT
-                      </span>
-                      {ev.verifiedJobDate && (
-                        <span className="text-[11px] text-slate-400">
-                          {ev.verifiedJobDate}
-                        </span>
-                      )}
-                    </div>
-                    <h4 className="text-slate-900 font-bold text-sm mb-1 leading-snug">
-                      {ev.shortJobDescription}
-                    </h4>
-                    <p className="text-xs text-slate-500">
-                      พิกัดหน้างาน: {ev.verifiedJobLocation || `เขต${name}`}
-                    </p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              // Honestly labeled general WMS operational imagery
-              <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs">
-                <div className="relative w-full aspect-video bg-slate-900/5">
-                  <Image
-                    src="/images/WM10.webp"
-                    alt="ภาพมาตรฐานฟลีตรถกระบะตู้ทึบ WMS TRANSPORT และทีมงานช่วยยกของ"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 400px"
-                  />
-                </div>
-                <div className="p-3.5 bg-white border-t border-slate-100">
-                  <span className="text-[11px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md inline-block mb-1">
-                    ภาพมาตรฐานฟลีตรถ WMS TRANSPORT
-                  </span>
-                  <h4 className="text-slate-900 font-bold text-sm mb-1">
-                    มาตรฐานการจัดเตรียมรถและแพ็กเฟอร์นิเจอร์ป้องกันริ้วรอย
-                  </h4>
-                  <p className="text-xs text-slate-500">
-                    ภาพตัวอย่างมาตรฐานการปฏิบัติงานทั่วไป พร้อมสแตนด์บายรับงานในเขต{name}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Safety & Service Standards Card */}
-            <div className="border border-slate-200 rounded-xl p-5 flex flex-col justify-center bg-slate-50/80">
-              <div className="flex items-center gap-2 mb-3">
-                <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0" />
-                <h4 className="text-slate-900 font-bold text-sm">
-                  มาตรฐานการดูแลความปลอดภัย WMS
-                </h4>
-              </div>
-              <ul className="space-y-2 text-xs text-slate-600">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>รถกระบะตอนเดียวตู้ทึบปิดมิดชิด ความสูง 2.1 ม. ป้องกันแดด ฝน และฝุ่น 100%</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>อุปกรณ์ยึดตรึงสิ่งของและตัวล็อกล้อหน้าสำหรับมอเตอร์ไซค์/บิ๊กไบค์</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>ทีมงานช่วยยกของมืออาชีพ แรปฟิล์มกันรอยเฟอร์นิเจอร์หลักทุกชิ้น</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>แจ้งราคาสุทธิตั้งแต่ก่อนยืนยันบริการ ไม่มีค่าใช้จ่ายแอบแฝง</span>
-                </li>
-              </ul>
+          <div className="border border-slate-200 rounded-xl p-5 bg-slate-50/80">
+            <div className="flex items-center gap-2 mb-3">
+              <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0" />
+              <h4 className="text-slate-900 font-bold text-sm">
+                การันตีความปลอดภัยและข้อกำหนดการปฏิบัติงาน
+              </h4>
             </div>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600">
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>รถกระบะตอนเดียวตู้ทึบปิดมิดชิด ความสูง 2.1 ม. ป้องกันแดด ฝน และฝุ่น 100%</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>อุปกรณ์ยึดตรึงสิ่งของและตัวล็อกล้อหน้าสำหรับมอเตอร์ไซค์/บิ๊กไบค์</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>ทีมงานช่วยยกของมืออาชีพ แรปฟิล์มกันรอยเฟอร์นิเจอร์หลักทุกชิ้น</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>แจ้งราคาสุทธิตั้งแต่ก่อนยืนยันบริการ ไม่มีค่าใช้จ่ายแอบแฝง</span>
+              </li>
+            </ul>
           </div>
         </section>
 

@@ -26,6 +26,7 @@ import ServiceAreaCoverage from "@/components/service-area/ServiceAreaCoverage";
 import ServiceAreaAccordions from "@/components/service-area/ServiceAreaAccordions";
 import ServiceAreaRelatedServices from "@/components/service-area/ServiceAreaRelatedServices";
 import ServiceAreaQuoteForm from "@/components/service-area/ServiceAreaQuoteForm";
+import ServiceContactBanner from "@/components/service-area/ServiceContactBanner";
 import TwoToneHeading from "@/components/service-area/TwoToneHeading";
 
 // ─────────────────────────────────────────────
@@ -585,6 +586,9 @@ export default async function LocationHubPage({
             })}
           </div>
         </section>
+
+        {/* ── Contact Banner matching Screenshot 1 ── */}
+        <ServiceContactBanner areaName={provinceThai} className="mb-8" />
 
         {/* ── 2. TRANSPORT & ROUTE TABLE ── */}
         <ServiceAreaRouteTable

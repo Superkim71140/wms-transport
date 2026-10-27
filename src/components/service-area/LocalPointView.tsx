@@ -24,6 +24,7 @@ import { siteConfig } from "@/lib/seo/site-config";
 import { escapeJsonLd } from "@/lib/seo/schema";
 import TwoToneHeading from "./TwoToneHeading";
 import ServiceAreaQuoteBanner from "./ServiceAreaQuoteBanner";
+import ServiceContactBanner from "./ServiceContactBanner";
 import QuotationPlanner from "./QuotationPlanner";
 import type { ZoneHubItem, LocalPointItem } from "@/data/areaZonesData";
 
@@ -428,6 +429,9 @@ export default function LocalPointView({ point, zone }: LocalPointViewProps) {
               ))}
             </div>
           </section>
+
+          {/* ── Contact Banner matching Screenshot 1 ── */}
+          <ServiceContactBanner areaName={point.thaiName} className="my-8" />
 
           {/* ── G & H. Interactive Quotation Preparation Component ── */}
           <QuotationPlanner areaName={point.thaiName} />

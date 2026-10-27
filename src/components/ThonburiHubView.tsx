@@ -22,6 +22,7 @@ import ServiceAreaLayout from "@/components/service-area/ServiceAreaLayout";
 import ServiceAreaRouteTable from "@/components/service-area/ServiceAreaRouteTable";
 import ServiceAreaRelatedServices from "@/components/service-area/ServiceAreaRelatedServices";
 import ServiceAreaQuoteForm from "@/components/service-area/ServiceAreaQuoteForm";
+import ServiceContactBanner from "@/components/service-area/ServiceContactBanner";
 import TwoToneHeading from "@/components/service-area/TwoToneHeading";
 
 export default function ThonburiHubView() {
@@ -273,6 +274,9 @@ export default function ThonburiHubView() {
           </Link>
         </div>
       </section>
+
+      {/* ── Contact Banner matching Screenshot 1 ── */}
+      <ServiceContactBanner areaName="ฝั่งธนบุรี" className="mb-8" />
 
       {/* ── 3. TRANSPORT & ROUTE TABLE ── */}
       <ServiceAreaRouteTable
