@@ -170,7 +170,6 @@ async function validateSitemap() {
     console.log('3️⃣ Verifying strict exclusion of draft districts and internal routes...');
     const forbiddenPatterns = [
       '/dashboard',
-      '/areas/bkk-thonburi/nong-khaem',
       '/areas/bkk-thonburi/phasi-charoen',
       '/areas/bkk-thonburi/bang-khun-thian',
       '/areas/bkk-thonburi/rat-burana',

@@ -8,6 +8,7 @@ import { getAllZoneHubs, getPublishedLocalPoints } from "@/data/areaZonesData";
 import { guidesData } from "@/data/guidesData";
 import { portfolioCasesData } from "@/data/mediaEvidence";
 import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
+import { pricingPolicyData } from "@/data/pricingPolicy";
 
 // Fixed release date for this technical SEO deployment (Phase 4 & Local SEO Expansion)
 const SEO_RELEASE_DATE = new Date("2026-09-21");
@@ -58,78 +59,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 1. Guaranteed Core Routes
   const coreRoutes: MetadataRoute.Sitemap = [
-    {
-      url: domain,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: `${domain}/areas`,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${domain}/portfolio`,
-      lastModified: parseTruthfulLastmod(searchIntentMap.portfolio?.lastReviewedDate),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/blog`,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/pricing`,
-      lastModified: parseTruthfulLastmod(searchIntentMap.pricing?.lastReviewedDate),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${domain}/pricing/moving`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-moving"]?.lastReviewedDate),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/pricing/motorcycle-transport`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-motorcycle"]?.lastReviewedDate),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/pricing/motorcycle-2026`,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
-      url: `${domain}/pricing/freight`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["pricing-freight"]?.lastReviewedDate),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/compare/pickup-vs-box-truck`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["compare-pickup-vs-box"]?.lastReviewedDate),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/compare/moving-alone-vs-helpers`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["compare-alone-vs-helpers"]?.lastReviewedDate),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${domain}/compare/one-vehicle-vs-multiple-trips`,
-      lastModified: parseTruthfulLastmod(searchIntentMap["compare-one-vs-multiple"]?.lastReviewedDate),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    buildEntry(domain, 1.0, "daily"),
+    buildEntry(`${domain}/areas`, 0.9, "weekly"),
+    buildEntry(`${domain}/portfolio`, 0.8, "weekly", searchIntentMap.portfolio?.lastReviewedDate),
+    buildEntry(`${domain}/blog`, 0.8, "weekly"),
+    buildEntry(`${domain}/pricing`, 0.9, "weekly", movingPricingDate || searchIntentMap.pricing?.lastReviewedDate),
+    buildEntry(`${domain}/pricing/moving`, 0.8, "weekly", movingPricingDate),
+    buildEntry(`${domain}/pricing/motorcycle-transport`, 0.8, "weekly", motorcyclePricingDate),
+    buildEntry(`${domain}/pricing/motorcycle-2026`, 0.75, "monthly"),
+    buildEntry(`${domain}/pricing/freight`, 0.8, "weekly", freightPricingDate),
+    buildEntry(`${domain}/compare/pickup-vs-box-truck`, 0.8, "monthly", searchIntentMap["compare-pickup-vs-box"]?.lastReviewedDate),
+    buildEntry(`${domain}/compare/moving-alone-vs-helpers`, 0.8, "monthly", searchIntentMap["compare-alone-vs-helpers"]?.lastReviewedDate),
+    buildEntry(`${domain}/compare/one-vehicle-vs-multiple-trips`, 0.8, "monthly", searchIntentMap["compare-one-vs-multiple"]?.lastReviewedDate),
   ];
 
   try {
