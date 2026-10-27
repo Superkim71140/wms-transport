@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone, Menu, X, ChevronDown, MapPin, ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { siteConfig } from "@/lib/seo/site-config";
 
 const priorityLocations = [
   {
@@ -53,12 +54,46 @@ export default function Navbar() {
   const [isAreaDropdownOpen, setIsAreaDropdownOpen] = useState(false);
   const [isMobileAreaOpen, setIsMobileAreaOpen] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setIsMobileMenuOpen(false);
+    setIsMobileAreaOpen(false);
+  }
   const [activeHash, setActiveHash] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const [isIndicatorReady, setIsIndicatorReady] = useState(false);
   const navItemsRef = useRef<Map<string, HTMLElement>>(new Map());
+  const navRef = useRef<HTMLElement>(null);
+
+  // Dynamic Header-Offset Measurement for Shared Layout Clearance
+  useEffect(() => {
+    const updateHeaderOffset = () => {
+      if (!navRef.current) return;
+      const isDesktop = window.innerWidth >= 1024;
+      const clearance = isDesktop ? 20 : 16;
+      const topOffset = isDesktop ? (isScrolled ? 8 : 16) : 12;
+      const baseHeight = isDesktop ? 68 : 56;
+      const rect = navRef.current.getBoundingClientRect();
+      const measuredBottom = !isMobileMenuOpen && rect.bottom > 0 ? rect.bottom : topOffset + baseHeight;
+      const totalOffset = Math.ceil(measuredBottom + clearance);
+
+      document.documentElement.style.setProperty("--site-header-offset", `${totalOffset}px`);
+      document.documentElement.style.setProperty("--site-header-height", `${Math.ceil(rect.height)}px`);
+    };
+
+    updateHeaderOffset();
+    const ro = new ResizeObserver(updateHeaderOffset);
+    if (navRef.current) ro.observe(navRef.current);
+    window.addEventListener("resize", updateHeaderOffset);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateHeaderOffset);
+    };
+  }, [isMobileMenuOpen, isScrolled]);
 
   useEffect(() => {
     let frameId: number;
@@ -200,11 +235,6 @@ export default function Navbar() {
     setIsMobileAreaOpen(false);
   }, []);
 
-  // Close mobile menu and area submenu on pathname change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-    setIsMobileAreaOpen(false);
-  }, [pathname]);
 
   // Close mobile menu on Escape key
   useEffect(() => {
@@ -244,6 +274,7 @@ export default function Navbar() {
       )}
 
       <nav
+        ref={navRef}
         className={`fixed z-[200] transition-all duration-300 ease-in-out
           /* Mobile Layout */
           top-3 left-3 right-3 w-auto max-w-none rounded-2xl px-3.5 py-2.5 border
@@ -437,14 +468,14 @@ export default function Navbar() {
         {/* Desktop CTA Buttons */}
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <a
-            href="tel:0612402436"
+            href={siteConfig.phoneHref}
             className="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm hover:bg-slate-100 hover:border-slate-300 transition-all duration-200 shadow-xs group"
           >
             <Phone className="w-3.5 h-3.5 text-blue-600 group-hover:scale-110 transition-transform" />
-            <span className="font-mono tracking-wide text-xs sm:text-sm">061-240-2436</span>
+            <span className="font-mono tracking-wide text-xs sm:text-sm">{siteConfig.phone}</span>
           </a>
           <a
-            href="https://line.me/ti/p/DtICkMaDet"
+            href={siteConfig.lineUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contact WMS Transport via LINE"
@@ -606,16 +637,16 @@ export default function Navbar() {
           {/* Streamlined Quick-Contact CTAs (Exactly 2 Buttons, Responsive Grid) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-100">
             <a
-              href="tel:0612402436"
+              href={siteConfig.phoneHref}
               onClick={closeMobileMenu}
-              aria-label="โทรหา WMS Transport ที่เบอร์ 061-240-2436"
+              aria-label={`โทรหา WMS Transport ที่เบอร์ ${siteConfig.phone}`}
               className="flex items-center justify-center gap-2 w-full py-3 px-3 rounded-xl bg-[#0B1F3A] hover:bg-[#163761] text-white font-bold text-sm shadow-xs min-h-[44px] transition-colors"
             >
               <Phone className="w-4 h-4 text-blue-400 shrink-0" />
-              <span className="font-mono tracking-wide">061-240-2436</span>
+              <span className="font-mono tracking-wide">{siteConfig.phone}</span>
             </a>
             <a
-              href="https://line.me/ti/p/DtICkMaDet"
+              href={siteConfig.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMobileMenu}

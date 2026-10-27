@@ -1,0 +1,143 @@
+# WMS TRANSPORT - Full Technical & Service Documentation
+
+WMS TRANSPORT เป็นผู้ให้บริการรถกระบะตู้ทึบรับจ้าง ขนย้ายบ้าน คอนโดมิเนียม ทาวน์โฮม ขนส่งสินค้าโรงงานอุตสาหกรรม คลังสินค้า และขนส่งรถมอเตอร์ไซค์ทั่วไทย
+สำนักงานใหญ่ตั้งอยู่ที่: 75 535 ซ.13 ตำบลบ้านเกาะ อำเภอเมืองสมุทรสาคร จังหวัดสมุทรสาคร 74000
+โทรศัพท์: 061-240-2436
+LINE URL: https://line.me/ti/p/DtICkMaDet
+เวลาทำการ: ให้บริการทุกวัน แนะนำจองคิวรถล่วงหน้า หรือสอบถามรอบรถว่างในเวลาทำการ
+
+---
+
+## สเปกยานพาหนะและอุปกรณ์ประจำรถ (Vehicle & Equipment Specifications)
+1. รถกระบะตอนเดียวตู้ทึบ (Standard High-Roof Closed-Box Pickup Truck)
+   - ความสูงภายในตู้: ประมาณ 2.10 เมตร
+   - ความยาวภายในกระบะ: ประมาณ 2.40 - 2.50 เมตร
+   - ความกว้างภายใน: ประมาณ 1.65 - 1.70 เมตร
+   - ความสูงรวมตัวรถภายนอก: ประมาณ 2.80 เมตร (ผ่านซุ้มประตูหมู่บ้านจัดสรรและหน้าโรงงานได้ปกติ ไม่เหมาะกับชั้นใต้ดินต่ำกว่า 2.5 เมตร)
+   - การป้องกันสภาพอากาศ: ปิดมิดชิด ปกป้องสิ่งของจากแดด ลม ละอองฝน และฝุ่นละออง
+   - กฎหมายการจราจร: รถกระบะ 4 ล้อ ไม่ติดเวลาตามกฎหมาย สัญจรได้คล่องตัว
+
+2. อุปกรณ์รัดตรึงและทุ่นแรงประจำรถ
+   - สายรัดมาตรฐานสำหรับรัดตรึงสิ่งของและมอเตอร์ไซค์
+   - ตัวล็อกล้อหน้ามอเตอร์ไซค์ (Wheel Chock) สำหรับตั้งตรงขณะขนย้าย
+   - ผ้านวมหนาและฟิล์มยืดสำหรับพันเฟอร์นิเจอร์ป้องกันรอยขูดขีด
+   - รถเข็นทุ่นแรงสำหรับเคลื่อนย้ายกล่องสินค้าและเครื่องใช้ไฟฟ้า
+
+---
+
+## บริการหลัก (Core Service Portfolio)
+1. บริการขนย้ายบ้าน คอนโดมิเนียม หอพัก และอาคารพาณิชย์
+   - ขนย้ายสิ่งของ เครื่องใช้ไฟฟ้า เฟอร์นิเจอร์ เตียง โซฟา ตู้เย็น เครื่องซักผ้า
+   - มีทีมงานช่วยยกของมืออาชีพ
+   - ประสานงานระเบียบอาคาร การใช้ลิฟต์ขนของ และช่องเทียบรถ Loading Bay
+
+2. บริการขนส่งมอเตอร์ไซค์และบิ๊กไบค์ทั่วไทย
+   - บริการรับ-ส่งถึงหน้าบ้าน (Door-to-Door)
+   - ล็อกล้อและรัดตรึง 4 จุด โดยไม่กดทับแฟริ่งหรือชิ้นส่วนสีของรถ
+   - ขนส่งในตู้ทึบมิดชิด ปลอดภัยจากสะเก็ดหินและละอองฝนตลอดเส้นทาง
+
+3. บริการขนส่งสินค้าโรงงาน โกดังสินค้า และงานเหมาเที่ยว B2B
+   - ขนส่งสินค้าพาเลท กล่องกระดาษ บรรจุภัณฑ์ และชิ้นส่วนอุตสาหกรรม
+   - บริการรับส่งเอกสารใบส่งของ เซ็นรับ (Proof of Delivery - POD) ชัดเจน
+   - ปฏิบัติตามมาตรฐานความปลอดภัยของโรงงาน
+
+---
+
+## โครงสร้าง 7 โซนบริการยุทธศาสตร์และ 75 พื้นที่บริการย่อย
+
+### โซน 1: /areas/maha-chai (มหาชัย – เมืองสมุทรสาคร - 12 พื้นที่บริการ)
+- จุดที่ 1: เมืองสมุทรสาคร (/areas/maha-chai/mueang-samut-sakhon)
+- จุดที่ 2: ท่าทราย (/areas/maha-chai/tha-sai)
+- จุดที่ 3: บ้านเกาะ - ที่ตั้ง สนง.ใหญ่ WMS (/areas/maha-chai/ban-ko)
+- จุดที่ 4: นาดี (/areas/maha-chai/na-di)
+- จุดที่ 5: มหาชัย (/areas/samutsakhon/maha-chai)
+- จุดที่ 6: บางน้ำจืด (/areas/maha-chai/bang-nam-chuet)
+- จุดที่ 7: โพธิ์แจ้ (/areas/maha-chai/phoi-chae)
+- จุดที่ 8: พันท้ายนรสิงห์ (/areas/maha-chai/phanthai-norasing)
+- จุดที่ 9: โคกขาม (/areas/maha-chai/khok-kham)
+- จุดที่ 10: คอกกระบือ (/areas/maha-chai/khok-krabue)
+- จุดที่ 71: บ้านแพ้ว (/areas/maha-chai/ban-phaeo)
+- จุดที่ 72: ยกกระบัตร (/areas/maha-chai/yok-krabat)
+
+### โซน 2: /areas/krathumbaen-omnoi (กระทุ่มแบน – อ้อมน้อย - 10 พื้นที่บริการ)
+- จุดที่ 11: กระทุ่มแบน (/areas/krathumbaen-omnoi/krathum-baen)
+- จุดที่ 12: ตลาดกระทุ่มแบน (/areas/krathumbaen-omnoi/talat-krathum-baen)
+- จุดที่ 13: แคราย (/areas/krathumbaen-omnoi/khae-rai)
+- จุดที่ 14: คลองมะเดื่อ (/areas/krathumbaen-omnoi/khlong-maduea)
+- จุดที่ 15: สวนหลวง (/areas/krathumbaen-omnoi/suan-luang)
+- จุดที่ 16: พุทธสาคร (/areas/krathumbaen-omnoi/phuttha-sakhon)
+- จุดที่ 17: อ้อมน้อย (/areas/krathumbaen-omnoi/om-noi)
+- จุดที่ 18: ดอนไก่ดี (/areas/krathumbaen-omnoi/don-kai-di)
+- จุดที่ 19: ท่าไม้ (/areas/krathumbaen-omnoi/tha-mai)
+- จุดที่ 20: ท่าเสา (/areas/krathumbaen-omnoi/tha-sao)
+
+### โซน 3: /areas/rama2-bangkradi (พระราม 2 – บางกระดี่ - 10 พื้นที่บริการ)
+- จุดที่ 21: พระราม 2 (/areas/rama2-bangkradi/rama-2)
+- จุดที่ 22: แสมดำ (/areas/rama2-bangkradi/samae-dam)
+- จุดที่ 23: บางกระดี่ (/areas/rama2-bangkradi/bang-kradi)
+- จุดที่ 24: ท่าข้าม (/areas/rama2-bangkradi/tha-kham)
+- จุดที่ 25: เคหะธนบุรี (/areas/rama2-bangkradi/kheha-thonburi)
+- จุดที่ 26: เทียนทะเล (/areas/rama2-bangkradi/thian-thale)
+- จุดที่ 27: บางขุนเทียน (/areas/bkk-thonburi/bang-khun-thian)
+- จุดที่ 28: จอมทอง (/areas/bkk-thonburi/chom-thong)
+- จุดที่ 29: ทุ่งครุ (/areas/bkk-thonburi/thung-khru)
+- จุดที่ 30: ราษฎร์บูรณะ (/areas/bkk-thonburi/rat-burana)
+
+### โซน 4: /areas/bangbon-ekachai (บางบอน – เอกชัย - 10 พื้นที่บริการ)
+- จุดที่ 31: บางบอน (/areas/bkk-thonburi/bang-bon)
+- จุดที่ 32: เอกชัย (/areas/bangbon-ekachai/ekkachai)
+- จุดที่ 33: คลองบางพราน (/areas/bangbon-ekachai/khlong-bang-phran)
+- จุดที่ 34: กัลปพฤกษ์ (/areas/bangbon-ekachai/kanlapaphruek)
+- จุดที่ 35: สำเพ็ง 2 (/areas/bangbon-ekachai/sampheng-2)
+- จุดที่ 36: บางบอน 3 (/areas/bangbon-ekachai/bang-bon-3)
+- จุดที่ 37: บางบอน 5 (/areas/bangbon-ekachai/bang-bon-5)
+- จุดที่ 38: บางบอนเหนือ (/areas/bangbon-ekachai/bang-bon-nuea)
+- จุดที่ 39: บางบอนใต้ (/areas/bangbon-ekachai/bang-bon-tai)
+- จุดที่ 40: คลองบางขุนเทียน (/areas/bangbon-ekachai/khlong-bang-khun-thian)
+
+### โซน 5: /areas/nongkhaem-phetkasem81 (หนองแขม – เพชรเกษม 81 - 10 พื้นที่บริการ)
+- จุดที่ 41: หนองแขม (/areas/bkk-thonburi/nong-khaem)
+- จุดที่ 42: เพชรเกษม 69 (/areas/nongkhaem-phetkasem81/phetkasem-69)
+- จุดที่ 43: เพชรเกษม 77 (/areas/nongkhaem-phetkasem81/phetkasem-77)
+- จุดที่ 44: เพชรเกษม 79 (/areas/nongkhaem-phetkasem81/phetkasem-79)
+- จุดที่ 45: เพชรเกษม 81 (/areas/nongkhaem-phetkasem81/phetkasem-81)
+- จุดที่ 46: เพชรเกษม 110 (/areas/nongkhaem-phetkasem81/phetkasem-110)
+- จุดที่ 47: เลียบคลองภาษีเจริญเหนือ (/areas/nongkhaem-phetkasem81/liap-khlong-phasi-charoen-nuea)
+- จุดที่ 48: เลียบคลองภาษีเจริญใต้ (/areas/nongkhaem-phetkasem81/liap-khlong-phasi-charoen-tai)
+- จุดที่ 49: หนองค้างพลู (/areas/nongkhaem-phetkasem81/nong-khang-phlu)
+- จุดที่ 50: แขวงหนองแขม (/areas/nongkhaem-phetkasem81/khwaeng-nong-khaem)
+
+### โซน 6: /areas/bang-khae (บางแค – เพชรเกษม - 10 พื้นที่บริการ)
+- จุดที่ 51: บางแค (/areas/bkk-thonburi/bang-khae)
+- จุดที่ 52: เพชรเกษม (/areas/bang-khae/phetkasem)
+- จุดที่ 53: หลักสอง (/areas/bang-khae/lak-song)
+- จุดที่ 54: วัดม่วง (/areas/bang-khae/wat-muang)
+- จุดที่ 55: บางแวก (/areas/bang-khae/bang-waek)
+- จุดที่ 56: บางหว้า (/areas/bang-khae/bang-wa)
+- จุดที่ 57: ภาษีเจริญ (/areas/bkk-thonburi/phasi-charoen)
+- จุดที่ 58: บางแคเหนือ (/areas/bang-khae/bang-khae-nuea)
+- จุดที่ 59: บางไผ่ (/areas/bang-khae/bang-phai)
+- จุดที่ 60: กาญจนาภิเษก บางแค (/areas/bang-khae/kanchanaphisek-bang-khae)
+
+### โซน 7: /areas/phutthamonthon-sai-1-4 (พุทธมณฑลสาย 1–4 – ศาลายา - 13 พื้นที่บริการ)
+- จุดที่ 61: พุทธมณฑลสาย 1 (/areas/phutthamonthon-sai-1-4/phutthamonthon-sai-1)
+- จุดที่ 62: พุทธมณฑลสาย 2 (/areas/phutthamonthon-sai-1-4/phutthamonthon-sai-2)
+- จุดที่ 63: พุทธมณฑลสาย 3 (/areas/phutthamonthon-sai-1-4/phutthamonthon-sai-3)
+- จุดที่ 64: พุทธมณฑลสาย 4 (/areas/phutthamonthon-sai-1-4/phutthamonthon-sai-4)
+- จุดที่ 65: ถนนพระเทพฯ (/areas/phutthamonthon-sai-1-4/phran-nok-phutthamonthon-sai-4)
+- จุดที่ 66: สนามหลวง 2 (/areas/phutthamonthon-sai-1-4/sanam-luang-2)
+- จุดที่ 67: ศาลายา (/areas/phutthamonthon-sai-1-4/salaya)
+- จุดที่ 68: ทวีวัฒนา (/areas/bkk-thonburi/thawi-watthana)
+- จุดที่ 69: ตลิ่งชัน (/areas/bkk-thonburi/taling-chan)
+- จุดที่ 70: สามพราน (/areas/phutthamonthon-sai-1-4/sam-phran)
+- จุดที่ 73: ไร่ขิง (/areas/phutthamonthon-sai-1-4/rai-khing)
+- จุดที่ 74: พุทธมณฑลสาย 5 (/areas/phutthamonthon-sai-1-4/phutthamonthon-sai-5)
+- จุดที่ 75: นครชัยศรี (/areas/phutthamonthon-sai-1-4/nakhon-chai-si)
+
+---
+
+## ขั้นตอนการขอใบเสนอราคา (Quotation Process)
+1. ส่งพิกัดจุดรับและจุดส่งผ่านทาง LINE หรือแจ้งทางโทรศัพท์ 061-240-2436
+2. ส่งรูปถ่ายสิ่งของหรือรายการสัมภาระ/สินค้าที่ต้องการขนย้าย
+3. แจ้งเงื่อนไขชั้นอาคาร (มีลิฟต์หรือบันไดกี่ชั้น) และจำนวนคนยกที่ต้องการ
+4. เจ้าหน้าที่ประเมินราคาสุทธิตามระยะทางจริง แจ้งยืนยันราคาก่อนเริ่มงาน ไม่มีค่าใช้จ่ายแอบแฝง

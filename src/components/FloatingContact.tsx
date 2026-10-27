@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Phone, MessageCircle, X } from "lucide-react";
 import Image from "next/image";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export default function FloatingContact() {
   const [isVisible, setIsVisible] = useState(false);
@@ -128,7 +129,7 @@ export default function FloatingContact() {
                 {/* 1. Facebook/Messenger Button (Top) */}
                 <motion.div variants={itemVariants}>
                   <a
-                    href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
+                    href={siteConfig.facebookPageAlt || siteConfig.facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
@@ -154,16 +155,16 @@ export default function FloatingContact() {
                 {/* 2. Telephone Button (Middle) */}
                 <motion.div variants={itemVariants}>
                   <a
-                    href="tel:0612402436"
+                    href={siteConfig.phoneHref}
                     onClick={() => setIsOpen(false)}
-                    aria-label="โทรหา WMS Transport ที่เบอร์ 061-240-2436"
+                    aria-label={`โทรหา WMS Transport ที่เบอร์ ${siteConfig.phone}`}
                     className="group relative flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-full bg-[#EF4444] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#EF4444]"
                   >
                     <span
                       aria-hidden="true"
                       className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-lg bg-[#0B1F3A] text-white text-xs font-semibold shadow-md whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-150 font-sans"
                     >
-                      โทร 061-240-2436
+                      โทร {siteConfig.phone}
                     </span>
                     <Phone className="w-5 h-5 text-white" fill="currentColor" aria-hidden="true" />
                   </a>
@@ -172,7 +173,7 @@ export default function FloatingContact() {
                 {/* 3. LINE Button (Bottom Contact Action) */}
                 <motion.div variants={itemVariants}>
                   <a
-                    href="https://line.me/ti/p/DtICkMaDet"
+                    href={siteConfig.lineUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { siteConfig } from "@/lib/seo/site-config";
 import { posts } from "../posts";
 
 // Re-export posts to support any backwards-compatibility import
@@ -47,32 +48,68 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  const schemaJson = {
+  const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": post.title,
-    "image": `https://wms-transport.com${post.image}`,
+    "image": post.image.startsWith("http") ? post.image : `${siteConfig.baseUrl}${post.image}`,
     "datePublished": post.dateISO,
+    "dateModified": post.dateISO,
     "author": {
       "@type": "Organization",
-      "name": "WMS TRANSPORT"
+      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "name": siteConfig.businessName,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "WMS TRANSPORT",
+      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "name": siteConfig.businessFullName,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://wms-transport.com/logoWMS.png"
-      }
+        "url": `${siteConfig.baseUrl}/logoWMS.png`,
+      },
     },
-    "description": post.description
+    "description": post.description,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteConfig.baseUrl}/blog/${slug}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "หน้าหลัก",
+        item: siteConfig.baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "บทความและสาระน่ารู้",
+        item: `${siteConfig.baseUrl}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${siteConfig.baseUrl}/blog/${slug}`,
+      },
+    ],
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden font-sans text-slate-900">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <main className="grow pt-12 pb-20 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">

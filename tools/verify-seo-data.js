@@ -45,6 +45,9 @@ function loadTs(relPath) {
     if (p === '@/data/approvedRouteCorridors' || p === './approvedRouteCorridors') {
       return loadTs('src/data/approvedRouteCorridors.ts');
     }
+    if (p === '@/data/areaZonesData' || p === './areaZonesData') {
+      return loadTs('src/data/areaZonesData.ts');
+    }
     throw new Error(`External require not supported in validator: ${p}`);
   }, path.dirname(fullPath), fullPath);
   return mod.exports;
@@ -68,7 +71,7 @@ function warn(condition, message) {
 console.log('🔍 Running WMS TRANSPORT Strict SEO & Source-of-Truth Validator...\n');
 
 // 1. Load authoritative datasets
-let siteConfig, searchIntentMap, districtLandingPages, guidesData, portfolioCasesData, schemaHelper, approvedRouteCorridorsMod;
+let siteConfig, searchIntentMap, districtLandingPages, guidesData, portfolioCasesData, schemaHelper, approvedRouteCorridorsMod, areaZonesMod;
 
 try {
   siteConfig = loadTs('src/lib/seo/site-config.ts').siteConfig;
@@ -78,6 +81,7 @@ try {
   portfolioCasesData = loadTs('src/data/mediaEvidence.ts').portfolioCasesData;
   schemaHelper = loadTs('src/lib/seo/schema.ts');
   approvedRouteCorridorsMod = loadTs('src/data/approvedRouteCorridors.ts');
+  areaZonesMod = loadTs('src/data/areaZonesData.ts');
 } catch (e) {
   console.error('❌ Failed to load TypeScript datasets:', e.message);
   process.exit(1);
@@ -131,6 +135,16 @@ Object.values(guidesData).forEach(item => {
 
 Object.values(portfolioCasesData).forEach(item => {
   validateCanonical(`/portfolio/${item.slug}`, `Portfolio: ${item.slug}`);
+});
+
+// Validate 7 Zone Hubs
+Object.values(areaZonesMod.ZONE_HUBS).forEach(hub => {
+  validateCanonical(`/areas/${hub.slug}`, `Zone Hub: ${hub.slug}`);
+});
+
+// Validate Published Local Points
+areaZonesMod.getAllLocalPoints().forEach(point => {
+  validateCanonical(point.preferredUrl, `Local Point: #${point.pointId} (${point.slug})`);
 });
 
 // ==========================================
@@ -496,6 +510,84 @@ Object.values(districtLandingPages)
       warn(hasLink, `[DISTRICT MISSING INCOMING LINK] Published district page "${linkPattern}" is missing an incoming contextual internal link from its parent hub (${record.province})`);
     }
   });
+
+// ==========================================
+// CHECK 7: 7-ZONE HUBS & 70-POINT COVERAGE AUDIT
+// ==========================================
+console.log('7️⃣ Checking 7 Zone Hubs & 70 Local Points hierarchy & data integrity...');
+
+const expectedZoneSlugs = [
+  'maha-chai',
+  'krathumbaen-omnoi',
+  'rama2-bangkradi',
+  'bangbon-ekachai',
+  'nongkhaem-phetkasem81',
+  'bang-khae',
+  'phutthamonthon-sai-1-4'
+];
+
+const zoneHubsList = Object.values(areaZonesMod.ZONE_HUBS);
+assert(zoneHubsList.length === 7, `[ZONE HUBS COUNT] Expected exactly 7 zone hubs, found ${zoneHubsList.length}`);
+
+expectedZoneSlugs.forEach(expectedSlug => {
+  const hub = areaZonesMod.ZONE_HUBS[expectedSlug];
+  assert(hub !== undefined, `[MISSING ZONE HUB] Expected zone hub "${expectedSlug}" not found`);
+  if (hub) {
+    assert(hub.title && hub.title.length > 10, `[ZONE HUB TITLE] Hub "${expectedSlug}" has invalid title`);
+    assert(hub.description && hub.description.length > 20, `[ZONE HUB DESC] Hub "${expectedSlug}" has invalid description`);
+    assert(hub.h1 && hub.h1.length > 5, `[ZONE HUB H1] Hub "${expectedSlug}" has invalid primaryH1`);
+    assert(Array.isArray(hub.serviceScope) && hub.serviceScope.length >= 3, `[ZONE HUB SCOPE] Hub "${expectedSlug}" has insufficient serviceScope items`);
+    assert(Array.isArray(hub.quotationNotes) && hub.quotationNotes.length >= 3, `[ZONE HUB QUOTE] Hub "${expectedSlug}" has insufficient quotationNotes`);
+  }
+});
+
+const allPoints = areaZonesMod.getAllLocalPoints();
+assert(allPoints.length === 81, `[POINTS COUNT] Expected exactly 81 local points, found ${allPoints.length}`);
+
+const publishedPoints = allPoints.filter(p => p.status === 'published');
+const draftPoints = allPoints.filter(p => p.status === 'draft');
+const newPoints = allPoints.filter(p => p.action === 'new_page');
+const reusedPoints = allPoints.filter(p => p.action === 'existing_reused' || p.action === 'enrich_existing');
+
+assert(publishedPoints.length === 75, `[PUBLISHED COUNT] Expected exactly 75 published local points, found ${publishedPoints.length}`);
+assert(draftPoints.length === 6, `[DRAFT COUNT] Expected exactly 6 draft local points, found ${draftPoints.length}`);
+
+console.log(`   - Total Local Points: ${allPoints.length} (Published: ${publishedPoints.length}, Drafts: ${draftPoints.length}, New Pages: ${newPoints.length}, Reused/Enriched Established: ${reusedPoints.length})`);
+
+// Validate every published point has complete answers and checklist
+publishedPoints.forEach(point => {
+  assert(point.directAnswer && point.directAnswer.length > 30, `[POINT DIRECT ANSWER] Point #${point.pointId} (${point.slug}) missing directAnswer`);
+  assert(point.localContext && point.localContext.length > 30, `[POINT CONTEXT] Point #${point.pointId} (${point.slug}) missing localContext`);
+  assert(Array.isArray(point.quotationChecklist) && point.quotationChecklist.length >= 3, `[POINT QUOTE CHECKLIST] Point #${point.pointId} (${point.slug}) quotationChecklist too short`);
+  assert(Array.isArray(point.localFaqs) && point.localFaqs.length >= 1, `[POINT FAQS] Point #${point.pointId} (${point.slug}) missing FAQs`);
+  assert(point.accessAndLoading && point.accessAndLoading.parking, `[POINT ACCESS] Point #${point.pointId} missing parking access considerations`);
+});
+
+// Validate every draft point has valid draftReason
+draftPoints.forEach(point => {
+  assert(point.draftReason && point.draftReason.length >= 10, `[DRAFT REASON MISSING] Draft point #${point.pointId} (${point.slug}) missing descriptive draftReason`);
+  assert(point.action === 'draft', `[DRAFT ACTION] Draft point #${point.pointId} action must be 'draft'`);
+});
+
+// Verify keyword-map.csv exists and has 81 points
+const kwMapPath = path.join(ROOT, 'keyword-map.csv');
+assert(fs.existsSync(kwMapPath), `[KEYWORD MAP MISSING] keyword-map.csv does not exist`);
+if (fs.existsSync(kwMapPath)) {
+  const kwContent = fs.readFileSync(kwMapPath, 'utf8').trim().split('\n');
+  assert(kwContent.length === 82, `[KEYWORD MAP ROWS] Expected 82 lines (1 header + 81 points) in keyword-map.csv, found ${kwContent.length}`);
+}
+
+// Verify docs/keyword-map.csv exists and has 81 points
+const docsKwMapPath = path.join(ROOT, 'docs/keyword-map.csv');
+assert(fs.existsSync(docsKwMapPath), `[DOCS KEYWORD MAP MISSING] docs/keyword-map.csv does not exist`);
+if (fs.existsSync(docsKwMapPath)) {
+  const docsKwContent = fs.readFileSync(docsKwMapPath, 'utf8').trim().split('\n');
+  assert(docsKwContent.length === 82, `[DOCS KEYWORD MAP ROWS] Expected 82 lines (1 header + 81 points) in docs/keyword-map.csv, found ${docsKwContent.length}`);
+}
+
+// Verify llms.txt & llms-full.txt
+assert(fs.existsSync(path.join(ROOT, 'public/llms.txt')), `[LLMS.TXT MISSING] public/llms.txt does not exist`);
+assert(fs.existsSync(path.join(ROOT, 'public/llms-full.txt')), `[LLMS-FULL.TXT MISSING] public/llms-full.txt does not exist`);
 
 // ==========================================
 // SUMMARY

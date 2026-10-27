@@ -49,3 +49,6 @@ ui-ux-pro-max-skill-main/
 lint-output.txt
 public/~partytown/
 *.zip
+
+# Customer data storage
+/data/quotations/

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Check, ArrowRight, ChevronDown } from "lucide-react";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export default function ServiceSplitShowcase() {
   const checklist = [
@@ -94,7 +95,7 @@ export default function ServiceSplitShowcase() {
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
                 <a
-                  href="https://line.me/ti/p/~@wmstransport"
+                  href={siteConfig.lineUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-base shadow-md hover:shadow-blue-500/25 transition-all active:scale-[0.98] -translate-y-0 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 min-h-[48px]"

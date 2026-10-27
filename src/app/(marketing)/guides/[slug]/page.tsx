@@ -8,6 +8,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import IntentHero from "@/components/IntentHero";
 import CargoFitPlanner from "@/components/CargoFitPlanner";
 import { guidesData } from "@/data/guidesData";
+import { siteConfig } from "@/lib/seo/site-config";
 
 interface GuidePageProps {
   params: Promise<{
@@ -47,8 +48,69 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
     notFound();
   }
 
+  const guideArticleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": guide.h1,
+    "description": guide.description,
+    "image": `${siteConfig.baseUrl}/images/WM8.webp`,
+    "datePublished": "2026-06-25",
+    "dateModified": guide.lastUpdated || "2026-06-25",
+    "author": {
+      "@type": "Organization",
+      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "name": siteConfig.businessName,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "name": siteConfig.businessFullName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteConfig.baseUrl}/logoWMS.png`,
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteConfig.baseUrl}/guides/${slug}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "หน้าหลัก",
+        item: siteConfig.baseUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "คู่มือและบทความ",
+        item: `${siteConfig.baseUrl}/guides/truck-capacity-cbm`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: guide.h1,
+        item: `${siteConfig.baseUrl}/guides/${slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden font-sans text-slate-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideArticleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <main className="grow relative pt-12 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
           {/* Breadcrumbs */}

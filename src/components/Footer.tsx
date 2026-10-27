@@ -1,208 +1,238 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Clock, ShieldCheck } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export default function Footer() {
-  const seoKeywords = [
-    { text: "#รถกระบะตู้ทึบรับจ้าง", href: "/service/samutsakhon" },
-    { text: "#ย้ายบ้าน", href: "/service/bangkok" },
-    { text: "#ย้ายคอนโด", href: "/service/bkk-thonburi" },
-    { text: "#ย้ายหอพัก", href: "/service/bangkok" },
-    { text: "#รถรับจ้างสมุทรสงคราม", href: "/service/samut-songkhram" },
-    { text: "#รถรับจ้างพร้อมคนยก", href: "/service/samutsakhon" },
-    { text: "#ขนส่งมอเตอร์ไซค์", href: "/service/phuket" },
-    { text: "#ส่งของชิ้นใหญ่", href: "/service/chonburi" },
-    { text: "#รถกระบะตู้ทึบกรุงเทพ", href: "/service/bangkok" },
-    { text: "#ขนส่งสินค้าทั่วไทย", href: "/#services" },
-    { text: "#รถรับจ้างปทุมธานี", href: "/service/bangkok" },
-    { text: "#รถรับจ้างนนทบุรี", href: "/service/bangkok" }
+  const serviceLinks = [
+    { label: "บริการย้ายบ้านและย้ายคอนโด", href: "/#services" },
+    { label: "บริการขนส่งมอเตอร์ไซค์ทั่วไทย", href: "/pricing/motorcycle-2026" },
+    { label: "รถกระบะตู้ทึบขนส่งสินค้าโรงงาน", href: "/pricing/freight" },
+    { label: "บริการพนักงานช่วยยกของ", href: "/compare/moving-alone-vs-helpers" },
+    { label: "เปรียบเทียบกระบะตู้ทึบ VS กระบะคอก", href: "/compare/pickup-vs-box-truck" },
+  ];
+
+  const priorityAreaLinks = [
+    { label: "รถรับจ้างมหาชัย (สมุทรสาคร)", href: "/areas/samutsakhon/maha-chai" },
+    { label: "รถรับจ้างกระทุ่มแบน–อ้อมน้อย", href: "/areas/krathumbaen-omnoi" },
+    { label: "รถรับจ้างบ้านแพ้ว", href: "/areas/banphaeo-kaset" },
+    { label: "รถรับจ้างบางแค", href: "/areas/bangkok/bang-khae" },
+    { label: "รถรับจ้างหนองแขม", href: "/areas/bangkok/nong-khaem" },
+    { label: "รถรับจ้างบางบอน", href: "/areas/bangkok/bang-bon" },
+    { label: "รถรับจ้างพระราม 2–บางกระดี่", href: "/areas/rama2-bangkradi" },
+    { label: "รถรับจ้างศาลายา–พุทธมณฑล", href: "/areas/salaya-phutthamonthon" },
+    { label: "รถรับจ้างสามพราน–เพชรเกษม", href: "/areas/samphran-phetkasem" },
+  ];
+
+  const helpfulLinks = [
+    { label: "เช็กขนาดรถและคิวบรรทุก (CBM Guide)", href: "/guides/truck-capacity-cbm" },
+    { label: "คู่มือเตรียมตัวก่อนย้ายบ้านและหอพัก", href: "/blog/moving-house-checklist" },
+    { label: "ขั้นตอนเตรียมรถมอเตอร์ไซค์ก่อนส่ง", href: "/blog/prepare-motorcycle-transport" },
+    { label: "ตัวอย่างผลงานการขนย้ายจริง (Portfolio)", href: "/portfolio" },
   ];
 
   return (
-    <footer className="bg-navy-dark border-t border-white/5 text-gray-400 font-sans pt-16 pb-[calc(env(safe-area-inset-bottom)+96px)] md:pb-12">
+    <footer
+      className="text-slate-300 font-sans border-t border-slate-800/80 pt-14 sm:pt-16 pb-[calc(env(safe-area-inset-bottom)+96px)] md:pb-14"
+      style={{ backgroundColor: "#07162E" }}
+      aria-label="ส่วนท้ายเว็บไซต์ WMS TRANSPORT"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-white/10">
-          
-          {/* Column 1: Brand & About */}
-          <div className="space-y-4">
-            <div className="flex flex-col items-start gap-4">
-              <Image 
+        {/* 4-Column Structured Navigation Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-slate-800">
+          {/* Column 1: Brand & Factual Identity (lg:col-span-4) */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="flex items-center gap-3.5">
+              <Image
                 src="/images/logoWMS.webp"
-                alt="WMS Transport Logo Badge" 
-                width={112} 
-                height={112} 
-                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover shadow-2xl shadow-blue-500/20 border-2 border-slate-700"
+                alt="WMS TRANSPORT โลโก้"
+                width={64}
+                height={64}
+                className="w-14 h-14 rounded-full object-cover border-2 border-sky-400/40 shadow-md shadow-sky-500/10"
               />
+              <div>
+                <span className="text-lg font-black text-white tracking-tight block">
+                  WMS TRANSPORT
+                </span>
+                <span className="text-xs text-sky-400 font-medium block">
+                  ดับบลิวเอ็มเอส ทรานสปอร์ต
+                </span>
+              </div>
             </div>
-            <p className="text-sm leading-relaxed text-slate-400">
-              บริการรถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และย้ายบ้านทั่วไทย บริการด้วยใจ ปลอดภัยทุกเส้นทาง
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              บริการรถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ ย้ายบ้าน คอนโด หอพัก และกระจายสินค้าโรงงานทั่วไทย ประเมินราคาสุทธิชัดเจนก่อนเริ่มงาน พร้อมทีมงานช่วยยกของมืออาชีพ
             </p>
+
+            {/* Verified Social Media Links */}
             <div className="pt-2 flex items-center gap-3">
               <a
-                href="https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr"
-                aria-label="Facebook"
-                target="_blank"
-                rel="noreferrer"
-                className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#1877F2] hover:border-[#1877F2] text-slate-300 hover:text-white transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(24,119,242,0.4)] hover:-translate-y-1 group"
-              >
-                <svg className="h-5 w-5 fill-current transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a
-                href="https://line.me/ti/p/DtICkMaDet"
-                aria-label="Contact WMS Transport via LINE"
+                href={siteConfig.lineUrl}
+                aria-label="ติดต่อ WMS TRANSPORT ผ่าน LINE Official"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#06C755] hover:border-[#06C755] transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(6,199,85,0.4)] hover:-translate-y-1 group"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white text-xs font-bold shadow-sm transition-all active:scale-95"
               >
-                <Image 
-                  src="/images/LINE_icon.webp" 
-                  alt="LINE Logo" 
-                  width={20} 
-                  height={20} 
-                  className="h-5 w-5 object-contain shrink-0 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:brightness-0 group-hover:invert" 
+                <Image
+                  src="/images/LINE_icon.webp"
+                  alt=""
+                  width={18}
+                  height={18}
+                  className="w-4 h-4 object-contain"
                 />
+                <span>แอด LINE สอบถาม</span>
+                <ExternalLink className="w-3 h-3 text-white/80" aria-hidden="true" />
+              </a>
+
+              <a
+                href={siteConfig.facebookPageAlt || siteConfig.facebookUrl}
+                aria-label="ติดตามเพจเฟซบุ๊ก WMS TRANSPORT"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl hover:bg-[#1877F2] hover:border-[#1877F2] text-slate-300 hover:text-white transition-all shadow-sm"
+              >
+                <svg
+                  className="h-4.5 w-4.5 fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
               </a>
             </div>
+
+            {/* Operational Commitment Highlights */}
+            <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-300">
+                <Clock className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+                <span>บริการ 24 ชม. (นัดหมาย)</span>
+              </div>
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 text-slate-300">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" aria-hidden="true" />
+                <span>รัดตรึงสินค้าปลอดภัย</span>
+              </div>
+            </div>
           </div>
 
-          {/* Column 2: Services */}
-          <div>
-            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
+          {/* Column 2: Services (lg:col-span-2) */}
+          <div className="lg:col-span-2">
+            <h3 className="text-white font-bold text-sm sm:text-base mb-4 tracking-tight">
               บริการของเรา
             </h3>
-            <ul className="flex flex-col gap-3 text-sm">
-              <li>
-                <Link href="/#services" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  ย้ายบ้าน/คอนโด
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  ขนส่งมอเตอร์ไซค์
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing/freight" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  เหมาเที่ยวต่างจังหวัด
-                </Link>
-              </li>
-              <li>
-                <Link href="/guides/truck-capacity-cbm" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  แพ็กสินค้า & ขนย้าย
+            <ul className="flex flex-col gap-2.5 text-xs sm:text-sm list-none p-0 m-0">
+              {serviceLinks.map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={item.href}
+                    className="text-slate-300 hover:text-sky-300 transition-colors inline-flex items-center gap-1.5 leading-snug group"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-sky-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Main Service Areas (lg:col-span-3) */}
+          <div className="lg:col-span-3">
+            <h3 className="text-white font-bold text-sm sm:text-base mb-4 tracking-tight">
+              พื้นที่บริการหลัก
+            </h3>
+            <ul className="flex flex-col gap-2 text-xs sm:text-sm list-none p-0 m-0">
+              {priorityAreaLinks.map((item, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={item.href}
+                    className="text-slate-300 hover:text-sky-300 transition-colors inline-flex items-center gap-1.5 leading-snug group"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-sky-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
+                <Link
+                  href="/areas"
+                  className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 font-bold text-xs sm:text-sm"
+                >
+                  <span>สำรวจพื้นที่บริการทั้งหมด (Area Directory) &rarr;</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Top Areas */}
-          <div>
-            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
-              พื้นที่ยอดฮิต
-            </h3>
-            <ul className="flex flex-col gap-3 text-sm">
-              <li>
-                <Link href="/service/bangkok" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  กรุงเทพมหานคร
-                </Link>
-              </li>
-              <li>
-                <Link href="/service/samutsakhon" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  สมุทรสาคร
-                </Link>
-              </li>
-              <li>
-                <Link href="/service/samut-songkhram" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  สมุทรสงคราม
-                </Link>
-              </li>
-              <li>
-                <Link href="/service/chonburi" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  ชลบุรี
-                </Link>
-              </li>
-              <li>
-                <Link href="/service/phuket" className="inline-block text-slate-300 hover:text-blue-400 hover:translate-x-1 transition-transform duration-200">
-                  ภูเก็ต
-                </Link>
-              </li>
-              <li className="pt-1.5">
-                <Link href="/areas" className="inline-block text-sky-400 hover:text-sky-300 font-medium hover:translate-x-1 transition-transform duration-200">
-                  พื้นที่บริการทั้งหมด &rarr;
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Trust & Contact */}
-          <div>
-            <h3 className="text-white font-bold text-base mb-4 tracking-tight">
-              ติดต่อเรา
-            </h3>
-            
-            <div className="space-y-4 mb-6">
-              <div className="flex items-start gap-3 text-sm">
-                <Phone className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
-                <div className="flex flex-col gap-1">
-                  <a href="tel:0612402436" className="hover:text-blue-400 transition-colors duration-200 text-white font-bold text-base">
-                    061-240-2436
-                  </a>
-                  <a href="mailto:1999.kittinanwimonset@gmail.com" className="hover:text-blue-400 transition-colors duration-200 text-xs text-slate-400">
-                    1999.kittinanwimonset@gmail.com
-                  </a>
-                </div>
-              </div>
+          {/* Column 4: Helpful Information & Contact (lg:col-span-3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div>
+              <h3 className="text-white font-bold text-sm sm:text-base mb-3.5 tracking-tight">
+                ข้อมูลแนะนำ & ติดต่อ
+              </h3>
+              <ul className="flex flex-col gap-2 text-xs sm:text-sm list-none p-0 m-0 mb-5">
+                {helpfulLinks.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={item.href}
+                      className="text-slate-300 hover:text-sky-300 transition-colors inline-flex items-center gap-1.5 leading-snug group"
+                    >
+                      <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-sky-300 group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="flex flex-col gap-2.5">
-              <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
-                <Clock className="w-4.5 h-4.5 text-emerald-400 flex-shrink-0" />
-                <span className="text-xs font-semibold text-white tracking-wide">
-                  เปิดบริการ 24 ชม.
-                </span>
+            {/* Direct Contact Details */}
+            <div className="pt-3 border-t border-slate-800 space-y-2.5 text-xs sm:text-sm">
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-sky-400 shrink-0" />
+                <a
+                  href={siteConfig.phoneHref}
+                  className="text-white font-bold hover:text-sky-300 transition-colors"
+                >
+                  {siteConfig.phone}
+                </a>
               </div>
-              <div className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60">
-                <ShieldCheck className="w-4.5 h-4.5 text-blue-400 flex-shrink-0" />
-                <span className="text-xs font-semibold text-white tracking-wide">
-                  ดูแลสินค้าปลอดภัยทุกเที่ยว
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-sky-400 shrink-0" />
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-slate-300 hover:text-white transition-colors"
+                >
+                  {siteConfig.email}
+                </a>
+              </div>
+
+              <div className="flex items-start gap-2.5 text-slate-400 pt-1">
+                <MapPin className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  สำนักงานใหญ่: {siteConfig.address.streetAddress} {siteConfig.address.addressLocality} จ.{siteConfig.address.addressRegion} {siteConfig.address.postalCode}
                 </span>
               </div>
             </div>
           </div>
-
         </div>
 
-        {/* SEO Keywords Block - Dynamic Spiderweb Links */}
-        <div className="py-8 border-b border-white/5">
-          <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">
-            พื้นที่ให้บริการ & คีย์เวิร์ด
-          </h4>
-          <div className="flex flex-wrap gap-2.5">
-            {seoKeywords.map((item) => (
-              <Link
-                key={item.text}
-                href={item.href}
-                className="inline-block text-xs font-semibold text-slate-400 bg-white/2 border border-white/10 px-3 py-1.5 rounded-md hover:text-blue-400 hover:border-blue-500/40 hover:bg-blue-500/10 hover:-translate-y-0.5 transition-all duration-300 shadow-sm"
-              >
-                {item.text}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Subtle SEO District Block */}
-        <div className="pt-6 border-t border-white/5 text-center md:text-left">
-          <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-            พื้นที่ให้บริการหลัก: [สมุทรสาคร]: อ.เมืองสมุทรสาคร, อ.กระทุ่มแบน, อ.บ้านแพ้ว | [สมุทรสงคราม]: อ.เมืองสมุทรสงคราม, อัมพวา, บางคนที | [กรุงเทพฯ และปริมณฑล]: ฝั่งธนบุรี, นนทบุรี, ปทุมธานี | [ภูเก็ต]: อ.เมืองภูเก็ต, อ.กะทู้, อ.ถลาง
+        {/* Bottom Legal & Copyright Bar */}
+        <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs text-slate-400">
+          <p className="m-0">
+            © {new Date().getFullYear()} WMS TRANSPORT (ดับบลิวเอ็มเอส ทรานสปอร์ต). All rights reserved.
+          </p>
+          <p className="m-0 text-slate-400">
+            บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน มอเตอร์ไซค์ ขนส่งสินค้า • สมุทรสาคร–กรุงเทพฯ ทั่วไทย
           </p>
         </div>
-
-        {/* Copyright */}
-        <div className="mt-6 border-t border-white/10 pt-5 flex flex-col items-center justify-center gap-2 text-center">
-          <p className="text-xs text-slate-500">© {new Date().getFullYear()} WMS TRANSPORT. All rights reserved.</p>
-        </div>
-
       </div>
     </footer>
   );

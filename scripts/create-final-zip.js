@@ -3,7 +3,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const ZIP_NAME = 'WMS-TRANSPORT-SITEWIDE-SEO-FINAL.zip';
+const ZIP_NAME = 'WMS-TRANSPORT-Update-local-seo-expansion.zip';
 const ZIP_PATH = path.join(ROOT, ZIP_NAME);
 const STAGE_DIR = path.join(ROOT, 'scripts', '_stage');
 

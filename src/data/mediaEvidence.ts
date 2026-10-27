@@ -64,11 +64,39 @@ export const mediaEvidenceData: Record<string, MediaRecord> = {
     serviceType: "motorcycle",
     broadLocation: "ปิ่นเกล้า กรุงเทพฯ",
     projectEvidenceId: "motorcycle-delivery-pinklao",
-    descriptiveAltText: "รถจักรยานยนต์บิ๊กไบค์ยึดแน่นด้วยสายรัด Ratchet Strap 4 จุดในรถตู้ทึบ WMS ปิ่นเกล้า",
+    descriptiveAltText: "รถจักรยานยนต์จัดตรึงแน่นด้วยสายรัด Ratchet Strap ในรถตู้ทึบ WMS ปิ่นเกล้า",
     caption: "การล็อกล้อหน้าและจัดตรึงรถมอเตอร์ไซค์ในตู้ทึบอย่างปลอดภัยส่งปิ่นเกล้า",
     dateOrMonth: "มิถุนายน 2026",
     privacyStatus: "safe_public",
     relatedLinks: ["/areas/bkk-thonburi/pinklao", "/service/bkk-thonburi/motorcycle"],
+    isIndexable: true
+  },
+  "WM15": {
+    imagePath: "/images/WM15.webp",
+    originalFileName: "WM15.webp",
+    ownershipPermission: "owned_by_wms",
+    serviceType: "moving",
+    broadLocation: "หนองแขม - บางแค กรุงเทพฯ",
+    projectEvidenceId: "moving-house-nongkhaem-bang-khae",
+    descriptiveAltText: "รถกระบะตอนเดียวตู้ทึบ WMS จอดเทียบหน้าบ้านพักอาศัยเพื่อขนย้ายของในแนวเขตหนองแขม–บางแค",
+    caption: "บริการรถกระบะตู้ทึบย้ายบ้านพักอาศัยในแนวหนองแขม–บางแค พร้อมทีมงานช่วยยกของ",
+    dateOrMonth: "กรกฎาคม 2026",
+    privacyStatus: "safe_public",
+    relatedLinks: ["/areas/bkk-thonburi/nong-khaem", "/areas/bkk-thonburi/bang-khae", "/service/bkk-thonburi/moving"],
+    isIndexable: true
+  },
+  "WM16": {
+    imagePath: "/images/WM16.webp",
+    originalFileName: "WM16.webp",
+    ownershipPermission: "owned_by_wms",
+    serviceType: "moving",
+    broadLocation: "บางบอน กรุงเทพฯ",
+    projectEvidenceId: "moving-townhouse-bang-bon",
+    descriptiveAltText: "ทีมงาน WMS ขนย้ายกล่องบรรจุภัณฑ์และเฟอร์นิเจอร์ขึ้นรถกระบะตู้ทึบในเขตบางบอน",
+    caption: "งานขนย้ายของและเฟอร์นิเจอร์บ้านพักอาศัยถนนบางบอน พร้อมอุปกรณ์รัดตรึงแน่นหนา",
+    dateOrMonth: "สิงหาคม 2026",
+    privacyStatus: "safe_public",
+    relatedLinks: ["/areas/bkk-thonburi/bang-bon", "/service/bkk-thonburi/moving"],
     isIndexable: true
   }
 };
@@ -76,15 +104,15 @@ export const mediaEvidenceData: Record<string, MediaRecord> = {
 export const portfolioCasesData: Record<string, PortfolioCase> = {
   "moving-condo-bang-khae": {
     slug: "moving-condo-bang-khae",
-    title: "เคสขนย้ายคอนโด High-rise 1 ห้องนอน ย่านบางแค เพชรเกษม MRT หลักสอง",
+    title: "ตัวอย่างงานขนย้ายคอนโดมิเนียมและหอพัก เขตบางแค ถนนเพชรเกษม",
     serviceType: "moving",
     broadArea: "บางแค กรุงเทพฯ (ฝั่งธนบุรี)",
-    jobChallenge: "ต้องขนของออกจากห้องชั้น 18 ข้ามสะพานเข้าลิฟต์บริการคอนโดที่มีความสูงจำกัด และจราจรหนาแน่นช่วงวันหยุดเสาร์อาทิตย์",
+    jobChallenge: "การขนย้ายสิ่งของและเฟอร์นิเจอร์ออกจากอาคารสูง มีระเบียบการใช้ลิฟต์บริการและเวลาจอดเทียบโหลดของที่จำกัด รวมทั้งการจราจรหนาแน่นช่วงวันหยุดเสาร์อาทิตย์",
     process: [
-      "คัดแยกสิ่งของลงกล่อง ล็อกของแตกง่ายด้วยแอร์บับเบิลหนา 3 ชั้น",
+      "คัดแยกสิ่งของลงกล่อง ล็อกของแตกง่ายด้วยแอร์บับเบิลกันกระแทก",
       "แรปฟิล์มกันรอยเฟอร์นิเจอร์หลัก เช่น โซฟาผ้า โต๊ะกินข้าว ตู้ไม้ลิ้นชัก เพื่อป้องกันรอยขูดขีด",
       "ใช้รถกระบะตอนเดียวตู้ทึบขนาดมาตรฐาน ความสูงภายในตู้ 2.1 ม. ขนย้ายสิ่งของชิ้นใหญ่ได้มิดชิด พร้อมประสานงานจุดโหลดของชั้นล่างกับนิติบุคคล",
-      "พนักงานยกของ 2 คนขนสินค้าทั้งหมดขึ้นลิฟต์และนำใส่ตู้เสร็จสิ้นภายใน 1.5 ชั่วโมง"
+      "พนักงานยกของ 2 คนขนสินค้าทั้งหมดขึ้นลิฟต์บริการและนำใส่ตู้เสร็จสิ้นภายในเวลาที่นัดหมาย"
     ],
     outcome: "สิ่งของทั้งหมดถูกจัดส่งถึงห้องใหม่ปลายทางอย่างปลอดภัย เรียบร้อย ปิดตู้มิดชิดป้องกันฝนและฝุ่นละอองตลอดเส้นทาง",
     approvedPhotos: [
@@ -92,14 +120,14 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/bkk-thonburi/moving",
     relatedDistrictLink: "/areas/bkk-thonburi/bang-khae",
-    proofScore: 92
+    proofScore: 90
   },
   "motorcycle-delivery-pinklao": {
     slug: "motorcycle-delivery-pinklao",
-    title: "บริการจัดส่งรถบิ๊กไบค์ Kawasaki Ninja 400 จากกรุงเทพฯ ไปย่านปิ่นเกล้า",
+    title: "ตัวอย่างการขนส่งรถจักรยานยนต์ในตู้ทึบ ย่านปิ่นเกล้า–ธนบุรี",
     serviceType: "motorcycle",
     broadArea: "ปิ่นเกล้า กรุงเทพฯ (ฝั่งธนบุรี)",
-    jobChallenge: "บิ๊กไบค์มีน้ำหนักมากและมีแฟริ่งแต่งรอบคันที่เปราะบาง เจ้าของรถกังวลเรื่องสีถลอกและการเอียงล้มของรถระหว่างการเบรก",
+    jobChallenge: "การจัดส่งรถจักรยานยนต์ขนาดใหญ่ต้องระมัดระวังริ้วรอยรอบคันเป็นพิเศษ และป้องกันการเอียงล้มขณะรถออกตัวหรือเบรกกะทันหัน",
     process: [
       "ใช้ตัวล็อกล้อหน้า Wheel Chock เพื่อประคองรถให้อยู่ในแนวตั้งตรง 90 องศา",
       "แรปหุ้มชิ้นส่วนแฮนด์และโครเมียมปลายท่อไอเสียด้วยแผ่นกันกระแทก",
@@ -108,7 +136,7 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     outcome: "จัดส่งถึงมือลูกค้าปลายทางตามเวลาที่นัดหมาย รถคงสภาพสมบูรณ์เรียบร้อย ไม่มีรอยถลอกหรือลื่นไถลใดๆ",
     approvedPhotos: [
-      { path: "/images/WM11.webp", alt: "การรัดยึดบิ๊กไบค์ภายในตู้ทึบอย่างปลอดภัย" }
+      { path: "/images/WM11.webp", alt: "การรัดยึดมอเตอร์ไซค์ภายในตู้ทึบอย่างปลอดภัย" }
     ],
     relatedServiceLink: "/service/bkk-thonburi/motorcycle",
     relatedDistrictLink: "/areas/bkk-thonburi/pinklao",
@@ -133,5 +161,45 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     relatedServiceLink: "/service/samutsakhon/freight",
     relatedDistrictLink: "/areas/samutsakhon/maha-chai",
     proofScore: 90
+  },
+  "moving-house-nongkhaem-bang-khae": {
+    slug: "moving-house-nongkhaem-bang-khae",
+    title: "ตัวอย่างงานย้ายบ้านในแนวหนองแขม–บางแค พร้อมทีมยกของ",
+    serviceType: "moving",
+    broadArea: "หนองแขม - บางแค กรุงเทพฯ (ฝั่งธนบุรี)",
+    jobChallenge: "การขนย้ายสิ่งของที่อยู่อาศัยในแนวเชื่อมต่อระหว่างเขตหนองแขมและบางแค ต้องจัดสรรพื้นที่วางเฟอร์นิเจอร์ชิ้นใหญ่และเครื่องใช้ไฟฟ้าให้ปลอดภัยตลอดเส้นทาง",
+    process: [
+      "สำรวจประเมินขนาดสัมภาระและจัดเตรียมพลาสติกแรปฟิล์มกันรอยสำหรับเตียงนอน ตู้เสื้อผ้า และตู้เย็น",
+      "จัดทีมงานยกของช่วยขนย้ายสิ่งของออกจากตัวบ้านอย่างระมัดระวัง",
+      "จัดเรียงสินค้าภายในตู้ทึบความสูง 2.1 เมตร พร้อมยึดตรึงด้วยสายรัด Ratchet Strap ป้องกันการเลื่อนไถล",
+      "เดินทางผ่านแนวถนนเพชรเกษมและยกสิ่งของเข้าจัดวางในจุดที่ลูกค้าต้องการอย่างเรียบร้อย"
+    ],
+    outcome: "สิ่งของทุกชิ้นเดินทางถึงปลายทางในเขตบางแคอย่างปลอดภัย ไร้รอยขูดขีด และเสร็จสิ้นตามกรอบเวลาที่นัดหมาย",
+    approvedPhotos: [
+      { path: "/images/WM15.webp", alt: "งานย้ายบ้านแนวหนองแขม–บางแคโดย WMS TRANSPORT" }
+    ],
+    relatedServiceLink: "/service/bkk-thonburi/moving",
+    relatedDistrictLink: "/areas/bkk-thonburi/nong-khaem",
+    proofScore: 82
+  },
+  "moving-townhouse-bang-bon": {
+    slug: "moving-townhouse-bang-bon",
+    title: "ตัวอย่างงานขนย้ายที่อยู่อาศัยและสินค้าในเขตบางบอน ถนนเอกชัย",
+    serviceType: "moving",
+    broadArea: "บางบอน กรุงเทพฯ (ฝั่งธนบุรี)",
+    jobChallenge: "การขนย้ายสิ่งของในย่านที่พักอาศัยและโรงงานขนาดย่อม ต้องจัดระเบียบสินค้าและสัมภาระในตู้ทึบอย่างเป็นระบบเพื่อไม่ให้เกิดการกดทับ",
+    process: [
+      "จัดระเบียบสินค้าและสัมภาระ แยกระหว่างกล่องสินค้ากับเฟอร์นิเจอร์ในบ้าน",
+      "แรปฟิล์มป้องกันฝุ่นและรอยขีดข่วนสำหรับเครื่องใช้ไฟฟ้าและเฟอร์นิเจอร์หลัก",
+      "บรรทุกสิ่งของเข้าตู้ทึบขนาดมาตรฐาน 2.1 เมตร วางกล่องหนักไว้ด้านล่างและยึดสายรัดอย่างแน่นหนา",
+      "จัดส่งถึงปลายทางและขนถ่ายเข้าสู่พื้นที่จัดเก็บตามตำแหน่งที่กำหนด"
+    ],
+    outcome: "การขนย้ายเสร็จสิ้นราบรื่น ปลอดภัย สินค้าและเฟอร์นิเจอร์ไม่ได้รับความเสียหาย ประหยัดเวลาของลูกค้า",
+    approvedPhotos: [
+      { path: "/images/WM16.webp", alt: "งานขนย้ายที่อยู่อาศัยและสินค้าในย่านบางบอนโดย WMS TRANSPORT" }
+    ],
+    relatedServiceLink: "/service/bkk-thonburi/moving",
+    relatedDistrictLink: "/areas/bkk-thonburi/bang-bon",
+    proofScore: 82
   }
 };

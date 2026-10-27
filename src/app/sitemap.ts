@@ -4,11 +4,12 @@ import { provinceMap } from "./(marketing)/service/[province]/page";
 import { posts } from "./(marketing)/blog/posts";
 import { searchIntentMap } from "@/data/searchIntentMap";
 import { districtLandingPages, isDistrictPageIndexable } from "@/data/districtLandingPages";
+import { getAllZoneHubs, getPublishedLocalPoints } from "@/data/areaZonesData";
 import { guidesData } from "@/data/guidesData";
 import { portfolioCasesData } from "@/data/mediaEvidence";
 import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 
-// Fixed release date for this technical SEO deployment (Phase 4)
+// Fixed release date for this technical SEO deployment (Phase 4 & Local SEO Expansion)
 const SEO_RELEASE_DATE = new Date("2026-09-21");
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -42,6 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: SEO_RELEASE_DATE,
       changeFrequency: "daily",
       priority: 1.0,
+    },
+    {
+      url: `${domain}/areas`,
+      lastModified: SEO_RELEASE_DATE,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${domain}/portfolio`,
@@ -174,8 +181,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.75,
       }));
 
+    // 7 Strategic Zone Hubs
+    const zoneHubUrls: MetadataRoute.Sitemap = getAllZoneHubs().map((zone) => ({
+      url: `${domain}/areas/${zone.slug}`,
+      lastModified: SEO_RELEASE_DATE,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    }));
+
+    // Detailed Local Area Points (where action === 'new_page' or 'enrich_existing' and status === 'published')
+    const publishedLocalPointUrls: MetadataRoute.Sitemap = getPublishedLocalPoints()
+      .filter((p) => p.action === "new_page" || p.action === "enrich_existing")
+      .map((point) => ({
+        url: `${domain}${point.preferredUrl}`,
+        lastModified: SEO_RELEASE_DATE,
+        changeFrequency: "weekly",
+        priority: 0.8,
+      }));
+
     return [
       ...coreRoutes,
+      ...zoneHubUrls,
+      ...publishedLocalPointUrls,
       ...provinceUrls,
       ...blogUrls,
       ...provinceServiceUrls,

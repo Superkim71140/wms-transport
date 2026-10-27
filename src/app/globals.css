@@ -73,10 +73,30 @@
   --text-muted: #64748B;
   --border: #E2E8F0;
   --card-bg: #FFFFFF;
-  --card-border: #E2E8F0;
   --focus-ring: #2563EB;
   --success: #06C755;
   --danger: #EF4444;
+
+  /* WMS COHERENT COLOR SYSTEM */
+  --wms-deep-navy: #07152F;
+  --wms-brand-blue: #2563EB;
+  --wms-bright-cyan: #38BDF8;
+  --wms-text-primary: #1E293B;
+  --wms-text-secondary: #475569;
+  --wms-bg-light: #F7FAFF;
+  --wms-bg-pale-blue: #EFF6FF;
+  --wms-card-white: #FFFFFF;
+
+  /* SHARED RESPONSIVE HEADER-OFFSET TOKENS */
+  --header-offset-mobile: 86px;
+  --header-offset-desktop: 104px;
+  --site-header-offset: var(--header-offset-mobile);
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-header-offset: var(--header-offset-desktop);
+  }
 }
 
 html,
@@ -89,14 +109,23 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--site-header-offset) + 16px);
+}
+
+[id] {
+  scroll-margin-top: calc(var(--site-header-offset) + 16px);
+}
+
+.has-site-header-offset {
+  padding-top: var(--site-header-offset);
 }
 
 body {
-  color: #0F172A;
+  color: #1E293B;
   font-family: var(--font-sans);
   position: relative;
   background-color: #FFFFFF;
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 * {
@@ -349,3 +378,74 @@ main {
     transform: none !important;
   }
 }
+
+/* WMS Responsive Promo Banner Container Query System */
+.wms-promo-container {
+  container-type: inline-size;
+  container-name: wmspromo;
+}
+
+/* Default / Mobile Stacked Layout (container width < 600px) */
+.wms-promo-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.25rem 0 1.25rem;
+  gap: 1.25rem;
+}
+
+.wms-promo-artwork {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 220px;
+  margin: 0.5rem auto 0 auto;
+  order: 2; /* Content first, employee grounded below on mobile */
+}
+
+.wms-promo-content {
+  width: 100%;
+  min-width: 0;
+  order: 1;
+}
+
+/* Wide / Landscape Container Query (container width >= 600px) */
+@container (min-width: 600px) {
+  .wms-promo-inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.75rem 1.75rem 0 1.25rem;
+    gap: 1.5rem;
+  }
+
+  .wms-promo-artwork {
+    width: 32%;
+    max-width: 260px;
+    min-width: 170px;
+    margin: 0;
+    order: 1; /* Artwork on the left */
+    flex-shrink: 0;
+  }
+
+  .wms-promo-content {
+    flex: 1 1 0%;
+    min-width: 0;
+    padding-bottom: 2rem;
+    padding-top: 0.5rem;
+    order: 2; /* Content on the right */
+  }
+}
+
+@container (min-width: 820px) {
+  .wms-promo-inner {
+    padding: 2rem 2.5rem 0 1.75rem;
+    gap: 2rem;
+  }
+  
+  .wms-promo-artwork {
+    width: 34%;
+    max-width: 280px;
+  }
+}
+

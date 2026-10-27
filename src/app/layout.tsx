@@ -4,6 +4,7 @@ import { Partytown } from "@builder.io/partytown/react";
 import "./globals.css";
 import EntityGraphSchema from "@/components/EntityGraphSchema";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import HashNavigationHandler from "@/components/HashNavigationHandler";
 import { siteConfig } from "@/lib/seo/site-config";
 
 export const revalidate = 3600;
@@ -108,6 +109,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
         <EntityGraphSchema />
         <GoogleAnalytics />
+        <HashNavigationHandler />
         {children}
       </body>
     </html>

@@ -3,10 +3,10 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const ZIP_PATH = path.join(ROOT, 'WMS-TRANSPORT-SITEWIDE-SEO-FINAL.zip');
+const ZIP_PATH = path.join(ROOT, 'WMS-TRANSPORT-Update-local-seo-expansion.zip');
 const SCRATCH_VERIFY_DIR = path.join('C:', 'Users', 'PC', '.gemini', 'antigravity-ide', 'scratch', 'wms-zip-verify');
 
-console.log('🔍 Verifying WMS-TRANSPORT-SITEWIDE-SEO-FINAL.zip...\n');
+console.log('🔍 Verifying WMS-TRANSPORT-Update-local-seo-expansion.zip...\n');
 
 // 1. Check ZIP existence & size
 if (!fs.existsSync(ZIP_PATH)) {
