@@ -12,13 +12,13 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
     : reviewEvidenceData;
 
   const displayTestimonials = filteredReviews
-    .filter(r => r.moderationStatus === "approved")
+    .filter(r => r.moderationStatus === "approved" && r.consentStatus === true && r.isVerified === true)
     .slice(0, 3);
 
   return (
     <section 
       id="reviews" 
-      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-gradient-to-b from-[#F7FAFF] via-white to-white"
+      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-linear-to-b from-[#F7FAFF] via-white to-white"
     >
       {/* Ambient subtle decorative background element */}
       <div 
@@ -33,7 +33,7 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
           <span>ความคิดเห็นจากผู้ใช้บริการ</span>
         </div>
         
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1F3A] tracking-tight leading-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy tracking-tight leading-tight">
           เสียงตอบรับจาก<span className="text-blue-600">ลูกค้าผู้ใช้บริการ</span>
         </h2>
         
@@ -59,7 +59,7 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
               >
                 {/* Subtle top accent */}
                 <div 
-                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-emerald-400" 
+                  className="absolute top-0 left-0 right-0 h-1 bg-linear-to-r from-blue-600 via-sky-400 to-emerald-400" 
                   aria-hidden="true" 
                 />
 
@@ -104,12 +104,12 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
                         />
                       </div>
                     ) : (
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs shrink-0 select-none">
+                      <div className="w-10 h-10 bg-linear-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-xs shrink-0 select-none">
                         {initial}
                       </div>
                     )}
                     <div className="min-w-0">
-                      <h4 className="text-xs sm:text-sm font-bold text-[#0B1F3A] truncate">
+                      <h4 className="text-xs sm:text-sm font-bold text-navy truncate">
                         {test.displayName}
                       </h4>
                       <p className="text-[11px] sm:text-xs text-slate-500 font-normal mt-0.5 truncate">

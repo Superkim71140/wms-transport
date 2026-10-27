@@ -262,7 +262,7 @@ export async function generateMetadata({
     title: `${serviceLabel} ${provinceName} | WMS TRANSPORT`,
     description: `บริการ${serviceLabel}ในพื้นที่${provinceName} และทั่วไทย โดย WMS Transport — รถกระบะตู้ทึบมาตรฐาน พร้อมคนยกของ ดูแลความปลอดภัย ติดต่อได้ 24 ชม.`,
     alternates: {
-      canonical: `/service/${province}/${serviceId}`,
+      canonical: `${siteConfig.productionUrl}/service/${province}/${serviceId}`,
     },
   };
 }
@@ -291,6 +291,8 @@ export default async function ServiceDetailPage({
     .map((s) => ({ id: s, ...serviceConfig[s] }));
 
   const geoData = geoMatrix[province];
+  const activeCaseStudyKey = localCaseStudyMap[`${province}/${serviceId}`];
+  const activeCaseStudy = activeCaseStudyKey ? portfolioCasesData[activeCaseStudyKey] : undefined;
 
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -298,7 +300,7 @@ export default async function ServiceDetailPage({
     name: `${service.label} ${provinceName}`,
     description: service.description,
     provider: {
-      "@id": "https://wms-transport.com/#moving-company",
+      "@id": `${siteConfig.productionUrl}/#moving-company`,
     },
     areaServed: [
       {

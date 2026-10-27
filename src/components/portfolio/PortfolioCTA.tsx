@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function PortfolioCTA() {
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#0B1F3A]">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-navy">
       <div className="max-w-4xl mx-auto relative z-10 text-center font-sans">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,7 +24,7 @@ export default function PortfolioCTA() {
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4">
             <a 
               href="tel:0612402436"
-              className="group flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white text-[#0B1F3A] font-bold text-base hover:bg-slate-100 transition-colors shadow-xs"
+              className="group flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white text-navy font-bold text-base hover:bg-slate-100 transition-colors shadow-xs"
             >
               <Phone className="h-5 w-5 text-blue-600" />
               <span>โทรเลย: 061-240-2436</span>

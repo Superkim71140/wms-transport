@@ -72,14 +72,14 @@ export default function FAQ() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} 
       />
       
-      <div className="max-w-[880px] mx-auto relative z-10">
+      <div className="max-w-220 mx-auto relative z-10">
         {/* Header Section */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold tracking-wide uppercase mb-4">
             <MessageCircleQuestion className="w-4 h-4" />
             <span>คำถามที่พบบ่อย</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0B1F3A] mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy mb-4 tracking-tight">
             ข้อสงสัย<span className="text-blue-600">ในการขนย้าย?</span>
           </h2>
           <p className="text-slate-600 font-medium text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
@@ -129,7 +129,7 @@ export default function FAQ() {
                       })()}
                     </div>
                     <span className={`text-base sm:text-lg font-bold transition-colors ${
-                      isActive ? "text-[#0B1F3A]" : "text-slate-800 group-hover:text-blue-600"
+                      isActive ? "text-navy" : "text-slate-800 group-hover:text-blue-600"
                     }`}>
                       {faq.question}
                     </span>
@@ -155,7 +155,7 @@ export default function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-5 sm:px-6 pb-5 pt-1 pl-[4.25rem]">
+                    <div className="px-5 sm:px-6 pb-5 pt-1 pl-17">
                       <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-slate-700 text-sm sm:text-base leading-relaxed">
                         {faq.answer}
                       </div>

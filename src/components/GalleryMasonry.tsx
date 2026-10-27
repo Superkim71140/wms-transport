@@ -149,7 +149,7 @@ export default function GalleryMasonry() {
           ผลงานจริงของเรา
         </span>
 
-        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-[#0B1F3A]">
+        <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-navy">
           ผลงานจริง
           <span className="text-blue-600">จากลูกค้าของเรา</span>
         </h2>
@@ -165,7 +165,7 @@ export default function GalleryMasonry() {
             key={cat}
             type="button"
             onClick={() => setSelectedFilter(cat)}
-            className={`min-h-[40px] shrink-0 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-200 ${
+            className={`min-h-10 shrink-0 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-200 ${
               selectedFilter === cat
                 ? "bg-blue-600 text-white shadow-xs"
                 : "text-slate-600 hover:bg-white hover:text-slate-900"

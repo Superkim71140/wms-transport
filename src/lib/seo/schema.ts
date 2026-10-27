@@ -17,7 +17,7 @@ export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org" as const,
     "@type": "Organization" as const,
-    "@id": `${siteConfig.baseUrl}/#organization`,
+    "@id": `${siteConfig.productionUrl}/#organization`,
     name: siteConfig.businessName,
     alternateName: siteConfig.businessFullName,
     url: siteConfig.baseUrl,
@@ -52,7 +52,7 @@ export function buildMovingCompanySchema(areaServed: string[] = siteConfig.servi
   return {
     "@context": "https://schema.org" as const,
     "@type": "MovingCompany" as const,
-    "@id": `${siteConfig.baseUrl}/#moving-company`,
+    "@id": `${siteConfig.productionUrl}/#moving-company`,
     name: siteConfig.businessName,
     image: `${siteConfig.baseUrl}${siteConfig.defaultOgImage}`,
     url: siteConfig.baseUrl,
@@ -77,7 +77,7 @@ export function buildMovingCompanySchema(areaServed: string[] = siteConfig.servi
     sameAs: siteConfig.socials,
     description: siteConfig.defaultDescription,
     parentOrganization: {
-      "@id": `${siteConfig.baseUrl}/#organization`,
+      "@id": `${siteConfig.productionUrl}/#organization`,
     },
   };
 }
@@ -89,12 +89,12 @@ export function buildWebSiteSchema() {
   return {
     "@context": "https://schema.org" as const,
     "@type": "WebSite" as const,
-    "@id": `${siteConfig.baseUrl}/#website`,
+    "@id": `${siteConfig.productionUrl}/#website`,
     url: `${siteConfig.baseUrl}/`,
     name: siteConfig.businessName,
     alternateName: ["WMS Transport", "wms-transport.com"],
     publisher: {
-      "@id": `${siteConfig.baseUrl}/#organization`,
+      "@id": `${siteConfig.productionUrl}/#organization`,
     },
   };
 }
@@ -112,11 +112,11 @@ export function buildServiceSchema(
   return {
     "@context": "https://schema.org" as const,
     "@type": "Service" as const,
-    "@id": `${siteConfig.baseUrl}${cleanPath}#service`,
+    "@id": `${siteConfig.productionUrl}${cleanPath}#service`,
     name,
     description,
     provider: {
-      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "@id": `${siteConfig.productionUrl}/#moving-company`,
     },
     serviceType,
     areaServed: siteConfig.serviceAreas,
@@ -137,11 +137,11 @@ export function buildRouteServiceSchema(
   return {
     "@context": "https://schema.org" as const,
     "@type": "Service" as const,
-    "@id": `${siteConfig.baseUrl}/route/${fromSlug}/${toSlug}#service`,
+    "@id": `${siteConfig.productionUrl}/route/${fromSlug}/${toSlug}#service`,
     name: `บริการรถรับจ้างขนของจาก ${fromName} ไป ${toName}`,
     description: `บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน ขนส่งมอเตอร์ไซค์ และสินค้าจาก ${fromName} ไปยัง ${toName}`,
     provider: {
-      "@id": `${siteConfig.baseUrl}/#moving-company`,
+      "@id": `${siteConfig.productionUrl}/#moving-company`,
     },
     serviceType: "Long Distance Transport",
     areaServed: [

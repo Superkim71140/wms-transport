@@ -58,7 +58,7 @@ export default function ServiceSteps() {
           ขั้นตอนการบริการ
         </span>
         
-        <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl text-[#0B1F3A] tracking-tight">
+        <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl text-navy tracking-tight">
           5 ขั้นตอนการบริการมาตรฐาน WMS
         </h2>
         
@@ -108,12 +108,12 @@ export default function ServiceSteps() {
                     {/* Content */}
                     <div className="flex items-start gap-4 sm:gap-5 relative z-10">
                       {/* Icon wrapper */}
-                      <div className="w-11 h-11 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl flex-shrink-0 flex items-center justify-center shadow-xs">
+                      <div className="w-11 h-11 bg-blue-50 text-blue-600 border border-blue-100 rounded-xl shrink-0 flex items-center justify-center shadow-xs">
                         {step.icon}
                       </div>
 
                       <div className="space-y-2 min-w-0">
-                        <h3 className="text-lg sm:text-xl font-bold text-[#0B1F3A]">
+                        <h3 className="text-lg sm:text-xl font-bold text-navy">
                           {step.title}
                         </h3>
                         <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed">

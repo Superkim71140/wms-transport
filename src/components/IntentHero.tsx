@@ -20,7 +20,7 @@ export default function IntentHero({ h1, supporting, badge, className = "" }: In
         )}
         
         {/* Visible, Natural H1 */}
-        <h1 className="font-sans text-3xl sm:text-4xl lg:text-[3.25rem] font-black text-[#0B1F3A] tracking-tight leading-[1.25] text-balance">
+        <h1 className="font-sans text-3xl sm:text-4xl lg:text-[3.25rem] font-black text-navy tracking-tight leading-tight text-balance">
           {h1}
         </h1>
         

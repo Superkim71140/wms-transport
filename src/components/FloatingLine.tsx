@@ -20,7 +20,7 @@ export default function FloatingLine() {
 
   return (
     <div
-      className="fixed z-[90] left-3 right-3 bottom-3 md:left-auto md:right-6 md:bottom-6 md:w-auto md:max-w-md pb-[env(safe-area-inset-bottom)] md:pb-0 mx-auto md:mx-0 select-none transition-all duration-300 transform translate-y-0 opacity-100 animate-in fade-in slide-in-from-bottom-4"
+      className="fixed z-90 left-3 right-3 bottom-3 md:left-auto md:right-6 md:bottom-6 md:w-auto md:max-w-md pb-[env(safe-area-inset-bottom)] md:pb-0 mx-auto md:mx-0 select-none transition-all duration-300 transform translate-y-0 opacity-100 animate-in fade-in slide-in-from-bottom-4"
     >
       <div className="w-full rounded-2xl bg-white/95 border border-slate-200/90 backdrop-blur-xl shadow-[0_10px_30px_-5px_rgba(11,31,58,0.15)] px-3.5 py-2.5 flex items-center justify-between gap-3 sm:gap-4">
         {/* Left Section: Status & Text */}
@@ -32,7 +32,7 @@ export default function FloatingLine() {
           </div>
           {/* Crisp Text */}
           <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-2">
-            <span className="text-xs sm:text-sm font-bold text-[#0B1F3A] tracking-wide whitespace-nowrap">
+            <span className="text-xs sm:text-sm font-bold text-navy tracking-wide whitespace-nowrap">
               <span className="min-[380px]:hidden">ติดต่อ</span>
               <span className="hidden min-[380px]:inline">ติดต่อแอดมิน</span>
             </span>

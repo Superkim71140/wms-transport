@@ -15,6 +15,7 @@ export const siteConfig = {
   facebookUrl: "https://www.facebook.com/wmstransport",
   facebookPageAlt: "https://www.facebook.com/share/1DnN6iPogp/?mibextid=wwXIfr",
   email: "1999.kittinanwimonset@gmail.com",
+  productionUrl: "https://wms-transport.com",
   baseUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://wms-transport.com").trim().replace(/\/$/, ""),
   // priceRange is omitted until officially confirmed by owner
   priceRange: undefined,

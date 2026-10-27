@@ -13,28 +13,48 @@ import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 const SEO_RELEASE_DATE = new Date("2026-09-21");
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const domain = siteConfig.baseUrl;
+  const domain = siteConfig.productionUrl || siteConfig.baseUrl;
 
-  // Helper to parse dates into standard Date objects safely, respecting truthful release and review dates
-  const parseTruthfulLastmod = (dateStr?: string): Date => {
-    if (!dateStr) return SEO_RELEASE_DATE;
+  // Helper to parse dates into standard Date objects safely.
+  // Returns a genuine Date when a reliable significant modification date is supplied, or undefined when unknown.
+  const parseReliableLastmod = (dateStr?: string): Date | undefined => {
+    if (!dateStr) return undefined;
     try {
       let parsed: Date;
-      if (dateStr.includes("มิถุนายน")) {
-        parsed = new Date("2026-06-25");
+      if (dateStr.includes("มิถุนายน") || dateStr.includes("มิ.ย.")) {
+        parsed = new Date("2026-06-25T00:00:00+07:00");
+      } else if (dateStr.includes("พฤษภาคม") || dateStr.includes("พ.ค.")) {
+        parsed = new Date("2026-05-20T00:00:00+07:00");
       } else {
         parsed = new Date(dateStr);
       }
-      if (isNaN(parsed.getTime())) return SEO_RELEASE_DATE;
-      // Do not assign a date later than the actual release date
-      if (parsed > SEO_RELEASE_DATE) return SEO_RELEASE_DATE;
-      // Because root Entity Graph rendered output changed across all public routes in this release,
-      // use the later truthful date when both a content review date and release date apply.
-      return SEO_RELEASE_DATE > parsed ? SEO_RELEASE_DATE : parsed;
+      if (isNaN(parsed.getTime())) return undefined;
+      return parsed;
     } catch {
-      return SEO_RELEASE_DATE;
+      return undefined;
     }
   };
+
+  type ChangeFreq = MetadataRoute.Sitemap[number]["changeFrequency"];
+
+  const buildEntry = (
+    url: string,
+    priority: number,
+    changeFrequency?: ChangeFreq,
+    rawDate?: string
+  ): MetadataRoute.Sitemap[number] => {
+    const lastModified = parseReliableLastmod(rawDate);
+    return {
+      url,
+      ...(lastModified ? { lastModified } : {}),
+      ...(changeFrequency ? { changeFrequency } : {}),
+      priority,
+    };
+  };
+
+  const movingPricingDate = pricingPolicyData.find((p) => p.serviceType === "moving")?.lastReviewedDate;
+  const motorcyclePricingDate = pricingPolicyData.find((p) => p.serviceType === "motorcycle")?.lastReviewedDate;
+  const freightPricingDate = pricingPolicyData.find((p) => p.serviceType === "freight")?.lastReviewedDate;
 
   // 1. Guaranteed Core Routes
   const coreRoutes: MetadataRoute.Sitemap = [
@@ -114,72 +134,56 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const provinces = Object.keys(provinceMap || {});
-    
-    // Dynamic provinces service hubs
-    const provinceUrls: MetadataRoute.Sitemap = provinces.map((province) => ({
-      url: `${domain}/service/${province}`,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    }));
 
-    // Dynamic blogs from posts
-    const blogSlugs = Object.keys(posts || {});
-    const blogUrls: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-      url: `${domain}/blog/${slug}`,
-      lastModified: parseTruthfulLastmod(posts[slug]?.dateISO),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    }));
-
-    // Dynamic nested service subpages (moving, motorcycle, freight)
-    const serviceIds = ["moving", "motorcycle", "freight"];
-    const provinceServiceUrls: MetadataRoute.Sitemap = provinces.flatMap((province) =>
-      serviceIds.map((serviceId) => ({
-        url: `${domain}/service/${province}/${serviceId}`,
-        lastModified: SEO_RELEASE_DATE,
-        changeFrequency: "weekly",
-        priority: 0.8,
-      }))
+    // Dynamic provinces service hubs - lastModified omitted when unknown
+    const provinceUrls: MetadataRoute.Sitemap = provinces.map((province) =>
+      buildEntry(`${domain}/service/${province}`, 0.8, "weekly")
     );
 
-    // Controlled Route-to-Route Allowlist from approvedRouteCorridors
+    // Dynamic blogs from posts - uses authentic per-post publication/modification dateISO
+    const blogSlugs = Object.keys(posts || {});
+    const blogUrls: MetadataRoute.Sitemap = blogSlugs.map((slug) =>
+      buildEntry(`${domain}/blog/${slug}`, 0.6, "monthly", posts[slug]?.dateISO)
+    );
+
+    // Dynamic nested service subpages (moving, motorcycle, freight) - lastModified omitted when unknown
+    const serviceIds = ["moving", "motorcycle", "freight"];
+    const provinceServiceUrls: MetadataRoute.Sitemap = provinces.flatMap((province) =>
+      serviceIds.map((serviceId) =>
+        buildEntry(`${domain}/service/${province}/${serviceId}`, 0.8, "weekly")
+      )
+    );
+
+    // Controlled Route-to-Route Allowlist from approvedRouteCorridors - lastModified omitted when unknown
     const routeUrls: MetadataRoute.Sitemap = approvedRouteCorridors
       .filter(({ from, to }) => provinceMap[from] && provinceMap[to] && from !== to)
-      .map(({ from, to }) => ({
-        url: `${domain}/route/${from}/${to}`,
-        lastModified: SEO_RELEASE_DATE,
-        changeFrequency: "monthly",
-        priority: 0.7,
-      }));
+      .map(({ from, to }) =>
+        buildEntry(`${domain}/route/${from}/${to}`, 0.7, "monthly")
+      );
 
-    // Approved District Pages (where indexable)
+    // Approved District Pages (where indexable) - uses per-district verified lastReviewedDate
     const approvedDistrictUrls: MetadataRoute.Sitemap = Object.values(districtLandingPages)
       .filter(isDistrictPageIndexable)
-      .map((district) => ({
-        url: `${domain}/areas/${district.province}/${district.districtSlug}`,
-        lastModified: parseTruthfulLastmod(district.lastReviewedDate),
-        changeFrequency: "weekly",
-        priority: 0.85,
-      }));
+      .map((district) =>
+        buildEntry(
+          `${domain}/areas/${district.province}/${district.districtSlug}`,
+          0.85,
+          "weekly",
+          district.lastReviewedDate
+        )
+      );
 
-    // Approved Portfolio Case Studies
-    const approvedPortfolioUrls: MetadataRoute.Sitemap = Object.values(portfolioCasesData).map((caseStudy) => ({
-      url: `${domain}/portfolio/${caseStudy.slug}`,
-      lastModified: SEO_RELEASE_DATE,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    }));
+    // Approved Portfolio Case Studies - lastModified omitted when unknown
+    const approvedPortfolioUrls: MetadataRoute.Sitemap = Object.values(portfolioCasesData).map(
+      (caseStudy) => buildEntry(`${domain}/portfolio/${caseStudy.slug}`, 0.7, "monthly")
+    );
 
-    // Valid Guides (where marked indexable)
+    // Valid Guides (where marked indexable) - uses authentic guide lastUpdated date
     const validGuidesUrls: MetadataRoute.Sitemap = Object.values(guidesData)
       .filter((g) => g.isIndexable)
-      .map((guide) => ({
-        url: `${domain}/guides/${guide.slug}`,
-        lastModified: parseTruthfulLastmod(guide.lastUpdated),
-        changeFrequency: "monthly",
-        priority: 0.75,
-      }));
+      .map((guide) =>
+        buildEntry(`${domain}/guides/${guide.slug}`, 0.75, "monthly", guide.lastUpdated)
+      );
 
     // 7 Strategic Zone Hubs
     const zoneHubUrls: MetadataRoute.Sitemap = getAllZoneHubs().map((zone) => ({

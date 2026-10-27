@@ -82,7 +82,7 @@ export default function TrustCounters() {
     <section 
       id="trust" 
       ref={sectionRef} 
-      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-gradient-to-br from-[#071A33] via-[#0B2A50] to-[#0F3B6D] text-white"
+      className="relative w-full max-w-full overflow-hidden px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-10 font-sans bg-linear-to-br from-[#071A33] via-[#0B2A50] to-[#0F3B6D] text-white"
     >
       {/* Subtle ambient radial blue glow */}
       <div 
@@ -130,7 +130,7 @@ export default function TrustCounters() {
                 </h3>
                 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-0 sm:min-h-[2.5rem]">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4 min-h-0 sm:min-h-10">
                   {stat.desc}
                 </p>
 

@@ -4,12 +4,13 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/TableOfContents";
 import RelatedServices from "@/components/RelatedServices";
 import InContentCTA from "@/components/InContentCTA";
+import { siteConfig } from "@/lib/seo/site-config";
 
 export const metadata: Metadata = {
   title: "รับย้ายบ้าน ภูเก็ต ย้ายหอ คอนโด อพาร์ทเม้นท์ | WMS TRANSPORT",
   description: "บริการรับย้ายบ้าน ภูเก็ต ขนย้ายหอพัก คอนโดมิเนียม เฟอร์นิเจอร์สำนักงาน จากกรุงเทพฯ ไปภูเก็ต หรือภายในจังหวัดภูเก็ต พร้อมคนช่วยยกของ แพ็กซีลกันกระแทกอย่างหนาแน่น 24 ชม.",
   alternates: {
-    canonical: "/service/phuket/moving",
+    canonical: `${siteConfig.productionUrl}/service/phuket/moving`,
   },
 };
 
@@ -34,8 +35,8 @@ export default function PhuketMovingPage() {
       <main className="flex-1 relative pt-28 pb-20 md:pt-36 md:pb-28">
         {/* Ambient subtle light background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px]" />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#2563eb_1px,transparent_1px)] bg-size-[32px_32px]" />
+          <div className="absolute top-0 right-0 w-150 h-150 bg-blue-100/40 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
@@ -210,17 +211,17 @@ export default function PhuketMovingPage() {
                 </section>
 
                 {/* Inline CTA block */}
-                <div className="bg-[#0B1F3A] border border-blue-900/30 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
+                <div className="bg-navy border border-blue-900/30 p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-white shadow-md">
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">ประเมินราคาย้ายบ้านไปภูเก็ตฟรี</h3>
-                    <p className="text-blue-100/80 text-sm">บริการประเมินจากภาพถ่ายหรือวิดีโอผ่าน LINE รวดเร็วใน 5 นาที</p>
+                    <p className="text-blue-100/80 text-sm">บริการประเมินจากภาพถ่ายหรือวิดีโอผ่าน LINE ตามระยะทางจริง ไม่มีค่าใช้จ่าย</p>
                   </div>
                   <a
-                    href="tel:0612402436"
+                    href={siteConfig.phoneHref}
                     className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all flex items-center gap-2 shadow-xs active:scale-98 shrink-0"
                   >
                     <Phone className="w-4.5 h-4.5" />
-                    <span>โทร 061-240-2436</span>
+                    <span>โทร {siteConfig.phone}</span>
                   </a>
                 </div>
 

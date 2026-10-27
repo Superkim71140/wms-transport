@@ -28,7 +28,7 @@ export default function BlogHubPage() {
             <span className="text-blue-700 tracking-wide uppercase font-bold text-xs bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200 mb-4 inline-block">
               WMS Content Hub
             </span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0B1F3A] mb-3 tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-navy mb-3 tracking-tight">
               บล็อกรวมความรู้ <span className="text-blue-600">เรื่องการขนย้าย</span>
             </h1>
             <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -43,7 +43,7 @@ export default function BlogHubPage() {
                 key={post.slug}
                 className="bg-white border border-slate-200/90 rounded-2xl overflow-hidden shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col group"
               >
-                <Link href={`/blog/${post.slug}`} className="relative aspect-[16/10] overflow-hidden block bg-slate-100">
+                <Link href={`/blog/${post.slug}`} className="relative aspect-16/10 overflow-hidden block bg-slate-100">
                   <Image 
                     src={post.image} 
                     alt={post.title} 
@@ -56,7 +56,7 @@ export default function BlogHubPage() {
                   <span className="text-xs text-blue-700 font-bold mb-2.5 inline-block bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200 w-fit">
                     {post.date}
                   </span>
-                  <h2 className="text-lg font-bold text-[#0B1F3A] mb-2 leading-snug group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-lg font-bold text-navy mb-2 leading-snug group-hover:text-blue-600 transition-colors">
                     <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>

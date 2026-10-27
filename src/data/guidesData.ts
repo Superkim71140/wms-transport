@@ -21,8 +21,8 @@ export const guidesData: Record<string, GuideRecord> = {
     readTime: "อ่าน 5 นาที",
     lastUpdated: "25 มิถุนายน 2026",
     author: {
-      name: "สมเกียรติ ยิ่งเจริญ",
-      role: "หัวหน้าฝ่ายจัดส่งสินค้าและโลจิสติกส์ WMS",
+      name: "ทีมงานฝ่ายโลจิสติกส์ WMS TRANSPORT",
+      role: "ฝ่ายจัดส่งและประเมินงานขนย้าย",
       avatar: "/images/logoWMS.webp"
     },
     h1: "รถกระบะตู้ทึบใส่ของได้กี่คิว? วิธีวัดขนาดตู้และคำนวณปริมาตรของก่อนย้ายบ้าน",
@@ -58,8 +58,8 @@ export const guidesData: Record<string, GuideRecord> = {
     readTime: "อ่าน 4 นาที",
     lastUpdated: "25 มิถุนายน 2026",
     author: {
-      name: "ธีรพล แก้วสว่าง",
-      role: "ผู้เชี่ยวชาญการขนย้ายหน้างานระดับสูง WMS",
+      name: "ทีมงานฝ่ายโลจิสติกส์ WMS TRANSPORT",
+      role: "ฝ่ายจัดส่งและประเมินงานขนย้าย",
       avatar: "/images/logoWMS.webp"
     },
     h1: "ย้ายหอไม่มีลิฟต์ทำอย่างไร? คู่มือขนย้ายขึ้นลงบันไดตึกสูงอย่างปลอดภัยและเป็นระบบ",
@@ -88,8 +88,8 @@ export const guidesData: Record<string, GuideRecord> = {
     readTime: "อ่าน 3 นาที",
     lastUpdated: "25 มิถุนายน 2026",
     author: {
-      name: "สมเกียรติ ยิ่งเจริญ",
-      role: "หัวหน้าฝ่ายจัดส่งสินค้าและโลจิสติกส์ WMS",
+      name: "ทีมงานฝ่ายโลจิสติกส์ WMS TRANSPORT",
+      role: "ฝ่ายจัดส่งและประเมินงานขนย้าย",
       avatar: "/images/logoWMS.webp"
     },
     h1: "ย้ายบ้านขนส่งของช่วงมรสุม/ฝนตกหนัก: วิธีแรปและป้องกันความเสียหายจากน้ำฝน",
@@ -118,8 +118,8 @@ export const guidesData: Record<string, GuideRecord> = {
     readTime: "อ่าน 4 นาที",
     lastUpdated: "25 มิถุนายน 2026",
     author: {
-      name: "วราวุฒิ มงคล",
-      role: "หัวหน้าทีมดูแลการขนส่งรถมอเตอร์ไซค์ WMS",
+      name: "ทีมงานฝ่ายโลจิสติกส์ WMS TRANSPORT",
+      role: "ฝ่ายจัดส่งและประเมินงานขนย้าย",
       avatar: "/images/logoWMS.webp"
     },
     h1: "เตรียมตัวอย่างไรก่อนส่งมอเตอร์ไซค์ข้ามจังหวัด? วิธีล็อก ป้องกัน และเอกสารที่ต้องใช้",
@@ -153,8 +153,8 @@ export const guidesData: Record<string, GuideRecord> = {
     readTime: "อ่าน 5 นาที",
     lastUpdated: "25 มิถุนายน 2026",
     author: {
-      name: "ธีรพล แก้วสว่าง",
-      role: "ผู้เชี่ยวชาญการขนย้ายหน้างานระดับสูง WMS",
+      name: "ทีมงานฝ่ายโลจิสติกส์ WMS TRANSPORT",
+      role: "ฝ่ายจัดส่งและประเมินงานขนย้าย",
       avatar: "/images/logoWMS.webp"
     },
     h1: "ย้ายห้องคอนโด 1 ห้องนอนขนาดมาตรฐาน: สรุปคิว CBM เฉลี่ย และจัดเตรียมรถขนของ",

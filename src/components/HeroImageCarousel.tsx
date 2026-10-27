@@ -116,7 +116,7 @@ export default function HeroImageCarousel() {
     >
       <div className="relative w-full rounded-2xl border border-slate-200/90 bg-slate-50/70 shadow-xs overflow-hidden select-none">
         {/* Aspect ratio container for artwork */}
-        <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[1.95/1] max-h-[540px] bg-white flex items-center justify-center">
+        <div className="relative w-full aspect-16/10 sm:aspect-video lg:aspect-[1.95/1] max-h-135 bg-white flex items-center justify-center">
           {slides.map((slide, index) => {
             const isActive = currentSlide === index;
             return (
@@ -180,7 +180,7 @@ export default function HeroImageCarousel() {
                   }}
                   aria-label={`Go to slide ${index + 1}`}
                   aria-current={isActive ? "true" : undefined}
-                  className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
+                  className="min-w-11 min-h-11 flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
                 >
                   <span
                     className={`block h-2 rounded-full motion-reduce:transition-none transition-all duration-300 ${

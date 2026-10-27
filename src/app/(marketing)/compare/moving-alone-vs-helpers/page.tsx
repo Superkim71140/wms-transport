@@ -31,7 +31,7 @@ export default function CompareAloneVsHelpersPage() {
               Expert Comparison Guide
             </span>
             
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0B1F3A] leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-navy leading-tight mb-6">
               ย้ายของเอง VS จ้างคนช่วยยกของ WMS <br />
               <span className="text-blue-600">
                 แบบไหนคุ้มค่าและถนอมร่างกายมากกว่ากัน?
@@ -45,7 +45,7 @@ export default function CompareAloneVsHelpersPage() {
                 
                 {/* Introduction */}
                 <section className="space-y-3">
-                  <h2 className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2">
+                  <h2 className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2">
                     บทนำ: ทางเลือกความสบายใจในการย้ายบ้านคอนโด
                   </h2>
                   <p>
@@ -56,7 +56,7 @@ export default function CompareAloneVsHelpersPage() {
 
                 {/* Section 1: Moving Alone */}
                 <section className="space-y-3">
-                  <h2 className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2">
+                  <h2 className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2">
                     1. ยกขนย้ายสิ่งของด้วยตัวเอง (DIY Moving)
                   </h2>
                   <p>
@@ -90,7 +90,7 @@ export default function CompareAloneVsHelpersPage() {
 
                 {/* Section 2: Using WMS Helpers */}
                 <section className="space-y-3">
-                  <h2 className="text-xl md:text-2xl font-bold text-[#0B1F3A] border-b border-slate-200 pb-2">
+                  <h2 className="text-xl md:text-2xl font-bold text-navy border-b border-slate-200 pb-2">
                     2. การจ้างคนช่วยยกของมืออาชีพ WMS (WMS Loading Helpers)
                   </h2>
                   <p>
@@ -123,7 +123,7 @@ export default function CompareAloneVsHelpersPage() {
 
                 {/* Comparison Summary */}
                 <section className="bg-blue-50/70 border border-blue-200 rounded-2xl p-6 sm:p-7 space-y-2.5 shadow-xs">
-                  <h3 className="text-base sm:text-lg font-bold text-[#0B1F3A]">บทสรุปส่งท้าย:</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-navy">บทสรุปส่งท้าย:</h3>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
                     หากสัมภาระมีเพียงกล่องขนาดเล็ก เสื้อผ้า ของจิปาถะไม่เกิน 5 กล่อง การย้ายของเองอาจเป็นคำตอบที่สมเหตุสมผลครับ แต่หากในของของคุณมีที่นอน 5-6 ฟุต โซฟา เครื่องซักผ้า หรือตู้เย็นขนาดใหญ่ การเรียกคนช่วยยกเสริมของ WMS จะคุ้มค่ากว่าอย่างมาก ช่วยให้ของถึงปลายทางในความปลอดภัยสูงสุด และเซฟหลังของคุณได้อย่างสมบูรณ์แบบ
                   </p>
@@ -132,7 +132,7 @@ export default function CompareAloneVsHelpersPage() {
 
               {/* Sidebar Column: CTA */}
               <div className="lg:col-span-4 space-y-6">
-                <div className="bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 text-center space-y-4 text-white shadow-md">
+                <div className="bg-navy border border-blue-950 rounded-2xl p-6 text-center space-y-4 text-white shadow-md">
                   <h4 className="text-white font-extrabold text-sm">จองคนช่วยยกพร้อมรถขนส่ง WMS</h4>
                   <p className="text-xs text-slate-300 leading-relaxed font-normal">
                     เลือกสัดส่วนแรงงานที่ลงตัว พนักงานสุภาพ ผ่านประวัติอาชญากรรม คุยง่าย ปลอดภัยสูงสุด

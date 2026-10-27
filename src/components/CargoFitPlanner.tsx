@@ -98,7 +98,7 @@ export default function CargoFitPlanner() {
           <div className="flex justify-between items-center border-b border-slate-100 pb-4">
             <div>
               <span className="text-xs text-blue-700 tracking-wide font-bold uppercase">WMS CARGO FIT SCORE</span>
-              <h3 className="text-xl font-extrabold text-[#0B1F3A]">เครื่องคำนวณปริมาตร คิว (CBM)</h3>
+              <h3 className="text-xl font-extrabold text-navy">เครื่องคำนวณปริมาตร คิว (CBM)</h3>
             </div>
             {roundedTotalVolume > 0 && (
               <button 
@@ -116,7 +116,7 @@ export default function CargoFitPlanner() {
             <div className="flex justify-between items-end">
               <span className="text-sm font-semibold text-slate-700">ปริมาตรรวมที่ใช้:</span>
               <div className="text-right">
-                <span className="text-2xl font-black text-[#0B1F3A]">{roundedTotalVolume} </span>
+                <span className="text-2xl font-black text-navy">{roundedTotalVolume} </span>
                 <span className="text-xs font-bold text-slate-500">/ {maxVolume} CBM (คิว)</span>
               </div>
             </div>
@@ -154,19 +154,19 @@ export default function CargoFitPlanner() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <div className="border-r border-slate-200 last:border-0 pr-2">
                 <span className="text-[10px] text-slate-500 font-bold block">กว้างภายใน</span>
-                <span className="text-sm font-extrabold text-[#0B1F3A]">{truckSpec.dimensions.widthInternalMeters} ม.</span>
+                <span className="text-sm font-extrabold text-navy">{truckSpec.dimensions.widthInternalMeters} ม.</span>
               </div>
               <div className="border-r border-slate-200 last:border-0 pr-2">
                 <span className="text-[10px] text-slate-500 font-bold block">ยาวภายใน</span>
-                <span className="text-sm font-extrabold text-[#0B1F3A]">{truckSpec.dimensions.lengthInternalMeters} ม.</span>
+                <span className="text-sm font-extrabold text-navy">{truckSpec.dimensions.lengthInternalMeters} ม.</span>
               </div>
               <div className="border-r border-slate-200 last:border-0 pr-2">
                 <span className="text-[10px] text-slate-500 font-bold block">สูงภายใน</span>
-                <span className="text-sm font-extrabold text-[#0B1F3A]">{truckSpec.dimensions.heightInternalMeters} ม.</span>
+                <span className="text-sm font-extrabold text-navy">{truckSpec.dimensions.heightInternalMeters} ม.</span>
               </div>
               <div>
                 <span className="text-[10px] text-slate-500 font-bold block">รับน้ำหนักสูงสุด</span>
-                <span className="text-sm font-extrabold text-[#0B1F3A]">{truckSpec.dimensions.payloadCapacityKg} กก.</span>
+                <span className="text-sm font-extrabold text-navy">{truckSpec.dimensions.payloadCapacityKg} กก.</span>
               </div>
             </div>
             <div className="text-[10px] text-slate-500 font-medium italic text-center pt-1">
@@ -179,7 +179,7 @@ export default function CargoFitPlanner() {
         <div className="flex-1 space-y-4">
           <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">เลือกรายการสิ่งของของคุณ</h4>
           
-          <div className="h-[280px] sm:h-[350px] overflow-y-auto pr-2 space-y-2 border border-slate-200 rounded-xl p-3 bg-slate-50/50">
+          <div className="h-70 sm:h-87.5 overflow-y-auto pr-2 space-y-2 border border-slate-200 rounded-xl p-3 bg-slate-50/50">
             {INVENTORY_ITEMS.map((item) => {
               const qty = selectedItems[item.id] || 0;
               return (

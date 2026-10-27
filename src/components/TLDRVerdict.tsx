@@ -11,7 +11,7 @@ export default function TLDRVerdict({ location = "ทั่วประเทศ
           <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs">
             <Zap className="w-5 h-5" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-[#0B1F3A] m-0 tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-navy m-0 tracking-tight">
             TL;DR: ข้อมูลสำคัญบริการรถรับจ้าง {location}
           </h3>
         </div>

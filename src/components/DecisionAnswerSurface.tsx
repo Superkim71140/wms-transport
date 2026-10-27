@@ -6,7 +6,7 @@ import Link from "next/link";
 export function AnswerSummary({ data }: { data: AnswerSurfaceData }) {
   return (
     <div className="bg-blue-50/70 border border-blue-200 p-6 sm:p-7 rounded-2xl mb-8 shadow-xs">
-      <h3 className="text-lg sm:text-xl font-extrabold text-[#0B1F3A] mb-2 tracking-tight">บทสรุปบริการ (TL;DR)</h3>
+      <h3 className="text-lg sm:text-xl font-extrabold text-navy mb-2 tracking-tight">บทสรุปบริการ (TL;DR)</h3>
       <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">{data.directAnswer}</p>
     </div>
   );
@@ -80,7 +80,7 @@ export function OperationalConstraints({ reqs, exclusions }: { reqs: string[], e
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
       {reqs.length > 0 && (
         <div className="bg-white border border-blue-200 p-5 sm:p-6 rounded-2xl shadow-xs">
-          <h4 className="text-base font-bold text-[#0B1F3A] mb-3.5 flex items-center gap-2">
+          <h4 className="text-base font-bold text-navy mb-3.5 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-blue-600" /> สิ่งที่ต้องเตรียมพร้อม
           </h4>
           <ul className="space-y-2.5">
@@ -137,7 +137,7 @@ export default function DecisionAnswerSurface({ data }: { data: AnswerSurfaceDat
       className="max-w-6xl mx-auto my-12 p-6 sm:p-8 md:p-10 bg-white border border-slate-200/90 rounded-2xl shadow-xs relative overflow-hidden"
     >
       <div className="relative z-10">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-[#0B1F3A] mb-8 tracking-tight">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-navy mb-8 tracking-tight">
           ข้อมูลสรุปเพื่อการตัดสินใจ
         </h2>
 

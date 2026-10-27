@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
     title: `${guide.h1} | WMS TRANSPORT`,
     description: guide.description,
     alternates: {
-      canonical: `/guides/${slug}`,
+      canonical: `${siteConfig.productionUrl}/guides/${slug}`,
     },
   };
 }
@@ -150,7 +150,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
               </div>
               <div>
                 <span className="text-[10px] text-blue-700 tracking-wider font-bold block uppercase">เขียนและตรวจสอบเนื้อหาโดย</span>
-                <span className="text-sm font-bold text-[#0B1F3A] block">{guide.author.name}</span>
+                <span className="text-sm font-bold text-navy block">{guide.author.name}</span>
                 <span className="text-xs text-slate-500 font-medium">{guide.author.role}</span>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
 
             {guide.sections.map((section, idx) => (
               <div key={idx} className="space-y-3">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#0B1F3A] tracking-tight border-b border-slate-200 pb-2">
+                <h2 className="text-xl sm:text-2xl font-bold text-navy tracking-tight border-b border-slate-200 pb-2">
                   {section.title}
                 </h2>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-normal">{section.content}</p>
@@ -196,7 +196,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
                 <span className="px-3.5 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-xs font-bold uppercase tracking-wider">
                   เครื่องมือจำลองหน้างานจริง
                 </span>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-[#0B1F3A] mt-3">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-navy mt-3">
                   คำนวณปริมาตรของรวม และทดสอบการโหลดเข้าตู้รับจ้าง
                 </h2>
               </div>
@@ -206,7 +206,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
 
           {/* Quote Factors Explainer Component */}
           <div className="mt-10 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-xs">
-            <h3 className="text-lg sm:text-xl font-extrabold text-[#0B1F3A] mb-3 flex items-center gap-2">
+            <h3 className="text-lg sm:text-xl font-extrabold text-navy mb-3 flex items-center gap-2">
               <ShieldCheck className="text-blue-600 h-5 w-5" />
               <span>ปัจจัยอะไรบ้างที่มีผลต่อการคำนวณค่าบริการขนย้าย?</span>
             </h3>
@@ -251,7 +251,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-10 bg-[#0B1F3A] border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
+          <div className="mt-10 bg-navy border border-blue-950 rounded-2xl p-6 sm:p-10 text-center text-white shadow-md relative overflow-hidden">
             <span className="text-blue-400 font-bold text-xs uppercase tracking-wider block mb-2">จองคิวด่วน / ประเมินราคาฟรี</span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
               ต้องการจ้างรถตู้ทึบรับจ้างขนย้ายใช่หรือไม่?
@@ -262,7 +262,7 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3.5">
               <a
-                href="https://line.me/ti/p/DtICkMaDet"
+                href={siteConfig.lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-base rounded-xl transition-colors shadow-xs"
@@ -271,11 +271,11 @@ export default async function GuideDetailPage({ params }: GuidePageProps) {
                 <span>คุยรายละเอียดผ่าน LINE</span>
               </a>
               <a
-                href="tel:0612402436"
+                href={siteConfig.phoneHref}
                 className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-base rounded-xl transition-colors"
               >
                 <Phone className="h-4 w-4 text-blue-400" />
-                <span className="font-mono">061-240-2436 (ติดต่อตรง)</span>
+                <span className="font-mono">{siteConfig.phone} (ติดต่อตรง)</span>
               </a>
             </div>
           </div>

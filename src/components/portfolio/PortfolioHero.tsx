@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function PortfolioHero() {
   return (
-    <section className="relative pt-24 pb-16 md:pt-36 md:pb-28 overflow-hidden bg-gradient-to-b from-blue-50/70 via-slate-50/40 to-white min-h-[75vh] md:min-h-[85vh] flex items-center justify-center">
+    <section className="relative pt-24 pb-16 md:pt-36 md:pb-28 overflow-hidden bg-linear-to-b from-blue-50/70 via-slate-50/40 to-white min-h-[75vh] md:min-h-[85vh] flex items-center justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 w-full flex flex-col items-center text-center font-sans">
         
         {/* Subtitle */}
@@ -26,7 +26,7 @@ export default function PortfolioHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0B1F3A] leading-tight mb-4 max-w-4xl tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-navy leading-tight mb-4 max-w-4xl tracking-tight">
             ผลงานจริงของ <span className="text-blue-600">WMS Transport</span>
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-slate-600 font-medium max-w-2xl mx-auto mb-8">
@@ -35,7 +35,7 @@ export default function PortfolioHero() {
         </motion.div>
         
         {/* Floating Image Cards */}
-        <div className="relative w-full max-w-5xl mt-4 mb-8 h-[220px] sm:h-[320px] md:h-[380px] flex justify-center items-center gap-4 md:gap-8">
+        <div className="relative w-full max-w-5xl mt-4 mb-8 h-55 sm:h-80 md:h-95 flex justify-center items-center gap-4 md:gap-8">
           
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -86,7 +86,7 @@ export default function PortfolioHero() {
             href="https://line.me/ti/p/DtICkMaDet"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold rounded-xl transition-colors shadow-xs w-full sm:w-auto min-h-[44px]"
+            className="flex items-center justify-center gap-2.5 px-7 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white font-bold rounded-xl transition-colors shadow-xs w-full sm:w-auto min-h-11"
           >
             <Image
               src="/images/LINE_icon.webp"
@@ -99,7 +99,7 @@ export default function PortfolioHero() {
           </a>
           <a
             href="#gallery-list"
-            className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200/90 font-bold rounded-xl transition-colors shadow-xs w-full sm:w-auto min-h-[44px]"
+            className="flex items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200/90 font-bold rounded-xl transition-colors shadow-xs w-full sm:w-auto min-h-11"
           >
             <span>ดูผลงานทั้งหมด</span>
           </a>
@@ -119,7 +119,7 @@ export default function PortfolioHero() {
       </div>
       
       {/* Anchor identifier for scrolling */}
-      <div id="gallery-list" className="absolute bottom-0 left-0 w-full h-[1px]" />
+      <div id="gallery-list" className="absolute bottom-0 left-0 w-full h-px" />
     </section>
   );
 }
