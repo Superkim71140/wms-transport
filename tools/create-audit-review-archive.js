@@ -28,7 +28,11 @@ const IGNORED_NAMES = new Set([
   '.DS_Store',
   'Thumbs.db',
   'cache',
-  '.cache'
+  '.cache',
+  'credentials',
+  'secrets',
+  '.secrets',
+  '.credentials'
 ]);
 
 function shouldCopy(relPath, isDirectory) {
@@ -36,10 +40,11 @@ function shouldCopy(relPath, isDirectory) {
   for (const part of parts) {
     if (IGNORED_NAMES.has(part)) return false;
   }
-  const basename = path.basename(relPath);
+  const basename = path.basename(relPath).toLowerCase();
   if (basename.endsWith('.zip')) return false;
   if (basename.startsWith('.env') && basename !== '.env.example') return false;
   if (basename.endsWith('.log')) return false;
+  if (basename.includes('serviceaccount') || basename.includes('gserviceaccount') || basename.includes('gsc-') || basename.endsWith('.key') || basename.endsWith('.p12')) return false;
   return true;
 }
 

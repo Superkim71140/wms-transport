@@ -52,5 +52,27 @@ public/~partytown/
 tools/*.json
 tools/*.xml
 
+# Google Cloud Service Account Credentials & Secrets
+wms-seo-monitor*.json
+*serviceaccount*.json
+*service-account*.json
+*gserviceaccount*.json
+*gsc*.json
+*credential*.json
+*secret*.json
+*-key.json
+*key*.json
+credentials/
+secrets/
+.secrets/
+.credentials/
+*.key
+*.p12
+*.bak
+*.backup
+
+# Tool temporary reports
+tools/sanitized-secret-scan-summary.json
+
 # Customer data storage
 /data/quotations/

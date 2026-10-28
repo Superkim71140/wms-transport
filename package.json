@@ -9,6 +9,8 @@
     "lint": "eslint",
     "test": "node tools/verify-seo-data.js",
     "seo:verify": "node tools/verify-seo-data.js",
+    "secret:check": "node tools/check-secrets.js",
+    "hook:install": "node tools/install-git-hooks.js",
     "optimize:images": "node scripts/optimize-images.mjs",
     "setup:partytown": "partytown copylib public/~partytown"
   },
