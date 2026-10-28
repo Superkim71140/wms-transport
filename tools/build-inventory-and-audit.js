@@ -338,7 +338,7 @@ async function run() {
       }
     }
 
-    item.httpStatus = res.statusCode || 0;
+    item.httpStatus = res.statusCode || res.status || 0;
     item.finalUrl = res.finalUrl || item.url;
     item.canonical = res.canonical || '';
     item.metaRobots = res.metaRobots || '';
@@ -346,7 +346,7 @@ async function run() {
     item.robotsAllowed = !(item.pathname.startsWith('/api/') || item.pathname.startsWith('/dashboard/'));
     item.title = res.title || '';
     item.h1 = res.h1 || '';
-    item.inLiveSitemap = liveUrls.has(item.url) || (item.rawUrl && liveUrls.has(item.rawUrl));
+    item.inLiveSitemap = liveUrls.has(item.url) || liveUrls.has(item.url + '/') || liveUrls.has(item.url.replace(/\/$/, '')) || (item.rawUrl && liveUrls.has(item.rawUrl));
     item.inLocalSitemap = localSitemapSet.has(item.url) || (item.rawUrl && localSitemapSet.has(item.rawUrl));
     item.checkedAt = now;
 
