@@ -44,7 +44,7 @@ function shouldCopy(relPath, isDirectory) {
   if (basename.endsWith('.zip')) return false;
   if (basename.startsWith('.env') && basename !== '.env.example') return false;
   if (basename.endsWith('.log')) return false;
-  if (basename.includes('serviceaccount') || basename.includes('gserviceaccount') || basename.includes('gsc-') || basename.endsWith('.key') || basename.endsWith('.p12')) return false;
+  if (basename.includes('serviceaccount') || basename.includes('gserviceaccount') || basename.includes('wms-seo-monitor') || basename.includes('credential') || basename.includes('secret') || basename.includes('gsc-') || basename.endsWith('.key') || basename.endsWith('.p12')) return false;
   return true;
 }
 
