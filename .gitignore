@@ -76,3 +76,4 @@ tools/sanitized-secret-scan-summary.json
 
 # Customer data storage
 /data/quotations/
+/data/seo-monitor/

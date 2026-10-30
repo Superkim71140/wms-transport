@@ -83,6 +83,16 @@ export default function ServiceMap() {
     }
   ];
 
+  const strategicZones = [
+    { id: 1, name: "มหาชัย – เมืองสมุทรสาคร", slug: "maha-chai" },
+    { id: 2, name: "กระทุ่มแบน – อ้อมน้อย", slug: "krathumbaen-omnoi" },
+    { id: 3, name: "พระราม 2 – บางกระดี่", slug: "rama2-bangkradi" },
+    { id: 4, name: "บางบอน – เอกชัย", slug: "bangbon-ekachai" },
+    { id: 5, name: "หนองแขม – เพชรเกษม 81", slug: "nongkhaem-phetkasem81" },
+    { id: 6, name: "บางแค – เพชรเกษม", slug: "bang-khae" },
+    { id: 7, name: "พุทธมณฑลสาย 1–4 – ศาลายา", slug: "phutthamonthon-sai-1-4" },
+  ];
+
   return (
     <section className="py-12 md:py-18 bg-linear-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden text-slate-800 font-sans">
       
@@ -402,6 +412,49 @@ export default function ServiceMap() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* 7 Strategic Zone Hubs (Direct Crawlable Pathway) */}
+        <div className="mt-8 pt-6 border-t border-slate-200/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div>
+              <h4 className="text-sm sm:text-base font-bold text-navy">
+                7 โซนยุทธศาสตร์การให้บริการ (สมุทรสาคร · กรุงเทพฯ ฝั่งธนบุรี · นครปฐม)
+              </h4>
+              <span className="text-xs text-slate-500">
+                เลือกสำรวจตามโซนเพื่อเข้าถึงพื้นที่บริการและจุดจอดเทียบรถเฉพาะแห่ง
+              </span>
+            </div>
+            <Link
+              href="/areas"
+              className="text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              สารบัญพื้นที่ทั้งหมด 70+ จุด ›
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5">
+            {strategicZones.map((zone) => (
+              <Link
+                key={zone.slug}
+                href={`/areas/${zone.slug}`}
+                className="p-3 bg-white hover:bg-blue-50/50 border border-slate-200/90 hover:border-blue-300 rounded-xl transition-all flex flex-col justify-between group shadow-2xs no-underline"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 block w-fit mb-1.5">
+                    โซน {zone.id}
+                  </span>
+                  <div className="text-xs font-bold text-slate-900 group-hover:text-blue-600 line-clamp-1">
+                    {zone.name}
+                  </div>
+                </div>
+                <div className="text-[11px] text-slate-400 group-hover:text-blue-500 flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100">
+                  <span>เข้าสู่ฮับ</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 

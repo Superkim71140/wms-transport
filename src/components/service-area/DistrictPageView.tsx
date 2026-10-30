@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   ShieldCheck,
@@ -141,20 +140,20 @@ export default function DistrictPageView({
     {
       route: `ในเขต ${name} และถนนสายหลักใกล้เคียง`,
       distanceOrScope: "ย้ายหอพัก คอนโด บ้าน ทาวน์โฮม และส่งมอเตอร์ไซค์",
-      transitTime: "30 - 60 นาที",
-      price: "เริ่มต้น 1,500 บาท",
+      transitTime: "ตามระยะทางและคิวงาน",
+      price: "ประเมินตามปริมาณของและชั้นอาคาร",
     },
     {
       route: `เขต${name} ➔ ทั่วเขตกรุงเทพฯ และปริมณฑล`,
       distanceOrScope: "ขนส่งสินค้าโรงงาน เหมาเที่ยว ย้ายคอนโด และส่งบิ๊กไบค์",
-      transitTime: "1 - 2 ชั่วโมง",
-      price: "เริ่มต้น 1,800 บาท",
+      transitTime: "ตามระยะทางวิ่งจริง",
+      price: "ประเมินตามระยะทางจริง",
     },
     {
       route: `เขต${name} ➔ ต่างจังหวัดทุกเส้นทางทั่วประเทศ`,
       distanceOrScope: "เหมารถกระบะตู้ทึบวิ่งตรง ไม่รวมของ ส่งมอบ Door-to-Door",
       transitTime: "ตามระยะทางจริง",
-      price: "เริ่มต้นตามระยะทาง",
+      price: "ประเมินตามระยะทางข้ามจังหวัด",
     },
   ];
 
@@ -213,8 +212,8 @@ export default function DistrictPageView({
           description: record.directAnswer,
           isHeadquarters: false,
           isRegionalHub: false,
-          startingPrice: "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายเวลาล่วงหน้าตามคิวงาน",
           imageSrc: record.images?.[0]?.path || "/images/WM10.webp",
           imageAlt: record.images?.[0]?.alt,
           imageCaption: record.images?.[0]?.caption || `ภาพงานจริง: รถกระบะตู้ทึบ WMS ให้บริการในพื้นที่เขต${name}`,
@@ -225,8 +224,8 @@ export default function DistrictPageView({
           isHeadquarters: false,
           isRegionalHub: false,
           geographicType: "service_area",
-          startingPrice: "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายเวลาล่วงหน้าตามคิวงาน",
           parentArea: {
             name: `${provThai} (${province === "samutsakhon" ? "สำนักงานใหญ่" : "ศูนย์รวมข้อมูล"})`,
             href: `/service/${province}`,
@@ -249,6 +248,27 @@ export default function DistrictPageView({
         {/* ── UX A: Local Page Jump Navigation ── */}
         <LocalPageJumpNav areaName={`เขต${name}`} />
 
+        {/* ── Directory Link Callout (if district has parent zone hub) ── */}
+        {record.zoneHubDirectoryLink && (
+          <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+            <div>
+              <span className="text-xs font-bold text-sky-800 uppercase tracking-wider block mb-1">
+                📍 ค้นหาจุดรับส่งย่อยและเส้นทางเฉพาะซอย
+              </span>
+              <p className="text-xs sm:text-sm text-slate-700">
+                {record.zoneHubDirectoryLink.description}
+              </p>
+            </div>
+            <Link
+              href={record.zoneHubDirectoryLink.href}
+              className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-all active:scale-95"
+            >
+              <span>{record.zoneHubDirectoryLink.anchor}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
+
         {/* ── 1. LOCAL DIRECT ANSWER SUMMARY ── */}
         <section className="mb-10" id="services">
           <div className="flex items-center gap-2 mb-3">
@@ -258,7 +278,7 @@ export default function DistrictPageView({
             </span>
           </div>
 
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs text-left mb-8">
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-xs text-left mb-6">
             <TwoToneHeading
               as="h2"
               text={`ข้อมูลสรุปการบริการ เขต${name}`}
@@ -267,10 +287,44 @@ export default function DistrictPageView({
               className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2"
               highlightClassName="text-blue-600 font-bold"
             />
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium mb-4">
               {record.directAnswer}
             </p>
+
+            <div className="pt-3 border-t border-slate-100 flex flex-wrap gap-4 text-xs font-bold text-blue-600">
+              <Link href="/pricing/moving" className="hover:text-blue-800 inline-flex items-center gap-1">
+                <span>ปัจจัยและเงื่อนไขราคาย้ายบ้าน</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              {primaryCase && (
+                <Link href={`/portfolio/${primaryCase.slug}`} className="hover:text-blue-800 inline-flex items-center gap-1">
+                  <span>ดูบันทึกผลงานจริง: {primaryCase.title}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
+              {record.province === "bkk-thonburi" && (
+                <Link href="/guides/condo-no-elevator" className="hover:text-blue-800 inline-flex items-center gap-1">
+                  <span>คู่มือขนย้ายอาคารไม่มีลิฟต์</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
+            </div>
           </div>
+
+          {/* Job Restrictions Disclosure */}
+          {record.restrictions && record.restrictions.length > 0 && (
+            <div className="mb-8 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700">
+              <h4 className="font-bold text-slate-900 mb-1.5 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-slate-700" />
+                <span>เงื่อนไขความปลอดภัยและสิ่งของที่ไม่รับขนส่ง:</span>
+              </h4>
+              <ul className="space-y-1 list-disc list-inside text-slate-600">
+                {record.restrictions.map((res, i) => (
+                  <li key={i}>{res}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Sub-Services Triad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">

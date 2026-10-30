@@ -269,6 +269,30 @@ export default function PricingMotorcyclePage() {
             steps={quotationSteps}
           />
 
+          {/* Contextual Motorcycle Prep Guide Link */}
+          <section className="mb-10 bg-slate-50 border border-slate-200/90 rounded-2xl p-5 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">
+                  คู่มือแนะนำสำหรับผู้ส่งรถมอเตอร์ไซค์
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  ขั้นตอนและวิธีเตรียมรถมอเตอร์ไซค์ก่อนส่งข้ามจังหวัด
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                  คำแนะนำการถ่ายน้ำมันเชื้อเพลิง การเตรียมเอกสารเล่มทะเบียน และอุปกรณ์ล็อกล้อหน้านิรภัย
+                </p>
+              </div>
+              <Link
+                href="/guides/prep-motorcycle-transport"
+                className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors shadow-2xs"
+              >
+                <span>อ่านคู่มือเตรียมรถ</span>
+                <span className="text-sm">›</span>
+              </Link>
+            </div>
+          </section>
+
           {/* 8. Brief FAQ & Final Contact Section */}
           <PricingFAQ
             title="คำถามที่พบบ่อยเกี่ยวกับการขนส่งมอเตอร์ไซค์"

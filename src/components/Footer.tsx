@@ -18,22 +18,24 @@ export default function Footer() {
     { label: "รถกระบะตู้ทึบขนส่งสินค้าโรงงาน", href: "/pricing/freight" },
     { label: "บริการพนักงานช่วยยกของ", href: "/compare/moving-alone-vs-helpers" },
     { label: "เปรียบเทียบกระบะตู้ทึบ VS กระบะคอก", href: "/compare/pickup-vs-box-truck" },
+    { label: "ขนย้ายเที่ยวเดียว VS ขนย้ายหลายเที่ยว", href: "/compare/one-vehicle-vs-multiple-trips" },
   ];
 
   const priorityAreaLinks = [
+    { label: "เลือกพื้นที่ให้บริการทั้งหมด", href: "/areas" },
     { label: "รถรับจ้างมหาชัย (สมุทรสาคร)", href: "/areas/samutsakhon/maha-chai" },
-    { label: "รถรับจ้างกระทุ่มแบน–อ้อมน้อย", href: "/areas/krathumbaen-omnoi" },
-    { label: "รถรับจ้างบ้านแพ้ว", href: "/areas/banphaeo-kaset" },
-    { label: "รถรับจ้างบางแค", href: "/areas/bangkok/bang-khae" },
-    { label: "รถรับจ้างหนองแขม", href: "/areas/bangkok/nong-khaem" },
-    { label: "รถรับจ้างบางบอน", href: "/areas/bangkok/bang-bon" },
+    { label: "พื้นที่บริการบางแค–เพชรเกษม", href: "/areas/bang-khae" },
+    { label: "รถรับจ้างบางแค (พร้อมคนยก)", href: "/areas/bkk-thonburi/bang-khae" },
+    { label: "รถรับจ้างหนองแขม", href: "/areas/bkk-thonburi/nong-khaem" },
+    { label: "รถรับจ้างบางบอน", href: "/areas/bkk-thonburi/bang-bon" },
     { label: "รถรับจ้างพระราม 2–บางกระดี่", href: "/areas/rama2-bangkradi" },
-    { label: "รถรับจ้างศาลายา–พุทธมณฑล", href: "/areas/salaya-phutthamonthon" },
-    { label: "รถรับจ้างสามพราน–เพชรเกษม", href: "/areas/samphran-phetkasem" },
+    { label: "รถรับจ้างพุทธมณฑลสาย 1–4 ศาลายา", href: "/areas/phutthamonthon-sai-1-4" },
+    { label: "รถรับจ้างกระทุ่มแบน–อ้อมน้อย", href: "/areas/krathumbaen-omnoi" },
   ];
 
   const helpfulLinks = [
     { label: "เช็กขนาดรถและคิวบรรทุก (CBM Guide)", href: "/guides/truck-capacity-cbm" },
+    { label: "คู่มือขนย้ายคอนโดไม่มีลิฟต์", href: "/guides/condo-no-elevator" },
     { label: "คู่มือเตรียมตัวก่อนย้ายบ้านและหอพัก", href: "/blog/moving-house-checklist" },
     { label: "ขั้นตอนเตรียมรถมอเตอร์ไซค์ก่อนส่ง", href: "/blog/prepare-motorcycle-transport" },
     { label: "ตัวอย่างผลงานการขนย้ายจริง (Portfolio)", href: "/portfolio" },

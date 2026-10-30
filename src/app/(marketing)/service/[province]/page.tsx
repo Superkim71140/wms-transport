@@ -28,6 +28,8 @@ import ServiceAreaRelatedServices from "@/components/service-area/ServiceAreaRel
 import ServiceAreaQuoteForm from "@/components/service-area/ServiceAreaQuoteForm";
 import ServiceContactBanner from "@/components/service-area/ServiceContactBanner";
 import TwoToneHeading from "@/components/service-area/TwoToneHeading";
+import WorkEvidenceSummary from "@/components/WorkEvidenceSummary";
+import { getLocalizedProvinceHub } from "@/data/serviceAreaContent";
 
 // ─────────────────────────────────────────────
 // Location data — add new regions here only
@@ -152,6 +154,18 @@ export async function generateMetadata({
       robots: { index: false, follow: false },
     };
   }
+
+  const localizedHub = getLocalizedProvinceHub(province);
+  if (localizedHub) {
+    return {
+      title: localizedHub.seoTitle,
+      description: localizedHub.metaDescription,
+      alternates: {
+        canonical: `/service/${province}`,
+      },
+    };
+  }
+
   const name = loc?.name ?? province;
 
   if (province === "bkk-thonburi") {
@@ -284,6 +298,7 @@ export default async function LocationHubPage({
 
   const geoData = geoMatrix[province];
   const provinceIntent = getProvinceIntent(province, provinceThai);
+  const localizedHub = getLocalizedProvinceHub(province);
 
   const subServices = [
     {
@@ -391,12 +406,12 @@ export default async function LocationHubPage({
           },
           {
             name: "กระทุ่มแบน (พุทธสาคร – พุทธมณฑลสาย 4/5)",
-            href: `/service/${province}`,
+            href: "/areas/krathumbaen-omnoi/krathum-baen",
             subtitle: "บริการรถตู้ทึบรับจ้าง ย้ายหอพักพนักงานและบ้านจัดสรร",
           },
           {
             name: "บ้านแพ้ว (เกษตรกรรม – คลองดำเนินสะดวก)",
-            href: `/service/${province}`,
+            href: "/areas/maha-chai/ban-phaeo",
             subtitle: "รถกระบะรับจ้างขนส่งสินค้าเกษตรและขนย้ายทั่วไป",
           },
         ]
@@ -410,20 +425,20 @@ export default async function LocationHubPage({
     {
       route: `ในเขต ${provinceThai} และพื้นที่ใกล้เคียง`,
       distanceOrScope: "ย้ายหอพัก คอนโด สินค้าทั่วไป ขนส่งมอเตอร์ไซค์",
-      transitTime: "30 - 60 นาที",
-      price: "เริ่มต้น 1,500 บาท",
+      transitTime: "ตามระยะทางจริง",
+      price: "ประเมินตามระยะทางจริง",
     },
     {
       route: `${provinceThai} ➔ กรุงเทพฯ และปริมณฑล`,
       distanceOrScope: "ขนย้ายบ้าน ทาวน์โฮม สินค้าโรงงาน และบิ๊กไบค์",
-      transitTime: "1 - 3 ชั่วโมง",
-      price: "เริ่มต้น 1,800 บาท",
+      transitTime: "ตามระยะทางจริง",
+      price: "ประเมินตามระยะทางจริง",
     },
     {
       route: `${provinceThai} ➔ ภาคกลาง / ภาคตะวันออก (ชลบุรี, ระยอง)`,
       distanceOrScope: "ขนส่งเหมาเที่ยว สินค้าโรงงาน และย้ายที่อยู่อาศัย",
-      transitTime: "2 - 4 ชั่วโมง",
-      price: "เริ่มต้น 3,000 บาท",
+      transitTime: "ตามระยะทางจริง",
+      price: "ประเมินตามระยะทางจริง",
     },
     {
       route: `${provinceThai} ➔ ต่างจังหวัดระยะไกล (เหนือ, อีสาน, ใต้)`,
@@ -453,13 +468,13 @@ export default async function LocationHubPage({
             { label: "พื้นที่ให้บริการ", href: "/areas" },
             { label: provinceThai, href: `/service/${province}` },
           ],
-          h1: provinceIntent.h1,
+          h1: localizedHub?.h1 || provinceIntent.h1,
           thaiName: provinceThai,
-          description: provinceIntent.heroSupportingStatement,
+          description: localizedHub?.metaDescription || provinceIntent.heroSupportingStatement,
           isHeadquarters: province === "samutsakhon",
           isRegionalHub: province === "bangkok",
-          startingPrice: "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายตามคิวงานและระยะทางจริง",
           imageSrc: PROVINCE_HERO_IMAGES[province]?.src || geoData?.images?.[0]?.url || "/images/WM15.webp",
           imageCaption: PROVINCE_HERO_IMAGES[province]?.caption || `ภาพตัวอย่างงานจริง: รถกระบะตู้ทึบ WMS ให้บริการขนย้ายในพื้นที่ ${provinceThai}`,
           highlightPhrase: provinceThai,
@@ -474,8 +489,8 @@ export default async function LocationHubPage({
               : province === "bangkok"
               ? "regional_hub"
               : "service_area",
-          startingPrice: "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายตามคิวงานและระยะทางจริง",
           parentArea: {
             name: "พื้นที่ให้บริการทั้งหมด",
             href: "/areas",
@@ -539,9 +554,16 @@ export default async function LocationHubPage({
             className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-4"
             highlightClassName="text-blue-600 font-black"
           />
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-medium">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-4 font-medium">
             WMS TRANSPORT ให้บริการรถกระบะตอนเดียวตู้ทึบหลังคาสูงปิดมิดชิด สำหรับขนย้ายบ้าน คอนโด หอพัก และขนส่งสินค้าโรงงานในพื้นที่ <strong>{provinceThai}</strong> มั่นใจในความปลอดภัยของสัมภาระด้วยสายรัดตรึงและทีมงานพนักงานยกของมืออาชีพ
           </p>
+
+          {localizedHub?.hubFocus && (
+            <div className="bg-blue-50/70 border border-blue-200/90 rounded-xl p-4 mb-6 text-xs sm:text-sm text-blue-950 leading-relaxed font-medium">
+              <span className="font-bold text-blue-900 block mb-1">จุดเน้นการให้บริการประจำโซน {provinceThai}:</span>
+              {localizedHub.hubFocus}
+            </div>
+          )}
 
           {/* Sub-services triad */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -587,8 +609,46 @@ export default async function LocationHubPage({
           </div>
         </section>
 
-        {/* ── Contact Banner matching Screenshot 1 ── */}
+        {/* ── Contact Banner ── */}
         <ServiceContactBanner areaName={provinceThai} className="mb-8" />
+
+        {/* ── Verified Work Evidence ── */}
+        <WorkEvidenceSummary
+          evidenceIds={localizedHub?.evidenceIds}
+          title={`ตัวอย่างผลงานจริงในพื้นที่และเส้นทาง ${provinceThai}`}
+        />
+
+        {/* ── Connecting Areas ── */}
+        {localizedHub?.nearbyConnectingAreas && localizedHub.nearbyConnectingAreas.length > 0 && (
+          <section className="mb-8 bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs">
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+              <Route className="w-4 h-4 text-blue-600" />
+              <span>เส้นทางและพื้นที่เชื่อมต่อจาก{provinceThai}</span>
+            </h3>
+            <p className="text-xs text-slate-500 mb-3 font-medium">
+              จุดเชื่อมต่อการขนย้ายที่ลูกค้าใช้บริการบ่อย
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {localizedHub.nearbyConnectingAreas.map((area: { name: string; href: string; reason: string }, idx: number) => (
+                <Link
+                  key={idx}
+                  href={area.href}
+                  className="p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-blue-300 transition-all flex items-center justify-between group"
+                >
+                  <div>
+                    <div className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-blue-600 transition-colors">
+                      {area.name}
+                    </div>
+                    <div className="text-[11px] text-slate-500">
+                      {area.reason}
+                    </div>
+                  </div>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ── 2. TRANSPORT & ROUTE TABLE ── */}
         <ServiceAreaRouteTable

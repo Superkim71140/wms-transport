@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { CheckCircle, XCircle, Phone } from "lucide-react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import RelatedComparisons from "@/components/compare/RelatedComparisons";
 
 export const metadata: Metadata = {
   title: "ย้ายของรอบเดียวจบ VS ขนส่งหลายเที่ยว แบบไหนประหยัดคุ้มกว่ากัน? | WMS",
@@ -133,6 +134,8 @@ export default function CompareOneVsMultipleTripsPage() {
                     WMS Transport แนะนำว่า หากระยะทางขนย้ายเกิน 10 กิโลเมตรขึ้นไป การจัดสรรรถกระบะตอนเดียวตู้ทึบที่มีปริมาตร 7.62 คิว ขนย้ายเสร็จสิ้นในเที่ยวเดียวคือทางเลือกที่คุ้มค่า ปลอดภัย และเซฟต้นทุนพลังงานรวมได้สูงสุดครับ ช่วยลดความเสี่ยงจากการขีดข่วนของเคลื่อนตัวระหว่างทางได้เป็นอย่างดี
                   </p>
                 </section>
+
+                <RelatedComparisons currentPath="/compare/one-vehicle-vs-multiple-trips" />
               </div>
 
               {/* Sidebar Column: CTA */}

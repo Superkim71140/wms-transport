@@ -127,10 +127,10 @@ export default function PhuketFreightPage() {
                     <div className="bg-slate-50/70 border border-slate-200/80 p-5 rounded-xl">
                       <h3 id="accident-cover" className="text-base font-bold text-slate-900 mb-1.5 flex items-center gap-2">
                         <CheckCircle className="w-4.5 h-4.5 text-blue-600 shrink-0" />
-                        คุ้มครองความปลอดภัยเต็มวงเงิน
+                        มาตรการดูแลความปลอดภัยสินค้า
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        อุ่นใจกับมาตรการดูแลความปลอดภัยของสินค้าตลอดเที่ยวการเดินทางตามเงื่อนไขที่ตกลง
+                        อุ่นใจกับมาตรการดูแลความปลอดภัยและอุปกรณ์ยึดตรึงสัมภาระตลอดเที่ยวการเดินทางตามเงื่อนไขที่ตกลง
                       </p>
                     </div>
                   </div>

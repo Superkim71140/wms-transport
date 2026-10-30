@@ -39,6 +39,8 @@ def should_exclude(rel_path):
             return True
         if p == ".env.local" or p == ".env":
             return True
+        if "wms-seo-monitor" in p or "serviceaccount" in p or p.endswith(".key") or p.endswith(".p12") or "secret" in p or "credential" in p:
+            return True
         if "data/quotations" in rel_path.replace("\\", "/"):
             return True
     return False

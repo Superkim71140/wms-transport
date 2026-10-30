@@ -9,6 +9,7 @@ import { guidesData } from "@/data/guidesData";
 import { portfolioCasesData } from "@/data/mediaEvidence";
 import { approvedRouteCorridors } from "@/data/approvedRouteCorridors";
 import { pricingPolicyData } from "@/data/pricingPolicy";
+import { localizedServiceDetails, localizedProvinceHubs } from "@/data/serviceAreaContent";
 
 const THAI_MONTH_MAP: Record<string, number> = {
   "มกราคม": 1, "ม.ค.": 1,
@@ -26,35 +27,66 @@ const THAI_MONTH_MAP: Record<string, number> = {
 };
 
 /**
- * Safely parse dates into standard Date objects.
- * Returns a genuine Date when a reliable significant modification date is supplied,
- * or undefined when unknown (allowing truthful omission of lastmod in the sitemap).
+ * Strict date validation for sitemap lastmod:
+ * 1. Checks ISO YYYY-MM-DD or full ISO 8601 timestamp with timezone.
+ * 2. Checks calendar validity (detects impossible dates like 2026-02-30).
+ * 3. Flags and rejects future dates.
+ * 4. Month-only strings (e.g. "มิถุนายน 2026") are rejected without synthetic day fallback, returning undefined.
+ * 5. Returns a genuine Date object for valid substantive dates, or undefined when omitted.
  */
-export function parseReliableLastmod(dateStr?: string): Date | undefined {
+export function parseReliableLastmod(dateStr?: string, maxAllowedDate: Date = new Date()): Date | undefined {
   if (!dateStr || typeof dateStr !== "string") return undefined;
   const trimmed = dateStr.trim();
   if (!trimmed) return undefined;
 
-  // Try ISO or standard YYYY-MM-DD
-  const directDate = new Date(trimmed);
-  if (!isNaN(directDate.getTime())) {
-    return directDate;
+  // Match ISO YYYY-MM-DD or YYYY-MM-DDTHH:mm:ss...
+  const isoMatch = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?)?$/);
+  if (isoMatch) {
+    const year = parseInt(isoMatch[1], 10);
+    const month = parseInt(isoMatch[2], 10); // 1-12
+    const day = parseInt(isoMatch[3], 10);
+
+    // Strict calendar validity check
+    if (month < 1 || month > 12 || day < 1 || day > 31) return undefined;
+    const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    if (day > daysInMonth) {
+      // Impossible calendar date (e.g. 2026-02-30)
+      return undefined;
+    }
+
+    const parsed = new Date(trimmed);
+    if (isNaN(parsed.getTime())) return undefined;
+
+    // Check future date
+    if (parsed.getTime() > maxAllowedDate.getTime()) {
+      return undefined;
+    }
+
+    return parsed;
   }
 
-  // Handle Thai text dates such as "25 มิถุนายน 2026" or "15 พฤษภาคม 2569"
+  // Handle Thai text dates ONLY when explicit day is present, e.g. "25 มิถุนายน 2026"
   for (const [monthName, monthNum] of Object.entries(THAI_MONTH_MAP)) {
     if (trimmed.includes(monthName)) {
-      const dayMatch = trimmed.match(/(\d{1,2})/);
-      const yearMatch = trimmed.match(/(\d{4})/);
-      const day = dayMatch ? parseInt(dayMatch[1], 10) : 1;
-      let year = yearMatch ? parseInt(yearMatch[1], 10) : 2026;
-      if (year > 2500) {
-        year -= 543;
+      const dayBeforeMonth = trimmed.match(new RegExp(`(\\d{1,2})\\s+${monthName}`));
+      if (!dayBeforeMonth) {
+        // Month only without day - do not synthesize a day
+        return undefined;
       }
+      const day = parseInt(dayBeforeMonth[1], 10);
+      const yearMatch = trimmed.match(/(\d{4})/);
+      let year = yearMatch ? parseInt(yearMatch[1], 10) : 2026;
+      if (year > 2500) year -= 543;
+
+      if (monthNum < 1 || monthNum > 12 || day < 1 || day > 31) return undefined;
+      const daysInMonth = new Date(Date.UTC(year, monthNum, 0)).getUTCDate();
+      if (day > daysInMonth) return undefined;
+
       const pad = (n: number) => String(n).padStart(2, "0");
       const isoStr = `${year}-${pad(monthNum)}-${pad(day)}T00:00:00+07:00`;
       const parsed = new Date(isoStr);
-      if (!isNaN(parsed.getTime())) return parsed;
+      if (isNaN(parsed.getTime()) || parsed.getTime() > maxAllowedDate.getTime()) return undefined;
+      return parsed;
     }
   }
 
@@ -214,21 +246,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw new Error("Sitemap validation failed: provinceMap is empty.");
   }
   for (const province of provinces) {
-    addEntry(`${domain}/service/${province}`, 0.8, "weekly");
+    const modDate = localizedProvinceHubs[province]?.contentModifiedAt;
+    addEntry(`${domain}/service/${province}`, 0.8, "weekly", modDate);
   }
 
   // 3. Dynamic Nested Service Subpages (moving, motorcycle, freight)
   const serviceIds = ["moving", "motorcycle", "freight"];
   for (const province of provinces) {
     for (const serviceId of serviceIds) {
-      addEntry(`${domain}/service/${province}/${serviceId}`, 0.8, "weekly");
+      const modDate = localizedServiceDetails[`${province}/${serviceId}`]?.contentModifiedAt;
+      addEntry(`${domain}/service/${province}/${serviceId}`, 0.8, "weekly", modDate);
     }
   }
 
   // 4. Dynamic Blogs from posts (excludes drafts)
   const publishedBlogEntries = Object.entries(posts || {}).filter(([, p]) => !p?.isDraft);
   for (const [slug, post] of publishedBlogEntries) {
-    addEntry(`${domain}/blog/${slug}`, 0.6, "monthly", post?.dateISO || post?.date);
+    const modDate = (post as unknown as { contentModifiedAt?: string })?.contentModifiedAt || post?.dateISO || post?.date;
+    addEntry(`${domain}/blog/${slug}`, 0.6, "monthly", modDate);
   }
 
   // 5. Controlled Route-to-Route Allowlist
@@ -246,19 +281,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       `${domain}/areas/${district.province}/${district.districtSlug}`,
       0.85,
       "weekly",
-      district.lastReviewedDate
+      district.contentModifiedAt || district.lastReviewedDate
     );
   }
 
   // 7. Approved Portfolio Case Studies
   for (const caseStudy of Object.values(portfolioCasesData || {})) {
-    addEntry(`${domain}/portfolio/${caseStudy.slug}`, 0.7, "monthly");
+    addEntry(`${domain}/portfolio/${caseStudy.slug}`, 0.7, "monthly", caseStudy.contentModifiedAt);
   }
 
   // 8. Valid Guides (where indexable)
   const indexableGuides = Object.values(guidesData || {}).filter((g) => g.isIndexable);
   for (const guide of indexableGuides) {
-    addEntry(`${domain}/guides/${guide.slug}`, 0.75, "monthly", guide.lastUpdated);
+    const modDate = (guide as unknown as { contentModifiedAt?: string })?.contentModifiedAt || guide.lastUpdated;
+    addEntry(`${domain}/guides/${guide.slug}`, 0.75, "monthly", modDate);
   }
 
   // 9. Seven Strategic Zone Hubs (truthful modification dates; omitted when unknown)
@@ -267,7 +303,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw new Error("Sitemap validation failed: getAllZoneHubs returned 0 hubs.");
   }
   for (const zone of zoneHubs) {
-    addEntry(`${domain}/areas/${zone.slug}`, 0.85, "weekly");
+    addEntry(`${domain}/areas/${zone.slug}`, 0.85, "weekly", zone.contentModifiedAt);
   }
 
   // 10. Detailed Published Local Area Points (truthful modification dates; omitted when unknown)
@@ -278,7 +314,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     throw new Error("Sitemap validation failed: getPublishedLocalPoints returned 0 published points.");
   }
   for (const point of publishedPoints) {
-    addEntry(`${domain}${point.preferredUrl}`, 0.8, "weekly");
+    const modDate = (point as unknown as { contentModifiedAt?: string })?.contentModifiedAt;
+    addEntry(`${domain}${point.preferredUrl}`, 0.8, "weekly", modDate);
   }
 
   // 11. Exact Set Comparison against Independently Derived Eligible Published Routes

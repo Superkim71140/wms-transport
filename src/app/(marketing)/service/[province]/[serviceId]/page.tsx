@@ -19,6 +19,8 @@ import ServiceAreaLayout from "@/components/service-area/ServiceAreaLayout";
 import ServiceAreaRouteTable from "@/components/service-area/ServiceAreaRouteTable";
 import ServiceAreaFAQ from "@/components/service-area/ServiceAreaFAQ";
 import ServiceAreaQuoteForm from "@/components/service-area/ServiceAreaQuoteForm";
+import WorkEvidenceSummary from "@/components/WorkEvidenceSummary";
+import { getLocalizedServiceDetail } from "@/data/serviceAreaContent";
 
 // ─────────────────────────────────────────────
 // Service metadata by slug
@@ -255,6 +257,17 @@ export async function generateMetadata({
     };
   }
 
+  const localized = getLocalizedServiceDetail(province, serviceId);
+  if (localized) {
+    return {
+      title: localized.seoTitle,
+      description: localized.metaDescription,
+      alternates: {
+        canonical: `/service/${province}/${serviceId}`,
+      },
+    };
+  }
+
   const provinceName = loc.name;
   const serviceLabel = service.label;
 
@@ -286,6 +299,8 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
+  const localized = getLocalizedServiceDetail(province, serviceId);
+
   const otherServices = serviceIds
     .filter((s) => s !== serviceId)
     .map((s) => ({ id: s, ...serviceConfig[s] }));
@@ -295,8 +310,8 @@ export default async function ServiceDetailPage({
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `${service.label} ${provinceName}`,
-    description: service.description,
+    name: localized?.h1 || `${service.label} ${provinceName}`,
+    description: localized?.metaDescription || service.description,
     provider: {
       "@id": "https://wms-transport.com/#moving-company",
     },
@@ -320,10 +335,12 @@ export default async function ServiceDetailPage({
     ],
   };
 
+  const activeFaqs = localized?.faqs || service.faqs;
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: service.faqs.map((f) => ({
+    mainEntity: activeFaqs.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -366,13 +383,15 @@ export default async function ServiceDetailPage({
               href: `/service/${province}/${serviceId}`,
             },
           ],
-          h1: `${service.headline} ${service.subheadline}`,
+          h1: localized?.h1 || `${service.headline} ${service.subheadline}`,
           thaiName: `${service.label} ${provinceName}`,
-          description: `${service.description} ให้บริการครอบคลุมพื้นที่ ${provinceName} และเส้นทางเชื่อมต่อทั่วประเทศ`,
+          description:
+            localized?.heroTagline ||
+            `${service.description} ให้บริการครอบคลุมพื้นที่ ${provinceName} และเส้นทางเชื่อมต่อทั่วประเทศ`,
           isHeadquarters: province === "samutsakhon",
           isRegionalHub: province === "bangkok" || province === "bkk-thonburi",
-          startingPrice: service.pricing[0]?.price || "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: service.pricing[0]?.price || "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายตามคิวงานและระยะทางจริง",
           imageSrc: geoData?.images?.[0]?.url || "/images/WM10.webp",
         }}
         sidebarProps={{
@@ -385,8 +404,8 @@ export default async function ServiceDetailPage({
               : province === "bangkok" || province === "bkk-thonburi"
               ? "regional_hub"
               : "service_area",
-          startingPrice: service.pricing[0]?.price || "เริ่มต้น 1,500 บาท",
-          deliveryEstimate: "เข้าถึงหน้างานภายใน 30-60 นาที",
+          startingPrice: service.pricing[0]?.price || "ประเมินตามระยะทางจริง",
+          deliveryEstimate: "นัดหมายตามคิวงานและระยะทางจริง",
           parentArea: {
             name: `${provinceName} (ดูบริการทั้งหมด)`,
             href: `/service/${province}`,
@@ -418,7 +437,7 @@ export default async function ServiceDetailPage({
             จุดเด่นบริการ{service.label}ในพื้นที่{provinceName}
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-medium">
-            {service.description} พร้อมให้คำปรึกษาและวางแผนการขนย้ายโดยทีมงานผู้เชี่ยวชาญ คุ้มครองความปลอดภัยทุกขั้นตอน
+            {localized?.metaDescription || service.description} พร้อมให้คำปรึกษาและวางแผนการขนย้ายโดยทีมงานผู้เชี่ยวชาญ คุ้มครองความปลอดภัยทุกขั้นตอน
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -443,7 +462,152 @@ export default async function ServiceDetailPage({
           </div>
         </section>
 
-        {/* ── 2. TRANSPORT & ROUTE TABLE ── */}
+        {/* ── 2. LOCAL CONTEXT & OPERATIONAL REQUIREMENTS ── */}
+        {localized && (
+          <section className="mb-10 bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-2xs">
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-2">
+              ลักษณะพื้นที่และข้อกำหนดการขนย้ายใน{provinceName}
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-500 mb-4 font-medium">
+              กลุ่มผู้ใช้บริการหลัก: {localized.audience}
+            </p>
+            <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed mb-5">
+              {localized.localContext}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* ข้อมูลที่ต้องเตรียมเพื่อประเมินราคา */}
+              <div className="bg-blue-50/60 border border-blue-200/80 rounded-xl p-4">
+                <h4 className="font-bold text-xs sm:text-sm text-blue-900 mb-2.5 flex items-center gap-1.5">
+                  <CheckCircle className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>ข้อมูลที่ลูกค้าต้องแจ้งเพื่อประเมินราคา</span>
+                </h4>
+                <ul className="space-y-1.5 text-xs text-slate-700">
+                  {localized.customerRequirements.map((req, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold">•</span>
+                      <span>{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* ข้อจำกัดและสิ่งที่ไม่รับขนส่ง */}
+              <div className="bg-amber-50/60 border border-amber-200/80 rounded-xl p-4">
+                <h4 className="font-bold text-xs sm:text-sm text-amber-900 mb-2.5 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span>ข้อจำกัดและประเภทสิ่งของที่ไม่รับขนส่ง</span>
+                </h4>
+                <ul className="space-y-1.5 text-xs text-slate-700">
+                  {localized.restrictions.map((res, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="text-amber-700 font-bold">•</span>
+                      <span>{res}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── 3. PREPARATION CHECKLIST ── */}
+        {localized?.preparationChecklist && localized.preparationChecklist.length > 0 && (
+          <section className="mb-10 bg-slate-50/70 border border-slate-200 rounded-2xl p-5 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5">
+              ขั้นตอนการเตรียมตัวก่อนการขนย้าย
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 mb-4">
+              คำแนะนำจากทีมงาน WMS เพื่อความสะดวกรวดเร็วและลดความเสี่ยงต่อสิ่งของ
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {localized.preparationChecklist.map((step, idx) => (
+                <div key={idx} className="bg-white border border-slate-200/90 rounded-xl p-3.5 flex flex-col justify-between">
+                  <div>
+                    <div className="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mb-2">
+                      {idx + 1}
+                    </div>
+                    <div className="font-bold text-xs sm:text-sm text-slate-900 mb-1">
+                      {step.step}
+                    </div>
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mt-1">
+                    {step.detail}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── 4. PRICING FACTORS ── */}
+        {localized?.pricingFactors && (
+          <section className="mb-10 bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-2xs">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+              ปัจจัยที่มีผลต่อการคำนวณราคาขนย้าย
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 mb-3">
+              WMS TRANSPORT ประเมินราคาสุทธิตามข้อตกลงล่วงหน้า ไม่มีค่าใช้จ่ายแอบแฝง
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {localized.pricingFactors.map((factor, idx) => (
+                <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                  <span className="text-blue-600 font-bold mt-0.5">✓</span>
+                  <span>{factor}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── 5. VERIFIED WORK EVIDENCE SUMMARY ── */}
+        <WorkEvidenceSummary
+          evidenceIds={localized?.evidenceIds}
+          title={`ตัวอย่างผลงานจริงในพื้นที่และเส้นทาง ${provinceName}`}
+        />
+
+        {/* ── 6. CONTEXTUAL GUIDES & PRICING LINKS ── */}
+        {localized && (
+          <section className="mb-10 bg-gradient-to-r from-blue-50/70 to-slate-50 border border-blue-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <div className="text-xs sm:text-sm font-bold text-slate-900">
+                ดูข้อมูลอัตราค่าบริการและคู่มือที่เกี่ยวข้อง
+              </div>
+              <div className="text-[11px] sm:text-xs text-slate-600">
+                ตรวจสอบตารางราคาเต็มและขั้นตอนการคำนวณปริมาตรสิ่งของก่อนตัดสินใจ
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {localized.relatedPricingHref && (
+                <Link
+                  href={localized.relatedPricingHref}
+                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1"
+                >
+                  <span>{localized.relatedPricingAnchor}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
+              {localized.relatedGuideHref && (
+                <Link
+                  href={localized.relatedGuideHref}
+                  className="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg text-xs font-bold transition-colors"
+                >
+                  <span>{localized.relatedGuideAnchor}</span>
+                </Link>
+              )}
+              {localized.relatedPortfolioHref && (
+                <Link
+                  href={localized.relatedPortfolioHref}
+                  className="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-lg text-xs font-bold transition-colors"
+                >
+                  <span>{localized.relatedPortfolioAnchor}</span>
+                </Link>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* ── 7. TRANSPORT & ROUTE TABLE ── */}
         <ServiceAreaRouteTable
           thaiName={`${service.label} ${provinceName}`}
           rates={routeRates}
@@ -451,7 +615,7 @@ export default async function ServiceDetailPage({
           customDescription={`อัตราค่าบริการอ้างอิงสำหรับการบริการในพื้นที่ ${provinceName} และเส้นทางข้ามจังหวัด`}
         />
 
-        {/* ── 3. FLEET & SAFETY STANDARDS ── */}
+        {/* ── 8. FLEET & SAFETY STANDARDS ── */}
         <section className="mb-10 bg-slate-50 border border-slate-200 rounded-2xl p-5">
           <h3 className="text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-blue-600" />
@@ -494,13 +658,13 @@ export default async function ServiceDetailPage({
           </div>
         </section>
 
-        {/* ── 5. FAQS ── */}
+        {/* ── 9. FAQS ── */}
         <ServiceAreaFAQ
           thaiName={`${service.label} ${provinceName}`}
-          faqs={service.faqs}
+          faqs={activeFaqs}
         />
 
-        {/* ── 6. OTHER SERVICES IN THIS PROVINCE ── */}
+        {/* ── 10. OTHER SERVICES IN THIS PROVINCE ── */}
         <section className="mb-10">
           <h3 className="text-xl font-bold text-slate-900 mb-3">
             บริการอื่นๆ ใน{provinceShort}

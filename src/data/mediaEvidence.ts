@@ -26,6 +26,8 @@ export interface PortfolioCase {
   relatedDistrictLink?: string;
   relatedRouteLink?: string;
   proofScore: number;
+  dateOrMonth?: string;
+  contentModifiedAt?: string;
 }
 
 export const mediaEvidenceData: Record<string, MediaRecord> = {
@@ -120,7 +122,9 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/bkk-thonburi/moving",
     relatedDistrictLink: "/areas/bkk-thonburi/bang-khae",
-    proofScore: 90
+    proofScore: 90,
+    dateOrMonth: "พฤษภาคม 2026",
+    contentModifiedAt: "2026-10-29T08:00:00+07:00"
   },
   "motorcycle-delivery-pinklao": {
     slug: "motorcycle-delivery-pinklao",
@@ -140,7 +144,9 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/bkk-thonburi/motorcycle",
     relatedDistrictLink: "/areas/bkk-thonburi/pinklao",
-    proofScore: 88
+    proofScore: 88,
+    dateOrMonth: "มิถุนายน 2026",
+    contentModifiedAt: "2026-10-29T08:00:00+07:00"
   },
   "freight-delivery-maha-chai": {
     slug: "freight-delivery-maha-chai",
@@ -160,7 +166,9 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/samutsakhon/freight",
     relatedDistrictLink: "/areas/samutsakhon/maha-chai",
-    proofScore: 90
+    proofScore: 90,
+    dateOrMonth: "มิถุนายน 2026",
+    contentModifiedAt: "2026-10-29T08:00:00+07:00"
   },
   "moving-house-nongkhaem-bang-khae": {
     slug: "moving-house-nongkhaem-bang-khae",
@@ -180,7 +188,9 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/bkk-thonburi/moving",
     relatedDistrictLink: "/areas/bkk-thonburi/nong-khaem",
-    proofScore: 82
+    proofScore: 82,
+    dateOrMonth: "กรกฎาคม 2026",
+    contentModifiedAt: "2026-10-29T08:00:00+07:00"
   },
   "moving-townhouse-bang-bon": {
     slug: "moving-townhouse-bang-bon",
@@ -200,6 +210,8 @@ export const portfolioCasesData: Record<string, PortfolioCase> = {
     ],
     relatedServiceLink: "/service/bkk-thonburi/moving",
     relatedDistrictLink: "/areas/bkk-thonburi/bang-bon",
-    proofScore: 82
+    proofScore: 82,
+    dateOrMonth: "สิงหาคม 2026",
+    contentModifiedAt: "2026-10-29T08:00:00+07:00"
   }
 };

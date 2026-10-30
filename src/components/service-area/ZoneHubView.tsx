@@ -258,6 +258,29 @@ export default function ZoneHubView({ zone, localPoints }: ZoneHubViewProps) {
                     <span>แอด LINE ประเมินราคาฟรี</span>
                   </a>
                 </div>
+
+                {/* Secondary Link to Transactional Service Page */}
+                {zone.transactionalServiceLink && (
+                  <div className="mt-6 p-4 rounded-xl bg-sky-950/70 border border-sky-400/30 text-white shadow-sm">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div>
+                        <span className="text-xs font-bold text-sky-300 uppercase tracking-wider block mb-1">
+                          บริการรถรับจ้างเฉพาะพื้นที่ (ขอใบเสนอราคา)
+                        </span>
+                        <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                          {zone.transactionalServiceLink.description}
+                        </p>
+                      </div>
+                      <Link
+                        href={zone.transactionalServiceLink.href}
+                        className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs sm:text-sm transition-all active:scale-95"
+                      >
+                        <span>{zone.transactionalServiceLink.anchor}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Right Column (45% desktop balance): Semantic Figure / Figcaption in Opaque Card */}

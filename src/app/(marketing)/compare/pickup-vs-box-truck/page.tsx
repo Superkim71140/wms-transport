@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { CheckCircle, XCircle } from "lucide-react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TableOfContents from "@/components/TableOfContents";
+import RelatedComparisons from "@/components/compare/RelatedComparisons";
 
 export const metadata: Metadata = {
   title: "เปรียบเทียบรถกระบะคอก VS รถกระบะตู้ทึบ ย้ายบ้านแบบไหนดีกว่ากัน? | WMS TRANSPORT",
@@ -196,6 +197,8 @@ export default function CompareTrucksPage() {
                     <span>ติดต่อประเมินราคาฟรี</span>
                   </a>
                 </div>
+
+                <RelatedComparisons currentPath="/compare/pickup-vs-box-truck" />
 
               </div>
 

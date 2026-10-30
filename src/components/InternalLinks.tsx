@@ -116,7 +116,7 @@ export default function InternalLinks({
               <span>เส้นทางวิ่งงานยอดนิยม</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2">
-              {displayRoutes.slice(0, 5).map((route) => (
+              {displayRoutes.slice(0, 10).map((route) => (
                 <Link
                   key={`${route.from}-${route.to}`}
                   href={`/route/${route.from}/${route.to}`}

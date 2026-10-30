@@ -47,7 +47,7 @@ const JOB_TYPES: JobTypeItem[] = [
       "แจ้งเจ้าหน้าที่หากไม่มีลิฟต์และต้องเดินยกขึ้น-ลงบันได",
     ],
     vehicleNote: "คล่องตัวสูง เข้าช่องโหลดของอาคารและจอดเทียบจุดขึ้นลิฟต์ได้สะดวก",
-    recommendedServiceHref: "/guides/condo-moving-checklist",
+    recommendedServiceHref: "/guides/condo-no-elevator",
   },
   {
     id: "freight",

@@ -296,6 +296,36 @@ export default function PricingMovingPage() {
                 </div>
               </Link>
             </div>
+
+            {/* Contextual Guides & Comparison Links */}
+            <div className="mt-4 pt-4 border-t border-slate-200/80">
+              <div className="text-xs font-bold text-slate-900 mb-2">
+                คู่มือและบทวิเคราะห์แนะนำสำหรับการย้ายบ้าน คอนโด:
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <Link
+                  href="/guides/condo-no-elevator"
+                  className="p-3 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block text-xs font-semibold text-slate-800 hover:text-blue-600 transition-all shadow-2xs"
+                >
+                  <span className="block text-blue-600 text-[10px] uppercase font-bold mb-0.5">คู่มือหอพัก/คอนโด</span>
+                  <span>ย้ายคอนโดและอาคารไม่มีลิฟต์</span>
+                </Link>
+                <Link
+                  href="/guides/one-bedroom-condo-move"
+                  className="p-3 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block text-xs font-semibold text-slate-800 hover:text-blue-600 transition-all shadow-2xs"
+                >
+                  <span className="block text-blue-600 text-[10px] uppercase font-bold mb-0.5">คู่มือจัดระเบียบของ</span>
+                  <span>ย้ายคอนโด 1 ห้องนอนให้ประหยัดรอบ</span>
+                </Link>
+                <Link
+                  href="/compare/one-vehicle-vs-multiple-trips"
+                  className="p-3 bg-white border border-slate-200 hover:border-blue-300 rounded-xl block text-xs font-semibold text-slate-800 hover:text-blue-600 transition-all shadow-2xs"
+                >
+                  <span className="block text-blue-600 text-[10px] uppercase font-bold mb-0.5">เปรียบเทียบความคุ้มค่า</span>
+                  <span>ขนย้ายเที่ยวเดียวจบ VS หลายเที่ยว</span>
+                </Link>
+              </div>
+            </div>
           </section>
 
           {/* 8. Brief FAQ & Final Contact Section */}

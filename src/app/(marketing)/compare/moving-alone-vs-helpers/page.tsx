@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { CheckCircle, XCircle, Phone } from "lucide-react";
 import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import RelatedComparisons from "@/components/compare/RelatedComparisons";
 
 export const metadata: Metadata = {
   title: "ย้ายของเอง VS จ้างคนช่วยยกของ WMS เลือกแบบไหนคุ้มค่าที่สุด | WMS",
@@ -128,6 +129,8 @@ export default function CompareAloneVsHelpersPage() {
                     หากสัมภาระมีเพียงกล่องขนาดเล็ก เสื้อผ้า ของจิปาถะไม่เกิน 5 กล่อง การย้ายของเองอาจเป็นคำตอบที่สมเหตุสมผลครับ แต่หากในของของคุณมีที่นอน 5-6 ฟุต โซฟา เครื่องซักผ้า หรือตู้เย็นขนาดใหญ่ การเรียกคนช่วยยกเสริมของ WMS จะคุ้มค่ากว่าอย่างมาก ช่วยให้ของถึงปลายทางในความปลอดภัยสูงสุด และเซฟหลังของคุณได้อย่างสมบูรณ์แบบ
                   </p>
                 </section>
+
+                <RelatedComparisons currentPath="/compare/moving-alone-vs-helpers" />
               </div>
 
               {/* Sidebar Column: CTA */}
