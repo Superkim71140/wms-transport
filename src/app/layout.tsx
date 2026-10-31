@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Thai } from "next/font/google";
-import { Partytown } from "@builder.io/partytown/react";
 import "./globals.css";
 import EntityGraphSchema from "@/components/EntityGraphSchema";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
@@ -103,8 +102,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://line.me" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://line.me" />
-        <link rel="preconnect" href="https://www.facebook.com" crossOrigin="anonymous" />
-        <Partytown debug={false} forward={["dataLayer.push"]} />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-blue-600 selection:text-white">
         <EntityGraphSchema />

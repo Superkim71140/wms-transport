@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -26,42 +26,31 @@ const slides: Slide[] = [
   },
 ];
 
+const emptySubscribe = () => () => {};
+
 export default function HeroImageCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [timerKey, setTimerKey] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const resetTimer = useCallback(() => {
-    setTimerKey((k) => k + 1);
+  // Synchronous client mounting check using React useSyncExternalStore (no cascading renders)
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
   }, []);
 
-  const nextSlide = useCallback((manual = false) => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    if (manual) resetTimer();
-  }, [resetTimer]);
-
-  const prevSlide = useCallback((manual = false) => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    if (manual) resetTimer();
-  }, [resetTimer]);
+  }, []);
 
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
-    resetTimer();
-  }, [resetTimer]);
-
-  // 3800ms interval timer (resets automatically upon manual interaction)
-  useEffect(() => {
-    if (isPaused) return;
-
-    const timer = setInterval(() => {
-      nextSlide(false);
-    }, 3800);
-
-    return () => clearInterval(timer);
-  }, [isPaused, nextSlide, timerKey]);
+  }, []);
 
   // Touch swipe support
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -79,9 +68,9 @@ export default function HeroImageCarousel() {
     const swipeThreshold = 40;
 
     if (diff > swipeThreshold) {
-      nextSlide(true);
+      nextSlide();
     } else if (diff < -swipeThreshold) {
-      prevSlide(true);
+      prevSlide();
     }
 
     touchStartX.current = null;
@@ -92,10 +81,10 @@ export default function HeroImageCarousel() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
       e.preventDefault();
-      prevSlide(true);
+      prevSlide();
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
-      nextSlide(true);
+      nextSlide();
     }
   };
 
@@ -104,10 +93,6 @@ export default function HeroImageCarousel() {
       aria-label="โปรโมชั่นและบริการ WMS TRANSPORT"
       aria-roledescription="carousel"
       className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-2"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
       onKeyDown={handleKeyDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -119,6 +104,11 @@ export default function HeroImageCarousel() {
         <div className="relative w-full aspect-16/10 sm:aspect-video lg:aspect-[1.95/1] max-h-135 bg-white flex items-center justify-center">
           {slides.map((slide, index) => {
             const isActive = currentSlide === index;
+            // Delay rendering secondary slides until after client hydration to avoid preload competition
+            if (index > 0 && !isClient) {
+              return null;
+            }
+
             return (
               <div
                 key={slide.src}
@@ -134,7 +124,7 @@ export default function HeroImageCarousel() {
                   priority={index === 0}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"
                   className="object-contain"
-                  quality={90}
+                  quality={80}
                 />
               </div>
             );
@@ -145,9 +135,9 @@ export default function HeroImageCarousel() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              prevSlide(true);
+              prevSlide();
             }}
-            aria-label="Previous slide"
+            aria-label="สไลด์ก่อนหน้า"
             className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 shadow-md border border-slate-200/90 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
           >
             <ChevronLeft className="w-6 h-6" aria-hidden="true" />
@@ -158,9 +148,9 @@ export default function HeroImageCarousel() {
             type="button"
             onClick={(e) => {
               e.stopPropagation();
-              nextSlide(true);
+              nextSlide();
             }}
-            aria-label="Next slide"
+            aria-label="สไลด์ถัดไป"
             className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 shadow-md border border-slate-200/90 transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer"
           >
             <ChevronRight className="w-6 h-6" aria-hidden="true" />
@@ -178,7 +168,7 @@ export default function HeroImageCarousel() {
                     e.stopPropagation();
                     goToSlide(index);
                   }}
-                  aria-label={`Go to slide ${index + 1}`}
+                  aria-label={`ไปยังสไลด์ที่ ${index + 1}`}
                   aria-current={isActive ? "true" : undefined}
                   className="min-w-11 min-h-11 flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer"
                 >

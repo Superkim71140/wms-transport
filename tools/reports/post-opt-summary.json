@@ -1,0 +1,219 @@
+{
+  "evaluatedAt": "2026-10-31T01:16:54.509Z",
+  "commit": "dfc8b988575b3b0abe280dc71e143b87f730cff5",
+  "nextVersion": "^16.3.5",
+  "homepage": {
+    "runs": [
+      {
+        "targetUrl": "http://localhost:3000/",
+        "timestamp": "2026-10-31T01:14:42.167Z",
+        "lighthouseVersion": "13.6.0",
+        "scores": {
+          "performance": 70,
+          "accessibility": 96,
+          "bestPractices": 77,
+          "seo": 100
+        },
+        "metrics": {
+          "fcp": 1981,
+          "lcp": 8169,
+          "tbt": 151,
+          "cls": 0.0085,
+          "ttfb": 49
+        },
+        "lcpBreakdown": {
+          "ttfb": 51.363,
+          "loadDelay": 12.104,
+          "loadDuration": 143.531,
+          "renderDelay": 1582.872
+        },
+        "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=80\">",
+        "run": 1
+      },
+      {
+        "targetUrl": "http://localhost:3000/",
+        "timestamp": "2026-10-31T01:15:05.081Z",
+        "lighthouseVersion": "13.6.0",
+        "scores": {
+          "performance": 69,
+          "accessibility": 96,
+          "bestPractices": 77,
+          "seo": 100
+        },
+        "metrics": {
+          "fcp": 1985,
+          "lcp": 7596,
+          "tbt": 251,
+          "cls": 0.0085,
+          "ttfb": 8
+        },
+        "lcpBreakdown": {
+          "ttfb": 10.562,
+          "loadDelay": 13.572,
+          "loadDuration": 21.749,
+          "renderDelay": 626.186
+        },
+        "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=80\">",
+        "run": 2
+      },
+      {
+        "targetUrl": "http://localhost:3000/",
+        "timestamp": "2026-10-31T01:15:26.985Z",
+        "lighthouseVersion": "13.6.0",
+        "scores": {
+          "performance": 70,
+          "accessibility": 96,
+          "bestPractices": 77,
+          "seo": 100
+        },
+        "metrics": {
+          "fcp": 1937,
+          "lcp": 7651,
+          "tbt": 231,
+          "cls": 0.0085,
+          "ttfb": 8
+        },
+        "lcpBreakdown": {
+          "ttfb": 10.151,
+          "loadDelay": 13.836,
+          "loadDuration": 21.822,
+          "renderDelay": 623.943
+        },
+        "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=80\">",
+        "run": 3
+      }
+    ],
+    "median": {
+      "targetUrl": "http://localhost:3000/",
+      "timestamp": "2026-10-31T01:14:42.167Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 70,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1981,
+        "lcp": 8169,
+        "tbt": 151,
+        "cls": 0.0085,
+        "ttfb": 49
+      },
+      "lcpBreakdown": {
+        "ttfb": 51.363,
+        "loadDelay": 12.104,
+        "loadDuration": 143.531,
+        "renderDelay": 1582.872
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=80\">",
+      "run": 1
+    }
+  },
+  "representativeTemplates": [
+    {
+      "targetUrl": "http://localhost:3000/areas",
+      "timestamp": "2026-10-31T01:15:48.910Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 69,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1724,
+        "lcp": 5724,
+        "tbt": 282,
+        "cls": 0,
+        "ttfb": 7
+      },
+      "lcpBreakdown": {
+        "ttfb": 9.336,
+        "loadDelay": 11.507,
+        "loadDuration": 19.24,
+        "renderDelay": 2471.663
+      },
+      "lcpElement": "<img alt=\"รถกระบะตู้ทึบ WMS เปิดท้ายแสดงการจัดเรียงสิ่งของและกล่องบรรจุภัณฑ์ย้ายบ้านอย่างเป็นระเบียบ\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover object-[center_35%] w-full h-full\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 1024px) 100vw, 500px\" srcset=\"/_next/image?url=%2Fimages%2FWM15.webp&amp;w=360&amp;q=75 360w, /_next/image?url=%…\" src=\"http://localhost:3000/_next/image?url=%2Fimages%2FWM15.webp&amp;w=750&amp;q=75\">",
+      "name": "areas"
+    },
+    {
+      "targetUrl": "http://localhost:3000/service/bkk-thonburi",
+      "timestamp": "2026-10-31T01:16:06.733Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 78,
+        "accessibility": 95,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1211,
+        "lcp": 5328,
+        "tbt": 162,
+        "cls": 0.0085,
+        "ttfb": 11
+      },
+      "lcpBreakdown": {
+        "ttfb": 13.122000001907349,
+        "loadDelay": 11.024999998092651,
+        "loadDuration": 19.204,
+        "renderDelay": 477.56
+      },
+      "lcpElement": "<img alt=\"บริการรถกระบะตู้ทึบรับจ้าง กรุงเทพฯ ฝั่งธนบุรี ย้ายบ้าน คอนโด ขนส่งสินค้า - WMS TRANSPORT\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover w-full h-full object-center\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 1024px) 100vw, 540px\" srcset=\"/_next/image?url=%2Fimages%2FWM11.webp&amp;w=360&amp;q=75 360w, /_next/image?url=%…\" src=\"http://localhost:3000/_next/image?url=%2Fimages%2FWM11.webp&amp;w=750&amp;q=75\">",
+      "name": "service-hub"
+    },
+    {
+      "targetUrl": "http://localhost:3000/service/bkk-thonburi/moving",
+      "timestamp": "2026-10-31T01:16:24.216Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 71,
+        "accessibility": 95,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1361,
+        "lcp": 6333,
+        "tbt": 258,
+        "cls": 0.0085,
+        "ttfb": 14
+      },
+      "lcpBreakdown": {
+        "ttfb": 16.942,
+        "loadDelay": 13.112,
+        "loadDuration": 20.56,
+        "renderDelay": 1458.719
+      },
+      "lcpElement": "<img alt=\"บริการรถกระบะตู้ทึบรับจ้าง ย้ายบ้าน / คอนโด / หอพัก กรุงเทพฯ ฝั่งธนบุรี ย้ายบ้าน คอนโด ขนส่…\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover w-full h-full object-center\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 1024px) 100vw, 540px\" srcset=\"/_next/image?url=%2Fimages%2FWM10.webp&amp;w=360&amp;q=75 360w, /_next/image?url=%…\" src=\"http://localhost:3000/_next/image?url=%2Fimages%2FWM10.webp&amp;w=750&amp;q=75\">",
+      "name": "service-item"
+    },
+    {
+      "targetUrl": "http://localhost:3000/blog/moving-house-checklist",
+      "timestamp": "2026-10-31T01:16:43.192Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 77,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 1210,
+        "lcp": 5369,
+        "tbt": 190,
+        "cls": 0,
+        "ttfb": 9
+      },
+      "lcpBreakdown": {
+        "ttfb": 11.467,
+        "loadDelay": 10.795,
+        "loadDuration": 18.174,
+        "renderDelay": 437.121
+      },
+      "lcpElement": "<img alt=\"Checklist เตรียมย้ายบ้านใหม่ใน 7 วันแบบมือโปร\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 780px) 100vw, 780px\" srcset=\"/_next/image?url=%2Fimages%2FWM11.webp&amp;w=360&amp;q=75 360w, /_next/image?url=%…\" src=\"http://localhost:3000/_next/image?url=%2Fimages%2FWM11.webp&amp;w=750&amp;q=75\">",
+      "name": "blog-post"
+    }
+  ]
+}

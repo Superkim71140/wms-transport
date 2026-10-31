@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run setup:partytown && next dev",
-    "build": "npm run setup:partytown && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test": "node tools/verify-seo-data.js",
@@ -36,6 +36,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9",
     "eslint-config-next": "^16.3.5",
+    "lighthouse": "^13.6.0",
     "tailwindcss": "^4",
     "tsx": "^4.19.3",
     "typescript": "^5"

@@ -141,7 +141,7 @@ export default function Home() {
                   <h2 className="font-sans text-xl sm:text-2xl font-bold text-navy tracking-tight mb-1">
                     มั่นใจก่อนเริ่มงาน
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 font-medium mb-5 sm:mb-6">
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium mb-5 sm:mb-6">
                     รายละเอียดชัดเจนก่อนยืนยันการจอง
                   </p>
 
@@ -296,7 +296,7 @@ export default function Home() {
                             href="https://line.me/ti/p/DtICkMaDet"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="ติดต่อผ่าน LINE เพื่อสอบถามราคา"
+                            aria-label="สอบถามผ่าน LINE เพื่อขอใบเสนอราคา"
                             className="w-full bg-[#06C755] hover:bg-[#05B34F] active:bg-[#049B44] text-white font-sans font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors min-h-11 focus-visible:ring-2 focus-visible:ring-emerald-500 focus:outline-none"
                           >
                             <Image
@@ -366,7 +366,7 @@ export default function Home() {
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Contact WMS Transport via LINE"
+                    aria-label="สอบถามราคาผ่าน LINE"
                     className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
@@ -395,7 +395,7 @@ export default function Home() {
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Contact WMS Transport via LINE"
+                    aria-label="สอบถามราคาผ่าน LINE"
                     className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
@@ -427,7 +427,7 @@ export default function Home() {
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Contact WMS Transport via LINE"
+                    aria-label="สอบถามราคาผ่าน LINE"
                     className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
@@ -456,7 +456,7 @@ export default function Home() {
                     href="https://line.me/ti/p/DtICkMaDet"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Contact WMS Transport via LINE"
+                    aria-label="สอบถามราคาผ่าน LINE"
                     className="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
                   >
                     <Image
@@ -478,7 +478,7 @@ export default function Home() {
                 href="https://line.me/ti/p/DtICkMaDet"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Contact WMS Transport via LINE for pricing"
+                aria-label="ล็อกคิวราคานี้ (ทัก LINE ฟรี)"
                 className="inline-flex items-center gap-3 px-8 py-4 text-white font-bold text-base sm:text-lg rounded-xl shadow-xs bg-[#06C755] hover:bg-[#05b34c] transition-colors mb-4"
               >
                 <Image
@@ -839,7 +839,7 @@ export default function Home() {
                       href="https://line.me/ti/p/DtICkMaDet"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Contact WMS Transport via LINE"
+                      aria-label="สอบถามราคาผ่าน LINE"
                       className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#06C755] hover:bg-[#05B34F] text-white rounded-xl font-bold text-base transition-colors shadow-xs"
                     >
                       <Image

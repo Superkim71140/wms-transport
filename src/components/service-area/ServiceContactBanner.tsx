@@ -107,7 +107,7 @@ export default function ServiceContactBanner({
           {/* 2. Contrasting Outlined Phone Button */}
           <a
             href={siteConfig.phoneHref}
-            aria-label={`โทรติดต่อ ${siteConfig.phone}`}
+            aria-label={`โทร ${siteConfig.phone}`}
             className="inline-flex items-center justify-center gap-2.5 min-h-[48px] px-5 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-[0.98] text-white border border-blue-400/50 hover:border-white font-bold text-sm sm:text-base transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152F] w-full sm:w-auto"
           >
             <Phone className="w-4 h-4 text-[#67E8F9] shrink-0" aria-hidden="true" />

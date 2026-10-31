@@ -109,9 +109,9 @@ export default function CustomerReviews({ currentProvince }: { currentProvince?:
                       </div>
                     )}
                     <div className="min-w-0">
-                      <h4 className="text-xs sm:text-sm font-bold text-navy truncate">
+                      <h3 className="text-xs sm:text-sm font-bold text-navy truncate">
                         {test.displayName}
-                      </h4>
+                      </h3>
                       <p className="text-[11px] sm:text-xs text-slate-500 font-normal mt-0.5 truncate">
                         {role} • {test.broadServiceArea}
                       </p>

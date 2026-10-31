@@ -1,0 +1,108 @@
+{
+  "targetUrl": "http://localhost:3000/",
+  "runsCount": 3,
+  "commit": "dfc8b988575b3b0abe280dc71e143b87f730cff5",
+  "nextVersion": "^16.3.5",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-10-31T00:58:14.652Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 73,
+        "accessibility": 95,
+        "bestPractices": 81,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 2040,
+        "lcp": 7040,
+        "tbt": 69,
+        "cls": 0.0085,
+        "ttfb": 10
+      },
+      "lcpBreakdown": {
+        "ttfb": 12.73499999809265,
+        "loadDelay": 13.40300000190735,
+        "loadDuration": 20.013,
+        "renderDelay": 1270.481
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=90 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=90\">"
+    },
+    {
+      "run": 2,
+      "timestamp": "2026-10-31T00:58:37.239Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 73,
+        "accessibility": 95,
+        "bestPractices": 81,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 2045,
+        "lcp": 6755,
+        "tbt": 134,
+        "cls": 0.0085,
+        "ttfb": 11
+      },
+      "lcpBreakdown": {
+        "ttfb": 13.177,
+        "loadDelay": 14.896,
+        "loadDuration": 17.666,
+        "renderDelay": 669.172
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=90 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=90\">"
+    },
+    {
+      "run": 3,
+      "timestamp": "2026-10-31T00:58:59.044Z",
+      "lighthouseVersion": "13.6.0",
+      "scores": {
+        "performance": 74,
+        "accessibility": 95,
+        "bestPractices": 81,
+        "seo": 100
+      },
+      "metrics": {
+        "fcp": 2043,
+        "lcp": 6804,
+        "tbt": 90,
+        "cls": 0.0085,
+        "ttfb": 8
+      },
+      "lcpBreakdown": {
+        "ttfb": 10.558,
+        "loadDelay": 12.934,
+        "loadDuration": 20.19,
+        "renderDelay": 612.529
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=90 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=90\">"
+    }
+  ],
+  "median": {
+    "run": 2,
+    "timestamp": "2026-10-31T00:58:37.239Z",
+    "lighthouseVersion": "13.6.0",
+    "scores": {
+      "performance": 73,
+      "accessibility": 95,
+      "bestPractices": 81,
+      "seo": 100
+    },
+    "metrics": {
+      "fcp": 2045,
+      "lcp": 6755,
+      "tbt": 134,
+      "cls": 0.0085,
+      "ttfb": 11
+    },
+    "lcpBreakdown": {
+      "ttfb": 13.177,
+      "loadDelay": 14.896,
+      "loadDuration": 17.666,
+      "renderDelay": 669.172
+    },
+    "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=90 360w, /_next/image?u…\" src=\"http://localhost:3000/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;q=90\">"
+  }
+}

@@ -34,7 +34,7 @@ export default function PortfolioCTA() {
               href="https://line.me/ti/p/DtICkMaDet"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Contact WMS Transport via LINE"
+              aria-label="ติดต่อขนส่งผ่าน LINE"
               className="group flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#06C755] hover:bg-[#05B34F] text-white font-bold text-base transition-colors shadow-xs"
             >
               <Image 

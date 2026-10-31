@@ -478,7 +478,7 @@ export default function Navbar() {
             href={siteConfig.lineUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contact WMS Transport via LINE"
+            aria-label="ติดต่อ LINE"
             className="whitespace-nowrap flex items-center gap-2 px-4 py-2 rounded-full bg-[#06C755] hover:bg-[#05B34F] active:scale-95 text-white font-bold text-sm transition-all duration-200 shadow-xs border border-[#06C755]/40"
           >
             <Image
