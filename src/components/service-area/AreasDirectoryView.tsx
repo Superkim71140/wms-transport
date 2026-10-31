@@ -4,7 +4,6 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/lib/seo/site-config";
-import ServiceAreaPromoBanner from "./ServiceAreaPromoBanner";
 import ServiceContactBanner from "./ServiceContactBanner";
 import TwoToneHeading from "./TwoToneHeading";
 import {

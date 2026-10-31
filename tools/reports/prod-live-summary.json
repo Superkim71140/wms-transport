@@ -1,0 +1,157 @@
+{
+  "target": "https://wms-transport.com/",
+  "runs": [
+    {
+      "run": 1,
+      "timestamp": "2026-10-31T01:23:28.548Z",
+      "scores": {
+        "performance": 43,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "throttledMetrics": {
+        "fcp": 2759,
+        "lcp": 7950,
+        "tbt": 1015,
+        "cls": 0.0085,
+        "ttfb": 31
+      },
+      "unthrottledLcpSubparts": {
+        "ttfb": 114,
+        "loadDelay": 299,
+        "loadDuration": 2022,
+        "renderDelay": 956
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"https://wms-transport.com/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;…\">",
+      "bestPracticesFailures": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0,
+          "displayValue": "1 cookie found"
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0,
+          "displayValue": ""
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "timestamp": "2026-10-31T01:24:08.344Z",
+      "scores": {
+        "performance": 54,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "throttledMetrics": {
+        "fcp": 2191,
+        "lcp": 7302,
+        "tbt": 577,
+        "cls": 0,
+        "ttfb": 33
+      },
+      "unthrottledLcpSubparts": {
+        "ttfb": 113,
+        "loadDelay": 31,
+        "loadDuration": 79,
+        "renderDelay": 2594
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"https://wms-transport.com/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;…\">",
+      "bestPracticesFailures": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0,
+          "displayValue": "1 cookie found"
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0,
+          "displayValue": ""
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "timestamp": "2026-10-31T01:24:40.307Z",
+      "scores": {
+        "performance": 47,
+        "accessibility": 96,
+        "bestPractices": 77,
+        "seo": 100
+      },
+      "throttledMetrics": {
+        "fcp": 2520,
+        "lcp": 7329,
+        "tbt": 816,
+        "cls": 0,
+        "ttfb": 30
+      },
+      "unthrottledLcpSubparts": {
+        "ttfb": 116,
+        "loadDelay": 32,
+        "loadDuration": 79,
+        "renderDelay": 2574
+      },
+      "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"https://wms-transport.com/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;…\">",
+      "bestPracticesFailures": [
+        {
+          "id": "third-party-cookies",
+          "title": "Uses third-party cookies",
+          "score": 0,
+          "displayValue": "1 cookie found"
+        },
+        {
+          "id": "inspector-issues",
+          "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+          "score": 0,
+          "displayValue": ""
+        }
+      ]
+    }
+  ],
+  "median": {
+    "run": 3,
+    "timestamp": "2026-10-31T01:24:40.307Z",
+    "scores": {
+      "performance": 47,
+      "accessibility": 96,
+      "bestPractices": 77,
+      "seo": 100
+    },
+    "throttledMetrics": {
+      "fcp": 2520,
+      "lcp": 7329,
+      "tbt": 816,
+      "cls": 0,
+      "ttfb": 30
+    },
+    "unthrottledLcpSubparts": {
+      "ttfb": 116,
+      "loadDelay": 32,
+      "loadDuration": 79,
+      "renderDelay": 2574
+    },
+    "lcpElement": "<img alt=\"WMS TRANSPORT รถกระบะตู้ทึบรับจ้าง ขนส่งมอเตอร์ไซค์ และบริการย้ายบ้าน ย้ายคอนโดทั่วไทย\" decoding=\"async\" data-nimg=\"fill\" class=\"object-contain\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" sizes=\"(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px\" srcset=\"/_next/image?url=%2Fwms-transport-page.png&amp;w=360&amp;q=80 360w, /_next/image?u…\" src=\"https://wms-transport.com/_next/image?url=%2Fwms-transport-page.png&amp;w=750&amp;…\">",
+    "bestPracticesFailures": [
+      {
+        "id": "third-party-cookies",
+        "title": "Uses third-party cookies",
+        "score": 0,
+        "displayValue": "1 cookie found"
+      },
+      {
+        "id": "inspector-issues",
+        "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "displayValue": ""
+      }
+    ]
+  }
+}

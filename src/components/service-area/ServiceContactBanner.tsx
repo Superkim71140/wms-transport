@@ -42,8 +42,9 @@ export default function ServiceContactBanner({
 }: ServiceContactBannerProps) {
   const defaultFirstPhrase = "ต้องการรถรับจ้างขนของ?";
   const defaultSecondPhrase = "ปรึกษาและประเมินราคาได้เลย";
-  const defaultSupporting =
-    "ส่งจุดรับ–ส่งและรายการของให้ทีมงาน WMS TRANSPORT ช่วยแนะนำรถและประเมินราคาให้เหมาะกับงานของคุณ";
+  const defaultSupporting = areaName
+    ? `ส่งจุดรับ–ส่งและรายการของในพื้นที่ ${areaName} ให้ทีมงาน WMS TRANSPORT ช่วยแนะนำรถและประเมินราคาให้เหมาะกับงานของคุณ`
+    : "ส่งจุดรับ–ส่งและรายการของให้ทีมงาน WMS TRANSPORT ช่วยแนะนำรถและประเมินราคาให้เหมาะกับงานของคุณ";
 
   const finalFirstPhrase = headingFirst || defaultFirstPhrase;
   const finalSecondPhrase = headingSecond || defaultSecondPhrase;

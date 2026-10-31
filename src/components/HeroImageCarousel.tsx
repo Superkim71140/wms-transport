@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useSyncExternalStore } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -26,34 +26,53 @@ const slides: Slide[] = [
   },
 ];
 
-const emptySubscribe = () => () => {};
-
 export default function HeroImageCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loadSecondary, setLoadSecondary] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  // Synchronous client mounting check using React useSyncExternalStore (no cascading renders)
-  const isClient = useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
+  // Defer secondary slides until browser is completely idle or after a generous delay
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    if ("requestIdleCallback" in window) {
+      const handle = (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+        () => setLoadSecondary(true),
+        { timeout: 5000 }
+      );
+      return () => {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
+      };
+    } else {
+      const timer = setTimeout(() => setLoadSecondary(true), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Trigger secondary slide immediately upon any user engagement
+  const ensureSecondaryLoaded = useCallback(() => {
+    setLoadSecondary(true);
+  }, []);
 
   const nextSlide = useCallback(() => {
+    ensureSecondaryLoaded();
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, []);
+  }, [ensureSecondaryLoaded]);
 
   const prevSlide = useCallback(() => {
+    ensureSecondaryLoaded();
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  }, []);
+  }, [ensureSecondaryLoaded]);
 
   const goToSlide = useCallback((index: number) => {
+    ensureSecondaryLoaded();
     setCurrentSlide(index);
-  }, []);
+  }, [ensureSecondaryLoaded]);
 
   // Touch swipe support
   const handleTouchStart = (e: React.TouchEvent) => {
+    ensureSecondaryLoaded();
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = e.touches[0].clientX;
   };
@@ -79,6 +98,7 @@ export default function HeroImageCarousel() {
 
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    ensureSecondaryLoaded();
     if (e.key === "ArrowLeft") {
       e.preventDefault();
       prevSlide();
@@ -93,6 +113,8 @@ export default function HeroImageCarousel() {
       aria-label="โปรโมชั่นและบริการ WMS TRANSPORT"
       aria-roledescription="carousel"
       className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-2"
+      onMouseEnter={ensureSecondaryLoaded}
+      onFocus={ensureSecondaryLoaded}
       onKeyDown={handleKeyDown}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -104,8 +126,8 @@ export default function HeroImageCarousel() {
         <div className="relative w-full aspect-16/10 sm:aspect-video lg:aspect-[1.95/1] max-h-135 bg-white flex items-center justify-center">
           {slides.map((slide, index) => {
             const isActive = currentSlide === index;
-            // Delay rendering secondary slides until after client hydration to avoid preload competition
-            if (index > 0 && !isClient) {
+            // Never mount secondary slide until idle or explicit user interaction to avoid network competition
+            if (index > 0 && !loadSecondary) {
               return null;
             }
 
@@ -122,6 +144,7 @@ export default function HeroImageCarousel() {
                   alt={slide.alt}
                   fill
                   priority={index === 0}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"
                   className="object-contain"
                   quality={80}

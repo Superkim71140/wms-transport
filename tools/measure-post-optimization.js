@@ -132,3 +132,4 @@ main().catch(err => {
   console.error('Fatal error running audits:', err);
   process.exit(1);
 });
+

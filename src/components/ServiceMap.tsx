@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -15,6 +15,23 @@ import {
 import { siteConfig } from "@/lib/seo/site-config";
 
 export default function ServiceMap() {
+  const [loadMap, setLoadMap] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(mapContainerRef.current);
+    return () => observer.disconnect();
+  }, []);
   const gmapsEmbedUrl = `https://maps.google.com/maps?q=${siteConfig.geo.latitude},${siteConfig.geo.longitude}&hl=th&z=16&output=embed`;
 
   const popularRoutes = [
@@ -161,17 +178,24 @@ export default function ServiceMap() {
             </address>
 
             {/* Interactive Google Map */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200/70 my-3.5 min-h-55 md:min-h-60 w-full shadow-inner relative bg-slate-100">
-              <iframe
-                title="แผนที่แสดงที่ตั้งสำนักงานและจุดจอดรถ WMS Transport ต.บ้านเกาะ อ.เมืองสมุทรสาคร"
-                src={gmapsEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 w-full h-full"
-              />
+            <div ref={mapContainerRef} className="rounded-2xl overflow-hidden border border-slate-200/70 my-3.5 min-h-55 md:min-h-60 w-full shadow-inner relative bg-slate-100 flex items-center justify-center">
+              {loadMap ? (
+                <iframe
+                  title="แผนที่แสดงที่ตั้งสำนักงานและจุดจอดรถ WMS Transport ต.บ้านเกาะ อ.เมืองสมุทรสาคร"
+                  src={gmapsEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full"
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center p-4 text-center text-slate-400 text-xs">
+                  <MapPin className="w-6 h-6 text-blue-500 mb-1 opacity-70" />
+                  <span>กำลังเตรียมแผนที่พิกัด WMS TRANSPORT...</span>
+                </div>
+              )}
             </div>
 
             {/* Operation & Hotline Bar */}
