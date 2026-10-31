@@ -6,7 +6,44 @@ import {
   SESSION_MAX_AGE_SECONDS
 } from '@/lib/seo-monitor/auth';
 
+interface AttemptRecord {
+  count: number;
+  resetAt: number;
+}
+
+const loginAttempts = new Map<string, AttemptRecord>();
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return request.headers.get('x-real-ip') || 'unknown-client';
+}
+
 export async function POST(request: Request) {
+  const clientIp = getClientIp(request);
+  const now = Date.now();
+
+  const record = loginAttempts.get(clientIp);
+  if (record) {
+    if (now < record.resetAt) {
+      if (record.count >= MAX_ATTEMPTS) {
+        const remainingMinutes = Math.ceil((record.resetAt - now) / 60000);
+        return NextResponse.json(
+          {
+            error: `พยายามเข้าสู่ระบบผิดพลาดเกินกำหนด กรุณารออีก ${remainingMinutes} นาที (Too many failed attempts. Try again in ${remainingMinutes} minutes.)`
+          },
+          { status: 429 }
+        );
+      }
+    } else {
+      loginAttempts.delete(clientIp);
+    }
+  }
+
   try {
     const body = await request.json();
     const { passcode } = body || {};
@@ -16,8 +53,22 @@ export async function POST(request: Request) {
     }
 
     if (!verifyPasscode(passcode)) {
-      return NextResponse.json({ error: 'รหัสผ่านไม่ถูกต้อง (Invalid Passcode)' }, { status: 401 });
+      const current = loginAttempts.get(clientIp) || { count: 0, resetAt: now + LOCKOUT_WINDOW_MS };
+      current.count += 1;
+      current.resetAt = now + LOCKOUT_WINDOW_MS;
+      loginAttempts.set(clientIp, current);
+
+      const attemptsRemaining = Math.max(0, MAX_ATTEMPTS - current.count);
+      return NextResponse.json(
+        {
+          error: `รหัสผ่านไม่ถูกต้อง (Invalid Passcode). เหลือโอกาสอีก ${attemptsRemaining} ครั้ง`
+        },
+        { status: 401 }
+      );
     }
+
+    // Success - reset attempts
+    loginAttempts.delete(clientIp);
 
     const token = createSessionToken();
     const response = NextResponse.json({ ok: true, message: 'Authenticated successfully.' });

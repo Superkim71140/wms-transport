@@ -3,10 +3,12 @@ import { isRequestAuthorized } from '@/lib/seo-monitor/auth';
 import {
   fetchSitemaps,
   querySearchAnalytics,
+  fetchSiteAggregates,
   inspectUrl,
   type UrlInspectionResult
 } from '@/lib/seo-monitor/gsc-client';
 import {
+  getSeoSnapshot,
   saveSeoSnapshot,
   deriveAlertsAndOpportunities,
   getDefaultPageSpeedAudits,
@@ -32,12 +34,13 @@ export async function POST(request: Request) {
   }
 
   try {
-    // 1. Fetch Sitemaps
+    const existingSnapshot = await getSeoSnapshot();
+
+    // 1. Fetch Sitemaps dynamically
     const sitemaps = await fetchSitemaps(SITE_URL);
 
-    // 2. Fetch Search Analytics (Latest 28d + Previous 28d)
+    // 2. Compute date ranges (GSC typically has ~3 day lag)
     const today = new Date();
-    // GSC data typically has ~3 day lag
     const endLatest = new Date(today);
     endLatest.setDate(endLatest.getDate() - 3);
     const startLatest = new Date(endLatest);
@@ -58,7 +61,16 @@ export async function POST(request: Request) {
       end: endPrev.toISOString().split('T')[0]
     };
 
-    const [analyticsLatest, analyticsPrev] = await Promise.all([
+    // 3. Fetch property-level aggregates (true totals) and dimension breakdowns in parallel
+    const [siteAggLatest, siteAggPrev, analyticsLatest, analyticsPrev] = await Promise.all([
+      fetchSiteAggregates(SITE_URL, latestRange.start, latestRange.end).catch(err => {
+        console.warn('Site aggregates latest warning:', err.message);
+        return undefined;
+      }),
+      fetchSiteAggregates(SITE_URL, prevRange.start, prevRange.end).catch(err => {
+        console.warn('Site aggregates prev warning:', err.message);
+        return undefined;
+      }),
       querySearchAnalytics(SITE_URL, {
         startDate: latestRange.start,
         endDate: latestRange.end,
@@ -76,32 +88,53 @@ export async function POST(request: Request) {
       })
     ]);
 
-    // 3. Inspect representative URLs (bounded sequence to respect API rate limits)
-    const inspections: UrlInspectionResult[] = [];
+    // 4. Inspect representative URLs (bounded sequence with pause to respect API rate limits)
+    const updatedInspectionsMap = new Map<string, UrlInspectionResult>();
+    for (const item of existingSnapshot.inspections || []) {
+      updatedInspectionsMap.set(item.inspectionUrl, item);
+    }
+
     for (const url of REPRESENTATIVE_INSPECTION_URLS) {
       try {
         const res = await inspectUrl(SITE_URL, url);
-        inspections.push(res);
+        updatedInspectionsMap.set(url, {
+          ...res,
+          status: 'inspected',
+          lastInspectedAt: new Date().toISOString()
+        });
       } catch (e: any) {
-        inspections.push({
+        // Record API failure as error, NEVER as "not indexed"
+        updatedInspectionsMap.set(url, {
           inspectionUrl: url,
           verdict: 'VERDICT_UNSPECIFIED',
           coverageState: `Inspection Error: ${e.message}`,
-          httpStatus: undefined
+          status: 'error',
+          errorMessage: e.message,
+          lastInspectedAt: new Date().toISOString()
         });
       }
+      await new Promise(r => setTimeout(r, 400));
     }
 
-    // 4. Derive alerts & opportunities
+    const inspections = Array.from(updatedInspectionsMap.values());
+
+    // 5. Derive alerts & opportunities
     const alerts = deriveAlertsAndOpportunities(inspections, analyticsLatest, analyticsPrev);
 
-    // 5. Build snapshot & save
+    // 6. Build snapshot & save
     const snapshot: SeoMonitorSnapshot = {
+      ...existingSnapshot,
       siteUrl: SITE_URL,
       lastSyncAt: new Date().toISOString(),
-      storageEngine: process.env.DATABASE_URL ? 'postgresql' : 'local_durable_file',
+      lastFailedSyncAt: null,
+      lastSyncError: null,
+      storageEngine: process.env.DATABASE_URL
+        ? 'postgresql'
+        : (process.env.VERCEL === '1' ? 'ephemeral_serverless_warning' : 'local_durable_file'),
       sitemaps,
       inspections,
+      siteAggregatesLatest28d: siteAggLatest,
+      siteAggregatesPrev28d: siteAggPrev,
       analyticsLatest28d: analyticsLatest,
       analyticsPrev28d: analyticsPrev,
       analyticsDateRange: {
@@ -109,7 +142,9 @@ export async function POST(request: Request) {
         previous: prevRange
       },
       alerts,
-      pageSpeedAudits: getDefaultPageSpeedAudits()
+      pageSpeedAudits: existingSnapshot.pageSpeedAudits && existingSnapshot.pageSpeedAudits.length > 0
+        ? existingSnapshot.pageSpeedAudits
+        : getDefaultPageSpeedAudits()
     };
 
     await saveSeoSnapshot(snapshot);
@@ -120,8 +155,17 @@ export async function POST(request: Request) {
       snapshot
     });
   } catch (e: any) {
+    const rawMsg = e.message || 'Failed to sync GSC data';
+    const sanitizedError = rawMsg.replace(/key=[^&\s]+/gi, 'key=***').replace(/AIza[0-9A-Za-z-_]{35}/g, '***');
+    try {
+      const snap = await getSeoSnapshot();
+      snap.lastFailedSyncAt = new Date().toISOString();
+      snap.lastSyncError = sanitizedError;
+      await saveSeoSnapshot(snap);
+    } catch {}
+
     return NextResponse.json(
-      { error: e.message || 'Failed to sync GSC data' },
+      { error: sanitizedError },
       { status: 500 }
     );
   }

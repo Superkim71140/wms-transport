@@ -213,6 +213,60 @@ export async function querySearchAnalytics(
   return data.rows || [];
 }
 
+export interface SiteAggregateMetrics {
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  position: number;
+}
+
+export async function fetchSiteAggregates(
+  siteUrl: string,
+  startDate: string,
+  endDate: string
+): Promise<SiteAggregateMetrics> {
+  const token = await getGscAccessToken();
+  const encSiteUrl = encodeURIComponent(siteUrl);
+
+  const res = await fetch(
+    `https://www.googleapis.com/webmasters/v3/sites/${encSiteUrl}/searchAnalytics/query`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        startDate,
+        endDate
+      })
+    }
+  );
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Failed to query site aggregates (${res.status}): ${err}`);
+  }
+
+  const data = await res.json();
+  const row = data.rows?.[0] || { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  return {
+    clicks: row.clicks || 0,
+    impressions: row.impressions || 0,
+    ctr: row.ctr || 0,
+    position: row.position || 0
+  };
+}
+
+export async function validateGscAccess(siteUrl: string = 'https://wms-transport.com/'): Promise<{ ok: boolean; siteUrl: string; permissionLevel: string }> {
+  const info = await fetchSiteInfo(siteUrl);
+  return {
+    ok: true,
+    siteUrl: info.siteUrl,
+    permissionLevel: info.permissionLevel
+  };
+}
+
 export interface UrlInspectionResult {
   inspectionUrl: string;
   verdict: 'PASS' | 'FAIL' | 'NEUTRAL' | 'PARTIAL' | 'VERDICT_UNSPECIFIED';
@@ -225,6 +279,9 @@ export interface UrlInspectionResult {
   userCanonical?: string;
   crawledAs?: string;
   httpStatus?: number;
+  status?: 'pending' | 'inspected' | 'error';
+  errorMessage?: string;
+  lastInspectedAt?: string;
 }
 
 export async function inspectUrl(

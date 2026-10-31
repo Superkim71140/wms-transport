@@ -24,6 +24,8 @@ const eslintConfig = defineConfig([
     "public/~partytown/**",
     "scripts/**",
     "claude-seo/**",
+    "superpowers-main/**",
+    "ponytail-main/**",
     "tools/**",
   ]),
 ]);
